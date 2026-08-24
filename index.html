@@ -92,16 +92,16 @@
     .missed { color: #888; }
     .ppg-badge { font-weight: bold; color: #ff552e; }
 
-    /* Layout for Guessed Players with Headshots */
+    /* Layout for Guessed Players with ESPN Headshots */
     .guessed-item {
       display: flex;
       align-items: center;
     }
     .guessed-img {
-      width: 50px;
-      height: 36px;
+      width: 45px;
+      height: 45px;
       object-fit: cover;
-      border-radius: 4px;
+      border-radius: 50%;
       margin-right: 15px;
       background-color: #eee;
     }
@@ -146,7 +146,7 @@
     const finishBtn = document.getElementById('finishBtn');
     const missingSection = document.getElementById('missingSection');
     
-    // Set total players from Python database
+    // Set total players from database
     document.getElementById('total').textContent = allPlayers.length;
 
     // Helper to add player and update UI
@@ -156,8 +156,8 @@
         
         const li = document.createElement('li');
         
-        // NBA/WNBA Official Image CDN
-        const imgUrl = `https://cdn.nba.com/headshots/wnba/latest/260x190/${playerObj.id}.png`;
+        // ESPN Headshot URL
+        const imgUrl = playerObj.headshot || '';
         
         li.innerHTML = `
           <div class="guessed-item">
@@ -178,12 +178,11 @@
       dropdown.style.display = 'none';
     }
 
-    // Input matching & Dropdown logic
+    // Input matching & Dropdown logic (Threshold: 5 characters)
     input.addEventListener('input', () => {
       const val = input.value.trim().toLowerCase();
       dropdown.innerHTML = ''; 
 
-      // Threshold set to 5 characters
       if (val.length >= 5) {
         const matches = allPlayers.filter(p => 
           p.name.toLowerCase().includes(val) && !guessedPlayers.has(p.name)
