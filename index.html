@@ -64,7 +64,7 @@
     .dropdown-item:last-child { border-bottom: none; }
     .dropdown-item:hover { background-color: #fff0ec; color: #ff552e; }
 
-    #finishBtn {
+    .action-btn {
       width: 100%;
       padding: 12px;
       background-color: #ff552e;
@@ -74,10 +74,17 @@
       font-size: 16px;
       font-weight: bold;
       cursor: pointer;
+      margin-bottom: 10px;
+    }
+    .action-btn:hover { background-color: #e04a26; }
+    .action-btn:disabled { background-color: #ccc; cursor: not-allowed; }
+
+    #shareBtn {
+      background-color: #2baf2b;
+      display: none; /* Hidden until game ends */
       margin-bottom: 20px;
     }
-    #finishBtn:hover { background-color: #e04a26; }
-    #finishBtn:disabled { background-color: #ccc; cursor: not-allowed; }
+    #shareBtn:hover { background-color: #239223; }
 
     .score { font-size: 20px; font-weight: bold; margin-bottom: 20px; }
     ul { list-style-type: none; padding: 0; margin-bottom: 30px; }
@@ -124,7 +131,8 @@
       <div id="dropdown" class="dropdown"></div>
     </div>
 
-    <button id="finishBtn">I Give Up - Show Missed Players</button>
+    <button id="finishBtn" class="action-btn">I Give Up - Show Missed Players</button>
+    <button id="shareBtn" class="action-btn">📋 Copy Share Score</button>
 
     <h3>Guessed Players:</h3>
     <ul id="guessedList"></ul>
@@ -135,7 +143,7 @@
     </div>
   </div>
 
-  <script src="players.js"></script>
+  <script src="players.js?v=3"></script>
 
   <script>
     const guessedPlayers = new Set();
@@ -145,6 +153,7 @@
     const missedList = document.getElementById('missedList');
     const countDisplay = document.getElementById('count');
     const finishBtn = document.getElementById('finishBtn');
+    const shareBtn = document.getElementById('shareBtn');
     const missingSection = document.getElementById('missingSection');
     
     // Set total players from database
@@ -157,12 +166,13 @@
         
         const li = document.createElement('li');
         const imgUrl = playerObj.headshot || '';
+        const posBadge = playerObj.position ? `<span class="position-badge">(${playerObj.position})</span>` : '';
         
         li.innerHTML = `
           <div class="guessed-item">
             <img src="${imgUrl}" alt="${playerObj.name}" class="guessed-img" onerror="this.style.display='none'">
             <div>
-              <strong>${playerObj.name}</strong> <span class="position-badge">(${playerObj.position})</span><br>
+              <strong>${playerObj.name}</strong> ${posBadge}<br>
               <span class="guessed-text-team">${playerObj.team}</span>
             </div>
           </div>
@@ -228,13 +238,32 @@
       finishBtn.textContent = "Game Over!";
       dropdown.style.display = 'none';
       missingSection.style.display = 'block';
+      shareBtn.style.display = 'block'; // Reveal the share button
       
       const missed = allPlayers.filter(p => !guessedPlayers.has(p.name));
       missed.forEach(m => {
         const li = document.createElement('li');
         li.className = 'missed';
-        li.innerHTML = `${m.name} <span class="position-badge">(${m.position})</span> [${m.team}] - <span class="ppg-badge">${m.ppg} PPG</span>`;
+        const posBadge = m.position ? `<span class="position-badge">(${m.position})</span>` : '';
+        li.innerHTML = `${m.name} ${posBadge} [${m.team}] - <span class="ppg-badge">${m.ppg} PPG</span>`;
         missedList.appendChild(li);
+      });
+    });
+
+    // Share Score Logic
+    shareBtn.addEventListener('click', () => {
+      const found = guessedPlayers.size;
+      const total = allPlayers.length;
+      const percentage = Math.round((found / total) * 100);
+      
+      const shareText = `WNBA Naming Challenge 🏀\nI found ${found} / ${total} players (${percentage}%)!\nCan you beat my score?`;
+
+      navigator.clipboard.writeText(shareText).then(() => {
+        const originalText = shareBtn.textContent;
+        shareBtn.textContent = "Copied to Clipboard! 🎉";
+        setTimeout(() => {
+          shareBtn.textContent = originalText;
+        }, 2000);
       });
     });
   </script>
