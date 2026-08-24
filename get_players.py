@@ -32,7 +32,9 @@ for _, row in df_all.iterrows():
         if games > 0:
             ppg = round(points / games, 1)
 
-    player_data.append({"name": name, "team": team, "ppg": ppg})
+
+    # NEW: We are now saving the "id" into the javascript file!
+    player_data.append({"name": name, "team": team, "ppg": ppg, "id": player_id})
 
 # 3. Sort the final list by PPG (highest to lowest)
 player_data.sort(key=lambda x: x['ppg'], reverse=True)
