@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WNBA Naming Challenge</title>
+  <style>
+    body { 
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+      max-width: 500px; 
+      margin: 40px auto; 
+      padding: 20px;
+      background-color: #f9f9f9;
+    }
+    .game-container {
+      background: white;
+      padding: 20px 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    h2 { margin-top: 0; color: #ff552e; } 
+
+    .input-wrapper {
+      position: relative;
+      margin-bottom: 15px;
+    }
+
+    input { 
+      width: 100%; 
+      padding: 12px; 
+      font-size: 16px; 
+      box-sizing: border-box; 
+      border: 2px solid #ccc;
+      border-radius: 6px;
+    }
+    input:focus { border-color: #ff552e; outline: none; }
+    
+    .dropdown {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: white;
+      border: 2px solid #ff552e;
+      border-top: none;
+      border-radius: 0 0 8px 8px;
+      max-height: 200px;
+      overflow-y: auto;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      z-index: 100;
+      display: none; 
+    }
+    
+    .dropdown-item {
+      padding: 12px;
+      font-size: 16px;
+      cursor: pointer;
+      border-bottom: 1px solid #eee;
+    }
+    .dropdown-item:last-child { border-bottom: none; }
+    .dropdown-item:hover { background-color: #fff0ec; color: #ff552e; }
+
+    #finishBtn {
+      width: 100%;
+      padding: 12px;
+      background-color: #ff552e;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
+    #finishBtn:hover { background-color: #e04a26; }
+    #finishBtn:disabled { background-color: #ccc; cursor: not-allowed; }
+
+    .score { font-size: 20px; font-weight: bold; margin-bottom: 20px; }
+    ul { list-style-type: none; padding: 0; margin-bottom: 30px; }
+    li { 
+      padding: 10px 0; 
+      border-bottom: 1px solid #eee; 
+      font-size: 16px;
+      animation: fadeIn 0.3s ease-in;
+    }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+    
+    .missed { color: #888; }
+    .ppg-badge { font-weight: bold; color: #ff552e; }
+  </style>
+</head>
+<body>
+
+  <div class="game-container">
+    <h2>WNBA Naming Challenge</h2>
+    
+    <div class="score">Players Found: <span id="count">0</span> / <span id="total">0</span></div>
+
+    <div class="input-wrapper">
+      <input type="text" id="playerInput" placeholder="Start typing a player name..." autocomplete="off">
+      <div id="dropdown" class="dropdown"></div>
+    </div>
+
+    <button id="finishBtn">I Give Up - Show Missed Players</button>
+
+    <h3>Guessed Players:</h3>
+    <ul id="guessedList"></ul>
+
+    <div id="missingSection" style="display: none;">
+      <h3 style="color: #888; border-top: 2px dashed #eee; padding-top: 20px;">Should've Known (Sorted by PPG):</h3>
+      <ul id="missedList"></ul>
+    </div>
+  </div>
+
+  <script src="players.js"></script>
+
+  <script>
+    const guessedPlayers = new Set();
+    const input = document.getElementById('playerInput');
+    const dropdown = document.getElementById('dropdown');
+    const guessedList = document.getElementById('guessedList');
+    const missedList = document.getElementById('missedList');
+    const countDisplay = document.getElementById('count');
+    const finishBtn = document.getElementById('finishBtn');
+    const missingSection = document.getElementById('missingSection');
+    
+    document.getElementById('total').textContent = allPlayers.length;
+
+    function addPlayerToGuessed(playerObj) {
+      if (!guessedPlayers.has(playerObj.name)) {
+        guessedPlayers.add(playerObj.name);
+        
+        const li = document.createElement('li');
+        li.innerHTML = `<strong>${playerObj.name}</strong> [${playerObj.team}]`;
+        guessedList.insertBefore(li, guessedList.firstChild); 
+        
+        countDisplay.textContent = guessedPlayers.size;
+      }
+      
+      input.value = '';
+      dropdown.innerHTML = '';
+      dropdown.style.display = 'none';
+    }
+
+    input.addEventListener('input', () => {
+      const val = input.value.trim().toLowerCase();
+      dropdown.innerHTML = ''; 
+
+      if (val.length >= 5) {
+        const matches = allPlayers.filter(p => 
+          p.name.toLowerCase().includes(val) && !guessedPlayers.has(p.name)
+        );
+        
+        if (matches.length > 0) {
+          dropdown.style.display = 'block';
+          matches.forEach(match => {
+            const item = document.createElement('div');
+            item.className = 'dropdown-item';
+            item.textContent = match.name;
+            
+            item.addEventListener('click', () => {
+              addPlayerToGuessed(match);
+            });
+
+            dropdown.appendChild(item);
+          });
+        } else {
+          dropdown.style.display = 'none';
+        }
+      } else {
+        dropdown.style.display = 'none';
+      }
+
+      const matchedPlayerObj = allPlayers.find(p => p.name.toLowerCase() === val);
+      if (matchedPlayerObj && !guessedPlayers.has(matchedPlayerObj.name)) {
+        addPlayerToGuessed(matchedPlayerObj);
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!input.contains(e.target) && !dropdown.contains(e.target)) {
+        dropdown.style.display = 'none';
+      }
+    });
+
+    // Reveal Missed Players - Now includes PPG
+    finishBtn.addEventListener('click', () => {
+      input.disabled = true;
+      finishBtn.disabled = true;
+      finishBtn.textContent = "Game Over!";
+      dropdown.style.display = 'none';
+      missingSection.style.display = 'block';
+      
+      // The array is already sorted by PPG, so this filters them perfectly in order
+      const missed = allPlayers.filter(p => !guessedPlayers.has(p.name));
+      missed.forEach(m => {
+        const li = document.createElement('li');
+        li.className = 'missed';
+        li.innerHTML = `${m.name} [${m.team}] - <span class="ppg-badge">${m.ppg} PPG</span>`;
+        missedList.appendChild(li);
+      });
+    });
+  </script>
+</body>
+</html>
