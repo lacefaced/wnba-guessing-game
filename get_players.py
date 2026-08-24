@@ -24,6 +24,9 @@ def fetch_wnba_players():
         player_id = athlete.get('id')
         name = athlete.get('displayName')
         
+        if not player_id or not name:
+            continue
+        
         team_name = "Free Agent"
         team_obj = athlete.get('team')
         if team_obj:
@@ -38,10 +41,8 @@ def fetch_wnba_players():
                 except (ValueError, TypeError):
                     pass
                     
-        # Grab ESPN's official headshot URL
-        headshot_url = athlete.get('headshot', {}).get('href')
-        if not headshot_url:
-            headshot_url = f"https://a.espncdn.com/i/headshots/wnba/players/full/{player_id}.png"
+        # Construct the reliable ESPN headshot URL directly using the player ID
+        headshot_url = f"https://a.espncdn.com/i/headshots/wnba/players/full/{player_id}.png"
                     
         players_list.append({
             "id": player_id,
