@@ -91,6 +91,7 @@
     
     .missed { color: #888; }
     .ppg-badge { font-weight: bold; color: #ff552e; }
+    .position-badge { font-size: 13px; color: #777; font-weight: normal; margin-left: 5px; }
 
     /* Layout for Guessed Players with ESPN Headshots */
     .guessed-item {
@@ -155,15 +156,13 @@
         guessedPlayers.add(playerObj.name);
         
         const li = document.createElement('li');
-        
-        // ESPN Headshot URL
         const imgUrl = playerObj.headshot || '';
         
         li.innerHTML = `
           <div class="guessed-item">
             <img src="${imgUrl}" alt="${playerObj.name}" class="guessed-img" onerror="this.style.display='none'">
             <div>
-              <strong>${playerObj.name}</strong> <br>
+              <strong>${playerObj.name}</strong> <span class="position-badge">(${playerObj.position})</span><br>
               <span class="guessed-text-team">${playerObj.team}</span>
             </div>
           </div>
@@ -234,7 +233,7 @@
       missed.forEach(m => {
         const li = document.createElement('li');
         li.className = 'missed';
-        li.innerHTML = `${m.name} [${m.team}] - <span class="ppg-badge">${m.ppg} PPG</span>`;
+        li.innerHTML = `${m.name} <span class="position-badge">(${m.position})</span> [${m.team}] - <span class="ppg-badge">${m.ppg} PPG</span>`;
         missedList.appendChild(li);
       });
     });
