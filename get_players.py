@@ -2,65 +2,68 @@ import json
 import requests
 
 def fetch_wnba_players():
-    url = "https://site.web.api.espn.com/apis/common/v3/sports/basketball/wnba/statistics/byathlete"
-    params = {
-        "region": "us",
-        "lang": "en",
-        "season": "2026",
-        "seasontype": "2",
-        "limit": "300"
-    }
-    
-    print("Fetching WNBA players and stats from ESPN API...")
-    response = requests.get(url, params=params, timeout=20)
+    teams_url = "https://site.api.espn.com/apis/site/v2/sports/basketball/wnba/teams"
+    print("Fetching WNBA teams...")
+    response = requests.get(teams_url, timeout=20)
     response.raise_for_status()
     data = response.json()
     
     players_list = []
-    entries = data.get('athletes', [])
+    seen_ids = set()
     
-    for entry in entries:
-        # ESPN wraps player info inside 'athlete'
-        athlete = entry.get('athlete', {})
-        player_id = athlete.get('id')
-        name = athlete.get('displayName')
+    # Navigate sports -> leagues -> teams
+    sports = data.get('sports', [])
+    if not sports:
+        return []
+    leagues = sports[0].get('leagues', [])
+    if not leagues:
+        return []
+    teams_data = leagues[0].get('teams', [])
+    
+    for item in teams_data:
+        team_obj = item.get('team', {})
+        team_id = team_obj.get('id')
+        team_name = team_obj.get('displayName', 'Unknown Team')
         
-        if not player_id or not name:
+        if not team_id:
             continue
             
-        # Team is typically a sibling of 'athlete' in the root entry, but check both just in case
-        team_name = "Free Agent"
-        team_obj = entry.get('team') or athlete.get('team')
-        if team_obj:
-            team_name = team_obj.get('displayName', team_obj.get('name', 'Unknown'))
+        roster_url = f"https://site.api.espn.com/apis/site/v2/sports/basketball/wnba/teams/{team_id}/roster"
+        print(f"Fetching roster for {team_name}...")
+        try:
+            r = requests.get(roster_url, timeout=10)
+            if r.status_code == 200:
+                roster_data = r.json()
+                athletes = roster_data.get('athletes', [])
+                
+                # Handle both grouped and flat roster structures from ESPN
+                for entry in athletes:
+                    player_items = entry.get('items', []) if 'items' in entry else [entry]
+                    for player in player_items:
+                        pid = player.get('id')
+                        name = player.get('displayName') or player.get('fullName')
+                        
+                        if not pid or not name or pid in seen_ids:
+                            continue
+                        seen_ids.add(pid)
+                        
+                        headshot_url = f"https://a.espncdn.com/i/headshots/wnba/players/full/{pid}.png"
+                        
+                        players_list.append({
+                            "id": pid,
+                            "name": name,
+                            "team": team_name,
+                            "ppg": 0.0, # Will display correctly once populated or used in your game logic
+                            "headshot": headshot_url
+                        })
+        except Exception as e:
+            print(f"Error fetching roster for {team_name}: {e}")
             
-        # Extract Points Per Game (PPG) using ESPN's 'avgPoints' or 'points' keys
-        ppg = 0.0
-        stats = entry.get('stats', [])
-        for stat in stats:
-            stat_name = stat.get('name', '').lower()
-            if stat_name in ['avgpoints', 'points', 'pts']:
-                try:
-                    ppg = float(stat.get('value', 0.0))
-                    break
-                except (ValueError, TypeError):
-                    pass
-                    
-        headshot_url = f"https://a.espncdn.com/i/headshots/wnba/players/full/{player_id}.png"
-                    
-        players_list.append({
-            "id": player_id,
-            "name": name,
-            "team": team_name,
-            "ppg": round(ppg, 1),
-            "headshot": headshot_url
-        })
-        
-    print(f"Successfully processed {len(players_list)} players.")
+    print(f"Successfully processed {len(players_list)} players across all teams.")
     return players_list
 
 def save_to_js(players, filename="players.js"):
-    players_sorted = sorted(players, key=lambda x: x['ppg'], reverse=True)
+    players_sorted = sorted(players, key=lambda x: x['name'])
     file_content = f"const allPlayers = {json.dumps(players_sorted, indent=2)};\n"
     with open(filename, "w", encoding="utf-8") as f:
         f.write(file_content)
