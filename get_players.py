@@ -2,18 +2,20 @@ import json
 import requests
 
 def fetch_wnba_data():
+    # Step 1: Extract PPG and Position from the stats endpoint using player IDs
     ppg_map = {}
+    position_map = {}
+    
     stats_url = "https://site.web.api.espn.com/apis/common/v3/sports/basketball/wnba/statistics/byathlete"
     params = {
         "region": "us",
         "lang": "en",
         "season": "2026",
         "seasontype": "2",
-        "category": "offensive",
         "limit": "300"
     }
     
-    print("Fetching WNBA player stats...")
+    print("Fetching WNBA player stats and positions...")
     try:
         resp = requests.get(stats_url, params=params, timeout=20)
         if resp.status_code == 200:
@@ -24,39 +26,26 @@ def fetch_wnba_data():
                 if not pid:
                     continue
                 
+                # Extract Position (e.g., Center, Guard, Forward)
+                pos_obj = athlete.get('position', {})
+                position_map[pid] = pos_obj.get('abbreviation', pos_obj.get('displayName', 'Player'))
+                
+                # Extract PPG from offensive category values[1]
                 player_ppg = 0.0
-                
-                # Check flat stats list
-                for stat in entry.get('stats', []):
-                    name = str(stat.get('name', '')).lower()
-                    display = str(stat.get('displayName', '')).lower()
-                    if name in ['points', 'avgpoints', 'pts', 'ppg', 'pointspergame'] or 'point' in display:
-                        try:
-                            player_ppg = float(stat.get('value', stat.get('displayValue', 0.0)))
-                            break
-                        except (ValueError, TypeError):
-                            pass
-                
-                # Check category-nested stats if flat list missed it
-                if player_ppg == 0.0:
-                    for cat in entry.get('categories', []):
-                        for stat in cat.get('stats', []):
-                            name = str(stat.get('name', '')).lower()
-                            display = str(stat.get('displayName', '')).lower()
-                            if name in ['points', 'avgpoints', 'pts', 'ppg', 'pointspergame'] or 'point' in display:
-                                try:
-                                    player_ppg = float(stat.get('value', stat.get('displayValue', 0.0)))
-                                    break
-                                except (ValueError, TypeError):
-                                    pass
-                        if player_ppg > 0.0:
-                            break
-                            
+                for cat in entry.get('categories', []):
+                    if cat.get('name') == 'offensive':
+                        values = cat.get('values', [])
+                        if len(values) > 1:
+                            try:
+                                player_ppg = float(values[1])
+                            except (ValueError, TypeError):
+                                pass
+                        break
                 ppg_map[pid] = player_ppg
     except Exception as e:
         print(f"Warning: Could not fetch stats endpoint: {e}")
 
-    # Fetch teams and rosters for accurate team names and headshots
+    # Step 2: Fetch teams and rosters for accurate team names and headshots
     teams_url = "https://site.api.espn.com/apis/site/v2/sports/basketball/wnba/teams"
     print("Fetching WNBA teams and rosters...")
     response = requests.get(teams_url, timeout=20)
@@ -98,18 +87,20 @@ def fetch_wnba_data():
                                 
                                 headshot_url = f"https://a.espncdn.com/i/headshots/wnba/players/full/{pid}.png"
                                 ppg = ppg_map.get(pid, 0.0)
+                                position = position_map.get(pid, 'Player')
                                 
                                 players_list.append({
                                     "id": pid,
                                     "name": name,
                                     "team": team_name,
+                                    "position": position,
                                     "ppg": round(float(ppg), 1),
                                     "headshot": headshot_url
                                 })
                 except Exception as e:
                     print(f"Error fetching roster for {team_name}: {e}")
                     
-    print(f"Successfully processed {len(players_list)} players with stats and teams.")
+    print(f"Successfully processed {len(players_list)} players with stats, positions, and teams.")
     return players_list
 
 def save_to_js(players, filename="players.js"):
