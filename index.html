@@ -4,7 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>WNBA Naming Challenge</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏀</text></svg>">
+  
+  <!-- Basketball Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏀</text></svg>">
+  
   <style>
     body { 
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
@@ -88,6 +91,24 @@
     
     .missed { color: #888; }
     .ppg-badge { font-weight: bold; color: #ff552e; }
+
+    /* Layout for Guessed Players with Headshots */
+    .guessed-item {
+      display: flex;
+      align-items: center;
+    }
+    .guessed-img {
+      width: 50px;
+      height: 36px;
+      object-fit: cover;
+      border-radius: 4px;
+      margin-right: 15px;
+      background-color: #eee;
+    }
+    .guessed-text-team {
+      font-size: 14px;
+      color: #666;
+    }
   </style>
 </head>
 <body>
@@ -125,16 +146,30 @@
     const finishBtn = document.getElementById('finishBtn');
     const missingSection = document.getElementById('missingSection');
     
+    // Set total players from Python database
     document.getElementById('total').textContent = allPlayers.length;
 
+    // Helper to add player and update UI
     function addPlayerToGuessed(playerObj) {
       if (!guessedPlayers.has(playerObj.name)) {
         guessedPlayers.add(playerObj.name);
         
         const li = document.createElement('li');
-        li.innerHTML = `<strong>${playerObj.name}</strong> [${playerObj.team}]`;
-        guessedList.insertBefore(li, guessedList.firstChild); 
         
+        // NBA/WNBA Official Image CDN
+        const imgUrl = `https://cdn.nba.com/headshots/wnba/latest/260x190/${playerObj.id}.png`;
+        
+        li.innerHTML = `
+          <div class="guessed-item">
+            <img src="${imgUrl}" alt="${playerObj.name}" class="guessed-img" onerror="this.style.display='none'">
+            <div>
+              <strong>${playerObj.name}</strong> <br>
+              <span class="guessed-text-team">${playerObj.team}</span>
+            </div>
+          </div>
+        `;
+        
+        guessedList.insertBefore(li, guessedList.firstChild); 
         countDisplay.textContent = guessedPlayers.size;
       }
       
@@ -143,10 +178,12 @@
       dropdown.style.display = 'none';
     }
 
+    // Input matching & Dropdown logic
     input.addEventListener('input', () => {
       const val = input.value.trim().toLowerCase();
       dropdown.innerHTML = ''; 
 
+      // Threshold set to 5 characters
       if (val.length >= 5) {
         const matches = allPlayers.filter(p => 
           p.name.toLowerCase().includes(val) && !guessedPlayers.has(p.name)
@@ -172,19 +209,21 @@
         dropdown.style.display = 'none';
       }
 
+      // Check for exact full match
       const matchedPlayerObj = allPlayers.find(p => p.name.toLowerCase() === val);
       if (matchedPlayerObj && !guessedPlayers.has(matchedPlayerObj.name)) {
         addPlayerToGuessed(matchedPlayerObj);
       }
     });
 
+    // Close dropdown on outside click
     document.addEventListener('click', (e) => {
       if (!input.contains(e.target) && !dropdown.contains(e.target)) {
         dropdown.style.display = 'none';
       }
     });
 
-    // Reveal Missed Players - Now includes PPG
+    // End Game Logic
     finishBtn.addEventListener('click', () => {
       input.disabled = true;
       finishBtn.disabled = true;
@@ -192,7 +231,6 @@
       dropdown.style.display = 'none';
       missingSection.style.display = 'block';
       
-      // The array is already sorted by PPG, so this filters them perfectly in order
       const missed = allPlayers.filter(p => !guessedPlayers.has(p.name));
       missed.forEach(m => {
         const li = document.createElement('li');
