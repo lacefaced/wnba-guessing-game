@@ -2,7 +2,6 @@ import json
 import requests
 
 def fetch_wnba_data():
-    # Step 1: Build a dictionary of player_id -> ppg from the stats endpoint
     ppg_map = {}
     stats_url = "https://site.web.api.espn.com/apis/common/v3/sports/basketball/wnba/statistics/byathlete"
     params = {
@@ -10,6 +9,7 @@ def fetch_wnba_data():
         "lang": "en",
         "season": "2026",
         "seasontype": "2",
+        "category": "offensive",
         "limit": "300"
     }
     
@@ -25,20 +25,38 @@ def fetch_wnba_data():
                     continue
                 
                 player_ppg = 0.0
+                
+                # Check flat stats list
                 for stat in entry.get('stats', []):
-                    name = stat.get('name', '').lower()
-                    display = stat.get('displayName', '').lower()
-                    if name in ['points', 'avgpoints', 'pts', 'ppg'] or 'point' in display:
+                    name = str(stat.get('name', '')).lower()
+                    display = str(stat.get('displayName', '')).lower()
+                    if name in ['points', 'avgpoints', 'pts', 'ppg', 'pointspergame'] or 'point' in display:
                         try:
-                            player_ppg = float(stat.get('value', 0.0))
+                            player_ppg = float(stat.get('value', stat.get('displayValue', 0.0)))
                             break
                         except (ValueError, TypeError):
                             pass
+                
+                # Check category-nested stats if flat list missed it
+                if player_ppg == 0.0:
+                    for cat in entry.get('categories', []):
+                        for stat in cat.get('stats', []):
+                            name = str(stat.get('name', '')).lower()
+                            display = str(stat.get('displayName', '')).lower()
+                            if name in ['points', 'avgpoints', 'pts', 'ppg', 'pointspergame'] or 'point' in display:
+                                try:
+                                    player_ppg = float(stat.get('value', stat.get('displayValue', 0.0)))
+                                    break
+                                except (ValueError, TypeError):
+                                    pass
+                        if player_ppg > 0.0:
+                            break
+                            
                 ppg_map[pid] = player_ppg
     except Exception as e:
         print(f"Warning: Could not fetch stats endpoint: {e}")
 
-    # Step 2: Fetch teams and rosters to get accurate team names and all active players
+    # Fetch teams and rosters for accurate team names and headshots
     teams_url = "https://site.api.espn.com/apis/site/v2/sports/basketball/wnba/teams"
     print("Fetching WNBA teams and rosters...")
     response = requests.get(teams_url, timeout=20)
