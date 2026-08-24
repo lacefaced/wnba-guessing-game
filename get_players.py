@@ -17,31 +17,35 @@ def fetch_wnba_players():
     data = response.json()
     
     players_list = []
-    athletes = data.get('athletes', [])
+    entries = data.get('athletes', [])
     
-    for entry in athletes:
+    for entry in entries:
+        # ESPN wraps player info inside 'athlete'
         athlete = entry.get('athlete', {})
         player_id = athlete.get('id')
         name = athlete.get('displayName')
         
         if not player_id or not name:
             continue
-        
+            
+        # Team is typically a sibling of 'athlete' in the root entry, but check both just in case
         team_name = "Free Agent"
-        team_obj = athlete.get('team')
+        team_obj = entry.get('team') or athlete.get('team')
         if team_obj:
             team_name = team_obj.get('displayName', team_obj.get('name', 'Unknown'))
             
+        # Extract Points Per Game (PPG) using ESPN's 'avgPoints' or 'points' keys
         ppg = 0.0
         stats = entry.get('stats', [])
         for stat in stats:
-            if stat.get('name') == 'points' or 'points' in stat.get('displayName', '').lower():
+            stat_name = stat.get('name', '').lower()
+            if stat_name in ['avgpoints', 'points', 'pts']:
                 try:
                     ppg = float(stat.get('value', 0.0))
+                    break
                 except (ValueError, TypeError):
                     pass
                     
-        # Construct the reliable ESPN headshot URL directly using the player ID
         headshot_url = f"https://a.espncdn.com/i/headshots/wnba/players/full/{player_id}.png"
                     
         players_list.append({
