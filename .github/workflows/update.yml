@@ -5,6 +5,9 @@ on:
     - cron: '0 6 * * *' # Runs daily at 6 AM UTC
   workflow_dispatch: # Allows you to manually trigger it anytime from the Actions tab
 
+permissions:
+  contents: write
+
 jobs:
   update-stats:
     runs-on: ubuntu-latest
