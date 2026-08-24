@@ -1,1 +1,764 @@
-const allPlayers = [{"name": "A'ja Wilson", "team": "Las Vegas Aces", "ppg": 25.9, "id": 1628932}, {"name": "Kelsey Mitchell", "team": "Indiana Fever", "ppg": 24.7, "id": 1628909}, {"name": "Kelsey Plum", "team": "Phoenix Mercury", "ppg": 22.2, "id": 1628276}, {"name": "Caitlin Clark", "team": "Indiana Fever", "ppg": 21.7, "id": 1642286}, {"name": "Kahleah Copper", "team": "Phoenix Mercury", "ppg": 21.0, "id": 1627674}, {"name": "Marina Mabrey", "team": "Toronto Tempo", "ppg": 20.8, "id": 1629497}, {"name": "Breanna Stewart", "team": "New York Liberty", "ppg": 20.8, "id": 1627668}, {"name": "Paige Bueckers", "team": "Dallas Wings", "ppg": 20.6, "id": 1642784}, {"name": "Olivia Miles", "team": "Minnesota Lynx", "ppg": 20.0, "id": 1643426}, {"name": "Allisha Gray", "team": "Atlanta Dream", "ppg": 19.4, "id": 1628277}, {"name": "Napheesa Collier", "team": "Minnesota Lynx", "ppg": 19.0, "id": 1629483}, {"name": "Jackie Young", "team": "Las Vegas Aces", "ppg": 18.7, "id": 1629498}, {"name": "Brittney Sykes", "team": "Toronto Tempo", "ppg": 18.6, "id": 1628279}, {"name": "Kayla McBride", "team": "Minnesota Lynx", "ppg": 18.3, "id": 203825}, {"name": "Rhyne Howard", "team": "Atlanta Dream", "ppg": 18.2, "id": 1631009}, {"name": "Rickea Jackson", "team": "", "ppg": 18.0, "id": 1642288}, {"name": "Aliyah Boston", "team": "Indiana Fever", "ppg": 17.0, "id": 1641648}, {"name": "Dominique Malonga", "team": "Seattle Storm", "ppg": 17.0, "id": 1642798}, {"name": "Sonia Citron", "team": "Washington Mystics", "ppg": 16.9, "id": 1642785}, {"name": "Shakira Austin", "team": "Washington Mystics", "ppg": 16.6, "id": 1631022}, {"name": "Nneka Ogwumike", "team": "Los Angeles Sparks", "ppg": 16.6, "id": 203014}, {"name": "Angel Reese", "team": "Atlanta Dream", "ppg": 16.3, "id": 1642291}, {"name": "Sabrina Ionescu", "team": "New York Liberty", "ppg": 15.9, "id": 1629477}, {"name": "Carla Leite", "team": "Portland Fire", "ppg": 15.5, "id": 1642304}, {"name": "Natisha Hiedeman", "team": "Seattle Storm", "ppg": 15.4, "id": 1629567}, {"name": "Natasha Howard", "team": "Minnesota Lynx", "ppg": 15.1, "id": 203827}, {"name": "Kiki Iriafen", "team": "Washington Mystics", "ppg": 15.1, "id": 1642792}, {"name": "Arike Ogunbowale", "team": "Dallas Wings", "ppg": 15.1, "id": 1629481}, {"name": "Kamilla Cardoso", "team": "Chicago Sky", "ppg": 14.8, "id": 1642289}, {"name": "Dearica Hamby", "team": "Los Angeles Sparks", "ppg": 14.8, "id": 204324}, {"name": "Alyssa Thomas", "team": "Phoenix Mercury", "ppg": 14.8, "id": 203826}, {"name": "Bridget Carleton", "team": "Portland Fire", "ppg": 14.6, "id": 1629524}, {"name": "Jonquel Jones", "team": "New York Liberty", "ppg": 14.6, "id": 1627673}, {"name": "Sydney Taylor", "team": "Chicago Sky", "ppg": 14.5, "id": 1642321}, {"name": "Rae Burrell", "team": "Los Angeles Sparks", "ppg": 14.4, "id": 1630996}, {"name": "Courtney Williams", "team": "Minnesota Lynx", "ppg": 14.4, "id": 1627675}, {"name": "Gabby Williams", "team": "Golden State Valkyries", "ppg": 14.4, "id": 1628931}, {"name": "Skylar Diggins", "team": "Chicago Sky", "ppg": 14.2, "id": 203400}, {"name": "Jessica Shepard", "team": "Dallas Wings", "ppg": 14.2, "id": 1629491}, {"name": "Flau'jae Johnson", "team": "Seattle Storm", "ppg": 13.8, "id": 1643428}, {"name": "Brittney Griner", "team": "Connecticut Sun", "ppg": 13.2, "id": 203398}, {"name": "Azzi Fudd", "team": "Dallas Wings", "ppg": 13.1, "id": 1643425}, {"name": "Janelle Salaun", "team": "Golden State Valkyries", "ppg": 13.1, "id": 1642767}, {"name": "Megan DiLeo", "team": "Portland Fire", "ppg": 13.0, "id": 1629484}, {"name": "Veronica Burton", "team": "Golden State Valkyries", "ppg": 12.4, "id": 1631007}, {"name": "Nyara Sabally", "team": "Toronto Tempo", "ppg": 12.3, "id": 1631055}, {"name": "Chennedy Carter", "team": "", "ppg": 12.2, "id": 1630150}, {"name": "Chelsea Gray", "team": "Las Vegas Aces", "ppg": 12.1, "id": 203833}, {"name": "Isabelle Harrison", "team": "Toronto Tempo", "ppg": 12.0, "id": 204330}, {"name": "Kiki Rice", "team": "Toronto Tempo", "ppg": 11.9, "id": 1643445}, {"name": "NaLyssa Smith", "team": "Las Vegas Aces", "ppg": 11.8, "id": 1631019}, {"name": "Jordin Canada", "team": "Atlanta Dream", "ppg": 11.6, "id": 1628886}, {"name": "Leila Lacan", "team": "Connecticut Sun", "ppg": 11.6, "id": 1642303}, {"name": "Natasha Cloud", "team": "Chicago Sky", "ppg": 11.4, "id": 204333}, {"name": "Aneesah Morrow", "team": "Toronto Tempo", "ppg": 11.0, "id": 1642800}, {"name": "Sarah Ashlee Barker", "team": "", "ppg": 10.7, "id": 1642782}, {"name": "Leonie Fiebich", "team": "New York Liberty", "ppg": 10.7, "id": 1630142}, {"name": "DeWanna Bonner", "team": "Phoenix Mercury", "ppg": 10.6, "id": 201886}, {"name": "Azura Stevens", "team": "Chicago Sky", "ppg": 10.5, "id": 1628922}, {"name": "Jovana Nogic", "team": "Phoenix Mercury", "ppg": 10.4, "id": 1643505}, {"name": "Satou Sabally", "team": "New York Liberty", "ppg": 10.4, "id": 1630149}, {"name": "Awa Fam", "team": "Seattle Storm", "ppg": 10.3, "id": 1643443}, {"name": "DiJonai Carrington", "team": "Chicago Sky", "ppg": 10.0, "id": 1630096}, {"name": "Laura Juskaite", "team": "Toronto Tempo", "ppg": 10.0, "id": 1643420}, {"name": "Olivia Nelson-Ododa", "team": "Connecticut Sun", "ppg": 10.0, "id": 1631135}, {"name": "Aaliyah Edwards", "team": "Connecticut Sun", "ppg": 9.9, "id": 1642290}, {"name": "Jade Melbourne", "team": "Seattle Storm", "ppg": 9.5, "id": 1631141}, {"name": "Pauline Astier", "team": "New York Liberty", "ppg": 9.3, "id": 1631136}, {"name": "Courtney Vandersloot", "team": "Chicago Sky", "ppg": 9.3, "id": 202664}, {"name": "Cameron Brink", "team": "Los Angeles Sparks", "ppg": 9.2, "id": 1642287}, {"name": "Michaela Onyenwere", "team": "Washington Mystics", "ppg": 9.2, "id": 1630446}, {"name": "Erica Wheeler", "team": "Los Angeles Sparks", "ppg": 9.2, "id": 204365}, {"name": "Emily Engstler", "team": "Portland Fire", "ppg": 9.1, "id": 1631083}, {"name": "Naz Hillmon", "team": "Atlanta Dream", "ppg": 9.1, "id": 1631044}, {"name": "Diamond Miller", "team": "Connecticut Sun", "ppg": 9.1, "id": 1641649}, {"name": "Maria Conde", "team": "Toronto Tempo", "ppg": 9.0, "id": 1629576}, {"name": "Marine Johannes", "team": "New York Liberty", "ppg": 9.0, "id": 1629546}, {"name": "Ariel Atkins", "team": "Los Angeles Sparks", "ppg": 8.7, "id": 1628878}, {"name": "Kennedy Burke", "team": "Connecticut Sun", "ppg": 8.7, "id": 1629568}, {"name": "Sophie Cunningham", "team": "Indiana Fever", "ppg": 8.6, "id": 1629482}, {"name": "Tiffany Hayes", "team": "Golden State Valkyries", "ppg": 8.6, "id": 203026}, {"name": "Monique Akoa Makani", "team": "Los Angeles Sparks", "ppg": 8.4, "id": 1642777}, {"name": "Emma Cechova", "team": "", "ppg": 8.3, "id": 1643488}, {"name": "Brionna Jones", "team": "Atlanta Dream", "ppg": 8.2, "id": 1628280}, {"name": "Cecilia Zandalasini", "team": "Golden State Valkyries", "ppg": 8.2, "id": 1628508}, {"name": "Kayla Thornton", "team": "Golden State Valkyries", "ppg": 8.1, "id": 203866}, {"name": "Natasha Mack", "team": "Phoenix Mercury", "ppg": 8.0, "id": 1630442}, {"name": "Jewell Loyd", "team": "Las Vegas Aces", "ppg": 7.9, "id": 204319}, {"name": "Kamiah Smalls", "team": "", "ppg": 7.5, "id": 1630154}, {"name": "Zia Cooke", "team": "Seattle Storm", "ppg": 7.4, "id": 1641660}, {"name": "Monique Billings", "team": "Indiana Fever", "ppg": 7.0, "id": 1628881}, {"name": "Saniya Rivers", "team": "Connecticut Sun", "ppg": 7.0, "id": 1642809}, {"name": "Charlisse Leger-Walker", "team": "Connecticut Sun", "ppg": 6.8, "id": 1643449}, {"name": "Ezi Magbegor", "team": "Seattle Storm", "ppg": 6.8, "id": 1629496}, {"name": "Kaitlyn Chen", "team": "Golden State Valkyries", "ppg": 6.7, "id": 1642822}, {"name": "Nia Coffey", "team": "Minnesota Lynx", "ppg": 6.6, "id": 1628269}, {"name": "Gabriela Jaquez", "team": "Chicago Sky", "ppg": 6.6, "id": 1643447}, {"name": "Cotie McMahon", "team": "Washington Mystics", "ppg": 6.6, "id": 1643430}, {"name": "Julie Allemand", "team": "Toronto Tempo", "ppg": 6.5, "id": 1627700}, {"name": "Valeriane Ayayi", "team": "Phoenix Mercury", "ppg": 6.5, "id": 204468}, {"name": "Jacy Sheldon", "team": "Chicago Sky", "ppg": 6.5, "id": 1642292}, {"name": "Lauren Betts", "team": "Washington Mystics", "ppg": 6.3, "id": 1643427}, {"name": "Frieda Buhner", "team": "Portland Fire", "ppg": 6.3, "id": 1643494}, {"name": "Han Xu", "team": "New York Liberty", "ppg": 6.3, "id": 1629566}, {"name": "Aziaha James", "team": "Dallas Wings", "ppg": 6.1, "id": 1642793}, {"name": "Maddy Siegrist", "team": "Dallas Wings", "ppg": 6.1, "id": 1641652}, {"name": "Noemie Brochant", "team": "Phoenix Mercury", "ppg": 6.0, "id": 1643493}, {"name": "Alex Fowler", "team": "", "ppg": 6.0, "id": 1643525}, {"name": "Kaila Charles", "team": "Golden State Valkyries", "ppg": 5.9, "id": 1630097}, {"name": "Alanna Smith", "team": "Dallas Wings", "ppg": 5.9, "id": 1629501}, {"name": "Georgia Amoore", "team": "Washington Mystics", "ppg": 5.8, "id": 1642781}, {"name": "Awak Kuier", "team": "Dallas Wings", "ppg": 5.8, "id": 1630386}, {"name": "Teja Oblak", "team": "Portland Fire", "ppg": 5.8, "id": 1643506}, {"name": "Julie Vanloo", "team": "", "ppg": 5.8, "id": 1642210}, {"name": "Mai Yamamoto", "team": "Las Vegas Aces", "ppg": 5.8, "id": 1642769}, {"name": "Rebecca Allen", "team": "New York Liberty", "ppg": 5.7, "id": 204296}, {"name": "Madina Okot", "team": "Atlanta Dream", "ppg": 5.7, "id": 1643431}, {"name": "Hailey Van Lith", "team": "Connecticut Sun", "ppg": 5.7, "id": 1642817}, {"name": "Jordan Harrison", "team": "Portland Fire", "ppg": 5.6, "id": 1643527}, {"name": "Tonie Morgan", "team": "Los Angeles Sparks", "ppg": 5.6, "id": 1643439}, {"name": "Justine Pissott", "team": "Las Vegas Aces", "ppg": 5.4, "id": 1643495}, {"name": "Temi Fagbenle", "team": "Toronto Tempo", "ppg": 5.3, "id": 1627701}, {"name": "Cheyenne Parker-Tyus", "team": "Las Vegas Aces", "ppg": 5.3, "id": 204323}, {"name": "Makayla Timpson", "team": "Indiana Fever", "ppg": 5.2, "id": 1642815}, {"name": "Rebekah Gardner", "team": "New York Liberty", "ppg": 5.1, "id": 203822}, {"name": "Lexie Hull", "team": "Indiana Fever", "ppg": 5.1, "id": 1631086}, {"name": "Odyssey Sims", "team": "Dallas Wings", "ppg": 5.1, "id": 203824}, {"name": "Kia Nurse", "team": "Toronto Tempo", "ppg": 5.0, "id": 1628915}, {"name": "Jordan Horston", "team": "Seattle Storm", "ppg": 4.9, "id": 1641651}, {"name": "Sami Whitcomb", "team": "Phoenix Mercury", "ppg": 4.9, "id": 1628244}, {"name": "Elizabeth Williams", "team": "Chicago Sky", "ppg": 4.9, "id": 204322}, {"name": "Aicha Coulibaly", "team": "Chicago Sky", "ppg": 4.8, "id": 1642786}, {"name": "Rachel Banham", "team": "Chicago Sky", "ppg": 4.7, "id": 1627671}, {"name": "Lexi Held", "team": "Phoenix Mercury", "ppg": 4.7, "id": 1631118}, {"name": "Karlie Samuelson", "team": "Portland Fire", "ppg": 4.7, "id": 1628317}, {"name": "Isobel Borlase", "team": "Atlanta Dream", "ppg": 4.6, "id": 1642302}, {"name": "Luisa Geiselsoder", "team": "Portland Fire", "ppg": 4.5, "id": 1630143}, {"name": "Betnijah Laney-Hamilton", "team": "Washington Mystics", "ppg": 4.5, "id": 204335}, {"name": "Chloe Bibby", "team": "Minnesota Lynx", "ppg": 4.4, "id": 1631064}, {"name": "Serah Williams", "team": "Portland Fire", "ppg": 4.4, "id": 1643436}, {"name": "Tyasha Harris", "team": "Indiana Fever", "ppg": 4.3, "id": 1630112}, {"name": "Katie Lou Samuelson", "team": "Seattle Storm", "ppg": 4.3, "id": 1629478}, {"name": "Marine Fauthoux", "team": "New York Liberty", "ppg": 4.0, "id": 1630469}, {"name": "Haley Jones", "team": "Dallas Wings", "ppg": 4.0, "id": 1641650}, {"name": "Ashten Prechtel", "team": "Golden State Valkyries", "ppg": 4.0, "id": 1641695}, {"name": "Nyadiew Puoch", "team": "Portland Fire", "ppg": 4.0, "id": 1642296}, {"name": "Costanza Verona", "team": "Dallas Wings", "ppg": 4.0, "id": 1643424}, {"name": "Maya Caldwell", "team": "Minnesota Lynx", "ppg": 3.9, "id": 1630471}, {"name": "Anastasiia Olairi Kosu", "team": "Minnesota Lynx", "ppg": 3.9, "id": 1642797}, {"name": "Lexie Brown", "team": "", "ppg": 3.8, "id": 1628882}, {"name": "Emma Cannon", "team": "Los Angeles Sparks", "ppg": 3.8, "id": 1628242}, {"name": "Dorka Juhasz", "team": "Minnesota Lynx", "ppg": 3.8, "id": 1641657}, {"name": "Te-Hina Paopao", "team": "Atlanta Dream", "ppg": 3.8, "id": 1642804}, {"name": "Kiana Williams", "team": "", "ppg": 3.8, "id": 1630461}, {"name": "Raegan Beers", "team": "Connecticut Sun", "ppg": 3.7, "id": 1643441}, {"name": "Myisha Hines-Allen", "team": "Indiana Fever", "ppg": 3.7, "id": 1628899}, {"name": "Kiah Stokes", "team": "Golden State Valkyries", "ppg": 3.7, "id": 204329}, {"name": "Nell Angloma", "team": "Connecticut Sun", "ppg": 3.6, "id": 1643448}, {"name": "Alicia Florez", "team": "Washington Mystics", "ppg": 3.6, "id": 1643644}, {"name": "Sug Sutton", "team": "Dallas Wings", "ppg": 3.6, "id": 1630134}, {"name": "Laeticia Amihere", "team": "Golden State Valkyries", "ppg": 3.5, "id": 1641656}, {"name": "Dana Evans", "team": "Las Vegas Aces", "ppg": 3.4, "id": 1630389}, {"name": "Li Yueru", "team": "Dallas Wings", "ppg": 3.4, "id": 1629574}, {"name": "Damiris Dantas", "team": "", "ppg": 3.3, "id": 203024}, {"name": "Stefanie Dolson", "team": "Seattle Storm", "ppg": 3.3, "id": 203828}, {"name": "Stephanie Talbot", "team": "Las Vegas Aces", "ppg": 3.3, "id": 203855}, {"name": "Holly Winterburn", "team": "Portland Fire", "ppg": 3.3, "id": 1641683}, {"name": "Raven Johnson", "team": "Indiana Fever", "ppg": 3.2, "id": 1643433}, {"name": "Tima Pouye", "team": "", "ppg": 3.2, "id": 1643647}, {"name": "Marta Suarez", "team": "Phoenix Mercury", "ppg": 3.2, "id": 1643438}, {"name": "Angela Dugalic", "team": "Washington Mystics", "ppg": 3.1, "id": 1643455}, {"name": "Gianna Kneepkens", "team": "Connecticut Sun", "ppg": 3.1, "id": 1643429}, {"name": "Kyara Linskens", "team": "Phoenix Mercury", "ppg": 3.1, "id": 1642768}, {"name": "Antonia Delaere", "team": "Minnesota Lynx", "ppg": 3.0, "id": 1643489}, {"name": "Chance Gray", "team": "Los Angeles Sparks", "ppg": 3.0, "id": 1643462}, {"name": "Liatu King", "team": "Minnesota Lynx", "ppg": 3.0, "id": 1642820}, {"name": "Nikolina Milic", "team": "", "ppg": 3.0, "id": 1631263}, {"name": "Alex Wilson", "team": "", "ppg": 3.0, "id": 1642775}, {"name": "Ta'Niya Latson", "team": "Las Vegas Aces", "ppg": 2.9, "id": 1643444}, {"name": "Lucy Olsen", "team": "Washington Mystics", "ppg": 2.9, "id": 1642802}, {"name": "Ornella Bankole", "team": "Toronto Tempo", "ppg": 2.7, "id": 1643706}, {"name": "Laura Ziegler", "team": "", "ppg": 2.7, "id": 1643461}, {"name": "Mackenzie Holmes", "team": "Seattle Storm", "ppg": 2.6, "id": 1642307}, {"name": "Juste Jocyte", "team": "Golden State Valkyries", "ppg": 2.6, "id": 1642794}, {"name": "Bree Hall", "team": "Indiana Fever", "ppg": 2.5, "id": 1642788}, {"name": "Emese Hof", "team": "", "ppg": 2.3, "id": 1629581}, {"name": "Kate Martin", "team": "Los Angeles Sparks", "ppg": 2.3, "id": 1642324}, {"name": "Jihyun Park", "team": "Los Angeles Sparks", "ppg": 2.3, "id": 1630148}, {"name": "Cassandre Prosper", "team": "Washington Mystics", "ppg": 2.3, "id": 1643467}, {"name": "Jaylyn Sherrod", "team": "Atlanta Dream", "ppg": 2.3, "id": 1642320}, {"name": "Kayla Alexander", "team": "", "ppg": 2.2, "id": 203405}, {"name": "Alysha Clark", "team": "Dallas Wings", "ppg": 2.2, "id": 202252}, {"name": "Kierstan Bell", "team": "Las Vegas Aces", "ppg": 2.1, "id": 1631006}, {"name": "Joyner Holmes", "team": "", "ppg": 2.0, "id": 1630115}, {"name": "Rayah Marshall", "team": "Connecticut Sun", "ppg": 2.0, "id": 1642796}, {"name": "Alissa Pili", "team": "Los Angeles Sparks", "ppg": 2.0, "id": 1642293}, {"name": "Eliska Joklova", "team": "Minnesota Lynx", "ppg": 1.9, "id": 1643490}, {"name": "Taina Mair", "team": "Seattle Storm", "ppg": 1.9, "id": 1643473}, {"name": "Teonni Key", "team": "Toronto Tempo", "ppg": 1.8, "id": 1643457}, {"name": "Sika Kone", "team": "Atlanta Dream", "ppg": 1.8, "id": 1631021}, {"name": "Ashlon Jackson", "team": "Connecticut Sun", "ppg": 1.7, "id": 1643437}, {"name": "Brianna Turner", "team": "Las Vegas Aces", "ppg": 1.7, "id": 1629488}, {"name": "Raquel Carrera", "team": "New York Liberty", "ppg": 1.6, "id": 1630384}, {"name": "Grace VanSlooten", "team": "Indiana Fever", "ppg": 1.6, "id": 1643453}, {"name": "Shay Ciezki", "team": "Phoenix Mercury", "ppg": 1.5, "id": 1643470}, {"name": "Teaira McCowan", "team": "", "ppg": 1.4, "id": 1629479}, {"name": "Mariella Fasoula", "team": "", "ppg": 1.3, "id": 1630108}, {"name": "Shatori Walker-Kimbrough", "team": "Atlanta Dream", "ppg": 1.3, "id": 1628278}, {"name": "Quionche Carter", "team": "", "ppg": 1.2, "id": 1643487}, {"name": "Taylor Thierry", "team": "Seattle Storm", "ppg": 1.1, "id": 1642814}, {"name": "Nadia Fingall", "team": "Golden State Valkyries", "ppg": 1.0, "id": 1643686}, {"name": "Amy Okonkwo", "team": "Portland Fire", "ppg": 1.0, "id": 1629539}, {"name": "JJ Quinerly", "team": "", "ppg": 1.0, "id": 1642808}, {"name": "Maddy Westbeld", "team": "Phoenix Mercury", "ppg": 1.0, "id": 1642818}, {"name": "Rori Harmon", "team": "Washington Mystics", "ppg": 0.9, "id": 1643450}, {"name": "Anneli Maley", "team": "New York Liberty", "ppg": 0.8, "id": 1630993}, {"name": "Indya Nivar", "team": "Atlanta Dream", "ppg": 0.8, "id": 1643469}, {"name": "Aaliyah Nye", "team": "Atlanta Dream", "ppg": 0.7, "id": 1642801}, {"name": "Mercedes Russell", "team": "Indiana Fever", "ppg": 0.7, "id": 1628920}, {"name": "Aubrey Griffin", "team": "", "ppg": 0.5, "id": 1642826}, {"name": "Elizabeth Balogun", "team": "New York Liberty", "ppg": 0.0, "id": 1641663}, {"name": "Elena Buenavida", "team": "Minnesota Lynx", "ppg": 0.0, "id": 1643825}, {"name": "Kara Dunn", "team": "Phoenix Mercury", "ppg": 0.0, "id": 1643454}, {"name": "Sania Feagin", "team": "Portland Fire", "ppg": 0.0, "id": 1642790}, {"name": "Zaay Green", "team": "Toronto Tempo", "ppg": 0.0, "id": 1642791}, {"name": "Darianna Littlepage-Buggs", "team": "Washington Mystics", "ppg": 0.0, "id": 1643440}, {"name": "Morgan Maly", "team": "Chicago Sky", "ppg": 0.0, "id": 1642835}, {"name": "Ndjakalenga Mwenentanda", "team": "", "ppg": 0.0, "id": 1643479}, {"name": "Michelle Onyiah", "team": "Indiana Fever", "ppg": 0.0, "id": 1642803}, {"name": "Saylor Poffenbarger", "team": "", "ppg": 0.0, "id": 1643458}, {"name": "Iliana Rupert", "team": "Golden State Valkyries", "ppg": 0.0, "id": 1630387}, {"name": "Miela Sowah", "team": "Golden State Valkyries", "ppg": 0.0, "id": 1631039}, {"name": "Christyn Williams", "team": "Dallas Wings", "ppg": 0.0, "id": 1631090}, {"name": "Peyton Williams", "team": "", "ppg": 0.0, "id": 1630138}];
+const allPlayers = [
+  {
+    "id": "3149391",
+    "name": "A'ja Wilson",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "3142191",
+    "name": "Kelsey Mitchell",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "4433403",
+    "name": "Caitlin Clark",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "2998938",
+    "name": "Kahleah Copper",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "3904576",
+    "name": "Marina Mabrey",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "2998928",
+    "name": "Breanna Stewart",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "4433730",
+    "name": "Paige Bueckers",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "4433791",
+    "name": "Olivia Miles",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "3058901",
+    "name": "Allisha Gray",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "4065870",
+    "name": "Jackie Young",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "2529205",
+    "name": "Kayla McBride",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "4398674",
+    "name": "Rhyne Howard",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "4432831",
+    "name": "Aliyah Boston",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "5220150",
+    "name": "Dominique Malonga",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "4398911",
+    "name": "Shakira Austin",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "4433524",
+    "name": "Sonia Citron",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "1068",
+    "name": "Nneka Ogwumike",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "4433402",
+    "name": "Angel Reese",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "5208982",
+    "name": "Carla Leite",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "3906753",
+    "name": "Natisha Hiedeman",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "4898384",
+    "name": "Kiki Iriafen",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "3904577",
+    "name": "Arike Ogunbowale",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "2529130",
+    "name": "Natasha Howard",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "2566106",
+    "name": "Dearica Hamby",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "2529140",
+    "name": "Alyssa Thomas",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "4433405",
+    "name": "Kamilla Cardoso",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "3906972",
+    "name": "Bridget Carleton",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "2999101",
+    "name": "Jonquel Jones",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "2987891",
+    "name": "Courtney Williams",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "3142328",
+    "name": "Gabby Williams",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "4398764",
+    "name": "Rae Burrell",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "3906949",
+    "name": "Jessica Shepard",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "4594786",
+    "name": "Sydney Taylor",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "4698736",
+    "name": "Flau'jae Johnson",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "3934218",
+    "name": "Megan DiLeo",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "4433790",
+    "name": "Azzi Fudd",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "4790264",
+    "name": "Janelle Salaun",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "4398935",
+    "name": "Veronica Burton",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "2529122",
+    "name": "Chelsea Gray",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "4398776",
+    "name": "NaLyssa Smith",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "5208981",
+    "name": "Leila Lacan",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "3142250",
+    "name": "Jordin Canada",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "2529137",
+    "name": "Natasha Cloud",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "4684384",
+    "name": "Aneesah Morrow",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "4703794",
+    "name": "Sarah Ashlee Barker",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "3142010",
+    "name": "Azura Stevens",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "869",
+    "name": "DeWanna Bonner",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "5345325",
+    "name": "Awa Fam",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "5345444",
+    "name": "Laura Juskaite",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "4398966",
+    "name": "Olivia Nelson-Ododa",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "4398729",
+    "name": "Emily Engstler",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "5017726",
+    "name": "Jade Melbourne",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "5345320",
+    "name": "Pauline Astier",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "2491214",
+    "name": "Erica Wheeler",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "4433404",
+    "name": "Cameron Brink",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "4282173",
+    "name": "Michaela Onyenwere",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "4398915",
+    "name": "Naz Hillmon",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "4433635",
+    "name": "Diamond Miller",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "3910470",
+    "name": "Maria Conde",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "4038379",
+    "name": "Marine Johannes",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "3146151",
+    "name": "Ariel Atkins",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "3922628",
+    "name": "Kennedy Burke",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "1054",
+    "name": "Tiffany Hayes",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "3907781",
+    "name": "Sophie Cunningham",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "4257500",
+    "name": "Cecilia Zandalasini",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "2529622",
+    "name": "Kayla Thornton",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "4068042",
+    "name": "Natasha Mack",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "2987869",
+    "name": "Jewell Loyd",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "4432832",
+    "name": "Zia Cooke",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "3142255",
+    "name": "Monique Billings",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "4433514",
+    "name": "Saniya Rivers",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "4583144",
+    "name": "Cotie McMahon",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "4703609",
+    "name": "Charlisse Leger-Walker",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "4899328",
+    "name": "Kaitlyn Chen",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "4858656",
+    "name": "Gabriela Jaquez",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "3054590",
+    "name": "Nia Coffey",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "3919496",
+    "name": "Valeriane Ayayi",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "4432865",
+    "name": "Jacy Sheldon",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "4001679",
+    "name": "Julie Allemand",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "5105737",
+    "name": "Lauren Betts",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "4337216",
+    "name": "Han Xu",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "5105406",
+    "name": "Frieda Buhner",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "4399415",
+    "name": "Maddy Siegrist",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "4433807",
+    "name": "Aziaha James",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "4704180",
+    "name": "Georgia Amoore",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "5345524",
+    "name": "Noemie Brochant",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "4065780",
+    "name": "Kaila Charles",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "3913881",
+    "name": "Alanna Smith",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "4790266",
+    "name": "Awak Kuier",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "5346554",
+    "name": "Teja Oblak",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "5108587",
+    "name": "Madina Okot",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "4433546",
+    "name": "Makayla Timpson",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "3142327",
+    "name": "Kia Nurse",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "4398829",
+    "name": "Lexie Hull",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "2327695",
+    "name": "Rebekah Gardner",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "2529047",
+    "name": "Odyssey Sims",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "2566081",
+    "name": "Elizabeth Williams",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "4432830",
+    "name": "Jordan Horston",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "2566186",
+    "name": "Rachel Banham",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "4399342",
+    "name": "Lexi Held",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "5208983",
+    "name": "Isobel Borlase",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "3917453",
+    "name": "Katie Lou Samuelson",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "5108550",
+    "name": "Serah Williams",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "4065760",
+    "name": "Tyasha Harris",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "4280850",
+    "name": "Maya Caldwell",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "5209202",
+    "name": "Nyadiew Puoch",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "5278237",
+    "name": "Anastasiia Olairi Kosu",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "4433431",
+    "name": "Te-Hina Paopao",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "3142055",
+    "name": "Myisha Hines-Allen",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "5105732",
+    "name": "Raegan Beers",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "2590093",
+    "name": "Kiah Stokes",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "5345319",
+    "name": "Nell Angloma",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "5349415",
+    "name": "Alicia Florez",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "3099736",
+    "name": "Stephanie Talbot",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "4432834",
+    "name": "Laeticia Amihere",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "4336633",
+    "name": "Li Yueru",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "2529183",
+    "name": "Stefanie Dolson",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "4898898",
+    "name": "Gianna Kneepkens",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "4433797",
+    "name": "Raven Johnson",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "4433411",
+    "name": "Angela Dugalic",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "5105729",
+    "name": "Chance Gray",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "4873358",
+    "name": "Antonia Delaere",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "4874375",
+    "name": "Jihyun Park",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "5122345",
+    "name": "Cassandre Prosper",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "4434020",
+    "name": "Teonni Key",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "5017721",
+    "name": "Sika Kone",
+    "team": "Free Agent",
+    "ppg": 0.0
+  },
+  {
+    "id": "3142086",
+    "name": "Brianna Turner",
+    "team": "Free Agent",
+    "ppg": 0.0
+  }
+];
