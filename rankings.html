@@ -33,6 +33,9 @@
     .image-placeholder { display: block; }
     .player-name { padding: 0 10px; font-weight: 800; font-size: 15px; }
     .ppg { display: block; margin-top: 4px; color: #2d7d58; font: 11px 'DM Mono', monospace; }
+    .position-feedback { display: block; margin-top: 4px; font: 10px 'DM Mono', monospace; text-transform: uppercase; }
+    .position-correct .position-feedback { color: #2d7d58; }
+    .position-wrong .position-feedback { color: var(--coral-dark); }
     .move-controls { display: flex; gap: 5px; }
     .move-button, .continue-button, .result-button { border: 1px solid var(--ink); cursor: pointer; }
     .move-button { width: 30px; height: 30px; background: var(--paper); color: var(--ink); font-weight: 800; }
@@ -66,7 +69,7 @@
       <p class="intro">Put each team’s top five scorers in order from highest to lowest points per game. Make your call, then continue.</p>
     </header>
     <section aria-labelledby="teamTitle">
-      <div class="progress-row"><span>Team <strong id="teamNumber">1</strong> of <strong id="teamTotal">15</strong></span><span id="correctTotal">0 correct</span></div>
+      <div class="progress-row"><span>Team <strong id="teamNumber">1</strong> of <strong id="teamTotal">15</strong></span><span id="correctTotal">0 first try</span></div>
       <div class="team-heading"><h2 id="teamTitle">Team</h2><p class="hint">1 is highest PPG</p></div>
       <ol id="rankingList" class="ranking-list"></ol>
       <button id="continueButton" class="continue-button" type="button">Check order</button>
@@ -84,12 +87,13 @@
     const continueButton = document.getElementById('continueButton');
     const feedback = document.getElementById('feedback');
     const resultPanel = document.getElementById('resultPanel');
+    const resultHeading = document.querySelector('#resultPanel h2');
     const resultSummary = document.getElementById('resultSummary');
     const resultButton = document.getElementById('resultButton');
     function shuffle(items) { return [...items].sort(() => Math.random() - .5); }
     const teams = [...new Set(allPlayers.map(player => player.team))].filter(Boolean).sort();
     const topFiveByTeam = shuffle(teams).map(team => ({ team, players: allPlayers.filter(player => player.team === team).sort((a, b) => b.ppg - a.ppg).slice(0, 5) }));
-    let teamIndex = 0; let correct = 0; let checked = false; let teamSolved = false; let attempted = false; let orderResults = []; let currentPlayers = [];
+    let teamIndex = 0; let firstTryTeams = 0; let firstTryPlayers = 0; let checked = false; let teamSolved = false; let attempted = false; let orderResults = []; let currentPlayers = [];
 
     function makeImage(player) {
       const image = document.createElement('img'); image.src = player.headshot; image.alt = `${player.name} headshot`;
@@ -105,6 +109,7 @@
         if (checked) item.classList.add(player.id === round.players[index].id ? 'position-correct' : 'position-wrong');
         const number = document.createElement('span'); number.className = 'rank-number'; number.textContent = index + 1;
         const name = document.createElement('span'); name.className = 'player-name'; name.textContent = player.name;
+        if (checked) { const positionFeedback = document.createElement('small'); positionFeedback.className = 'position-feedback'; positionFeedback.textContent = player.id === round.players[index].id ? 'Correct spot' : 'Move this player'; name.appendChild(positionFeedback); }
         if (teamSolved) { const ppg = document.createElement('small'); ppg.className = 'ppg'; ppg.textContent = `${player.ppg.toFixed(1)} PPG`; name.appendChild(ppg); }
         const controls = document.createElement('span'); controls.className = 'move-controls';
         const up = document.createElement('button'); up.className = 'move-button'; up.type = 'button'; up.textContent = '^'; up.setAttribute('aria-label', `Move ${player.name} up`); up.disabled = index === 0;
@@ -124,18 +129,24 @@
       const answer = topFiveByTeam[teamIndex].players;
       const isCorrect = currentPlayers.every((player, index) => player.id === answer[index].id);
       checked = true;
-      if (!attempted) { orderResults.push(isCorrect); attempted = true; }
+      const firstAttempt = !attempted;
+      if (firstAttempt) { orderResults.push(isCorrect); attempted = true; }
       if (isCorrect) {
-        teamSolved = true; correct += 1; correctTotal.textContent = `${correct} correct`; feedback.textContent = 'Correct order. PPG revealed.'; feedback.className = 'feedback success';
+        teamSolved = true; if (firstAttempt) { firstTryTeams += 1; firstTryPlayers += answer.length; } correctTotal.textContent = `${firstTryTeams} first try`; feedback.textContent = 'Correct order. PPG revealed.'; feedback.className = 'feedback success';
       } else { feedback.textContent = 'Green cards are in the right spot. Fix the red cards, then check again.'; feedback.className = 'feedback error'; }
+      if (!isCorrect && firstAttempt) firstTryPlayers += currentPlayers.filter((player, index) => player.id === answer[index].id).length;
+      updateResultPanel();
       renderRanking();
     }
+    function updateResultPanel() {
+      resultHeading.textContent = 'Share your progress'; resultSummary.textContent = `${firstTryTeams}/${topFiveByTeam.length} teams perfect on first try\n${firstTryPlayers}/${topFiveByTeam.length * 5} players in the right spot on first try\n${orderResults.map(result => result ? '🟩' : '🟥').join('')}`;
+      resultPanel.classList.remove('hidden');
+    }
     function finishGame() {
-      resultSummary.textContent = `${correct}/${topFiveByTeam.length} teams ordered correctly\n${orderResults.map(result => result ? '🟩' : '🟥').join('')}`;
-      resultPanel.classList.remove('hidden'); continueButton.classList.add('hidden'); resultPanel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      updateResultPanel(); resultHeading.textContent = 'League complete'; continueButton.classList.add('hidden'); resultPanel.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
     resultButton.addEventListener('click', async () => {
-      const shareText = `WNBA Top Five\n${correct}/${topFiveByTeam.length} teams ordered correctly\n${orderResults.map(result => result ? '🟩' : '🟥').join('')}\nCan you beat my score?`;
+      const shareText = `WNBA Top Five\n${firstTryTeams}/${topFiveByTeam.length} teams perfect on first try\n${firstTryPlayers}/${topFiveByTeam.length * 5} players in the right spot on first try\n${orderResults.map(result => result ? '🟩' : '🟥').join('')}\nCan you beat my score?`;
       try { if (navigator.share) { await navigator.share({ title: 'WNBA Top Five', text: shareText }); resultButton.textContent = 'Results shared'; } else { await navigator.clipboard.writeText(shareText); resultButton.textContent = 'Results copied'; } } catch { resultButton.textContent = 'Share canceled'; }
     });
     continueButton.addEventListener('click', checkOrder); renderRanking(true);
