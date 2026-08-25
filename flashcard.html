@@ -75,7 +75,7 @@
       <div class="game-bar"><h2 id="round-title">Round one</h2><span id="roundLabel" class="round-label">06 matches</span></div>
       <div class="board"><div class="player-column"><h3 class="column-title">Players <span>select a card</span></h3><div id="playerCards" class="cards"></div></div><div class="team-column"><h3 class="column-title">Teams <span>then make a match</span></h3><div id="teamCards" class="cards"></div></div></div>
       <p id="status" class="status" role="status" aria-live="polite">Select a player to get started.</p><button id="newRound" class="new-round hidden" type="button">Play another round</button>
-      <div id="sharePanel" class="share-panel hidden"><h3 class="share-heading">Round complete</h3><p id="shareResult" class="share-result"></p><button id="shareButton" class="share-button" type="button">Share my score</button></div>
+      <div id="sharePanel" class="share-panel"><h3 id="shareHeading" class="share-heading">Share your score</h3><p id="shareResult" class="share-result">0 total matches  |  0 wrong guesses</p><button id="shareButton" class="share-button" type="button">Share my score</button></div>
     </section>
   </main>
   <script src="players.js?v=3"></script>
@@ -89,6 +89,7 @@
     const roundTitle = document.getElementById('round-title');
     const newRoundButton = document.getElementById('newRound');
     const sharePanel = document.getElementById('sharePanel');
+    const shareHeading = document.getElementById('shareHeading');
     const shareResult = document.getElementById('shareResult');
     const shareButton = document.getElementById('shareButton');
     let round = 0; let score = 0; let streak = 0; let selectedPlayer = null; let matched = 0; let totalMisses = 0;
@@ -100,11 +101,11 @@
       const name = document.createElement('span'); name.className = 'player-name'; name.textContent = player.name; card.append(image, name);
       card.addEventListener('click', () => selectPlayer(card, player)); return card;
     }
-    function makeTeamCard(match) {
-      const card = document.createElement('button'); card.className = 'team-card'; card.type = 'button'; card.dataset.team = match.team;
-      const image = document.createElement('img'); image.src = match.player.headshot; image.alt = `${match.player.name} headshot`; image.onerror = () => image.remove();
-      const copy = document.createElement('span'); copy.className = 'team-copy'; copy.textContent = match.team; card.append(image, copy);
-      card.addEventListener('click', () => selectTeam(card, match.team)); return card;
+    function makeTeamCard(team) {
+      const card = document.createElement('button'); card.className = 'team-card'; card.type = 'button'; card.dataset.team = team;
+      const image = document.createElement('img');
+      const copy = document.createElement('span'); copy.className = 'team-copy'; copy.textContent = team; card.append(image, copy);
+      card.addEventListener('click', () => selectTeam(card, team)); return card;
     }
     function selectPlayer(card, player) {
       if (card.disabled || matched === ROUND_SIZE) return;
@@ -115,6 +116,7 @@
       if (card.disabled || !selectedPlayer || matched === ROUND_SIZE) return;
       if (selectedPlayer.player.team === team) {
         selectedPlayer.card.classList.remove('selected'); selectedPlayer.card.classList.add('matched'); card.classList.add('matched');
+        const teamImage = card.querySelector('img'); teamImage.src = selectedPlayer.player.headshot; teamImage.alt = `${selectedPlayer.player.name} headshot`;
         const playerMatchLabel = document.createElement('small'); playerMatchLabel.className = 'match-label'; playerMatchLabel.textContent = `Match: ${team}`;
         const teamMatchLabel = document.createElement('small'); teamMatchLabel.className = 'match-label'; teamMatchLabel.textContent = `Match: ${selectedPlayer.player.name}`;
         selectedPlayer.card.querySelector('.player-name').appendChild(playerMatchLabel); card.querySelector('.team-copy').appendChild(teamMatchLabel);
@@ -126,14 +128,13 @@
     }
     function finishRound() {
       roundTitle.textContent = `Round ${round} complete`; newRoundButton.classList.remove('hidden'); document.getElementById('roundLabel').textContent = 'all matches made';
-      shareResult.textContent = `${score} total matches  |  ${totalMisses} wrong guesses`;
-      sharePanel.classList.remove('hidden');
+      shareHeading.textContent = 'Round complete'; shareResult.textContent = `${score} total matches  |  ${totalMisses} wrong guesses`;
       sharePanel.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
     function startRound() {
-      round += 1; matched = 0; selectedPlayer = null; const players = choosePlayers(); const matches = shuffle(players.map(player => ({ team: player.team, player })));
-      playerCards.replaceChildren(...players.map(makePlayerCard)); teamCards.replaceChildren(...matches.map(makeTeamCard));
-      roundTitle.textContent = `Round ${round}`; document.getElementById('roundLabel').textContent = `${String(ROUND_SIZE).padStart(2, '0')} matches`; status.textContent = 'Select a player to get started.'; status.className = 'status'; newRoundButton.classList.add('hidden'); sharePanel.classList.add('hidden'); shareButton.textContent = 'Share my score';
+      round += 1; matched = 0; selectedPlayer = null; const players = choosePlayers();
+      playerCards.replaceChildren(...players.map(makePlayerCard)); teamCards.replaceChildren(...shuffle(players.map(player => player.team)).map(makeTeamCard));
+      roundTitle.textContent = `Round ${round}`; document.getElementById('roundLabel').textContent = `${String(ROUND_SIZE).padStart(2, '0')} matches`; status.textContent = 'Select a player to get started.'; status.className = 'status'; newRoundButton.classList.add('hidden'); shareHeading.textContent = 'Share your score'; shareResult.textContent = `${score} total matches  |  ${totalMisses} wrong guesses`; shareButton.textContent = 'Share my score';
     }
     shareButton.addEventListener('click', async () => {
       const shareText = `WNBA Matchup #${round}\n${score} total matches\n${totalMisses} wrong guesses\n${'🟩'.repeat(matched)}${'⬜'.repeat(ROUND_SIZE - matched)}\nCan you beat my score?`;
