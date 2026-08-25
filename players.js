@@ -368,14 +368,6 @@ const allPlayers = [
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4703794.png"
   },
   {
-    "id": "869",
-    "name": "DeWanna Bonner",
-    "team": "Phoenix Mercury",
-    "position": "F",
-    "ppg": 10.6,
-    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/869.png"
-  },
-  {
     "id": "5345325",
     "name": "Awa Fam",
     "team": "Seattle Storm",
@@ -1654,6 +1646,14 @@ const allPlayers = [
     "position": "Player",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2988756.png"
+  },
+  {
+    "id": "4282168",
+    "name": "Kiana Williams",
+    "team": "Toronto Tempo",
+    "position": "Player",
+    "ppg": 0.0,
+    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4282168.png"
   },
   {
     "id": "4433523",
