@@ -48,11 +48,20 @@
     .share-result { margin: 0 0 14px; color: var(--muted); font: 12px 'DM Mono', monospace; }
     .share-button { padding: 10px 16px; border: 1px solid var(--coral); background: var(--coral); color: white; cursor: pointer; font: 800 12px Manrope, sans-serif; text-transform: uppercase; }
     .share-button:hover { background: var(--coral-dark); border-color: var(--coral-dark); }
+    .game-nav { display: grid; gap: 2px; width: fit-content; margin-bottom: 34px; padding: 10px 14px; border-left: 3px solid var(--coral); background: rgba(255,253,248,.72); font: 12px/1.7 'DM Mono', monospace; }
+    .game-nav-label { color: var(--muted); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; }
+    .game-nav a { color: var(--muted); text-decoration: none; }
+    .game-nav a:hover, .game-nav a.active { color: var(--coral-dark); }
     @keyframes shake { 25% { transform: translateX(5px); } 75% { transform: translateX(-5px); } }
     @media (max-width: 700px) { main { width: min(100% - 24px, 560px); padding-top: 24px; } header { display: block; margin-bottom: 30px; } h1 { font-size: 34px; } .intro { max-width: none; margin-bottom: 20px; } .scoreboard { width: fit-content; } .board { grid-template-columns: 1fr; gap: 25px; } .team-column { order: 2; } }
   </style>
 </head>
 <body>
+  <nav class="game-nav" aria-label="WNBA games">
+    <span class="game-nav-label">WNBA games</span>
+    <a href="index.html">01 / Naming Challenge</a>
+    <a class="active" href="flashcard.html" aria-current="page">02 / Team Matchup</a>
+  </nav>
   <main>
     <header>
       <div><p class="kicker">WNBA / 2026 season</p><h1>Find the home team.</h1><p class="intro">Match each player to the team they play for. Trust your basketball brain.</p></div>
