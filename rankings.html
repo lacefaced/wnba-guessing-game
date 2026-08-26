@@ -51,6 +51,8 @@
     .result-summary { margin: 0 0 14px; color: var(--muted); font: 12px/1.7 'DM Mono', monospace; white-space: pre-line; }
     .result-button { padding: 11px 18px; background: var(--coral); color: white; font: 800 12px Manrope, sans-serif; text-transform: uppercase; }
     .result-button:hover { background: var(--coral-dark); border-color: var(--coral-dark); }
+    .share-actions { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
+    .copy-button { border-color: var(--ink); background: var(--ink); }
     .hidden { display: none; }
     @media (max-width: 520px) { main { padding-top: 20px; } h1 { font-size: 32px; } .team-heading { display: block; } .hint { margin-top: 8px; text-align: left; } .ranking-card { grid-template-columns: 30px 52px 1fr auto; padding-right: 7px; } .ranking-card img, .image-placeholder { width: 44px; height: 58px; } .player-name { padding: 0 6px; font-size: 14px; } .move-button { width: 28px; height: 28px; } }
   </style>
@@ -75,7 +77,7 @@
       <ol id="rankingList" class="ranking-list"></ol>
       <button id="continueButton" class="continue-button" type="button">Check order</button>
       <p id="feedback" class="feedback" role="status" aria-live="polite">Use the arrows to arrange the players.</p>
-      <div id="resultPanel" class="result-panel hidden"><h2>League complete</h2><p id="resultSummary" class="result-summary"></p><button id="resultButton" class="result-button" type="button">Share my results</button></div>
+      <div id="resultPanel" class="result-panel hidden"><h2>Share your progress</h2><p id="resultSummary" class="result-summary"></p><div class="share-actions"><button id="shareButton" class="result-button" type="button">Share with link</button><button id="copyButton" class="result-button copy-button" type="button">Copy score</button></div></div>
     </section>
   </main>
   <script src="players.js?v=3"></script>
@@ -90,7 +92,7 @@
     const resultPanel = document.getElementById('resultPanel');
     const resultHeading = document.querySelector('#resultPanel h2');
     const resultSummary = document.getElementById('resultSummary');
-    const resultButton = document.getElementById('resultButton');
+    const shareButton = document.getElementById('shareButton'); const copyButton = document.getElementById('copyButton');
     function shuffle(items) { return [...items].sort(() => Math.random() - .5); }
     const teams = [...new Set(allPlayers.map(player => player.team))].filter(Boolean).sort();
     const topFiveByTeam = shuffle(teams).map(team => ({ team, players: allPlayers.filter(player => player.team === team).sort((a, b) => b.ppg - a.ppg).slice(0, 5) }));
@@ -146,10 +148,11 @@
     function finishGame() {
       updateResultPanel(); resultHeading.textContent = 'League complete'; continueButton.classList.add('hidden'); resultPanel.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
-    resultButton.addEventListener('click', async () => {
-      const shareText = `WNBA Top Five\n${firstTryTeams}/${topFiveByTeam.length} teams perfect on first try\n${firstTryPlayers}/${topFiveByTeam.length * 5} players in the right spot on first try\n${orderResults.map(result => result ? '🟩' : '🟥').join('')}\nCan you beat my score?`;
-      try { if (navigator.share) { await navigator.share({ title: 'WNBA Top Five', text: shareText }); resultButton.textContent = 'Results shared'; } else { await navigator.clipboard.writeText(shareText); resultButton.textContent = 'Results copied'; } } catch { resultButton.textContent = 'Share canceled'; }
+    shareButton.addEventListener('click', async () => {
+      const shareText = `WNBA Top Five\n${firstTryTeams}/${topFiveByTeam.length} teams perfect on first try\n${firstTryPlayers}/${topFiveByTeam.length * 5} players in the right spot on first try\n${orderResults.map(result => result ? '🟩' : '🟥').join('')}\n${location.href}`;
+      try { if (navigator.share) await navigator.share({ title: 'WNBA Top Five', text: shareText }); else await navigator.clipboard.writeText(shareText); shareButton.textContent = 'Score shared'; } catch { shareButton.textContent = 'Share canceled'; }
     });
+    copyButton.addEventListener('click', async () => { const scoreText = `WNBA Top Five\n${firstTryTeams}/${topFiveByTeam.length} teams perfect on first try\n${firstTryPlayers}/${topFiveByTeam.length * 5} players in the right spot on first try\n${orderResults.map(result => result ? '🟩' : '🟥').join('')}`; try { await navigator.clipboard.writeText(scoreText); copyButton.textContent = 'Score copied'; } catch { copyButton.textContent = 'Copy unavailable'; } });
     continueButton.addEventListener('click', checkOrder); renderRanking(true);
   </script>
 </body>

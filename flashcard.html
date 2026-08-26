@@ -53,6 +53,8 @@
     .result-summary { margin: 0 0 14px; color: var(--muted); font: 12px 'DM Mono', monospace; }
     .result-button { padding: 10px 16px; border: 1px solid var(--coral); background: var(--coral); color: white; cursor: pointer; font: 800 12px Manrope, sans-serif; text-transform: uppercase; }
     .result-button:hover { background: var(--coral-dark); border-color: var(--coral-dark); }
+    .share-actions { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
+    .copy-button { border-color: var(--ink); background: var(--ink); }
     .game-nav { display: grid; gap: 2px; width: fit-content; margin-bottom: 34px; padding: 10px 14px; border-left: 3px solid var(--coral); background: rgba(255,253,248,.72); font: 12px/1.7 'DM Mono', monospace; }
     .game-nav-label { color: var(--muted); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; }
     .game-nav a { color: var(--muted); text-decoration: none; }
@@ -78,7 +80,7 @@
       <div class="game-bar"><h2 id="round-title">Round one</h2><span id="roundLabel" class="round-label">06 matches</span></div>
       <div class="board"><div class="player-column"><h3 class="column-title">Players <span>select a card</span></h3><div id="playerCards" class="cards"></div></div><div class="team-column"><h3 class="column-title">Teams <span>then make a match</span></h3><div id="teamCards" class="cards"></div></div></div>
       <p id="status" class="status" role="status" aria-live="polite">Select a player to get started.</p><button id="newRound" class="new-round hidden" type="button">Play another round</button>
-      <div id="resultPanel" class="result-panel"><h3 id="resultHeading" class="result-heading">Share your score</h3><p id="resultSummary" class="result-summary">0 total matches  |  0 wrong guesses</p><button id="resultButton" class="result-button" type="button">Share my score</button></div>
+      <div id="resultPanel" class="result-panel"><h3 id="resultHeading" class="result-heading">Your score</h3><p id="resultSummary" class="result-summary">0 total matches  |  0 wrong guesses</p><div class="share-actions"><button id="shareButton" class="result-button" type="button">Share with link</button><button id="copyButton" class="result-button copy-button" type="button">Copy score</button></div></div>
     </section>
   </main>
   <script src="players.js?v=3"></script>
@@ -94,7 +96,7 @@
     const resultPanel = document.getElementById('resultPanel');
     const resultHeading = document.getElementById('resultHeading');
     const resultSummary = document.getElementById('resultSummary');
-    const resultButton = document.getElementById('resultButton');
+    const shareButton = document.getElementById('shareButton'); const copyButton = document.getElementById('copyButton');
     let round = 0; let score = 0; let streak = 0; let selectedPlayer = null; let matched = 0; let totalMisses = 0;
     function shuffle(items) { return [...items].sort(() => Math.random() - .5); }
     function choosePlayers() { return shuffle(allPlayers.filter(player => player.team && player.headshot)).slice(0, ROUND_SIZE); }
@@ -137,15 +139,12 @@
     function startRound() {
       round += 1; matched = 0; selectedPlayer = null; const players = choosePlayers();
       playerCards.replaceChildren(...players.map(makePlayerCard)); teamCards.replaceChildren(...shuffle(players.map(player => player.team)).map(makeTeamCard));
-      roundTitle.textContent = `Round ${round}`; document.getElementById('roundLabel').textContent = `${String(ROUND_SIZE).padStart(2, '0')} matches`; status.textContent = 'Select a player to get started.'; status.className = 'status'; newRoundButton.classList.add('hidden'); resultHeading.textContent = 'Share your score'; resultSummary.textContent = `${score} total matches  |  ${totalMisses} wrong guesses`; resultButton.textContent = 'Share my score';
+      roundTitle.textContent = `Round ${round}`; document.getElementById('roundLabel').textContent = `${String(ROUND_SIZE).padStart(2, '0')} matches`; status.textContent = 'Select a player to get started.'; status.className = 'status'; newRoundButton.classList.add('hidden'); resultHeading.textContent = 'Your score'; resultSummary.textContent = `${score} total matches  |  ${totalMisses} wrong guesses`; shareButton.textContent = 'Share with link'; copyButton.textContent = 'Copy score';
     }
-    resultButton.addEventListener('click', async () => {
-      const shareText = `WNBA Matchup #${round}\n${score} total matches\n${totalMisses} wrong guesses\n${'🟩'.repeat(matched)}${'⬜'.repeat(ROUND_SIZE - matched)}\nCan you beat my score?`;
-      try {
-        if (navigator.share) { await navigator.share({ title: 'WNBA Matchup', text: shareText }); resultButton.textContent = 'Score shared'; }
-        else { await navigator.clipboard.writeText(shareText); resultButton.textContent = 'Score copied'; }
-      } catch { resultButton.textContent = 'Share canceled'; }
-    });
+    function scoreText(includeLink) { return `WNBA Matchup\n${score} total matches\n${'🟩'.repeat(matched)}${'⬜'.repeat(ROUND_SIZE - matched)}${includeLink ? `\n${location.href}` : ''}`; }
+    async function shareScore() { try { if (navigator.share) await navigator.share({ title: 'WNBA Matchup', text: scoreText(true) }); else await navigator.clipboard.writeText(scoreText(true)); shareButton.textContent = 'Score shared'; } catch { shareButton.textContent = 'Share canceled'; } }
+    async function copyScore() { try { await navigator.clipboard.writeText(scoreText(false)); copyButton.textContent = 'Score copied'; } catch { copyButton.textContent = 'Copy unavailable'; } }
+    shareButton.addEventListener('click', shareScore); copyButton.addEventListener('click', copyScore);
     newRoundButton.addEventListener('click', startRound); startRound();
   </script>
 </body>

@@ -100,6 +100,9 @@
       margin-bottom: 20px;
     }
     #shareBtn:hover { background-color: var(--coral-dark); }
+    .share-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+    .share-actions .action-btn { width: auto; flex: 1; margin-bottom: 0; }
+    .copy-button { background-color: var(--ink) !important; }
 
     .score { margin-bottom: 20px; color: var(--muted); font: 12px 'DM Mono', monospace; text-transform: uppercase; }
     .score span { color: var(--coral-dark); font: 22px 'Archivo Black', sans-serif; }
@@ -175,7 +178,7 @@
     </div>
 
     <button id="finishBtn" class="action-btn">I Give Up - Show Missed Players</button>
-    <button id="shareBtn" class="action-btn">📋 Copy Share Score</button>
+    <div id="shareActions" class="share-actions" style="display: none;"><button id="shareBtn" class="action-btn">Share with link</button><button id="copyBtn" class="action-btn copy-button">Copy score</button></div>
 
     <h3>Guessed Players:</h3>
     <ul id="guessedList"></ul>
@@ -197,6 +200,8 @@
     const countDisplay = document.getElementById('count');
     const finishBtn = document.getElementById('finishBtn');
     const shareBtn = document.getElementById('shareBtn');
+    const copyBtn = document.getElementById('copyBtn');
+    const shareActions = document.getElementById('shareActions');
     const missingSection = document.getElementById('missingSection');
     
     // Set total players from database
@@ -281,7 +286,7 @@
       finishBtn.textContent = "Game Over!";
       dropdown.style.display = 'none';
       missingSection.style.display = 'block';
-      shareBtn.style.display = 'block'; // Reveal the share button
+      shareActions.style.display = 'flex';
       
       const missed = allPlayers.filter(p => !guessedPlayers.has(p.name));
       missed.forEach(m => {
@@ -293,22 +298,14 @@
       });
     });
 
-    // Share Score Logic
-    shareBtn.addEventListener('click', () => {
+    function scoreText(includeLink) {
       const found = guessedPlayers.size;
       const total = allPlayers.length;
       const percentage = Math.round((found / total) * 100);
-      
-      const shareText = `WNBA Naming Challenge 🏀\nI found ${found} / ${total} players (${percentage}%)!\nCan you beat my score?`;
-
-      navigator.clipboard.writeText(shareText).then(() => {
-        const originalText = shareBtn.textContent;
-        shareBtn.textContent = "Copied to Clipboard! 🎉";
-        setTimeout(() => {
-          shareBtn.textContent = originalText;
-        }, 2000);
-      });
-    });
+      return `WNBA Naming Challenge\n${found}/${total} players found (${percentage}%)\n${'🟩'.repeat(found)}${'⬜'.repeat(total - found)}${includeLink ? `\n${location.href}` : ''}`;
+    }
+    shareBtn.addEventListener('click', async () => { try { if (navigator.share) await navigator.share({ title: 'WNBA Naming Challenge', text: scoreText(true) }); else await navigator.clipboard.writeText(scoreText(true)); shareBtn.textContent = 'Score shared'; } catch { shareBtn.textContent = 'Share canceled'; } });
+    copyBtn.addEventListener('click', async () => { try { await navigator.clipboard.writeText(scoreText(false)); copyBtn.textContent = 'Score copied'; } catch { copyBtn.textContent = 'Copy unavailable'; } });
   </script>
 </body>
 </html>
