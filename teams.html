@@ -26,16 +26,20 @@
     .game-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
     .game-bar h2 { margin: 0; font: 21px 'Archivo Black', sans-serif; text-transform: uppercase; }
     .round-label { color: var(--muted); font: 12px 'DM Mono', monospace; }
-    .board { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; align-items: start; }
+    .board { display: grid; grid-template-columns: minmax(220px, .8fr) minmax(280px, 1.2fr); gap: 26px; align-items: start; }
     .column-title { display: flex; justify-content: space-between; align-items: baseline; margin: 0 0 10px; font: 11px 'DM Mono', monospace; letter-spacing: .09em; text-transform: uppercase; }
     .column-title span { color: var(--muted); font-size: 10px; }
     .cards { display: grid; gap: 10px; }
+    .logo-stage { display: grid; place-items: center; min-height: 360px; padding: 24px; border: 1px solid var(--ink); background: var(--white); box-shadow: 0 10px 0 rgba(23,34,44,.08); }
+    .logo-stage .logo { flex-basis: 190px; width: 190px; height: 190px; margin: 0; padding: 16px; }
+    .question-label { margin: 18px 0 0; color: var(--muted); font: 11px 'DM Mono', monospace; text-align: center; text-transform: uppercase; }
     button { font: inherit; }
     button:focus-visible { outline: 3px solid var(--coral); outline-offset: 3px; }
-    .match-card { display: flex; align-items: center; width: 100%; min-height: 76px; padding: 8px 14px; border: 1px solid var(--ink); color: var(--ink); background: var(--white); box-shadow: 0 8px 0 rgba(23,34,44,.08); text-align: left; cursor: pointer; transition: transform .18s ease, box-shadow .18s ease, background .18s ease; }
+    .match-card { display: flex; align-items: center; width: 100%; min-height: 62px; padding: 8px 14px; border: 1px solid var(--ink); color: var(--ink); background: var(--white); box-shadow: 0 8px 0 rgba(23,34,44,.08); text-align: left; cursor: pointer; transition: transform .18s ease, box-shadow .18s ease, background .18s ease; }
     .match-card:hover:not(:disabled) { transform: translate(-3px, -3px); box-shadow: 7px 7px 0 rgba(23,34,44,.14); }
     .match-card.selected { border: 3px solid var(--coral); padding: 6px 12px; transform: translate(-2px, -2px); box-shadow: 6px 6px 0 rgba(240,90,71,.2); }
     .match-card.matched { background: var(--mint); border-color: #5c9c7e; box-shadow: none; transform: none; }
+    .answer-card.correct { background: var(--mint); border-color: #5c9c7e; }
     .match-card.wrong { background: #ffd8d1; border-color: var(--coral); animation: shake .3s ease; }
     .logo { display: grid; place-items: center; flex: 0 0 56px; width: 56px; height: 56px; margin-right: 14px; padding: 5px; background: #eef1ea; object-fit: contain; }
     .logo-fallback { background: #68c5b4; color: var(--ink); font: 800 14px 'DM Mono', monospace; }
@@ -51,7 +55,7 @@
     .result-button { padding: 10px 16px; border: 1px solid var(--coral); background: var(--coral); color: white; cursor: pointer; font: 800 12px Manrope, sans-serif; text-transform: uppercase; }
     .result-button:hover { background: var(--coral-dark); border-color: var(--coral-dark); }
     @keyframes shake { 25% { transform: translateX(5px); } 75% { transform: translateX(-5px); } }
-    @media (max-width: 700px) { main { padding-top: 20px; } header { display: block; margin-bottom: 30px; } h1 { font-size: 34px; } .intro { max-width: none; margin-bottom: 20px; } .scoreboard { width: fit-content; } .board { grid-template-columns: 1fr; gap: 25px; } .name-column { order: 2; } .location-column { order: 3; } }
+    @media (max-width: 700px) { main { padding-top: 20px; } header { display: block; margin-bottom: 30px; } h1 { font-size: 34px; } .intro { max-width: none; margin-bottom: 20px; } .scoreboard { width: fit-content; } .board { grid-template-columns: 1fr; gap: 20px; } .logo-stage { min-height: 230px; } .logo-stage .logo { flex-basis: 140px; width: 140px; height: 140px; } }
   </style>
 </head>
 <body>
@@ -64,13 +68,13 @@
       <a class="active" href="teams.html" aria-current="page">04 / Logo Match</a>
     </nav>
     <header>
-      <div><p class="kicker">WNBA / team challenge</p><h1>Know your home court.</h1><p class="intro">Match every team logo to its city and team name. The whole league is on the board.</p></div>
-      <div class="scoreboard" aria-label="Game score"><div><span id="score" class="score-number">0</span><span class="score-label">matched</span></div><div><span id="misses" class="score-number">0</span><span class="score-label">misses</span></div></div>
+      <div><p class="kicker">WNBA / team challenge</p><h1>Know your home court.</h1><p class="intro">Identify each team from its logo. Every question asks for either the team name or its broad location.</p></div>
+      <div class="scoreboard" aria-label="Game score"><div><span id="score" class="score-number">0</span><span class="score-label">correct</span></div><div><span id="misses" class="score-number">0</span><span class="score-label">misses</span></div></div>
     </header>
     <section aria-labelledby="gameTitle">
       <div class="game-bar"><h2 id="gameTitle">Logo match</h2><span id="roundLabel" class="round-label"></span></div>
-      <div class="board"><div><h3 class="column-title">Logos <span>select one</span></h3><div id="logoCards" class="cards"></div></div><div class="name-column"><h3 class="column-title">Team names <span>match once</span></h3><div id="nameCards" class="cards"></div></div><div class="location-column"><h3 class="column-title">Locations <span>match once</span></h3><div id="locationCards" class="cards"></div></div></div>
-      <p id="status" class="status" role="status" aria-live="polite">Select a logo to get started.</p><button id="nextRound" class="next-round" type="button" hidden>Next round</button>
+      <div class="board"><div><h3 class="column-title">Logo <span id="questionType"></span></h3><div id="logoStage" class="logo-stage"></div></div><div><h3 id="answerHeading" class="column-title">Choose an answer <span>one click</span></h3><div id="answerCards" class="cards"></div></div></div>
+      <p id="status" class="status" role="status" aria-live="polite">Choose the correct answer.</p>
       <div id="resultPanel" class="result-panel" hidden><h3 class="result-heading">League complete</h3><p id="resultSummary" class="result-summary"></p><button id="resultButton" class="result-button" type="button">Share my score</button></div>
     </section>
   </main>
@@ -82,49 +86,18 @@
       'Minnesota Lynx': ['Minnesota', 'The Lynx', 'min'], 'New York Liberty': ['New York', 'The Liberty', 'ny'], 'Phoenix Mercury': ['Phoenix', 'The Mercury', 'phx'], 'Portland Fire': ['Portland', 'The Fire', 'por'],
       'Seattle Storm': ['Seattle', 'The Storm', 'sea'], 'Toronto Tempo': ['Toronto', 'The Tempo', 'tor'], 'Washington Mystics': ['Washington', 'The Mystics', 'wsh']
     };
-    const logoCards = document.getElementById('logoCards'); const nameCards = document.getElementById('nameCards'); const locationCards = document.getElementById('locationCards'); const status = document.getElementById('status'); const nextRoundButton = document.getElementById('nextRound');
+    const logoStage = document.getElementById('logoStage'); const answerCards = document.getElementById('answerCards'); const answerHeading = document.getElementById('answerHeading'); const questionType = document.getElementById('questionType'); const status = document.getElementById('status');
     const scoreDisplay = document.getElementById('score'); const missesDisplay = document.getElementById('misses'); const resultPanel = document.getElementById('resultPanel'); const resultSummary = document.getElementById('resultSummary'); const resultButton = document.getElementById('resultButton');
     const teams = [...new Set(allPlayers.map(player => player.team))].filter(team => teamDetails[team]).sort();
-    const rounds = []; for (let index = 0; index < teams.length; index += 5) rounds.push(teams.slice(index, index + 5));
-    let selectedLogo = null; let selectedTarget = null; let matched = 0; let misses = 0; let roundIndex = 0; let currentTeams = []; let roundMatched = 0;
+    let score = 0; let misses = 0; let questionIndex = 0; let currentTeam = null; let currentType = null; let questionTeams = [];
     function shuffle(items) { return [...items].sort(() => Math.random() - .5); }
-    function makeLogoCard(team) {
-      const card = document.createElement('button'); card.className = 'match-card'; card.type = 'button'; card.dataset.team = team;
-      const image = document.createElement('img'); image.className = 'logo'; image.src = `https://a.espncdn.com/i/teamlogos/wnba/500/${teamDetails[team][2]}.png`; image.alt = `${team} logo`;
-      image.onerror = () => { const fallback = document.createElement('span'); fallback.className = 'logo logo-fallback'; fallback.textContent = team.split(' ').map(word => word[0]).join('').slice(0, 3); fallback.setAttribute('aria-label', `${team} logo unavailable`); image.replaceWith(fallback); };
-      const copy = document.createElement('span'); copy.className = 'card-copy'; copy.textContent = 'Team logo'; card.append(image, copy); card.addEventListener('click', () => selectCard('logo', card, team)); return card;
-    }
-    function makeNameCard(team) {
-      const card = document.createElement('button'); card.className = 'match-card'; card.type = 'button'; card.dataset.team = team;
-      const copy = document.createElement('span'); copy.className = 'card-copy'; copy.textContent = teamDetails[team][1]; card.append(copy); card.addEventListener('click', () => selectCard('name', card, team)); return card;
-    }
-    function selectCard(type, card, team) {
-      if (card.disabled) return;
-      const selection = { card, team };
-      if (type === 'logo') { document.querySelectorAll('#logoCards .selected').forEach(item => item.classList.remove('selected')); selectedLogo = selection; }
-      else { document.querySelectorAll('.target-card.selected').forEach(item => item.classList.remove('selected')); selectedTarget = { ...selection, type }; }
-      card.classList.add('selected');
-      if (selectedLogo && selectedTarget) checkMatch(); else status.textContent = type === 'logo' ? 'Now choose its team name or location.' : 'Now choose the matching logo.';
-    }
-    function checkMatch() {
-      const isCorrect = selectedLogo.team === selectedTarget.team;
-      if (isCorrect) {
-        selectedTarget.card.classList.remove('selected'); selectedTarget.card.classList.add('matched'); selectedTarget.card.disabled = true; selectedLogo.card.classList.remove('selected'); selectedLogo.card.dataset[`${selectedTarget.type}Matched`] = 'true';
-        const matchLabel = document.createElement('small'); matchLabel.textContent = selectedTarget.type === 'name' ? 'Name matched' : 'Location matched'; selectedLogo.card.querySelector('.card-copy').append(matchLabel);
-        if (selectedLogo.card.dataset.nameMatched === 'true' && selectedLogo.card.dataset.locationMatched === 'true') selectedLogo.card.classList.add('matched');
-        matched += 1; scoreDisplay.textContent = matched; status.textContent = matched === teams.length * 2 ? 'Perfect league. You know every home court.' : 'That is the match. Keep going.'; status.className = 'status success';
-        selectedLogo = null; selectedTarget = null; roundMatched += 1;
-        if (matched === teams.length * 2) finishGame(); else if (roundMatched === currentTeams.length * 2) { nextRoundButton.hidden = false; status.textContent = 'Round complete. Ready for the next five?'; }
-      } else {
-        selectedLogo.card.classList.add('wrong'); selectedTarget.card.classList.add('wrong'); misses += 1; missesDisplay.textContent = misses; status.textContent = 'Those do not belong together. Try again.'; status.className = 'status error';
-        const wrongCards = [selectedLogo.card, selectedTarget.card]; setTimeout(() => wrongCards.forEach(card => card.classList.remove('wrong', 'selected')), 350); selectedLogo = null; selectedTarget = null;
-      }
-    }
-    function finishGame() { nextRoundButton.hidden = true; resultSummary.textContent = `${matched}/${teams.length * 2} matches made  |  ${misses} wrong guesses`; resultPanel.hidden = false; resultPanel.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
-    resultButton.addEventListener('click', async () => { const shareText = `WNBA Logo Match\n${matched}/${teams.length * 2} matches made\n${misses} wrong guesses\n${'🟩'.repeat(matched)}\nCan you beat my score?`; try { if (navigator.share) { await navigator.share({ title: 'WNBA Logo Match', text: shareText }); resultButton.textContent = 'Score shared'; } else { await navigator.clipboard.writeText(shareText); resultButton.textContent = 'Score copied'; } } catch { resultButton.textContent = 'Share canceled'; } });
-    function startRound() { currentTeams = shuffle(rounds[roundIndex]); roundMatched = 0; selectedLogo = null; selectedTarget = null; logoCards.replaceChildren(...shuffle(currentTeams).map(makeLogoCard)); nameCards.replaceChildren(...shuffle(currentTeams).map(makeNameCard)); locationCards.replaceChildren(...shuffle(currentTeams).map(makeLocationCard)); document.getElementById('roundLabel').textContent = `Round ${roundIndex + 1} of ${rounds.length} | ${currentTeams.length} teams`; status.textContent = 'Select a logo to get started.'; status.className = 'status'; nextRoundButton.hidden = true; }
-    function makeLocationCard(team) { const card = document.createElement('button'); card.className = 'match-card target-card'; card.type = 'button'; card.dataset.team = team; const copy = document.createElement('span'); copy.className = 'card-copy'; copy.textContent = teamDetails[team][0]; card.append(copy); card.addEventListener('click', () => selectCard('location', card, team)); return card; }
-    nextRoundButton.addEventListener('click', () => { roundIndex += 1; startRound(); }); startRound();
+    function makeLogo(team) { const image = document.createElement('img'); image.className = 'logo'; image.src = `https://a.espncdn.com/i/teamlogos/wnba/500/${teamDetails[team][2]}.png`; image.alt = `${team} logo`; image.onerror = () => { const fallback = document.createElement('span'); fallback.className = 'logo logo-fallback'; fallback.textContent = team.split(' ').map(word => word[0]).join('').slice(0, 3); image.replaceWith(fallback); }; return image; }
+    function makeAnswer(team) { const card = document.createElement('button'); card.className = 'match-card answer-card'; card.type = 'button'; card.textContent = currentType === 'name' ? teamDetails[team][1] : teamDetails[team][0]; card.addEventListener('click', () => answer(card, team)); return card; }
+    function answer(card, team) { if (card.disabled) return; if (team === currentTeam) { score += 1; scoreDisplay.textContent = score; answerCards.querySelectorAll('button').forEach(button => { button.disabled = true; }); card.classList.add('correct'); status.textContent = 'Correct. Next logo.'; status.className = 'status success'; setTimeout(nextQuestion, 350); } else { misses += 1; missesDisplay.textContent = misses; card.classList.add('wrong'); status.textContent = 'Not quite. Try another answer.'; status.className = 'status error'; setTimeout(() => card.classList.remove('wrong'), 350); } }
+    function nextQuestion() { if (questionIndex === teams.length) return finishGame(); currentTeam = teams[questionIndex]; currentType = Math.random() < .5 ? 'name' : 'location'; questionIndex += 1; questionType.textContent = currentType === 'name' ? 'team name' : 'location'; answerHeading.firstChild.textContent = currentType === 'name' ? 'Team name ' : 'Location '; logoStage.replaceChildren(makeLogo(currentTeam)); questionTeams = shuffle([currentTeam, ...shuffle(teams.filter(team => team !== currentTeam)).slice(0, 4)]); answerCards.replaceChildren(...shuffle(questionTeams).map(makeAnswer)); document.getElementById('roundLabel').textContent = `Question ${questionIndex} of ${teams.length}`; status.textContent = 'Choose the correct answer.'; status.className = 'status'; }
+    function finishGame() { resultSummary.textContent = `${score}/${teams.length} correct  |  ${misses} wrong guesses`; resultPanel.hidden = false; resultPanel.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+    resultButton.addEventListener('click', async () => { const shareText = `WNBA Logo Match\n${score}/${teams.length} correct\n${misses} wrong guesses\nCan you beat my score?`; try { if (navigator.share) { await navigator.share({ title: 'WNBA Logo Match', text: shareText }); resultButton.textContent = 'Score shared'; } else { await navigator.clipboard.writeText(shareText); resultButton.textContent = 'Score copied'; } } catch { resultButton.textContent = 'Share canceled'; } });
+    nextQuestion();
   </script>
 </body>
 </html>
