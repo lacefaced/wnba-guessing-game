@@ -133,26 +133,27 @@
       const isCorrect = currentPlayers.every((player, index) => player.id === answer[index].id);
       checked = true;
       const firstAttempt = !attempted;
-      if (firstAttempt) { orderResults.push(isCorrect); attempted = true; }
+      const correctPositions = currentPlayers.filter((player, index) => player.id === answer[index].id).length;
+      if (firstAttempt) { orderResults.push(correctPositions); attempted = true; }
       if (isCorrect) {
         teamSolved = true; if (firstAttempt) { firstTryTeams += 1; firstTryPlayers += answer.length; } correctTotal.textContent = `${firstTryTeams} first try`; feedback.textContent = 'Correct order. PPG revealed.'; feedback.className = 'feedback success';
       } else { feedback.textContent = 'Green cards are in the right spot. Fix the red cards, then check again.'; feedback.className = 'feedback error'; }
-      if (!isCorrect && firstAttempt) firstTryPlayers += currentPlayers.filter((player, index) => player.id === answer[index].id).length;
+      if (!isCorrect && firstAttempt) firstTryPlayers += correctPositions;
       updateResultPanel();
       renderRanking();
     }
     function updateResultPanel() {
-      resultHeading.textContent = 'Share your progress'; resultSummary.textContent = `${firstTryTeams}/${topFiveByTeam.length} teams perfect on first try\n${firstTryPlayers}/${topFiveByTeam.length * 5} players in the right spot on first try\n${orderResults.map(result => result ? '🟩' : '🟥').join('')}`;
+      resultHeading.textContent = 'Share your progress'; resultSummary.textContent = `${firstTryTeams}/${topFiveByTeam.length} teams perfect on first try\n${firstTryPlayers}/${topFiveByTeam.length * 5} players in the right spot on first try\n${orderResults.map(result => result === 5 ? '🟩' : result >= 3 ? '🟧' : '🟥').join('')}`;
       resultPanel.classList.remove('hidden');
     }
     function finishGame() {
       updateResultPanel(); resultHeading.textContent = 'League complete'; continueButton.classList.add('hidden'); resultPanel.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
     shareButton.addEventListener('click', async () => {
-      const shareText = `WNBA Top Five\n${firstTryTeams}/${topFiveByTeam.length} teams perfect on first try\n${firstTryPlayers}/${topFiveByTeam.length * 5} players in the right spot on first try\n${orderResults.map(result => result ? '🟩' : '🟥').join('')}\n${location.href}`;
+      const shareText = `WNBA Top Five\n${firstTryTeams}/${topFiveByTeam.length} teams perfect on first try\n${firstTryPlayers}/${topFiveByTeam.length * 5} players in the right spot on first try\n${orderResults.map(result => result === 5 ? '🟩' : result >= 3 ? '🟧' : '🟥').join('')}\n${location.href}`;
       try { if (navigator.share) await navigator.share({ title: 'WNBA Top Five', text: shareText }); else await navigator.clipboard.writeText(shareText); shareButton.textContent = 'Score shared'; } catch { shareButton.textContent = 'Share canceled'; }
     });
-    copyButton.addEventListener('click', async () => { const scoreText = `WNBA Top Five\n${firstTryTeams}/${topFiveByTeam.length} teams perfect on first try\n${firstTryPlayers}/${topFiveByTeam.length * 5} players in the right spot on first try\n${orderResults.map(result => result ? '🟩' : '🟥').join('')}`; try { await navigator.clipboard.writeText(scoreText); copyButton.textContent = 'Score copied'; } catch { copyButton.textContent = 'Copy unavailable'; } });
+    copyButton.addEventListener('click', async () => { const scoreText = `WNBA Top Five\n${firstTryTeams}/${topFiveByTeam.length} teams perfect on first try\n${firstTryPlayers}/${topFiveByTeam.length * 5} players in the right spot on first try\n${orderResults.map(result => result === 5 ? '🟩' : result >= 3 ? '🟧' : '🟥').join('')}`; try { await navigator.clipboard.writeText(scoreText); copyButton.textContent = 'Score copied'; } catch { copyButton.textContent = 'Copy unavailable'; } });
     continueButton.addEventListener('click', checkOrder); renderRanking(true);
   </script>
 </body>
