@@ -93,6 +93,9 @@
     }
     .action-btn:hover { background-color: var(--coral); border-color: var(--coral); }
     .action-btn:disabled { background-color: #ccc; cursor: not-allowed; }
+    .finish-area { margin-top: 34px; padding-top: 18px; border-top: 1px dashed #cfc8bd; }
+    .finish-area .action-btn { margin-bottom: 0; background-color: transparent; color: var(--muted); border-color: #b9b1a5; }
+    .finish-area .action-btn:hover { background-color: #fff0ec; color: var(--coral-dark); border-color: var(--coral); }
 
     #shareBtn {
       background-color: var(--coral);
@@ -177,7 +180,7 @@
       <div id="dropdown" class="dropdown"></div>
     </div>
 
-    <button id="finishBtn" class="action-btn">I Give Up - Show Missed Players</button>
+    <div class="finish-area"><button id="finishBtn" class="action-btn">Finish and show missed players</button></div>
     <div id="shareActions" class="share-actions" style="display: none;"><button id="shareBtn" class="action-btn">Share with link</button><button id="copyBtn" class="action-btn copy-button">Copy score</button></div>
 
     <h3>Guessed Players:</h3>
@@ -302,9 +305,9 @@
       const found = guessedPlayers.size;
       const total = allPlayers.length;
       const percentage = Math.round((found / total) * 100);
-      return `WNBA Naming Challenge\n${found}/${total} players found (${percentage}%)\n${'🟩'.repeat(found)}${'⬜'.repeat(total - found)}${includeLink ? `\n${location.href}` : ''}`;
+      return `WNBA Naming Challenge\n${found}/${total} players found (${percentage}%)${includeLink ? `\n${location.href}` : ''}`;
     }
-    shareBtn.addEventListener('click', async () => { try { if (navigator.share) await navigator.share({ title: 'WNBA Naming Challenge', text: scoreText(true) }); else await navigator.clipboard.writeText(scoreText(true)); shareBtn.textContent = 'Score shared'; } catch { shareBtn.textContent = 'Share canceled'; } });
+    shareBtn.addEventListener('click', async () => { try { await navigator.clipboard.writeText(scoreText(true)); shareBtn.textContent = 'Link copied'; setTimeout(() => { shareBtn.textContent = 'Share with link'; }, 1500); } catch { shareBtn.textContent = 'Copy unavailable'; setTimeout(() => { shareBtn.textContent = 'Share with link'; }, 1500); } });
     copyBtn.addEventListener('click', async () => { try { await navigator.clipboard.writeText(scoreText(false)); copyBtn.textContent = 'Score copied'; } catch { copyBtn.textContent = 'Copy unavailable'; } });
   </script>
 </body>
