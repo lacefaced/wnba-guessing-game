@@ -12,6 +12,10 @@
     body { position: relative; width: min(700px, calc(100% - 28px)); margin: 0 auto; padding: 34px 0 60px; color: var(--ink); background: var(--paper); font-family: Manrope, sans-serif; }
     body::before { content: ""; position: fixed; inset: 0; pointer-events: none; opacity: .3; background-image: radial-gradient(#c9c2b6 1px, transparent 1px); background-size: 18px 18px; }
     .game-container { position: relative; }
+    .game-nav { display: grid; gap: 2px; width: fit-content; margin-bottom: 34px; padding: 10px 14px; border-left: 3px solid var(--coral); background: rgba(255,253,248,.72); font: 12px/1.7 'DM Mono', monospace; }
+    .game-nav-label { color: var(--muted); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; }
+    .game-nav a { color: var(--muted); text-decoration: none; }
+    .game-nav a:hover, .game-nav a.active { color: var(--coral-dark); }
     h1 { margin: 0; font: 40px/1.05 'Archivo Black', sans-serif; text-transform: uppercase; }
     h2 { margin: 0 0 8px; color: var(--coral-dark); font: 25px 'Archivo Black', sans-serif; text-transform: uppercase; }
     h3 { margin: 28px 0 10px; font: 16px 'Archivo Black', sans-serif; text-transform: uppercase; }
@@ -74,6 +78,13 @@
 </head>
 <body>
   <div class="game-container">
+    <nav class="game-nav" aria-label="WNBA games">
+      <span class="game-nav-label">WNBA games</span>
+      <a class="active" href="index.html" aria-current="page">01 / Naming Challenge</a>
+      <a href="flashcard.html">02 / Team Matchup</a>
+      <a href="rankings.html">03 / Top Five</a>
+      <a href="teams.html">04 / Logo Match</a>
+    </nav>
     <p class="kicker">WNBA / naming challenge</p>
     <h1>Name the players.</h1>
     <p class="intro">Identify as many WNBA players as you can. Start typing a name and choose a match from the list.</p>
