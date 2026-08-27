@@ -151,7 +151,7 @@
     }
     shareButton.addEventListener('click', async () => {
       const shareText = `WNBA Top Five\n${firstTryTeams}/${topFiveByTeam.length} teams perfect on first try\n${firstTryPlayers}/${topFiveByTeam.length * 5} players in the right spot on first try\n${orderResults.map(result => result === 5 ? '🟩' : result >= 3 ? '🟧' : '🟥').join('')}\n${location.href}`;
-      try { if (navigator.share) await navigator.share({ title: 'WNBA Top Five', text: shareText }); else await navigator.clipboard.writeText(shareText); shareButton.textContent = 'Score shared'; } catch { shareButton.textContent = 'Share canceled'; }
+      try { await navigator.clipboard.writeText(shareText); shareButton.textContent = 'Link copied'; setTimeout(() => { shareButton.textContent = 'Share with link'; }, 1500); } catch { shareButton.textContent = 'Copy unavailable'; setTimeout(() => { shareButton.textContent = 'Share with link'; }, 1500); }
     });
     copyButton.addEventListener('click', async () => { const scoreText = `WNBA Top Five\n${firstTryTeams}/${topFiveByTeam.length} teams perfect on first try\n${firstTryPlayers}/${topFiveByTeam.length * 5} players in the right spot on first try\n${orderResults.map(result => result === 5 ? '🟩' : result >= 3 ? '🟧' : '🟥').join('')}`; try { await navigator.clipboard.writeText(scoreText); copyButton.textContent = 'Score copied'; } catch { copyButton.textContent = 'Copy unavailable'; } });
     continueButton.addEventListener('click', checkOrder); renderRanking(true);
