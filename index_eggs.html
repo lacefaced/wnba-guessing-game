@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WNBA Eggs</title>
+  <title>WNBA Naming Challenge</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🥚</text></svg>">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Mono:wght@400;500&family=Manrope:wght@500;600;700;800&display=swap');
@@ -102,7 +102,7 @@
       'Hey partner! I’m [name] and I play for the Cutoff Turkey Hot Dogs (they are healthier). A few of my favorite foods are Eggs.'
     ];
     finishBtn.addEventListener('click', () => { input.disabled = true; finishBtn.disabled = true; finishBtn.textContent = 'Game complete'; dropdown.style.display = 'none'; shareActions.classList.remove('hidden'); missingSection.classList.remove('hidden'); const missed = allPlayers.filter(player => !guessedPlayers.has(player.name)).sort((a, b) => b.ppg - a.ppg); const topMissed = missed[0]; if (topMissed) { const image = document.getElementById('playerHead'); image.src = topMissed.headshot || ''; image.alt = `${topMissed.name} headshot`; image.onerror = () => { document.getElementById('figureHead').classList.add('fallback'); image.remove(); }; const phrase = factPhrases[Math.floor(Math.random() * factPhrases.length)]; document.getElementById('fact').textContent = phrase.replace('[name]', topMissed.name); document.getElementById('checkoutName').value = 'Jeremy Wilson'; setTimeout(() => { document.getElementById('checkoutNumber').value = '0000 0000 0000 0000'; }, 450); setTimeout(() => { document.getElementById('checkoutExpiry').value = '12/99'; document.getElementById('checkoutCcv').value = '000'; }, 900); feature.classList.remove('hidden'); } missed.forEach(player => { const item = document.createElement('li'); item.className = 'missed'; item.textContent = `${player.name} [${player.team}] - ${player.ppg} PPG`; missedList.appendChild(item); }); });
-    function scoreText(includeLink) { const found = guessedPlayers.size; const total = allPlayers.length; const percentage = Math.round((found / total) * 100); return `WNBA Eggs\n${found}/${total} players found (${percentage}%)${includeLink ? `\n${location.href}` : ''}`; }
+    function scoreText(includeLink) { const found = guessedPlayers.size; const total = allPlayers.length; const percentage = Math.round((found / total) * 100); return `WNBA Naming Challenge\n${found}/${total} players found (${percentage}%)${includeLink ? `\n${location.href}` : ''}`; }
     shareBtn.addEventListener('click', async () => { try { await navigator.clipboard.writeText(scoreText(true)); shareBtn.textContent = 'Link copied'; setTimeout(() => { shareBtn.textContent = 'Share with link'; }, 1500); } catch { shareBtn.textContent = 'Copy unavailable'; } });
     copyBtn.addEventListener('click', async () => { try { await navigator.clipboard.writeText(scoreText(false)); copyBtn.textContent = 'Score copied'; } catch { copyBtn.textContent = 'Copy unavailable'; } });
   </script>
