@@ -88,12 +88,14 @@ def fetch_wnba_data():
                                 headshot_url = f"https://a.espncdn.com/i/headshots/wnba/players/full/{pid}.png"
                                 ppg = ppg_map.get(pid, 0.0)
                                 position = position_map.get(pid, 'Player')
+                                jersey = player.get('jersey') or player.get('uniformNumber') or ''
                                 
                                 players_list.append({
                                     "id": pid,
                                     "name": name,
                                     "team": team_name,
                                     "position": position,
+                                    "jersey": str(jersey),
                                     "ppg": round(float(ppg), 1),
                                     "headshot": headshot_url
                                 })

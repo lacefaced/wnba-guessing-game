@@ -4,6 +4,7 @@ const allPlayers = [
     "name": "A'ja Wilson",
     "team": "Las Vegas Aces",
     "position": "C",
+    "jersey": "22",
     "ppg": 26.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3149391.png"
   },
@@ -12,6 +13,7 @@ const allPlayers = [
     "name": "Kelsey Mitchell",
     "team": "Indiana Fever",
     "position": "G",
+    "jersey": "0",
     "ppg": 24.8,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3142191.png"
   },
@@ -20,6 +22,7 @@ const allPlayers = [
     "name": "Caitlin Clark",
     "team": "Indiana Fever",
     "position": "G",
+    "jersey": "22",
     "ppg": 22.1,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4433403.png"
   },
@@ -28,7 +31,8 @@ const allPlayers = [
     "name": "Kahleah Copper",
     "team": "Phoenix Mercury",
     "position": "G",
-    "ppg": 21.0,
+    "jersey": "2",
+    "ppg": 20.9,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2998938.png"
   },
   {
@@ -36,6 +40,7 @@ const allPlayers = [
     "name": "Breanna Stewart",
     "team": "New York Liberty",
     "position": "F",
+    "jersey": "30",
     "ppg": 20.8,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2998928.png"
   },
@@ -44,6 +49,7 @@ const allPlayers = [
     "name": "Marina Mabrey",
     "team": "Toronto Tempo",
     "position": "G",
+    "jersey": "3",
     "ppg": 20.8,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3904576.png"
   },
@@ -52,6 +58,7 @@ const allPlayers = [
     "name": "Paige Bueckers",
     "team": "Dallas Wings",
     "position": "G",
+    "jersey": "5",
     "ppg": 20.6,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4433730.png"
   },
@@ -60,6 +67,7 @@ const allPlayers = [
     "name": "Olivia Miles",
     "team": "Minnesota Lynx",
     "position": "G",
+    "jersey": "5",
     "ppg": 19.7,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4433791.png"
   },
@@ -68,6 +76,7 @@ const allPlayers = [
     "name": "Allisha Gray",
     "team": "Atlanta Dream",
     "position": "G",
+    "jersey": "15",
     "ppg": 19.4,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3058901.png"
   },
@@ -76,6 +85,7 @@ const allPlayers = [
     "name": "Jackie Young",
     "team": "Las Vegas Aces",
     "position": "G",
+    "jersey": "0",
     "ppg": 18.8,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4065870.png"
   },
@@ -84,6 +94,7 @@ const allPlayers = [
     "name": "Rhyne Howard",
     "team": "Atlanta Dream",
     "position": "G",
+    "jersey": "10",
     "ppg": 18.2,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4398674.png"
   },
@@ -92,6 +103,7 @@ const allPlayers = [
     "name": "Kayla McBride",
     "team": "Minnesota Lynx",
     "position": "G",
+    "jersey": "21",
     "ppg": 18.1,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2529205.png"
   },
@@ -100,6 +112,7 @@ const allPlayers = [
     "name": "Aliyah Boston",
     "team": "Indiana Fever",
     "position": "C",
+    "jersey": "7",
     "ppg": 17.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4432831.png"
   },
@@ -108,6 +121,7 @@ const allPlayers = [
     "name": "Dominique Malonga",
     "team": "Seattle Storm",
     "position": "C",
+    "jersey": "14",
     "ppg": 17.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/5220150.png"
   },
@@ -116,7 +130,8 @@ const allPlayers = [
     "name": "Shakira Austin",
     "team": "Washington Mystics",
     "position": "C",
-    "ppg": 17.0,
+    "jersey": "0",
+    "ppg": 16.9,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4398911.png"
   },
   {
@@ -124,6 +139,7 @@ const allPlayers = [
     "name": "Sonia Citron",
     "team": "Washington Mystics",
     "position": "G",
+    "jersey": "22",
     "ppg": 16.9,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4433524.png"
   },
@@ -132,6 +148,7 @@ const allPlayers = [
     "name": "Nneka Ogwumike",
     "team": "Los Angeles Sparks",
     "position": "F",
+    "jersey": "30",
     "ppg": 16.8,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/1068.png"
   },
@@ -140,6 +157,7 @@ const allPlayers = [
     "name": "Angel Reese",
     "team": "Atlanta Dream",
     "position": "F",
+    "jersey": "5",
     "ppg": 16.1,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4433402.png"
   },
@@ -148,7 +166,8 @@ const allPlayers = [
     "name": "Carla Leite",
     "team": "Portland Fire",
     "position": "G",
-    "ppg": 15.8,
+    "jersey": "0",
+    "ppg": 15.6,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/5208982.png"
   },
   {
@@ -156,6 +175,7 @@ const allPlayers = [
     "name": "Natisha Hiedeman",
     "team": "Seattle Storm",
     "position": "G",
+    "jersey": "2",
     "ppg": 15.4,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3906753.png"
   },
@@ -164,7 +184,8 @@ const allPlayers = [
     "name": "Kiki Iriafen",
     "team": "Washington Mystics",
     "position": "F",
-    "ppg": 15.2,
+    "jersey": "44",
+    "ppg": 15.3,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4898384.png"
   },
   {
@@ -172,7 +193,8 @@ const allPlayers = [
     "name": "Arike Ogunbowale",
     "team": "Dallas Wings",
     "position": "G",
-    "ppg": 15.1,
+    "jersey": "24",
+    "ppg": 15.2,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3904577.png"
   },
   {
@@ -180,14 +202,25 @@ const allPlayers = [
     "name": "Natasha Howard",
     "team": "Minnesota Lynx",
     "position": "F",
+    "jersey": "1",
     "ppg": 15.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2529130.png"
+  },
+  {
+    "id": "4433405",
+    "name": "Kamilla Cardoso",
+    "team": "Chicago Sky",
+    "position": "C",
+    "jersey": "10",
+    "ppg": 14.9,
+    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4433405.png"
   },
   {
     "id": "2566106",
     "name": "Dearica Hamby",
     "team": "Los Angeles Sparks",
     "position": "F",
+    "jersey": "5",
     "ppg": 14.8,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2566106.png"
   },
@@ -196,46 +229,43 @@ const allPlayers = [
     "name": "Alyssa Thomas",
     "team": "Phoenix Mercury",
     "position": "F",
+    "jersey": "25",
     "ppg": 14.8,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2529140.png"
-  },
-  {
-    "id": "4433405",
-    "name": "Kamilla Cardoso",
-    "team": "Chicago Sky",
-    "position": "C",
-    "ppg": 14.7,
-    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4433405.png"
-  },
-  {
-    "id": "3906972",
-    "name": "Bridget Carleton",
-    "team": "Portland Fire",
-    "position": "F",
-    "ppg": 14.7,
-    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3906972.png"
   },
   {
     "id": "2999101",
     "name": "Jonquel Jones",
     "team": "New York Liberty",
     "position": "C",
+    "jersey": "35",
     "ppg": 14.6,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2999101.png"
   },
   {
-    "id": "3142328",
-    "name": "Gabby Williams",
-    "team": "Golden State Valkyries",
+    "id": "3906972",
+    "name": "Bridget Carleton",
+    "team": "Portland Fire",
     "position": "F",
+    "jersey": "6",
+    "ppg": 14.6,
+    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3906972.png"
+  },
+  {
+    "id": "3906949",
+    "name": "Jessica Shepard",
+    "team": "Dallas Wings",
+    "position": "F",
+    "jersey": "32",
     "ppg": 14.4,
-    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3142328.png"
+    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3906949.png"
   },
   {
     "id": "4398764",
     "name": "Rae Burrell",
     "team": "Los Angeles Sparks",
     "position": "G",
+    "jersey": "12",
     "ppg": 14.4,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4398764.png"
   },
@@ -244,38 +274,43 @@ const allPlayers = [
     "name": "Courtney Williams",
     "team": "Minnesota Lynx",
     "position": "G",
+    "jersey": "10",
     "ppg": 14.4,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2987891.png"
   },
   {
-    "id": "4594786",
-    "name": "Sydney Taylor",
-    "team": "Chicago Sky",
-    "position": "G",
-    "ppg": 14.2,
-    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4594786.png"
-  },
-  {
-    "id": "3906949",
-    "name": "Jessica Shepard",
-    "team": "Dallas Wings",
+    "id": "3142328",
+    "name": "Gabby Williams",
+    "team": "Golden State Valkyries",
     "position": "F",
+    "jersey": "1",
     "ppg": 14.2,
-    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3906949.png"
+    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3142328.png"
   },
   {
     "id": "4698736",
     "name": "Flau'jae Johnson",
     "team": "Seattle Storm",
     "position": "G",
-    "ppg": 13.8,
+    "jersey": "4",
+    "ppg": 13.9,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4698736.png"
+  },
+  {
+    "id": "4594786",
+    "name": "Sydney Taylor",
+    "team": "Chicago Sky",
+    "position": "G",
+    "jersey": "12",
+    "ppg": 13.8,
+    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4594786.png"
   },
   {
     "id": "3934218",
     "name": "Megan DiLeo",
     "team": "Portland Fire",
     "position": "C",
+    "jersey": "17",
     "ppg": 13.2,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3934218.png"
   },
@@ -284,6 +319,7 @@ const allPlayers = [
     "name": "Azzi Fudd",
     "team": "Dallas Wings",
     "position": "G",
+    "jersey": "35",
     "ppg": 13.1,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4433790.png"
   },
@@ -292,6 +328,7 @@ const allPlayers = [
     "name": "Janelle Salaun",
     "team": "Golden State Valkyries",
     "position": "F",
+    "jersey": "13",
     "ppg": 13.1,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4790264.png"
   },
@@ -300,6 +337,7 @@ const allPlayers = [
     "name": "Veronica Burton",
     "team": "Golden State Valkyries",
     "position": "G",
+    "jersey": "22",
     "ppg": 12.5,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4398935.png"
   },
@@ -308,6 +346,7 @@ const allPlayers = [
     "name": "Chelsea Gray",
     "team": "Las Vegas Aces",
     "position": "G",
+    "jersey": "12",
     "ppg": 12.1,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2529122.png"
   },
@@ -316,6 +355,7 @@ const allPlayers = [
     "name": "NaLyssa Smith",
     "team": "Las Vegas Aces",
     "position": "F",
+    "jersey": "3",
     "ppg": 11.7,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4398776.png"
   },
@@ -324,6 +364,7 @@ const allPlayers = [
     "name": "Leila Lacan",
     "team": "Connecticut Sun",
     "position": "G",
+    "jersey": "47",
     "ppg": 11.6,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/5208981.png"
   },
@@ -332,6 +373,7 @@ const allPlayers = [
     "name": "Jordin Canada",
     "team": "Atlanta Dream",
     "position": "G",
+    "jersey": "3",
     "ppg": 11.5,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3142250.png"
   },
@@ -340,7 +382,8 @@ const allPlayers = [
     "name": "Natasha Cloud",
     "team": "Chicago Sky",
     "position": "G",
-    "ppg": 11.5,
+    "jersey": "9",
+    "ppg": 11.3,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2529137.png"
   },
   {
@@ -348,6 +391,7 @@ const allPlayers = [
     "name": "Aneesah Morrow",
     "team": "Toronto Tempo",
     "position": "F",
+    "jersey": "24",
     "ppg": 11.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4684384.png"
   },
@@ -356,22 +400,25 @@ const allPlayers = [
     "name": "Azura Stevens",
     "team": "Chicago Sky",
     "position": "F",
-    "ppg": 10.7,
+    "jersey": "30",
+    "ppg": 10.9,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3142010.png"
   },
   {
-    "id": "4703794",
-    "name": "Sarah Ashlee Barker",
-    "team": "Portland Fire",
-    "position": "G",
-    "ppg": 10.7,
-    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4703794.png"
+    "id": "869",
+    "name": "DeWanna Bonner",
+    "team": "Atlanta Dream",
+    "position": "F",
+    "jersey": "24",
+    "ppg": 10.6,
+    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/869.png"
   },
   {
     "id": "5345325",
     "name": "Awa Fam",
     "team": "Seattle Storm",
     "position": "C",
+    "jersey": "11",
     "ppg": 10.3,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/5345325.png"
   },
@@ -380,7 +427,8 @@ const allPlayers = [
     "name": "Laura Juskaite",
     "team": "Toronto Tempo",
     "position": "F",
-    "ppg": 10.1,
+    "jersey": "2",
+    "ppg": 10.2,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/5345444.png"
   },
   {
@@ -388,30 +436,43 @@ const allPlayers = [
     "name": "Olivia Nelson-Ododa",
     "team": "Connecticut Sun",
     "position": "C",
+    "jersey": "10",
     "ppg": 10.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4398966.png"
-  },
-  {
-    "id": "4398729",
-    "name": "Emily Engstler",
-    "team": "Portland Fire",
-    "position": "F",
-    "ppg": 9.5,
-    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4398729.png"
   },
   {
     "id": "5017726",
     "name": "Jade Melbourne",
     "team": "Seattle Storm",
     "position": "G",
-    "ppg": 9.5,
+    "jersey": "5",
+    "ppg": 9.7,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/5017726.png"
+  },
+  {
+    "id": "4398729",
+    "name": "Emily Engstler",
+    "team": "Portland Fire",
+    "position": "F",
+    "jersey": "21",
+    "ppg": 9.6,
+    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4398729.png"
+  },
+  {
+    "id": "4433635",
+    "name": "Diamond Miller",
+    "team": "Connecticut Sun",
+    "position": "F",
+    "jersey": "1",
+    "ppg": 9.4,
+    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4433635.png"
   },
   {
     "id": "4433404",
     "name": "Cameron Brink",
     "team": "Los Angeles Sparks",
     "position": "F",
+    "jersey": "22",
     "ppg": 9.4,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4433404.png"
   },
@@ -420,6 +481,7 @@ const allPlayers = [
     "name": "Pauline Astier",
     "team": "New York Liberty",
     "position": "G",
+    "jersey": "18",
     "ppg": 9.3,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/5345320.png"
   },
@@ -428,6 +490,7 @@ const allPlayers = [
     "name": "Naz Hillmon",
     "team": "Atlanta Dream",
     "position": "F",
+    "jersey": "00",
     "ppg": 9.2,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4398915.png"
   },
@@ -436,22 +499,16 @@ const allPlayers = [
     "name": "Michaela Onyenwere",
     "team": "Washington Mystics",
     "position": "F",
+    "jersey": "12",
     "ppg": 9.2,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4282173.png"
-  },
-  {
-    "id": "4433635",
-    "name": "Diamond Miller",
-    "team": "Connecticut Sun",
-    "position": "F",
-    "ppg": 9.1,
-    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4433635.png"
   },
   {
     "id": "2491214",
     "name": "Erica Wheeler",
     "team": "Los Angeles Sparks",
     "position": "G",
+    "jersey": "17",
     "ppg": 9.1,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2491214.png"
   },
@@ -460,6 +517,7 @@ const allPlayers = [
     "name": "Marine Johannes",
     "team": "New York Liberty",
     "position": "G",
+    "jersey": "23",
     "ppg": 9.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4038379.png"
   },
@@ -468,31 +526,35 @@ const allPlayers = [
     "name": "Maria Conde",
     "team": "Toronto Tempo",
     "position": "F",
-    "ppg": 9.0,
+    "jersey": "10",
+    "ppg": 8.9,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3910470.png"
-  },
-  {
-    "id": "3146151",
-    "name": "Ariel Atkins",
-    "team": "Los Angeles Sparks",
-    "position": "G",
-    "ppg": 8.8,
-    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3146151.png"
   },
   {
     "id": "3922628",
     "name": "Kennedy Burke",
     "team": "Connecticut Sun",
     "position": "G",
-    "ppg": 8.7,
+    "jersey": "25",
+    "ppg": 8.8,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3922628.png"
+  },
+  {
+    "id": "3146151",
+    "name": "Ariel Atkins",
+    "team": "Los Angeles Sparks",
+    "position": "G",
+    "jersey": "7",
+    "ppg": 8.8,
+    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3146151.png"
   },
   {
     "id": "1054",
     "name": "Tiffany Hayes",
     "team": "Golden State Valkyries",
     "position": "G",
-    "ppg": 8.7,
+    "jersey": "15",
+    "ppg": 8.6,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/1054.png"
   },
   {
@@ -500,6 +562,7 @@ const allPlayers = [
     "name": "Cecilia Zandalasini",
     "team": "Golden State Valkyries",
     "position": "F",
+    "jersey": "24",
     "ppg": 8.5,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4257500.png"
   },
@@ -508,6 +571,7 @@ const allPlayers = [
     "name": "Sophie Cunningham",
     "team": "Indiana Fever",
     "position": "G",
+    "jersey": "8",
     "ppg": 8.4,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3907781.png"
   },
@@ -516,7 +580,8 @@ const allPlayers = [
     "name": "Natasha Mack",
     "team": "Phoenix Mercury",
     "position": "F",
-    "ppg": 8.0,
+    "jersey": "4",
+    "ppg": 8.4,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4068042.png"
   },
   {
@@ -524,7 +589,8 @@ const allPlayers = [
     "name": "Kayla Thornton",
     "team": "Golden State Valkyries",
     "position": "F",
-    "ppg": 7.9,
+    "jersey": "5",
+    "ppg": 7.7,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2529622.png"
   },
   {
@@ -532,6 +598,7 @@ const allPlayers = [
     "name": "Jewell Loyd",
     "team": "Las Vegas Aces",
     "position": "G",
+    "jersey": "24",
     "ppg": 7.7,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2987869.png"
   },
@@ -540,7 +607,8 @@ const allPlayers = [
     "name": "Zia Cooke",
     "team": "Seattle Storm",
     "position": "G",
-    "ppg": 7.4,
+    "jersey": "7",
+    "ppg": 7.5,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4432832.png"
   },
   {
@@ -548,6 +616,7 @@ const allPlayers = [
     "name": "Saniya Rivers",
     "team": "Connecticut Sun",
     "position": "G",
+    "jersey": "22",
     "ppg": 7.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4433514.png"
   },
@@ -556,6 +625,7 @@ const allPlayers = [
     "name": "Monique Billings",
     "team": "Indiana Fever",
     "position": "F",
+    "jersey": "25",
     "ppg": 7.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3142255.png"
   },
@@ -564,15 +634,26 @@ const allPlayers = [
     "name": "Charlisse Leger-Walker",
     "team": "Connecticut Sun",
     "position": "G",
-    "ppg": 6.8,
+    "jersey": "4",
+    "ppg": 6.9,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4703609.png"
+  },
+  {
+    "id": "4899328",
+    "name": "Kaitlyn Chen",
+    "team": "Golden State Valkyries",
+    "position": "G",
+    "jersey": "2",
+    "ppg": 6.7,
+    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4899328.png"
   },
   {
     "id": "4583144",
     "name": "Cotie McMahon",
     "team": "Washington Mystics",
     "position": "G",
-    "ppg": 6.8,
+    "jersey": "23",
+    "ppg": 6.7,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4583144.png"
   },
   {
@@ -580,22 +661,16 @@ const allPlayers = [
     "name": "Gabriela Jaquez",
     "team": "Chicago Sky",
     "position": "G",
+    "jersey": "11",
     "ppg": 6.6,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4858656.png"
-  },
-  {
-    "id": "4899328",
-    "name": "Kaitlyn Chen",
-    "team": "Golden State Valkyries",
-    "position": "G",
-    "ppg": 6.6,
-    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4899328.png"
   },
   {
     "id": "3054590",
     "name": "Nia Coffey",
     "team": "Minnesota Lynx",
     "position": "F",
+    "jersey": "12",
     "ppg": 6.6,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3054590.png"
   },
@@ -604,6 +679,7 @@ const allPlayers = [
     "name": "Valeriane Ayayi",
     "team": "Phoenix Mercury",
     "position": "F",
+    "jersey": "11",
     "ppg": 6.5,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3919496.png"
   },
@@ -612,62 +688,97 @@ const allPlayers = [
     "name": "Jacy Sheldon",
     "team": "Chicago Sky",
     "position": "G",
+    "jersey": "0",
     "ppg": 6.4,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4432865.png"
-  },
-  {
-    "id": "4337216",
-    "name": "Han Xu",
-    "team": "New York Liberty",
-    "position": "C",
-    "ppg": 6.3,
-    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4337216.png"
-  },
-  {
-    "id": "4001679",
-    "name": "Julie Allemand",
-    "team": "Toronto Tempo",
-    "position": "G",
-    "ppg": 6.3,
-    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4001679.png"
   },
   {
     "id": "5105737",
     "name": "Lauren Betts",
     "team": "Washington Mystics",
     "position": "C",
-    "ppg": 6.3,
+    "jersey": "51",
+    "ppg": 6.4,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/5105737.png"
+  },
+  {
+    "id": "4337216",
+    "name": "Han Xu",
+    "team": "New York Liberty",
+    "position": "C",
+    "jersey": "21",
+    "ppg": 6.3,
+    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4337216.png"
   },
   {
     "id": "5105406",
     "name": "Frieda Buhner",
     "team": "Portland Fire",
     "position": "F",
-    "ppg": 6.2,
+    "jersey": "20",
+    "ppg": 6.3,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/5105406.png"
   },
   {
-    "id": "4433807",
-    "name": "Aziaha James",
-    "team": "Dallas Wings",
+    "id": "4001679",
+    "name": "Julie Allemand",
+    "team": "Toronto Tempo",
     "position": "G",
-    "ppg": 6.1,
-    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4433807.png"
+    "jersey": "22",
+    "ppg": 6.3,
+    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4001679.png"
   },
   {
     "id": "4399415",
     "name": "Maddy Siegrist",
     "team": "Dallas Wings",
     "position": "F",
-    "ppg": 6.1,
+    "jersey": "20",
+    "ppg": 6.2,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4399415.png"
+  },
+  {
+    "id": "4433807",
+    "name": "Aziaha James",
+    "team": "Dallas Wings",
+    "position": "G",
+    "jersey": "10",
+    "ppg": 6.1,
+    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4433807.png"
+  },
+  {
+    "id": "4790266",
+    "name": "Awak Kuier",
+    "team": "Dallas Wings",
+    "position": "F",
+    "jersey": "34",
+    "ppg": 6.0,
+    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4790266.png"
+  },
+  {
+    "id": "3913881",
+    "name": "Alanna Smith",
+    "team": "Dallas Wings",
+    "position": "F",
+    "jersey": "8",
+    "ppg": 6.0,
+    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3913881.png"
+  },
+  {
+    "id": "4065780",
+    "name": "Kaila Charles",
+    "team": "Golden State Valkyries",
+    "position": "G",
+    "jersey": "6",
+    "ppg": 6.0,
+    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4065780.png"
   },
   {
     "id": "5345524",
     "name": "Noemie Brochant",
     "team": "Phoenix Mercury",
     "position": "F",
+    "jersey": "1",
     "ppg": 6.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/5345524.png"
   },
@@ -676,54 +787,34 @@ const allPlayers = [
     "name": "Georgia Amoore",
     "team": "Washington Mystics",
     "position": "G",
+    "jersey": "8",
     "ppg": 6.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4704180.png"
-  },
-  {
-    "id": "3913881",
-    "name": "Alanna Smith",
-    "team": "Dallas Wings",
-    "position": "F",
-    "ppg": 5.9,
-    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3913881.png"
-  },
-  {
-    "id": "4790266",
-    "name": "Awak Kuier",
-    "team": "Dallas Wings",
-    "position": "F",
-    "ppg": 5.8,
-    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4790266.png"
-  },
-  {
-    "id": "4065780",
-    "name": "Kaila Charles",
-    "team": "Golden State Valkyries",
-    "position": "G",
-    "ppg": 5.8,
-    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4065780.png"
-  },
-  {
-    "id": "5346554",
-    "name": "Teja Oblak",
-    "team": "Portland Fire",
-    "position": "G",
-    "ppg": 5.8,
-    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/5346554.png"
   },
   {
     "id": "5108587",
     "name": "Madina Okot",
     "team": "Atlanta Dream",
     "position": "C",
+    "jersey": "11",
     "ppg": 5.6,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/5108587.png"
+  },
+  {
+    "id": "5346554",
+    "name": "Teja Oblak",
+    "team": "Portland Fire",
+    "position": "G",
+    "jersey": "7",
+    "ppg": 5.6,
+    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/5346554.png"
   },
   {
     "id": "4433546",
     "name": "Makayla Timpson",
     "team": "Indiana Fever",
     "position": "F",
+    "jersey": "21",
     "ppg": 5.4,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4433546.png"
   },
@@ -732,6 +823,7 @@ const allPlayers = [
     "name": "Kia Nurse",
     "team": "Toronto Tempo",
     "position": "G",
+    "jersey": "11",
     "ppg": 5.4,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3142327.png"
   },
@@ -740,86 +832,97 @@ const allPlayers = [
     "name": "Lexie Hull",
     "team": "Indiana Fever",
     "position": "G",
+    "jersey": "10",
     "ppg": 5.3,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4398829.png"
-  },
-  {
-    "id": "2529047",
-    "name": "Odyssey Sims",
-    "team": "Dallas Wings",
-    "position": "G",
-    "ppg": 5.1,
-    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2529047.png"
-  },
-  {
-    "id": "2327695",
-    "name": "Rebekah Gardner",
-    "team": "New York Liberty",
-    "position": "G",
-    "ppg": 5.1,
-    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2327695.png"
   },
   {
     "id": "2566081",
     "name": "Elizabeth Williams",
     "team": "Chicago Sky",
     "position": "C",
-    "ppg": 5.0,
+    "jersey": "1",
+    "ppg": 5.1,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2566081.png"
+  },
+  {
+    "id": "2327695",
+    "name": "Rebekah Gardner",
+    "team": "New York Liberty",
+    "position": "G",
+    "jersey": "7",
+    "ppg": 5.1,
+    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2327695.png"
+  },
+  {
+    "id": "2529047",
+    "name": "Odyssey Sims",
+    "team": "Dallas Wings",
+    "position": "G",
+    "jersey": "1",
+    "ppg": 4.9,
+    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2529047.png"
   },
   {
     "id": "4432830",
     "name": "Jordan Horston",
     "team": "Seattle Storm",
     "position": "F",
-    "ppg": 4.9,
-    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4432830.png"
-  },
-  {
-    "id": "2566186",
-    "name": "Rachel Banham",
-    "team": "Chicago Sky",
-    "position": "G",
+    "jersey": "23",
     "ppg": 4.8,
-    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2566186.png"
+    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4432830.png"
   },
   {
     "id": "5208983",
     "name": "Isobel Borlase",
     "team": "Atlanta Dream",
     "position": "G",
+    "jersey": "20",
     "ppg": 4.7,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/5208983.png"
+  },
+  {
+    "id": "2566186",
+    "name": "Rachel Banham",
+    "team": "Chicago Sky",
+    "position": "G",
+    "jersey": "24",
+    "ppg": 4.7,
+    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2566186.png"
   },
   {
     "id": "4399342",
     "name": "Lexi Held",
     "team": "Phoenix Mercury",
     "position": "G",
+    "jersey": "10",
     "ppg": 4.7,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4399342.png"
-  },
-  {
-    "id": "5108550",
-    "name": "Serah Williams",
-    "team": "Portland Fire",
-    "position": "C",
-    "ppg": 4.3,
-    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/5108550.png"
   },
   {
     "id": "3917453",
     "name": "Katie Lou Samuelson",
     "team": "Seattle Storm",
     "position": "F",
-    "ppg": 4.3,
+    "jersey": "33",
+    "ppg": 4.5,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3917453.png"
+  },
+  {
+    "id": "5108550",
+    "name": "Serah Williams",
+    "team": "Portland Fire",
+    "position": "C",
+    "jersey": "25",
+    "ppg": 4.3,
+    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/5108550.png"
   },
   {
     "id": "4065760",
     "name": "Tyasha Harris",
     "team": "Indiana Fever",
     "position": "G",
+    "jersey": "52",
     "ppg": 4.1,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4065760.png"
   },
@@ -828,86 +931,88 @@ const allPlayers = [
     "name": "Maya Caldwell",
     "team": "Minnesota Lynx",
     "position": "G",
+    "jersey": "3",
     "ppg": 4.1,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4280850.png"
-  },
-  {
-    "id": "5209202",
-    "name": "Nyadiew Puoch",
-    "team": "Portland Fire",
-    "position": "F",
-    "ppg": 3.9,
-    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/5209202.png"
-  },
-  {
-    "id": "3142055",
-    "name": "Myisha Hines-Allen",
-    "team": "Indiana Fever",
-    "position": "F",
-    "ppg": 3.8,
-    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3142055.png"
-  },
-  {
-    "id": "4433431",
-    "name": "Te-Hina Paopao",
-    "team": "Atlanta Dream",
-    "position": "G",
-    "ppg": 3.7,
-    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4433431.png"
-  },
-  {
-    "id": "5105732",
-    "name": "Raegan Beers",
-    "team": "Connecticut Sun",
-    "position": "F",
-    "ppg": 3.7,
-    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/5105732.png"
-  },
-  {
-    "id": "5278237",
-    "name": "Anastasiia Olairi Kosu",
-    "team": "Minnesota Lynx",
-    "position": "F",
-    "ppg": 3.7,
-    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/5278237.png"
   },
   {
     "id": "5345319",
     "name": "Nell Angloma",
     "team": "Connecticut Sun",
     "position": "F",
-    "ppg": 3.6,
+    "jersey": "33",
+    "ppg": 3.9,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/5345319.png"
+  },
+  {
+    "id": "3142055",
+    "name": "Myisha Hines-Allen",
+    "team": "Indiana Fever",
+    "position": "F",
+    "jersey": "2",
+    "ppg": 3.8,
+    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3142055.png"
+  },
+  {
+    "id": "5209202",
+    "name": "Nyadiew Puoch",
+    "team": "Portland Fire",
+    "position": "F",
+    "jersey": "13",
+    "ppg": 3.8,
+    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/5209202.png"
+  },
+  {
+    "id": "4433431",
+    "name": "Te-Hina Paopao",
+    "team": "Atlanta Dream",
+    "position": "G",
+    "jersey": "2",
+    "ppg": 3.7,
+    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4433431.png"
   },
   {
     "id": "2590093",
     "name": "Kiah Stokes",
     "team": "Golden State Valkyries",
     "position": "C",
-    "ppg": 3.6,
+    "jersey": "41",
+    "ppg": 3.7,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2590093.png"
+  },
+  {
+    "id": "5278237",
+    "name": "Anastasiia Olairi Kosu",
+    "team": "Minnesota Lynx",
+    "position": "F",
+    "jersey": "7",
+    "ppg": 3.7,
+    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/5278237.png"
+  },
+  {
+    "id": "5105732",
+    "name": "Raegan Beers",
+    "team": "Connecticut Sun",
+    "position": "F",
+    "jersey": "15",
+    "ppg": 3.6,
+    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/5105732.png"
   },
   {
     "id": "3099736",
     "name": "Stephanie Talbot",
     "team": "Las Vegas Aces",
     "position": "F",
+    "jersey": "7",
     "ppg": 3.5,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3099736.png"
-  },
-  {
-    "id": "5349415",
-    "name": "Alicia Florez",
-    "team": "Washington Mystics",
-    "position": "G",
-    "ppg": 3.5,
-    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/5349415.png"
   },
   {
     "id": "4336633",
     "name": "Li Yueru",
     "team": "Dallas Wings",
     "position": "C",
+    "jersey": "28",
     "ppg": 3.4,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4336633.png"
   },
@@ -916,7 +1021,8 @@ const allPlayers = [
     "name": "Laeticia Amihere",
     "team": "Golden State Valkyries",
     "position": "F",
-    "ppg": 3.3,
+    "jersey": "3",
+    "ppg": 3.4,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4432834.png"
   },
   {
@@ -924,38 +1030,43 @@ const allPlayers = [
     "name": "Stefanie Dolson",
     "team": "Seattle Storm",
     "position": "C",
+    "jersey": "31",
     "ppg": 3.3,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2529183.png"
   },
   {
-    "id": "4898898",
-    "name": "Gianna Kneepkens",
-    "team": "Connecticut Sun",
+    "id": "5349415",
+    "name": "Alicia Florez",
+    "team": "Washington Mystics",
     "position": "G",
-    "ppg": 3.1,
-    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4898898.png"
+    "jersey": "2",
+    "ppg": 3.3,
+    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/5349415.png"
   },
   {
     "id": "4433797",
     "name": "Raven Johnson",
     "team": "Indiana Fever",
     "position": "G",
+    "jersey": "3",
     "ppg": 3.1,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4433797.png"
   },
   {
-    "id": "4433411",
-    "name": "Angela Dugalic",
-    "team": "Washington Mystics",
-    "position": "F",
-    "ppg": 3.0,
-    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4433411.png"
+    "id": "4898898",
+    "name": "Gianna Kneepkens",
+    "team": "Connecticut Sun",
+    "position": "G",
+    "jersey": "5",
+    "ppg": 2.9,
+    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4898898.png"
   },
   {
     "id": "5105729",
     "name": "Chance Gray",
     "team": "Los Angeles Sparks",
     "position": "G",
+    "jersey": "2",
     "ppg": 2.9,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/5105729.png"
   },
@@ -964,14 +1075,25 @@ const allPlayers = [
     "name": "Antonia Delaere",
     "team": "Minnesota Lynx",
     "position": "F",
+    "jersey": "8",
     "ppg": 2.9,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4873358.png"
+  },
+  {
+    "id": "4433411",
+    "name": "Angela Dugalic",
+    "team": "Washington Mystics",
+    "position": "F",
+    "jersey": "32",
+    "ppg": 2.9,
+    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4433411.png"
   },
   {
     "id": "4874375",
     "name": "Jihyun Park",
     "team": "Los Angeles Sparks",
     "position": "F",
+    "jersey": "6",
     "ppg": 2.2,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4874375.png"
   },
@@ -980,7 +1102,8 @@ const allPlayers = [
     "name": "Cassandre Prosper",
     "team": "Washington Mystics",
     "position": "G",
-    "ppg": 2.2,
+    "jersey": "18",
+    "ppg": 2.1,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/5122345.png"
   },
   {
@@ -988,6 +1111,7 @@ const allPlayers = [
     "name": "Sika Kone",
     "team": "Atlanta Dream",
     "position": "F",
+    "jersey": "23",
     "ppg": 1.8,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/5017721.png"
   },
@@ -996,6 +1120,7 @@ const allPlayers = [
     "name": "Teonni Key",
     "team": "Toronto Tempo",
     "position": "F",
+    "jersey": "7",
     "ppg": 1.8,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4434020.png"
   },
@@ -1004,6 +1129,7 @@ const allPlayers = [
     "name": "Brianna Turner",
     "team": "Las Vegas Aces",
     "position": "F",
+    "jersey": "21",
     "ppg": 1.6,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3142086.png"
   },
@@ -1012,6 +1138,7 @@ const allPlayers = [
     "name": "Brionna Jones",
     "team": "Atlanta Dream",
     "position": "Player",
+    "jersey": "42",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3058895.png"
   },
@@ -1020,30 +1147,16 @@ const allPlayers = [
     "name": "Indya Nivar",
     "team": "Atlanta Dream",
     "position": "Player",
+    "jersey": "21",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/5105740.png"
-  },
-  {
-    "id": "4597509",
-    "name": "Aaliyah Nye",
-    "team": "Atlanta Dream",
-    "position": "Player",
-    "ppg": 0.0,
-    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4597509.png"
-  },
-  {
-    "id": "4433386",
-    "name": "Jaylyn Sherrod",
-    "team": "Atlanta Dream",
-    "position": "Player",
-    "ppg": 0.0,
-    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4433386.png"
   },
   {
     "id": "3058893",
     "name": "Shatori Walker-Kimbrough",
     "team": "Atlanta Dream",
     "position": "Player",
+    "jersey": "33",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3058893.png"
   },
@@ -1052,6 +1165,7 @@ const allPlayers = [
     "name": "DiJonai Carrington",
     "team": "Chicago Sky",
     "position": "Player",
+    "jersey": "7",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4066548.png"
   },
@@ -1060,6 +1174,7 @@ const allPlayers = [
     "name": "Aicha Coulibaly",
     "team": "Chicago Sky",
     "position": "Player",
+    "jersey": "35",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4433433.png"
   },
@@ -1068,6 +1183,7 @@ const allPlayers = [
     "name": "Skylar Diggins",
     "team": "Chicago Sky",
     "position": "Player",
+    "jersey": "4",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2491205.png"
   },
@@ -1076,6 +1192,7 @@ const allPlayers = [
     "name": "Rickea Jackson",
     "team": "Chicago Sky",
     "position": "Player",
+    "jersey": "5",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4433630.png"
   },
@@ -1084,6 +1201,7 @@ const allPlayers = [
     "name": "Morgan Maly",
     "team": "Chicago Sky",
     "position": "Player",
+    "jersey": "",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4599199.png"
   },
@@ -1092,6 +1210,7 @@ const allPlayers = [
     "name": "Courtney Vandersloot",
     "team": "Chicago Sky",
     "position": "Player",
+    "jersey": "22",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/981.png"
   },
@@ -1100,6 +1219,7 @@ const allPlayers = [
     "name": "Aaliyah Edwards",
     "team": "Connecticut Sun",
     "position": "Player",
+    "jersey": "8",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4433408.png"
   },
@@ -1108,6 +1228,7 @@ const allPlayers = [
     "name": "Brittney Griner",
     "team": "Connecticut Sun",
     "position": "Player",
+    "jersey": "42",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2490553.png"
   },
@@ -1116,6 +1237,7 @@ const allPlayers = [
     "name": "Ashlon Jackson",
     "team": "Connecticut Sun",
     "position": "Player",
+    "jersey": "3",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/5106232.png"
   },
@@ -1124,6 +1246,7 @@ const allPlayers = [
     "name": "Rayah Marshall",
     "team": "Connecticut Sun",
     "position": "Player",
+    "jersey": "13",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4433792.png"
   },
@@ -1132,6 +1255,7 @@ const allPlayers = [
     "name": "Hailey Van Lith",
     "team": "Connecticut Sun",
     "position": "Player",
+    "jersey": "2",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4433412.png"
   },
@@ -1140,6 +1264,7 @@ const allPlayers = [
     "name": "Alysha Clark",
     "team": "Dallas Wings",
     "position": "Player",
+    "jersey": "7",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/924.png"
   },
@@ -1148,6 +1273,7 @@ const allPlayers = [
     "name": "Haley Jones",
     "team": "Dallas Wings",
     "position": "Player",
+    "jersey": "30",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4595910.png"
   },
@@ -1156,6 +1282,7 @@ const allPlayers = [
     "name": "Sug Sutton",
     "team": "Dallas Wings",
     "position": "Player",
+    "jersey": "0",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4068159.png"
   },
@@ -1164,6 +1291,7 @@ const allPlayers = [
     "name": "Costanza Verona",
     "team": "Dallas Wings",
     "position": "Player",
+    "jersey": "6",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/5345473.png"
   },
@@ -1172,6 +1300,7 @@ const allPlayers = [
     "name": "Christyn Williams",
     "team": "Dallas Wings",
     "position": "Player",
+    "jersey": "31",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4398965.png"
   },
@@ -1180,6 +1309,7 @@ const allPlayers = [
     "name": "Nadia Fingall",
     "team": "Golden State Valkyries",
     "position": "Player",
+    "jersey": "45",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4066546.png"
   },
@@ -1188,6 +1318,7 @@ const allPlayers = [
     "name": "Juste Jocyte",
     "team": "Golden State Valkyries",
     "position": "Player",
+    "jersey": "4",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/5277552.png"
   },
@@ -1196,6 +1327,7 @@ const allPlayers = [
     "name": "Ashten Prechtel",
     "team": "Golden State Valkyries",
     "position": "Player",
+    "jersey": "11",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4433634.png"
   },
@@ -1204,6 +1336,7 @@ const allPlayers = [
     "name": "Iliana Rupert",
     "team": "Golden State Valkyries",
     "position": "Player",
+    "jersey": "12",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4790263.png"
   },
@@ -1212,6 +1345,7 @@ const allPlayers = [
     "name": "Miela Sowah",
     "team": "Golden State Valkyries",
     "position": "Player",
+    "jersey": "7",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4398577.png"
   },
@@ -1220,6 +1354,7 @@ const allPlayers = [
     "name": "Bree Hall",
     "team": "Indiana Fever",
     "position": "Player",
+    "jersey": "23",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4898383.png"
   },
@@ -1228,6 +1363,7 @@ const allPlayers = [
     "name": "Michelle Onyiah",
     "team": "Indiana Fever",
     "position": "Player",
+    "jersey": "1",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4433744.png"
   },
@@ -1236,6 +1372,7 @@ const allPlayers = [
     "name": "Mercedes Russell",
     "team": "Indiana Fever",
     "position": "Player",
+    "jersey": "5",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3056672.png"
   },
@@ -1244,6 +1381,7 @@ const allPlayers = [
     "name": "Grace VanSlooten",
     "team": "Indiana Fever",
     "position": "Player",
+    "jersey": "14",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/5105731.png"
   },
@@ -1252,6 +1390,7 @@ const allPlayers = [
     "name": "Kierstan Bell",
     "team": "Las Vegas Aces",
     "position": "Player",
+    "jersey": "1",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4433633.png"
   },
@@ -1260,6 +1399,7 @@ const allPlayers = [
     "name": "Dana Evans",
     "team": "Las Vegas Aces",
     "position": "Player",
+    "jersey": "11",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4281190.png"
   },
@@ -1268,6 +1408,7 @@ const allPlayers = [
     "name": "Ta'Niya Latson",
     "team": "Las Vegas Aces",
     "position": "Player",
+    "jersey": "5",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4609797.png"
   },
@@ -1276,6 +1417,7 @@ const allPlayers = [
     "name": "Cheyenne Parker-Tyus",
     "team": "Las Vegas Aces",
     "position": "Player",
+    "jersey": "32",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2529458.png"
   },
@@ -1284,6 +1426,7 @@ const allPlayers = [
     "name": "Justine Pissott",
     "team": "Las Vegas Aces",
     "position": "Player",
+    "jersey": "13",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4682855.png"
   },
@@ -1292,6 +1435,7 @@ const allPlayers = [
     "name": "Mai Yamamoto",
     "team": "Las Vegas Aces",
     "position": "Player",
+    "jersey": "18",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/5220104.png"
   },
@@ -1300,6 +1444,7 @@ const allPlayers = [
     "name": "Monique Akoa Makani",
     "team": "Los Angeles Sparks",
     "position": "Player",
+    "jersey": "1",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/5274110.png"
   },
@@ -1308,6 +1453,7 @@ const allPlayers = [
     "name": "Emma Cannon",
     "team": "Los Angeles Sparks",
     "position": "Player",
+    "jersey": "32",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2284331.png"
   },
@@ -1316,6 +1462,7 @@ const allPlayers = [
     "name": "Kate Martin",
     "team": "Los Angeles Sparks",
     "position": "Player",
+    "jersey": "21",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4398907.png"
   },
@@ -1324,6 +1471,7 @@ const allPlayers = [
     "name": "Tonie Morgan",
     "team": "Los Angeles Sparks",
     "position": "Player",
+    "jersey": "4",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4565515.png"
   },
@@ -1332,6 +1480,7 @@ const allPlayers = [
     "name": "Alissa Pili",
     "team": "Los Angeles Sparks",
     "position": "Player",
+    "jersey": "35",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/5105752.png"
   },
@@ -1340,6 +1489,7 @@ const allPlayers = [
     "name": "Chloe Bibby",
     "team": "Minnesota Lynx",
     "position": "Player",
+    "jersey": "55",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4280877.png"
   },
@@ -1348,6 +1498,7 @@ const allPlayers = [
     "name": "Elena Buenavida",
     "team": "Minnesota Lynx",
     "position": "Player",
+    "jersey": "",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/5208984.png"
   },
@@ -1356,6 +1507,7 @@ const allPlayers = [
     "name": "Napheesa Collier",
     "team": "Minnesota Lynx",
     "position": "Player",
+    "jersey": "24",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3917450.png"
   },
@@ -1364,6 +1516,7 @@ const allPlayers = [
     "name": "Eliska Joklova",
     "team": "Minnesota Lynx",
     "position": "Player",
+    "jersey": "11",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/5345478.png"
   },
@@ -1372,6 +1525,7 @@ const allPlayers = [
     "name": "Dorka Juhasz",
     "team": "Minnesota Lynx",
     "position": "Player",
+    "jersey": "14",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4398938.png"
   },
@@ -1380,6 +1534,7 @@ const allPlayers = [
     "name": "Liatu King",
     "team": "Minnesota Lynx",
     "position": "Player",
+    "jersey": "2",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4596309.png"
   },
@@ -1388,6 +1543,7 @@ const allPlayers = [
     "name": "Rebecca Allen",
     "team": "New York Liberty",
     "position": "Player",
+    "jersey": "9",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3102133.png"
   },
@@ -1396,6 +1552,7 @@ const allPlayers = [
     "name": "Elizabeth Balogun",
     "team": "New York Liberty",
     "position": "Player",
+    "jersey": "5",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4398589.png"
   },
@@ -1404,6 +1561,7 @@ const allPlayers = [
     "name": "Raquel Carrera",
     "team": "New York Liberty",
     "position": "Player",
+    "jersey": "14",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4790258.png"
   },
@@ -1412,6 +1570,7 @@ const allPlayers = [
     "name": "Marine Fauthoux",
     "team": "New York Liberty",
     "position": "Player",
+    "jersey": "4",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4790260.png"
   },
@@ -1420,6 +1579,7 @@ const allPlayers = [
     "name": "Leonie Fiebich",
     "team": "New York Liberty",
     "position": "Player",
+    "jersey": "13",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4683006.png"
   },
@@ -1428,6 +1588,7 @@ const allPlayers = [
     "name": "Sabrina Ionescu",
     "team": "New York Liberty",
     "position": "Player",
+    "jersey": "20",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4066533.png"
   },
@@ -1436,6 +1597,7 @@ const allPlayers = [
     "name": "Anneli Maley",
     "team": "New York Liberty",
     "position": "Player",
+    "jersey": "24",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4281930.png"
   },
@@ -1444,6 +1606,7 @@ const allPlayers = [
     "name": "Satou Sabally",
     "team": "New York Liberty",
     "position": "Player",
+    "jersey": "0",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4281929.png"
   },
@@ -1452,6 +1615,7 @@ const allPlayers = [
     "name": "Shay Ciezki",
     "team": "Phoenix Mercury",
     "position": "Player",
+    "jersey": "5",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4688629.png"
   },
@@ -1460,6 +1624,7 @@ const allPlayers = [
     "name": "Kara Dunn",
     "team": "Phoenix Mercury",
     "position": "Player",
+    "jersey": "12",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4698730.png"
   },
@@ -1468,6 +1633,7 @@ const allPlayers = [
     "name": "Kyara Linskens",
     "team": "Phoenix Mercury",
     "position": "Player",
+    "jersey": "31",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4873359.png"
   },
@@ -1476,6 +1642,7 @@ const allPlayers = [
     "name": "Jovana Nogic",
     "team": "Phoenix Mercury",
     "position": "Player",
+    "jersey": "29",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3906769.png"
   },
@@ -1484,6 +1651,7 @@ const allPlayers = [
     "name": "Kelsey Plum",
     "team": "Phoenix Mercury",
     "position": "Player",
+    "jersey": "0",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3065570.png"
   },
@@ -1492,6 +1660,7 @@ const allPlayers = [
     "name": "Saylor Poffenbarger",
     "team": "Phoenix Mercury",
     "position": "Player",
+    "jersey": "6",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4433542.png"
   },
@@ -1500,6 +1669,7 @@ const allPlayers = [
     "name": "Marta Suarez",
     "team": "Phoenix Mercury",
     "position": "Player",
+    "jersey": "77",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4704594.png"
   },
@@ -1508,6 +1678,7 @@ const allPlayers = [
     "name": "Maddy Westbeld",
     "team": "Phoenix Mercury",
     "position": "Player",
+    "jersey": "21",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4433424.png"
   },
@@ -1516,14 +1687,25 @@ const allPlayers = [
     "name": "Sami Whitcomb",
     "team": "Phoenix Mercury",
     "position": "Player",
+    "jersey": "33",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/887.png"
+  },
+  {
+    "id": "4703794",
+    "name": "Sarah Ashlee Barker",
+    "team": "Portland Fire",
+    "position": "Player",
+    "jersey": "3",
+    "ppg": 0.0,
+    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4703794.png"
   },
   {
     "id": "4433795",
     "name": "Sania Feagin",
     "team": "Portland Fire",
     "position": "Player",
+    "jersey": "1",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4433795.png"
   },
@@ -1532,6 +1714,7 @@ const allPlayers = [
     "name": "Luisa Geiselsoder",
     "team": "Portland Fire",
     "position": "Player",
+    "jersey": "15",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4682797.png"
   },
@@ -1540,6 +1723,7 @@ const allPlayers = [
     "name": "Jordan Harrison",
     "team": "Portland Fire",
     "position": "Player",
+    "jersey": "2",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/5108051.png"
   },
@@ -1548,6 +1732,7 @@ const allPlayers = [
     "name": "Amy Okonkwo",
     "team": "Portland Fire",
     "position": "Player",
+    "jersey": "8",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3142242.png"
   },
@@ -1556,6 +1741,7 @@ const allPlayers = [
     "name": "Karlie Samuelson",
     "team": "Portland Fire",
     "position": "Player",
+    "jersey": "44",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3056730.png"
   },
@@ -1564,6 +1750,7 @@ const allPlayers = [
     "name": "Holly Winterburn",
     "team": "Portland Fire",
     "position": "Player",
+    "jersey": "77",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4433690.png"
   },
@@ -1572,6 +1759,7 @@ const allPlayers = [
     "name": "Mackenzie Holmes",
     "team": "Seattle Storm",
     "position": "Player",
+    "jersey": "54",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4433643.png"
   },
@@ -1580,6 +1768,7 @@ const allPlayers = [
     "name": "Ezi Magbegor",
     "team": "Seattle Storm",
     "position": "Player",
+    "jersey": "13",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4420318.png"
   },
@@ -1588,6 +1777,7 @@ const allPlayers = [
     "name": "Taina Mair",
     "team": "Seattle Storm",
     "position": "Player",
+    "jersey": "22",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/5106222.png"
   },
@@ -1596,6 +1786,7 @@ const allPlayers = [
     "name": "Taylor Thierry",
     "team": "Seattle Storm",
     "position": "Player",
+    "jersey": "3",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4898400.png"
   },
@@ -1604,6 +1795,7 @@ const allPlayers = [
     "name": "Ornella Bankole",
     "team": "Toronto Tempo",
     "position": "Player",
+    "jersey": "33",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/5364343.png"
   },
@@ -1612,6 +1804,7 @@ const allPlayers = [
     "name": "Temi Fagbenle",
     "team": "Toronto Tempo",
     "position": "Player",
+    "jersey": "14",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2569044.png"
   },
@@ -1620,6 +1813,7 @@ const allPlayers = [
     "name": "Zaay Green",
     "team": "Toronto Tempo",
     "position": "Player",
+    "jersey": "00",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4398766.png"
   },
@@ -1628,6 +1822,7 @@ const allPlayers = [
     "name": "Isabelle Harrison",
     "team": "Toronto Tempo",
     "position": "Player",
+    "jersey": "21",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2566453.png"
   },
@@ -1636,6 +1831,7 @@ const allPlayers = [
     "name": "Kiki Rice",
     "team": "Toronto Tempo",
     "position": "Player",
+    "jersey": "1",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4565505.png"
   },
@@ -1644,6 +1840,7 @@ const allPlayers = [
     "name": "Nyara Sabally",
     "team": "Toronto Tempo",
     "position": "Player",
+    "jersey": "8",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4398768.png"
   },
@@ -1652,6 +1849,7 @@ const allPlayers = [
     "name": "Brittney Sykes",
     "team": "Toronto Tempo",
     "position": "Player",
+    "jersey": "20",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2988756.png"
   },
@@ -1660,6 +1858,7 @@ const allPlayers = [
     "name": "Kiana Williams",
     "team": "Toronto Tempo",
     "position": "Player",
+    "jersey": "",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4282168.png"
   },
@@ -1668,6 +1867,7 @@ const allPlayers = [
     "name": "Rori Harmon",
     "team": "Washington Mystics",
     "position": "Player",
+    "jersey": "3",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4433523.png"
   },
@@ -1676,6 +1876,7 @@ const allPlayers = [
     "name": "Betnijah Laney-Hamilton",
     "team": "Washington Mystics",
     "position": "Player",
+    "jersey": "4",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2593770.png"
   },
@@ -1684,6 +1885,7 @@ const allPlayers = [
     "name": "Darianna Littlepage-Buggs",
     "team": "Washington Mystics",
     "position": "Player",
+    "jersey": "5",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/5106145.png"
   },
@@ -1692,6 +1894,7 @@ const allPlayers = [
     "name": "Lucy Olsen",
     "team": "Washington Mystics",
     "position": "Player",
+    "jersey": "33",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4433815.png"
   }
