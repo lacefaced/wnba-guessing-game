@@ -89,6 +89,11 @@ def fetch_wnba_data():
                                 ppg = ppg_map.get(pid, 0.0)
                                 position = position_map.get(pid, 'Player')
                                 jersey = player.get('jersey') or player.get('uniformNumber') or ''
+                                birth_place = player.get('birthPlace') or {}
+                                college = player.get('college') or {}
+                                experience = player.get('experience') or {}
+                                status = player.get('status') or {}
+                                profile_link = next((link.get('href') for link in player.get('links', []) if 'athlete' in link.get('rel', []) and link.get('href', '').startswith('http')), '')
                                 
                                 players_list.append({
                                     "id": pid,
@@ -96,6 +101,13 @@ def fetch_wnba_data():
                                     "team": team_name,
                                     "position": position,
                                     "jersey": str(jersey),
+                                    "age": player.get('age'),
+                                    "height": player.get('displayHeight', ''),
+                                    "college": college.get('name', ''),
+                                    "birthPlace": ', '.join(filter(None, [birth_place.get('city'), birth_place.get('state'), birth_place.get('country')])),
+                                    "experience": experience.get('years'),
+                                    "status": status.get('displayName') or status.get('name', ''),
+                                    "profile": profile_link,
                                     "ppg": round(float(ppg), 1),
                                     "headshot": headshot_url
                                 })
