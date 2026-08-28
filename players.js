@@ -10,7 +10,7 @@ const allPlayers = [
     "college": "South Carolina",
     "birthPlace": "Hopkins, SC, USA",
     "experience": 9,
-    "status": "Active",
+    "status": "Day-To-Day",
     "profile": "https://www.espn.com/wnba/player/_/id/3149391/aja-wilson",
     "ppg": 26.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3149391.png"
@@ -42,7 +42,7 @@ const allPlayers = [
     "college": "Iowa",
     "birthPlace": "West Des Moines, IA, USA",
     "experience": 3,
-    "status": "Active",
+    "status": "Day-To-Day",
     "profile": "https://www.espn.com/wnba/player/_/id/4433403/caitlin-clark",
     "ppg": 22.1,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4433403.png"
@@ -90,7 +90,7 @@ const allPlayers = [
     "college": "Notre Dame",
     "birthPlace": "Belmar, NJ, USA",
     "experience": 8,
-    "status": "Active",
+    "status": "Out",
     "profile": "https://www.espn.com/wnba/player/_/id/3904576/marina-mabrey",
     "ppg": 20.8,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3904576.png"
@@ -314,7 +314,7 @@ const allPlayers = [
     "college": "Marquette",
     "birthPlace": "Green Bay, WI, USA",
     "experience": 8,
-    "status": "Active",
+    "status": "Out",
     "profile": "https://www.espn.com/wnba/player/_/id/3906753/natisha-hiedeman",
     "ppg": 15.4,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3906753.png"
@@ -490,7 +490,7 @@ const allPlayers = [
     "college": "South Florida",
     "birthPlace": "Folkston, GA, USA",
     "experience": 11,
-    "status": "Active",
+    "status": "Out",
     "profile": "https://www.espn.com/wnba/player/_/id/2987891/courtney-williams",
     "ppg": 14.4,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2987891.png"
@@ -570,7 +570,7 @@ const allPlayers = [
     "college": "UConn",
     "birthPlace": "Arlington, VA, USA",
     "experience": 0,
-    "status": "Active",
+    "status": "Out",
     "profile": "https://www.espn.com/wnba/player/_/id/4433790/azzi-fudd",
     "ppg": 13.1,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4433790.png"
@@ -634,7 +634,7 @@ const allPlayers = [
     "college": "Baylor",
     "birthPlace": "Converse, TX, USA",
     "experience": 5,
-    "status": "Active",
+    "status": "Out",
     "profile": "https://www.espn.com/wnba/player/_/id/4398776/nalyssa-smith",
     "ppg": 11.7,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4398776.png"
@@ -650,7 +650,7 @@ const allPlayers = [
     "college": "",
     "birthPlace": "Rodez, France",
     "experience": 2,
-    "status": "Active",
+    "status": "Out",
     "profile": "https://www.espn.com/wnba/player/_/id/5208981/leila-lacan",
     "ppg": 11.6,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/5208981.png"
@@ -682,7 +682,7 @@ const allPlayers = [
     "college": "Saint Joseph's",
     "birthPlace": "Broomall, PA, USA",
     "experience": 11,
-    "status": "Active",
+    "status": "Out",
     "profile": "https://www.espn.com/wnba/player/_/id/2529137/natasha-cloud",
     "ppg": 11.3,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2529137.png"
@@ -698,7 +698,7 @@ const allPlayers = [
     "college": "LSU",
     "birthPlace": "Chicago, IL, USA",
     "experience": 2,
-    "status": "Active",
+    "status": "Out",
     "profile": "https://www.espn.com/wnba/player/_/id/4684384/aneesah-morrow",
     "ppg": 11.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4684384.png"
@@ -730,7 +730,7 @@ const allPlayers = [
     "college": "Auburn",
     "birthPlace": "Fairfield, AL, USA",
     "experience": 17,
-    "status": "Active",
+    "status": "Out",
     "profile": "https://www.espn.com/wnba/player/_/id/869/dewanna-bonner",
     "ppg": 10.6,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/869.png"
@@ -746,7 +746,7 @@ const allPlayers = [
     "college": "",
     "birthPlace": "",
     "experience": 0,
-    "status": "Active",
+    "status": "Out",
     "profile": "https://www.espn.com/wnba/player/_/id/5345325/awa-fam",
     "ppg": 10.3,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/5345325.png"
@@ -778,7 +778,7 @@ const allPlayers = [
     "college": "UConn",
     "birthPlace": "Winder, GA, USA",
     "experience": 5,
-    "status": "Active",
+    "status": "Out",
     "profile": "https://www.espn.com/wnba/player/_/id/4398966/olivia-nelson-ododa",
     "ppg": 10.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4398966.png"
@@ -938,7 +938,7 @@ const allPlayers = [
     "college": "Florida State",
     "birthPlace": "Madrid, Spain",
     "experience": 0,
-    "status": "Active",
+    "status": "Out",
     "profile": "https://www.espn.com/wnba/player/_/id/3910470/maria-conde",
     "ppg": 8.9,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3910470.png"
@@ -954,7 +954,7 @@ const allPlayers = [
     "college": "UCLA",
     "birthPlace": "Northridge, CA, USA",
     "experience": 7,
-    "status": "Active",
+    "status": "Out",
     "profile": "https://www.espn.com/wnba/player/_/id/3922628/kennedy-burke",
     "ppg": 8.8,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3922628.png"
@@ -1274,7 +1274,7 @@ const allPlayers = [
     "college": "Florida",
     "birthPlace": "Osnabruck, Germany",
     "experience": 0,
-    "status": "Active",
+    "status": "Out",
     "profile": "https://www.espn.com/wnba/player/_/id/5105406/frieda-buhner",
     "ppg": 6.3,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/5105406.png"
@@ -1290,7 +1290,7 @@ const allPlayers = [
     "college": "",
     "birthPlace": "Brussels, Belgium",
     "experience": 4,
-    "status": "Active",
+    "status": "Out",
     "profile": "https://www.espn.com/wnba/player/_/id/4001679/julie-allemand",
     "ppg": 6.3,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4001679.png"
@@ -1322,7 +1322,7 @@ const allPlayers = [
     "college": "NC State",
     "birthPlace": "Virginia Beach, VA, USA",
     "experience": 2,
-    "status": "Active",
+    "status": "Out",
     "profile": "https://www.espn.com/wnba/player/_/id/4433807/aziaha-james",
     "ppg": 6.1,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4433807.png"
@@ -1626,7 +1626,7 @@ const allPlayers = [
     "college": "UConn",
     "birthPlace": "Brooklyn, NY, USA",
     "experience": 0,
-    "status": "Active",
+    "status": "Day-To-Day",
     "profile": "https://www.espn.com/wnba/player/_/id/5108550/serah-williams",
     "ppg": 4.3,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/5108550.png"
@@ -1914,7 +1914,7 @@ const allPlayers = [
     "college": "",
     "birthPlace": "Antwerp, Belgium",
     "experience": 0,
-    "status": "Active",
+    "status": "Out",
     "profile": "https://www.espn.com/wnba/player/_/id/4873358/antonia-delaere",
     "ppg": 2.9,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4873358.png"
@@ -2026,7 +2026,7 @@ const allPlayers = [
     "college": "Maryland",
     "birthPlace": "Havre De Grace, MD, USA",
     "experience": 10,
-    "status": "Active",
+    "status": "Out",
     "profile": "https://www.espn.com/wnba/player/_/id/3058895/brionna-jones",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3058895.png"
@@ -2074,7 +2074,7 @@ const allPlayers = [
     "college": "Baylor",
     "birthPlace": "San Diego, CA, USA",
     "experience": 6,
-    "status": "Active",
+    "status": "Out",
     "profile": "https://www.espn.com/wnba/player/_/id/4066548/dijonai-carrington",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4066548.png"
@@ -2106,7 +2106,7 @@ const allPlayers = [
     "college": "Notre Dame",
     "birthPlace": "South Bend, IN, USA",
     "experience": 12,
-    "status": "Active",
+    "status": "Out",
     "profile": "https://www.espn.com/wnba/player/_/id/2491205/skylar-diggins",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2491205.png"
@@ -2122,7 +2122,7 @@ const allPlayers = [
     "college": "Tennessee",
     "birthPlace": "Detroit, MI, USA",
     "experience": 3,
-    "status": "Active",
+    "status": "Out",
     "profile": "https://www.espn.com/wnba/player/_/id/4433630/rickea-jackson",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4433630.png"
@@ -2186,7 +2186,7 @@ const allPlayers = [
     "college": "Baylor",
     "birthPlace": "Houston, TX, USA",
     "experience": 13,
-    "status": "Active",
+    "status": "Out",
     "profile": "https://www.espn.com/wnba/player/_/id/2490553/brittney-griner",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2490553.png"
@@ -2266,7 +2266,7 @@ const allPlayers = [
     "college": "Stanford",
     "birthPlace": "Santa Cruz, CA, USA",
     "experience": 4,
-    "status": "Active",
+    "status": "Out",
     "profile": "https://www.espn.com/wnba/player/_/id/4595910/haley-jones",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4595910.png"
@@ -2298,7 +2298,7 @@ const allPlayers = [
     "college": "",
     "birthPlace": "Palermo, Italy",
     "experience": 0,
-    "status": "Active",
+    "status": "Out",
     "profile": "https://www.espn.com/wnba/player/_/id/5345473/costanza-verona",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/5345473.png"
@@ -2314,7 +2314,7 @@ const allPlayers = [
     "college": "UConn",
     "birthPlace": "Little Rock, AR, USA",
     "experience": 1,
-    "status": "Active",
+    "status": "Out",
     "profile": "https://www.espn.com/wnba/player/_/id/4398965/christyn-williams",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4398965.png"
@@ -2378,7 +2378,7 @@ const allPlayers = [
     "college": "",
     "birthPlace": "",
     "experience": 4,
-    "status": "Active",
+    "status": "Out",
     "profile": "https://www.espn.com/wnba/player/_/id/4790263/iliana-rupert",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4790263.png"
@@ -2490,7 +2490,7 @@ const allPlayers = [
     "college": "Louisville",
     "birthPlace": "Gary, IN, USA",
     "experience": 6,
-    "status": "Active",
+    "status": "Out",
     "profile": "https://www.espn.com/wnba/player/_/id/4281190/dana-evans",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4281190.png"
@@ -2586,7 +2586,7 @@ const allPlayers = [
     "college": "UCF",
     "birthPlace": "Rochester, NY, USA",
     "experience": 8,
-    "status": "Active",
+    "status": "Day-To-Day",
     "profile": "https://www.espn.com/wnba/player/_/id/2284331/emma-cannon",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2284331.png"
@@ -2666,7 +2666,7 @@ const allPlayers = [
     "college": "",
     "birthPlace": "",
     "experience": 0,
-    "status": "Active",
+    "status": "Out",
     "profile": "https://www.espn.com/wnba/player/_/id/5208984/elena-buenavida",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/5208984.png"
@@ -2714,7 +2714,7 @@ const allPlayers = [
     "college": "UConn",
     "birthPlace": "Pecs, Hungary",
     "experience": 3,
-    "status": "Active",
+    "status": "Out",
     "profile": "https://www.espn.com/wnba/player/_/id/4398938/dorka-juhasz",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4398938.png"
@@ -2730,7 +2730,7 @@ const allPlayers = [
     "college": "Notre Dame",
     "birthPlace": "Washington, DC, USA",
     "experience": 2,
-    "status": "Active",
+    "status": "Out",
     "profile": "https://www.espn.com/wnba/player/_/id/4596309/liatu-king",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4596309.png"
@@ -2762,7 +2762,7 @@ const allPlayers = [
     "college": "Duke",
     "birthPlace": "Lagos, Nigeria",
     "experience": 0,
-    "status": "Active",
+    "status": "Out",
     "profile": "https://www.espn.com/wnba/player/_/id/4398589/elizabeth-balogun",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4398589.png"
@@ -2842,7 +2842,7 @@ const allPlayers = [
     "college": "TCU",
     "birthPlace": "Melbourne, VIC, Australia",
     "experience": 2,
-    "status": "Active",
+    "status": "Out",
     "profile": "https://www.espn.com/wnba/player/_/id/4281930/anneli-maley",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4281930.png"
@@ -2858,7 +2858,7 @@ const allPlayers = [
     "college": "Oregon",
     "birthPlace": "Berlin, Germany",
     "experience": 7,
-    "status": "Active",
+    "status": "Out",
     "profile": "https://www.espn.com/wnba/player/_/id/4281929/satou-sabally",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4281929.png"
@@ -2906,7 +2906,7 @@ const allPlayers = [
     "college": "",
     "birthPlace": "",
     "experience": 2,
-    "status": "Active",
+    "status": "Out",
     "profile": "https://www.espn.com/wnba/player/_/id/4873359/kyara-linskens",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4873359.png"
@@ -2922,7 +2922,7 @@ const allPlayers = [
     "college": "Providence",
     "birthPlace": "Belgrade, Serbia",
     "experience": 0,
-    "status": "Active",
+    "status": "Out",
     "profile": "https://www.espn.com/wnba/player/_/id/3906769/jovana-nogic",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3906769.png"
@@ -2938,7 +2938,7 @@ const allPlayers = [
     "college": "Washington",
     "birthPlace": "Poway, CA, USA",
     "experience": 9,
-    "status": "Active",
+    "status": "Out",
     "profile": "https://www.espn.com/wnba/player/_/id/3065570/kelsey-plum",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3065570.png"
@@ -2970,7 +2970,7 @@ const allPlayers = [
     "college": "TCU",
     "birthPlace": "Oviedo, Spain",
     "experience": 0,
-    "status": "Active",
+    "status": "Out",
     "profile": "https://www.espn.com/wnba/player/_/id/4704594/marta-suarez",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4704594.png"
@@ -3018,7 +3018,7 @@ const allPlayers = [
     "college": "Alabama",
     "birthPlace": "Birmingham, AL, USA",
     "experience": 2,
-    "status": "Active",
+    "status": "Out",
     "profile": "https://www.espn.com/wnba/player/_/id/4703794/sarah-ashlee-barker",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4703794.png"
@@ -3034,7 +3034,7 @@ const allPlayers = [
     "college": "South Carolina",
     "birthPlace": "Ellenwood, GA, USA",
     "experience": 2,
-    "status": "Active",
+    "status": "Out",
     "profile": "https://www.espn.com/wnba/player/_/id/4433795/sania-feagin",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4433795.png"
@@ -3050,7 +3050,7 @@ const allPlayers = [
     "college": "",
     "birthPlace": "Ansbach, Germany",
     "experience": 2,
-    "status": "Active",
+    "status": "Out",
     "profile": "https://www.espn.com/wnba/player/_/id/4682797/luisa-geiselsoder",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4682797.png"
@@ -3242,7 +3242,7 @@ const allPlayers = [
     "college": "Tennessee",
     "birthPlace": "Nashville, TN, USA",
     "experience": 9,
-    "status": "Active",
+    "status": "Day-To-Day",
     "profile": "https://www.espn.com/wnba/player/_/id/2566453/isabelle-harrison",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2566453.png"
@@ -3274,7 +3274,7 @@ const allPlayers = [
     "college": "Oregon",
     "birthPlace": "Berlin, Germany",
     "experience": 4,
-    "status": "Active",
+    "status": "Out",
     "profile": "https://www.espn.com/wnba/player/_/id/4398768/nyara-sabally",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4398768.png"
@@ -3290,7 +3290,7 @@ const allPlayers = [
     "college": "Syracuse",
     "birthPlace": "Newark, NJ, USA",
     "experience": 10,
-    "status": "Active",
+    "status": "Out",
     "profile": "https://www.espn.com/wnba/player/_/id/2988756/brittney-sykes",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2988756.png"

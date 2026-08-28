@@ -93,6 +93,8 @@ def fetch_wnba_data():
                                 college = player.get('college') or {}
                                 experience = player.get('experience') or {}
                                 status = player.get('status') or {}
+                                injuries = player.get('injuries') or []
+                                injury_status = next((injury.get('status') for injury in injuries if injury.get('status')), '')
                                 profile_link = next((link.get('href') for link in player.get('links', []) if 'athlete' in link.get('rel', []) and link.get('href', '').startswith('http')), '')
                                 
                                 players_list.append({
@@ -106,7 +108,7 @@ def fetch_wnba_data():
                                     "college": college.get('name', ''),
                                     "birthPlace": ', '.join(filter(None, [birth_place.get('city'), birth_place.get('state'), birth_place.get('country')])),
                                     "experience": experience.get('years'),
-                                    "status": status.get('displayName') or status.get('name', ''),
+                                    "status": injury_status or status.get('displayName') or status.get('name', ''),
                                     "profile": profile_link,
                                     "ppg": round(float(ppg), 1),
                                     "headshot": headshot_url
