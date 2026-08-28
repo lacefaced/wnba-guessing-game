@@ -27,9 +27,8 @@
     .roster-count { color: var(--muted); font: 11px 'DM Mono', monospace; }
     .roster { display: grid; gap: 6px; }
     .player-card { display: grid; grid-template-columns: 50px 58px 1fr; align-items: center; min-height: 68px; padding: 4px 10px 4px 5px; border: 1px solid var(--ink); background: var(--white); box-shadow: 0 6px 0 rgba(23,34,44,.08); }
-    .player-card.no-ppg { min-height: 54px; opacity: .72; }
     .player-card img, .image-placeholder { width: 48px; height: 64px; object-fit: cover; object-position: top center; background: var(--mint); }
-    .player-card.no-ppg img, .player-card.no-ppg .image-placeholder { width: 38px; height: 48px; }
+    .player-card.no-ppg img, .player-card.no-ppg .image-placeholder { width: 48px; height: 64px; }
     .number { color: var(--coral-dark); font: 24px 'Archivo Black', sans-serif; text-align: center; }
     .name { min-width: 0; padding: 0 8px; font-weight: 800; font-size: 14px; line-height: 1.2; }
     .player-meta { display: flex; gap: 8px; align-items: baseline; margin-top: 4px; }
@@ -55,7 +54,7 @@
     .modal-link { display: inline-block; margin-top: 18px; color: var(--coral-dark); font: 12px 'DM Mono', monospace; }
     [hidden] { display: none !important; }
     @media (max-width: 520px) { .player-modal { padding: 18px; } .modal-profile { grid-template-columns: 96px 1fr; gap: 12px; } .modal-profile img, .modal-image-placeholder { width: 96px; height: 132px; } .modal-profile h2 { font-size: 21px; } .detail-grid { gap: 6px; } .detail { padding: 8px 4px; } .detail-value { font-size: 12px; overflow-wrap: anywhere; } }
-    @media (max-width: 700px) { main { padding-top: 24px; } h1 { font-size: 34px; } .selectors { gap: 12px; margin-bottom: 24px; } .comparison { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; } .team-heading { display: block; } .team-heading h2 { font-size: 16px; line-height: 1.1; overflow-wrap: anywhere; } .roster-count { display: block; margin-top: 5px; } .player-card { grid-template-columns: 22px 30px minmax(0, 1fr); gap: 3px; min-height: 52px; padding: 3px; } .player-card img, .image-placeholder { width: 30px; height: 42px; } .player-card.no-ppg img, .player-card.no-ppg .image-placeholder { width: 24px; height: 34px; } .number { font-size: 15px; } .name { padding: 0; font-size: 10px; overflow-wrap: anywhere; } .player-meta { gap: 5px; margin-top: 2px; } .position, .ppg { font-size: 8px; } }
+    @media (max-width: 700px) { main { padding-top: 24px; } h1 { font-size: 34px; } .selectors { gap: 12px; margin-bottom: 24px; } .comparison { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; } .team-heading { display: block; } .team-heading h2 { font-size: 16px; line-height: 1.1; overflow-wrap: anywhere; } .roster-count { display: block; margin-top: 5px; } .player-card { grid-template-columns: 22px 30px minmax(0, 1fr); gap: 3px; min-height: 52px; padding: 3px; } .player-card img, .image-placeholder, .player-card.no-ppg img, .player-card.no-ppg .image-placeholder { width: 30px; height: 42px; } .number { font-size: 15px; } .name { padding: 0; font-size: 10px; overflow-wrap: anywhere; } .player-meta { gap: 5px; margin-top: 2px; } .position, .ppg { font-size: 8px; } }
   </style>
 </head>
 <body>
