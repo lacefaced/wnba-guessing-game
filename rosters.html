@@ -45,6 +45,8 @@
     .game-btn:hover { border-color: var(--coral); transform: translateY(-1px); }
     .game-time { display: block; color: var(--muted); font: 9px 'DM Mono', monospace; margin-bottom: 4px; text-transform: uppercase; }
     #quickPickSection.empty-state { text-align: center; color: var(--muted); font: 11px 'DM Mono', monospace; padding: 10px; }
+    .hub-link { display: inline-block; margin: 0 0 16px; color: var(--coral-dark); font: 11px 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .08em; text-decoration: none; }
+    .hub-link:hover { text-decoration: underline; }
     .player-card { width: 100%; color: inherit; font: inherit; text-align: left; cursor: pointer; }
     .player-card:hover { border-color: var(--coral); transform: translateY(-1px); }
     .player-card.unavailable { background: #ffd8d1; border-color: var(--coral); }
@@ -69,6 +71,7 @@
 </head>
 <body>
   <main>
+    <a class="hub-link" href="index.html">← Back to hub</a>
     <p class="kicker">WNBA / roster viewer</p>
     <h1>Compare two teams.</h1>
     <p class="intro">Choose any two teams to see their current rosters, player images, jersey numbers, positions, and points per game.</p>

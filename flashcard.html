@@ -59,12 +59,15 @@
     .game-nav-label { color: var(--muted); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; }
     .game-nav a { color: var(--muted); text-decoration: none; }
     .game-nav a:hover, .game-nav a.active { color: var(--coral-dark); }
+    .hub-link { display: inline-block; margin: 0 0 18px; color: var(--coral-dark); font: 11px 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .08em; text-decoration: none; }
+    .hub-link:hover { text-decoration: underline; }
     @keyframes shake { 25% { transform: translateX(5px); } 75% { transform: translateX(-5px); } }
     @media (max-width: 700px) { main { width: min(100% - 24px, 560px); padding-top: 24px; } header { display: block; margin-bottom: 30px; } h1 { font-size: 34px; } .intro { max-width: none; margin-bottom: 20px; } .scoreboard { width: fit-content; } .board { grid-template-columns: 1fr; gap: 25px; } .team-column { order: 2; } }
   </style>
 </head>
 <body>
   <main>
+    <a class="hub-link" href="index.html">← Back to hub</a>
     <nav class="game-nav" aria-label="WNBA games">
       <span class="game-nav-label">WNBA games</span>
       <a href="index.html">01 / Naming Challenge</a>

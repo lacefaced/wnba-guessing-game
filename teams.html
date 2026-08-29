@@ -16,6 +16,8 @@
     .game-nav-label { color: var(--muted); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; }
     .game-nav a { color: var(--muted); text-decoration: none; }
     .game-nav a:hover, .game-nav a.active { color: var(--coral-dark); }
+    .hub-link { display: inline-block; margin: 0 0 18px; color: var(--coral-dark); font: 11px 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .08em; text-decoration: none; }
+    .hub-link:hover { text-decoration: underline; }
     header { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 36px; }
     .kicker { margin: 0 0 8px; color: var(--coral-dark); font: 500 12px 'DM Mono', monospace; letter-spacing: .12em; text-transform: uppercase; }
     h1 { max-width: 600px; margin: 0; font: 42px/1.02 'Archivo Black', sans-serif; text-transform: uppercase; }
@@ -62,6 +64,7 @@
 </head>
 <body>
   <main>
+    <a class="hub-link" href="index.html">← Back to hub</a>
     <nav class="game-nav" aria-label="WNBA games">
       <span class="game-nav-label">WNBA games</span>
       <a href="index.html">01 / Naming Challenge</a>
