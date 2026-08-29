@@ -42,7 +42,7 @@ const allPlayers = [
     "college": "Iowa",
     "birthPlace": "West Des Moines, IA, USA",
     "experience": 3,
-    "status": "Day-To-Day",
+    "status": "Active",
     "profile": "https://www.espn.com/wnba/player/_/id/4433403/caitlin-clark",
     "ppg": 22.1,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4433403.png"
@@ -53,31 +53,15 @@ const allPlayers = [
     "team": "Phoenix Mercury",
     "position": "G",
     "jersey": "2",
-    "age": 31,
+    "age": 32,
     "height": "6' 1\"",
     "college": "Rutgers",
     "birthPlace": "Philadelphia, PA, USA",
     "experience": 11,
     "status": "Active",
     "profile": "https://www.espn.com/wnba/player/_/id/2998938/kahleah-copper",
-    "ppg": 20.9,
+    "ppg": 21.3,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2998938.png"
-  },
-  {
-    "id": "2998928",
-    "name": "Breanna Stewart",
-    "team": "New York Liberty",
-    "position": "F",
-    "jersey": "30",
-    "age": 32,
-    "height": "6' 4\"",
-    "college": "UConn",
-    "birthPlace": "North Syracuse, NY, USA",
-    "experience": 10,
-    "status": "Active",
-    "profile": "https://www.espn.com/wnba/player/_/id/2998928/breanna-stewart",
-    "ppg": 20.8,
-    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2998928.png"
   },
   {
     "id": "3904576",
@@ -110,6 +94,22 @@ const allPlayers = [
     "profile": "https://www.espn.com/wnba/player/_/id/4433730/paige-bueckers",
     "ppg": 20.6,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4433730.png"
+  },
+  {
+    "id": "2998928",
+    "name": "Breanna Stewart",
+    "team": "New York Liberty",
+    "position": "F",
+    "jersey": "30",
+    "age": 32,
+    "height": "6' 4\"",
+    "college": "UConn",
+    "birthPlace": "North Syracuse, NY, USA",
+    "experience": 10,
+    "status": "Active",
+    "profile": "https://www.espn.com/wnba/player/_/id/2998928/breanna-stewart",
+    "ppg": 20.6,
+    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2998928.png"
   },
   {
     "id": "4433791",
@@ -224,6 +224,22 @@ const allPlayers = [
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/5220150.png"
   },
   {
+    "id": "1068",
+    "name": "Nneka Ogwumike",
+    "team": "Los Angeles Sparks",
+    "position": "F",
+    "jersey": "30",
+    "age": 36,
+    "height": "6' 2\"",
+    "college": "Stanford",
+    "birthPlace": "Tomball, TX, USA",
+    "experience": 15,
+    "status": "Active",
+    "profile": "https://www.espn.com/wnba/player/_/id/1068/nneka-ogwumike",
+    "ppg": 16.8,
+    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/1068.png"
+  },
+  {
     "id": "4398911",
     "name": "Shakira Austin",
     "team": "Washington Mystics",
@@ -236,7 +252,7 @@ const allPlayers = [
     "experience": 5,
     "status": "Active",
     "profile": "https://www.espn.com/wnba/player/_/id/4398911/shakira-austin",
-    "ppg": 16.9,
+    "ppg": 16.8,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4398911.png"
   },
   {
@@ -252,24 +268,8 @@ const allPlayers = [
     "experience": 2,
     "status": "Active",
     "profile": "https://www.espn.com/wnba/player/_/id/4433524/sonia-citron",
-    "ppg": 16.9,
+    "ppg": 16.7,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4433524.png"
-  },
-  {
-    "id": "1068",
-    "name": "Nneka Ogwumike",
-    "team": "Los Angeles Sparks",
-    "position": "F",
-    "jersey": "30",
-    "age": 36,
-    "height": "6' 2\"",
-    "college": "Stanford",
-    "birthPlace": "Tomball, TX, USA",
-    "experience": 15,
-    "status": "Active",
-    "profile": "https://www.espn.com/wnba/player/_/id/1068/nneka-ogwumike",
-    "ppg": 16.8,
-    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/1068.png"
   },
   {
     "id": "4433402",
@@ -332,7 +332,7 @@ const allPlayers = [
     "experience": 2,
     "status": "Active",
     "profile": "https://www.espn.com/wnba/player/_/id/4898384/kiki-iriafen",
-    "ppg": 15.3,
+    "ppg": 15.4,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4898384.png"
   },
   {
@@ -400,22 +400,6 @@ const allPlayers = [
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2566106.png"
   },
   {
-    "id": "2529140",
-    "name": "Alyssa Thomas",
-    "team": "Phoenix Mercury",
-    "position": "F",
-    "jersey": "25",
-    "age": 34,
-    "height": "6' 2\"",
-    "college": "Maryland",
-    "birthPlace": "Camp Hill, PA, USA",
-    "experience": 13,
-    "status": "Active",
-    "profile": "https://www.espn.com/wnba/player/_/id/2529140/alyssa-thomas",
-    "ppg": 14.8,
-    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2529140.png"
-  },
-  {
     "id": "2999101",
     "name": "Jonquel Jones",
     "team": "New York Liberty",
@@ -428,7 +412,7 @@ const allPlayers = [
     "experience": 10,
     "status": "Active",
     "profile": "https://www.espn.com/wnba/player/_/id/2999101/jonquel-jones",
-    "ppg": 14.6,
+    "ppg": 14.7,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2999101.png"
   },
   {
@@ -446,6 +430,22 @@ const allPlayers = [
     "profile": "https://www.espn.com/wnba/player/_/id/3906972/bridget-carleton",
     "ppg": 14.6,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3906972.png"
+  },
+  {
+    "id": "2529140",
+    "name": "Alyssa Thomas",
+    "team": "Phoenix Mercury",
+    "position": "F",
+    "jersey": "25",
+    "age": 34,
+    "height": "6' 2\"",
+    "college": "Maryland",
+    "birthPlace": "Camp Hill, PA, USA",
+    "experience": 13,
+    "status": "Active",
+    "profile": "https://www.espn.com/wnba/player/_/id/2529140/alyssa-thomas",
+    "ppg": 14.5,
+    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2529140.png"
   },
   {
     "id": "3906949",
@@ -506,9 +506,9 @@ const allPlayers = [
     "college": "UConn",
     "birthPlace": "Sparks, NV, USA",
     "experience": 8,
-    "status": "Active",
+    "status": "Out",
     "profile": "https://www.espn.com/wnba/player/_/id/3142328/gabby-williams",
-    "ppg": 14.2,
+    "ppg": 14.3,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3142328.png"
   },
   {
@@ -586,9 +586,9 @@ const allPlayers = [
     "college": "",
     "birthPlace": "",
     "experience": 2,
-    "status": "Active",
+    "status": "Out",
     "profile": "https://www.espn.com/wnba/player/_/id/4790264/janelle-salaun",
-    "ppg": 13.1,
+    "ppg": 12.9,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4790264.png"
   },
   {
@@ -604,7 +604,7 @@ const allPlayers = [
     "experience": 5,
     "status": "Active",
     "profile": "https://www.espn.com/wnba/player/_/id/4398935/veronica-burton",
-    "ppg": 12.5,
+    "ppg": 12.4,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4398935.png"
   },
   {
@@ -848,22 +848,6 @@ const allPlayers = [
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4433404.png"
   },
   {
-    "id": "5345320",
-    "name": "Pauline Astier",
-    "team": "New York Liberty",
-    "position": "G",
-    "jersey": "18",
-    "age": 24,
-    "height": "5' 11\"",
-    "college": "",
-    "birthPlace": "",
-    "experience": 0,
-    "status": "Active",
-    "profile": "https://www.espn.com/wnba/player/_/id/5345320/pauline-astier",
-    "ppg": 9.3,
-    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/5345320.png"
-  },
-  {
     "id": "4398915",
     "name": "Naz Hillmon",
     "team": "Atlanta Dream",
@@ -880,20 +864,20 @@ const allPlayers = [
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4398915.png"
   },
   {
-    "id": "4282173",
-    "name": "Michaela Onyenwere",
-    "team": "Washington Mystics",
-    "position": "F",
-    "jersey": "12",
-    "age": 27,
-    "height": "6' 0\"",
-    "college": "UCLA",
-    "birthPlace": "Aurora, CO, USA",
-    "experience": 6,
+    "id": "5345320",
+    "name": "Pauline Astier",
+    "team": "New York Liberty",
+    "position": "G",
+    "jersey": "18",
+    "age": 24,
+    "height": "5' 11\"",
+    "college": "",
+    "birthPlace": "",
+    "experience": 0,
     "status": "Active",
-    "profile": "https://www.espn.com/wnba/player/_/id/4282173/michaela-onyenwere",
+    "profile": "https://www.espn.com/wnba/player/_/id/5345320/pauline-astier",
     "ppg": 9.2,
-    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4282173.png"
+    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/5345320.png"
   },
   {
     "id": "2491214",
@@ -912,20 +896,20 @@ const allPlayers = [
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2491214.png"
   },
   {
-    "id": "4038379",
-    "name": "Marine Johannes",
-    "team": "New York Liberty",
-    "position": "G",
-    "jersey": "23",
-    "age": 31,
-    "height": "5' 10\"",
-    "college": "",
-    "birthPlace": "Lisieux, France",
-    "experience": 5,
+    "id": "4282173",
+    "name": "Michaela Onyenwere",
+    "team": "Washington Mystics",
+    "position": "F",
+    "jersey": "12",
+    "age": 27,
+    "height": "6' 0\"",
+    "college": "UCLA",
+    "birthPlace": "Aurora, CO, USA",
+    "experience": 6,
     "status": "Active",
-    "profile": "https://www.espn.com/wnba/player/_/id/4038379/marine-johannes",
+    "profile": "https://www.espn.com/wnba/player/_/id/4282173/michaela-onyenwere",
     "ppg": 9.0,
-    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4038379.png"
+    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4282173.png"
   },
   {
     "id": "3910470",
@@ -960,6 +944,22 @@ const allPlayers = [
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3922628.png"
   },
   {
+    "id": "4257500",
+    "name": "Cecilia Zandalasini",
+    "team": "Golden State Valkyries",
+    "position": "F",
+    "jersey": "24",
+    "age": 30,
+    "height": "6' 2\"",
+    "college": "",
+    "birthPlace": "Milan, Italy",
+    "experience": 5,
+    "status": "Out",
+    "profile": "https://www.espn.com/wnba/player/_/id/4257500/cecilia-zandalasini",
+    "ppg": 8.8,
+    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4257500.png"
+  },
+  {
     "id": "3146151",
     "name": "Ariel Atkins",
     "team": "Los Angeles Sparks",
@@ -976,6 +976,22 @@ const allPlayers = [
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3146151.png"
   },
   {
+    "id": "4038379",
+    "name": "Marine Johannes",
+    "team": "New York Liberty",
+    "position": "G",
+    "jersey": "23",
+    "age": 31,
+    "height": "5' 10\"",
+    "college": "",
+    "birthPlace": "Lisieux, France",
+    "experience": 5,
+    "status": "Active",
+    "profile": "https://www.espn.com/wnba/player/_/id/4038379/marine-johannes",
+    "ppg": 8.8,
+    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4038379.png"
+  },
+  {
     "id": "1054",
     "name": "Tiffany Hayes",
     "team": "Golden State Valkyries",
@@ -988,24 +1004,8 @@ const allPlayers = [
     "experience": 14,
     "status": "Active",
     "profile": "https://www.espn.com/wnba/player/_/id/1054/tiffany-hayes",
-    "ppg": 8.6,
+    "ppg": 8.7,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/1054.png"
-  },
-  {
-    "id": "4257500",
-    "name": "Cecilia Zandalasini",
-    "team": "Golden State Valkyries",
-    "position": "F",
-    "jersey": "24",
-    "age": 30,
-    "height": "6' 2\"",
-    "college": "",
-    "birthPlace": "Milan, Italy",
-    "experience": 5,
-    "status": "Active",
-    "profile": "https://www.espn.com/wnba/player/_/id/4257500/cecilia-zandalasini",
-    "ppg": 8.5,
-    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4257500.png"
   },
   {
     "id": "3907781",
@@ -1040,22 +1040,6 @@ const allPlayers = [
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4068042.png"
   },
   {
-    "id": "2529622",
-    "name": "Kayla Thornton",
-    "team": "Golden State Valkyries",
-    "position": "F",
-    "jersey": "5",
-    "age": 33,
-    "height": "6' 1\"",
-    "college": "UTEP",
-    "birthPlace": "El Paso, TX, USA",
-    "experience": 11,
-    "status": "Active",
-    "profile": "https://www.espn.com/wnba/player/_/id/2529622/kayla-thornton",
-    "ppg": 7.7,
-    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2529622.png"
-  },
-  {
     "id": "2987869",
     "name": "Jewell Loyd",
     "team": "Las Vegas Aces",
@@ -1070,6 +1054,22 @@ const allPlayers = [
     "profile": "https://www.espn.com/wnba/player/_/id/2987869/jewell-loyd",
     "ppg": 7.7,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2987869.png"
+  },
+  {
+    "id": "2529622",
+    "name": "Kayla Thornton",
+    "team": "Golden State Valkyries",
+    "position": "F",
+    "jersey": "5",
+    "age": 33,
+    "height": "6' 1\"",
+    "college": "UTEP",
+    "birthPlace": "El Paso, TX, USA",
+    "experience": 11,
+    "status": "Active",
+    "profile": "https://www.espn.com/wnba/player/_/id/2529622/kayla-thornton",
+    "ppg": 7.6,
+    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2529622.png"
   },
   {
     "id": "4432832",
@@ -1136,38 +1136,6 @@ const allPlayers = [
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4703609.png"
   },
   {
-    "id": "4899328",
-    "name": "Kaitlyn Chen",
-    "team": "Golden State Valkyries",
-    "position": "G",
-    "jersey": "2",
-    "age": 24,
-    "height": "5' 9\"",
-    "college": "UConn",
-    "birthPlace": "San Marino, CA, USA",
-    "experience": 2,
-    "status": "Active",
-    "profile": "https://www.espn.com/wnba/player/_/id/4899328/kaitlyn-chen",
-    "ppg": 6.7,
-    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4899328.png"
-  },
-  {
-    "id": "4583144",
-    "name": "Cotie McMahon",
-    "team": "Washington Mystics",
-    "position": "G",
-    "jersey": "23",
-    "age": 22,
-    "height": "6' 0\"",
-    "college": "Ole Miss",
-    "birthPlace": "Dayton, OH, USA",
-    "experience": 0,
-    "status": "Active",
-    "profile": "https://www.espn.com/wnba/player/_/id/4583144/cotie-mcmahon",
-    "ppg": 6.7,
-    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4583144.png"
-  },
-  {
     "id": "4858656",
     "name": "Gabriela Jaquez",
     "team": "Chicago Sky",
@@ -1200,20 +1168,52 @@ const allPlayers = [
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3054590.png"
   },
   {
-    "id": "3919496",
-    "name": "Valeriane Ayayi",
-    "team": "Phoenix Mercury",
-    "position": "F",
-    "jersey": "11",
-    "age": 32,
-    "height": "6' 1\"",
-    "college": "",
-    "birthPlace": "Bordeaux, France",
+    "id": "4899328",
+    "name": "Kaitlyn Chen",
+    "team": "Golden State Valkyries",
+    "position": "G",
+    "jersey": "2",
+    "age": 24,
+    "height": "5' 9\"",
+    "college": "UConn",
+    "birthPlace": "San Marino, CA, USA",
     "experience": 2,
     "status": "Active",
-    "profile": "https://www.espn.com/wnba/player/_/id/3919496/valeriane-ayayi",
+    "profile": "https://www.espn.com/wnba/player/_/id/4899328/kaitlyn-chen",
     "ppg": 6.5,
-    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3919496.png"
+    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4899328.png"
+  },
+  {
+    "id": "4704180",
+    "name": "Georgia Amoore",
+    "team": "Washington Mystics",
+    "position": "G",
+    "jersey": "8",
+    "age": 25,
+    "height": "5' 6\"",
+    "college": "Kentucky",
+    "birthPlace": "Ballarat, VIC, Australia",
+    "experience": 0,
+    "status": "Active",
+    "profile": "https://www.espn.com/wnba/player/_/id/4704180/georgia-amoore",
+    "ppg": 6.5,
+    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4704180.png"
+  },
+  {
+    "id": "4583144",
+    "name": "Cotie McMahon",
+    "team": "Washington Mystics",
+    "position": "G",
+    "jersey": "23",
+    "age": 22,
+    "height": "6' 0\"",
+    "college": "Ole Miss",
+    "birthPlace": "Dayton, OH, USA",
+    "experience": 0,
+    "status": "Active",
+    "profile": "https://www.espn.com/wnba/player/_/id/4583144/cotie-mcmahon",
+    "ppg": 6.5,
+    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4583144.png"
   },
   {
     "id": "4432865",
@@ -1248,20 +1248,20 @@ const allPlayers = [
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/5105737.png"
   },
   {
-    "id": "4337216",
-    "name": "Han Xu",
-    "team": "New York Liberty",
-    "position": "C",
-    "jersey": "21",
-    "age": 26,
-    "height": "6' 11\"",
+    "id": "3919496",
+    "name": "Valeriane Ayayi",
+    "team": "Phoenix Mercury",
+    "position": "F",
+    "jersey": "11",
+    "age": 32,
+    "height": "6' 1\"",
     "college": "",
-    "birthPlace": "Hebei, China",
-    "experience": 4,
-    "status": "Active",
-    "profile": "https://www.espn.com/wnba/player/_/id/4337216/han-xu",
+    "birthPlace": "Bordeaux, France",
+    "experience": 2,
+    "status": "Out",
+    "profile": "https://www.espn.com/wnba/player/_/id/3919496/valeriane-ayayi",
     "ppg": 6.3,
-    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4337216.png"
+    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3919496.png"
   },
   {
     "id": "5105406",
@@ -1328,6 +1328,22 @@ const allPlayers = [
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4433807.png"
   },
   {
+    "id": "4337216",
+    "name": "Han Xu",
+    "team": "New York Liberty",
+    "position": "C",
+    "jersey": "21",
+    "age": 26,
+    "height": "6' 11\"",
+    "college": "",
+    "birthPlace": "Hebei, China",
+    "experience": 4,
+    "status": "Active",
+    "profile": "https://www.espn.com/wnba/player/_/id/4337216/han-xu",
+    "ppg": 6.1,
+    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4337216.png"
+  },
+  {
     "id": "4790266",
     "name": "Awak Kuier",
     "team": "Dallas Wings",
@@ -1388,24 +1404,8 @@ const allPlayers = [
     "experience": 0,
     "status": "Active",
     "profile": "https://www.espn.com/wnba/player/_/id/5345524/noemie-brochant",
-    "ppg": 6.0,
+    "ppg": 5.9,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/5345524.png"
-  },
-  {
-    "id": "4704180",
-    "name": "Georgia Amoore",
-    "team": "Washington Mystics",
-    "position": "G",
-    "jersey": "8",
-    "age": 25,
-    "height": "5' 6\"",
-    "college": "Kentucky",
-    "birthPlace": "Ballarat, VIC, Australia",
-    "experience": 0,
-    "status": "Active",
-    "profile": "https://www.espn.com/wnba/player/_/id/4704180/georgia-amoore",
-    "ppg": 6.0,
-    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4704180.png"
   },
   {
     "id": "5108587",
@@ -1488,6 +1488,22 @@ const allPlayers = [
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4398829.png"
   },
   {
+    "id": "2327695",
+    "name": "Rebekah Gardner",
+    "team": "New York Liberty",
+    "position": "G",
+    "jersey": "7",
+    "age": 36,
+    "height": "6' 1\"",
+    "college": "UCLA",
+    "birthPlace": "Upland, CA, USA",
+    "experience": 4,
+    "status": "Active",
+    "profile": "https://www.espn.com/wnba/player/_/id/2327695/rebekah-gardner",
+    "ppg": 5.2,
+    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2327695.png"
+  },
+  {
     "id": "2566081",
     "name": "Elizabeth Williams",
     "team": "Chicago Sky",
@@ -1504,22 +1520,6 @@ const allPlayers = [
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2566081.png"
   },
   {
-    "id": "2327695",
-    "name": "Rebekah Gardner",
-    "team": "New York Liberty",
-    "position": "G",
-    "jersey": "7",
-    "age": 36,
-    "height": "6' 1\"",
-    "college": "UCLA",
-    "birthPlace": "Upland, CA, USA",
-    "experience": 4,
-    "status": "Active",
-    "profile": "https://www.espn.com/wnba/player/_/id/2327695/rebekah-gardner",
-    "ppg": 5.1,
-    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2327695.png"
-  },
-  {
     "id": "2529047",
     "name": "Odyssey Sims",
     "team": "Dallas Wings",
@@ -1534,6 +1534,22 @@ const allPlayers = [
     "profile": "https://www.espn.com/wnba/player/_/id/2529047/odyssey-sims",
     "ppg": 4.9,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2529047.png"
+  },
+  {
+    "id": "4399342",
+    "name": "Lexi Held",
+    "team": "Phoenix Mercury",
+    "position": "G",
+    "jersey": "10",
+    "age": 26,
+    "height": "5' 10\"",
+    "college": "DePaul",
+    "birthPlace": "Burlington, KY, USA",
+    "experience": 2,
+    "status": "Active",
+    "profile": "https://www.espn.com/wnba/player/_/id/4399342/lexi-held",
+    "ppg": 4.8,
+    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4399342.png"
   },
   {
     "id": "4432830",
@@ -1582,22 +1598,6 @@ const allPlayers = [
     "profile": "https://www.espn.com/wnba/player/_/id/2566186/rachel-banham",
     "ppg": 4.7,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2566186.png"
-  },
-  {
-    "id": "4399342",
-    "name": "Lexi Held",
-    "team": "Phoenix Mercury",
-    "position": "G",
-    "jersey": "10",
-    "age": 26,
-    "height": "5' 10\"",
-    "college": "DePaul",
-    "birthPlace": "Burlington, KY, USA",
-    "experience": 2,
-    "status": "Active",
-    "profile": "https://www.espn.com/wnba/player/_/id/4399342/lexi-held",
-    "ppg": 4.7,
-    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4399342.png"
   },
   {
     "id": "3917453",
@@ -1820,7 +1820,7 @@ const allPlayers = [
     "experience": 4,
     "status": "Active",
     "profile": "https://www.espn.com/wnba/player/_/id/4432834/laeticia-amihere",
-    "ppg": 3.4,
+    "ppg": 3.3,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4432834.png"
   },
   {
@@ -2762,7 +2762,7 @@ const allPlayers = [
     "college": "Duke",
     "birthPlace": "Lagos, Nigeria",
     "experience": 0,
-    "status": "Out",
+    "status": "Active",
     "profile": "https://www.espn.com/wnba/player/_/id/4398589/elizabeth-balogun",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4398589.png"
@@ -2842,7 +2842,7 @@ const allPlayers = [
     "college": "TCU",
     "birthPlace": "Melbourne, VIC, Australia",
     "experience": 2,
-    "status": "Out",
+    "status": "Active",
     "profile": "https://www.espn.com/wnba/player/_/id/4281930/anneli-maley",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4281930.png"
@@ -3242,7 +3242,7 @@ const allPlayers = [
     "college": "Tennessee",
     "birthPlace": "Nashville, TN, USA",
     "experience": 9,
-    "status": "Day-To-Day",
+    "status": "Active",
     "profile": "https://www.espn.com/wnba/player/_/id/2566453/isabelle-harrison",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2566453.png"
