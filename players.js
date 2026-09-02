@@ -1840,22 +1840,6 @@ const allPlayers = [
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4336633.png"
   },
   {
-    "id": "5349415",
-    "name": "Alicia Florez",
-    "team": "Washington Mystics",
-    "position": "G",
-    "jersey": "2",
-    "age": 22,
-    "height": "5' 9\"",
-    "college": "",
-    "birthPlace": "Leon, Spain",
-    "experience": 0,
-    "status": "Active",
-    "profile": "https://www.espn.com/wnba/player/_/id/5349415/alicia-florez",
-    "ppg": 3.3,
-    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/5349415.png"
-  },
-  {
     "id": "2529183",
     "name": "Stefanie Dolson",
     "team": "Seattle Storm",
@@ -2853,7 +2837,7 @@ const allPlayers = [
     "team": "New York Liberty",
     "position": "Player",
     "jersey": "24",
-    "age": 27,
+    "age": 28,
     "height": "6' 1\"",
     "college": "TCU",
     "birthPlace": "Melbourne, VIC, Australia",
@@ -2958,22 +2942,6 @@ const allPlayers = [
     "profile": "https://www.espn.com/wnba/player/_/id/3065570/kelsey-plum",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3065570.png"
-  },
-  {
-    "id": "4433542",
-    "name": "Saylor Poffenbarger",
-    "team": "Phoenix Mercury",
-    "position": "Player",
-    "jersey": "6",
-    "age": 23,
-    "height": "6' 2\"",
-    "college": "Maryland",
-    "birthPlace": "Middletown, MD, USA",
-    "experience": 0,
-    "status": "Active",
-    "profile": "https://www.espn.com/wnba/player/_/id/4433542/saylor-poffenbarger",
-    "ppg": 0.0,
-    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4433542.png"
   },
   {
     "id": "4704594",
@@ -3294,6 +3262,22 @@ const allPlayers = [
     "profile": "https://www.espn.com/wnba/player/_/id/2988756/brittney-sykes",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2988756.png"
+  },
+  {
+    "id": "5208985",
+    "name": "Alicia Florez",
+    "team": "Washington Mystics",
+    "position": "Player",
+    "jersey": "2",
+    "age": 22,
+    "height": "5' 9\"",
+    "college": "",
+    "birthPlace": "",
+    "experience": 0,
+    "status": "Active",
+    "profile": "https://www.espn.com/wnba/player/_/id/5208985/alicia-florez",
+    "ppg": 0.0,
+    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/5208985.png"
   },
   {
     "id": "4433523",
