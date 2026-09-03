@@ -71,7 +71,7 @@
 </head>
 <body>
   <main>
-    <a class="hub-link" href="index.html">← Back to hub</a>
+    <div id="site-menu"></div>
     <p class="kicker">WNBA / roster viewer</p>
     <h1>Compare two teams.</h1>
     <p class="intro">Choose any two teams to see their current rosters, player images, jersey numbers, positions, and points per game.</p>
@@ -97,5 +97,6 @@
     teamOneSelect.addEventListener('change', render); teamTwoSelect.addEventListener('change', render); render();
     document.getElementById('modalClose').addEventListener('click', closePlayerModal); document.getElementById('playerModalBackdrop').addEventListener('click', event => { if (event.target.id === 'playerModalBackdrop') closePlayerModal(); }); document.addEventListener('keydown', event => { if (event.key === 'Escape') closePlayerModal(); });
   </script>
+  <script src="menu.js"></script>
 </body>
 </html>

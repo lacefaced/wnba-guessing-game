@@ -64,15 +64,7 @@
 </head>
 <body>
   <main>
-    <a class="hub-link" href="index.html">← Back to hub</a>
-    <nav class="game-nav" aria-label="WNBA games">
-      <span class="game-nav-label">WNBA games</span>
-      <a href="index.html">01 / Naming Challenge</a>
-      <a href="flashcard.html">02 / Team Matchup</a>
-      <a href="rankings.html">03 / Top Five</a>
-      <a class="active" href="teams.html" aria-current="page">04 / Logo Match</a>
-      <a href="guess-the-legend.html">05 / Guess the Legend</a>
-    </nav>
+    <div id="site-menu"></div>
     <header>
       <div><p class="kicker">WNBA / team challenge</p><h1>Know your home court.</h1><p class="intro">Identify each team from its logo. Every question asks for either the team name or its broad location.</p></div>
       <div class="scoreboard" aria-label="Game score"><div><span id="score" class="score-number">0</span><span class="score-label">correct</span></div><div><span id="misses" class="score-number">0</span><span class="score-label">misses</span></div></div>
@@ -111,5 +103,6 @@
     shareButton.addEventListener('click', shareScore); copyButton.addEventListener('click', copyScore);
     nextQuestion();
   </script>
+  <script src="menu.js"></script>
 </body>
 </html>

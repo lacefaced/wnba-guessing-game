@@ -67,15 +67,7 @@
 </head>
 <body>
   <main>
-    <a class="hub-link" href="index.html">← Back to hub</a>
-    <nav class="game-nav" aria-label="WNBA games">
-      <span class="game-nav-label">WNBA games</span>
-      <a href="index.html">01 / Naming Challenge</a>
-      <a class="active" href="flashcard.html" aria-current="page">02 / Team Matchup</a>
-      <a href="rankings.html">03 / Top Five</a>
-      <a href="teams.html">04 / Logo Match</a>
-      <a href="guess-the-legend.html">05 / Guess the Legend</a>
-    </nav>
+    <div id="site-menu"></div>
     <header>
       <div><p class="kicker">WNBA / 2026 season</p><h1>Find the home team.</h1><p class="intro">Match each player to the team they play for. Trust your basketball brain.</p></div>
       <div class="scoreboard" aria-label="Game score"><div><span id="score" class="score-number">0</span><span class="score-label">matched</span></div><div><span id="streak" class="score-number">0</span><span class="score-label">streak</span></div></div>
@@ -151,5 +143,6 @@
     shareButton.addEventListener('click', shareScore); copyButton.addEventListener('click', copyScore);
     newRoundButton.addEventListener('click', startRound); startRound();
   </script>
+  <script src="menu.js"></script>
 </body>
 </html>

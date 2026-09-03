@@ -61,15 +61,7 @@
 </head>
 <body>
   <main>
-    <a class="hub-link" href="index.html">← Back to hub</a>
-    <nav class="game-nav" aria-label="WNBA games">
-      <span class="game-nav-label">WNBA games</span>
-      <a href="index.html">01 / Naming Challenge</a>
-      <a href="flashcard.html">02 / Team Matchup</a>
-      <a class="active" href="rankings.html" aria-current="page">03 / Top Five</a>
-      <a href="teams.html">04 / Logo Match</a>
-      <a href="guess-the-legend.html">05 / Guess the Legend</a>
-    </nav>
+    <div id="site-menu"></div>
     <header>
       <p class="kicker">WNBA / ranking challenge</p>
       <h1>Who leads the team?</h1>
@@ -160,5 +152,6 @@
     copyButton.addEventListener('click', async () => { const scoreText = `WNBA Top Five\n${firstTryTeams}/${topFiveByTeam.length} teams perfect on first try\n${firstTryPlayers}/${topFiveByTeam.length * 5} players in the right spot on first try\n${orderResults.map(result => result === 5 ? '🟩' : result >= 3 ? '🟧' : '🟥').join('')}`; try { await navigator.clipboard.writeText(scoreText); copyButton.textContent = 'Score copied'; } catch { copyButton.textContent = 'Copy unavailable'; } });
     continueButton.addEventListener('click', checkOrder); renderRanking(true);
   </script>
+  <script src="menu.js"></script>
 </body>
 </html>

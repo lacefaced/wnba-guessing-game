@@ -84,15 +84,7 @@
 </head>
 <body>
   <div class="game-container">
-    <a class="hub-link" href="index.html">← Back to hub</a>
-    <nav class="game-nav" aria-label="WNBA games">
-      <span class="game-nav-label">WNBA games</span>
-      <a class="active" href="naming-challenge.html" aria-current="page">01 / Naming Challenge</a>
-      <a href="flashcard.html">02 / Team Matchup</a>
-      <a href="rankings.html">03 / Top Five</a>
-      <a href="teams.html">04 / Logo Match</a>
-      <a href="guess-the-legend.html">05 / Guess the Legend</a>
-    </nav>
+    <div id="site-menu"></div>
     <p class="kicker">WNBA / naming challenge</p>
     <h1>Name the players.</h1>
     <p class="intro">Identify as many WNBA players as you can. Start typing a name and choose a match from the list.</p>
@@ -126,5 +118,6 @@
     shareBtn.addEventListener('click', async () => { try { await navigator.clipboard.writeText(scoreText(true)); shareBtn.textContent = 'Link copied'; setTimeout(() => { shareBtn.textContent = 'Share with link'; }, 1500); } catch { shareBtn.textContent = 'Copy unavailable'; } });
     copyBtn.addEventListener('click', async () => { try { await navigator.clipboard.writeText(scoreText(false)); copyBtn.textContent = 'Score copied'; } catch { copyBtn.textContent = 'Copy unavailable'; } });
   </script>
+  <script src="menu.js"></script>
 </body>
 </html>
