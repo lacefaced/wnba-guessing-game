@@ -357,7 +357,7 @@ const allPlayers = [
     "team": "Minnesota Lynx",
     "position": "F",
     "jersey": "1",
-    "age": 34,
+    "age": 35,
     "height": "6' 2\"",
     "college": "Florida State",
     "birthPlace": "",
@@ -1840,6 +1840,22 @@ const allPlayers = [
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4336633.png"
   },
   {
+    "id": "5208985",
+    "name": "Alicia Florez",
+    "team": "Washington Mystics",
+    "position": "G",
+    "jersey": "2",
+    "age": 22,
+    "height": "5' 9\"",
+    "college": "",
+    "birthPlace": "",
+    "experience": 0,
+    "status": "Active",
+    "profile": "https://www.espn.com/wnba/player/_/id/5208985/alicia-florez",
+    "ppg": 3.3,
+    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/5208985.png"
+  },
+  {
     "id": "2529183",
     "name": "Stefanie Dolson",
     "team": "Seattle Storm",
@@ -2694,7 +2710,7 @@ const allPlayers = [
     "position": "Player",
     "jersey": "11",
     "age": 24,
-    "height": "6' 0\"",
+    "height": "5' 11\"",
     "college": "",
     "birthPlace": "",
     "experience": 0,
@@ -3262,22 +3278,6 @@ const allPlayers = [
     "profile": "https://www.espn.com/wnba/player/_/id/2988756/brittney-sykes",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2988756.png"
-  },
-  {
-    "id": "5208985",
-    "name": "Alicia Florez",
-    "team": "Washington Mystics",
-    "position": "Player",
-    "jersey": "2",
-    "age": 22,
-    "height": "5' 9\"",
-    "college": "",
-    "birthPlace": "",
-    "experience": 0,
-    "status": "Active",
-    "profile": "https://www.espn.com/wnba/player/_/id/5208985/alicia-florez",
-    "ppg": 0.0,
-    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/5208985.png"
   },
   {
     "id": "4433523",
