@@ -11,7 +11,7 @@
     * { box-sizing: border-box; }
     body { margin: 0; min-height: 100vh; color: var(--ink); background: var(--paper); font-family: Manrope, sans-serif; }
     body::before { content: ""; position: fixed; inset: 0; pointer-events: none; opacity: .3; background-image: radial-gradient(#c9c2b6 1px, transparent 1px); background-size: 18px 18px; }
-    main { position: relative; width: min(640px, calc(100% - 28px)); margin: 0 auto; padding: 28px 0 60px; }
+    main { position: relative; width: min(680px, calc(100% - 28px)); margin: 0 auto; padding: 28px 0 60px; }
     .game-nav { display: grid; gap: 2px; width: fit-content; margin-bottom: 36px; padding: 10px 14px; border-left: 3px solid var(--coral); background: rgba(255,253,248,.72); font: 12px/1.7 'DM Mono', monospace; }
     .game-nav-label { color: var(--muted); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; }
     .game-nav a { color: var(--muted); text-decoration: none; }
@@ -24,21 +24,27 @@
     .progress-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; font: 12px 'DM Mono', monospace; }
     .progress-row strong { color: var(--coral-dark); }
     .legend-card { border: 1px solid var(--ink); background: var(--white); box-shadow: 0 8px 0 rgba(23,34,44,.08); overflow: hidden; }
-    .legend-photo { display: block; width: 100%; height: auto; max-height: min(380px, 48vh); object-fit: contain; object-position: center; background: var(--white); }
+    @media (min-width: 561px) {
+      .legend-card.answered { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); }
+      .legend-card.answered .legend-photo { height: 100%; max-height: 440px; border-bottom: none; border-right: 1px solid #e7e0d2; }
+      .legend-card.answered .reveal { align-self: center; }
+    }
+    .legend-photo { display: block; width: 100%; height: auto; max-height: min(380px, 48vh); object-fit: contain; object-position: center; background: var(--white); border-bottom: 1px solid #e7e0d2; }
     .legend-photo.missing { height: 200px; display: flex; align-items: center; justify-content: center; font: 12px 'DM Mono', monospace; color: #fffdf8; background: #68c5b4; }
     .choices { display: grid; gap: 8px; padding: 14px; }
     .choice { padding: 13px 14px; border: 1px solid var(--ink); background: var(--paper); color: var(--ink); font: 800 14px Manrope, sans-serif; text-align: left; cursor: pointer; transition: background .12s ease, color .12s ease; }
     .choice:hover:not(:disabled) { background: var(--coral); color: #fff; }
     .choice:disabled { cursor: default; }
-    .choice.correct { background: var(--mint); border-color: #5c9c7e; color: var(--ink); }
-    .choice.wrong { background: #ffd8d1; border-color: var(--coral); color: var(--coral-dark); }
     button:focus-visible { outline: 3px solid var(--coral); outline-offset: 3px; }
-    .reveal { margin-top: 18px; padding: 18px; border: 1px solid var(--ink); background: var(--white); box-shadow: 0 8px 0 rgba(23,34,44,.08); }
-    .reveal h2 { margin: 0 0 4px; font: 24px 'Archivo Black', sans-serif; text-transform: uppercase; }
-    .reveal .verdict { margin: 0 0 12px; font: 11px 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .1em; }
+    .reveal { padding: 20px; }
+    .reveal .verdict { margin: 0 0 6px; font: 11px 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .12em; }
     .reveal .verdict.hit { color: #2d7d58; } .reveal .verdict.miss { color: var(--coral-dark); }
-    .reveal ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 13px; line-height: 1.6; }
-    .next-button { display: block; width: 100%; margin-top: 16px; padding: 14px; border: 1px solid var(--ink); background: var(--ink); color: #fff; font: 800 13px Manrope, sans-serif; text-transform: uppercase; cursor: pointer; }
+    .reveal h2 { margin: 0 0 14px; font: 30px/1.05 'Archivo Black', sans-serif; text-transform: uppercase; letter-spacing: -.02em; }
+    .fact-list { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; }
+    .fact-list li { position: relative; padding-left: 18px; color: var(--ink); font-size: 15.5px; line-height: 1.6; }
+    .fact-list li::before { content: ""; position: absolute; left: 0; top: 9px; width: 8px; height: 8px; background: var(--coral); }
+    .fact-list strong { font-weight: 800; color: var(--coral-dark); }
+    .next-button { display: block; width: 100%; margin-top: 18px; padding: 14px; border: 1px solid var(--ink); background: var(--ink); color: #fff; font: 800 13px Manrope, sans-serif; text-transform: uppercase; cursor: pointer; }
     .next-button:hover { background: var(--coral); border-color: var(--coral); }
     .feedback { min-height: 24px; margin: 16px 0 0; color: var(--muted); font: 12px 'DM Mono', monospace; text-align: center; }
     .result-panel { margin-top: 24px; padding: 20px; border: 1px solid var(--ink); background: var(--white); text-align: center; }
@@ -61,8 +67,9 @@
       .legend-photo { max-height: min(320px, 40vh); }
       .choices { gap: 6px; padding: 10px; }
       .choice { padding: 10px 12px; font-size: 13px; }
-      .reveal { margin-top: 12px; padding: 14px; }
-      .reveal h2 { font-size: 20px; }
+      .reveal { padding: 16px; }
+      .reveal h2 { font-size: 24px; margin-bottom: 12px; }
+      .fact-list li { font-size: 14.5px; }
     }
   </style>
 </head>
@@ -80,7 +87,7 @@
     <header>
       <p class="kicker">WNBA / guess the legend</p>
       <h1>Name the legend.</h1>
-      <p class="intro">A retired WNBA great, one photo, five names. Pick who you think it is, then see what made them a legend.</p>
+      <p class="intro">A retired WNBA great, one photo, five names. Pick who you think it is, then read what made them a legend.</p>
     </header>
     <section aria-labelledby="roundTitle">
       <div class="progress-row"><span>Legend <strong id="roundNumber">1</strong> of <strong id="roundTotal">21</strong></span><span id="scoreTotal">0 correct</span></div>
@@ -88,12 +95,12 @@
       <div class="legend-card">
         <img id="legendPhoto" class="legend-photo" alt="Mystery retired WNBA player">
         <div id="choices" class="choices"></div>
-      </div>
-      <div id="reveal" class="reveal hidden">
-        <h2 id="revealName"></h2>
-        <p id="revealVerdict" class="verdict"></p>
-        <ul id="revealFacts"></ul>
-        <button id="nextButton" class="next-button" type="button">Next legend</button>
+        <div id="reveal" class="reveal hidden">
+          <p id="revealVerdict" class="verdict"></p>
+          <h2 id="revealName"></h2>
+          <ul id="revealFacts" class="fact-list"></ul>
+          <button id="nextButton" class="next-button" type="button">Next legend</button>
+        </div>
       </div>
       <p id="feedback" class="feedback" role="status" aria-live="polite">Tap the name you think matches the photo.</p>
       <div id="resultPanel" class="result-panel hidden">
@@ -109,89 +116,89 @@
   <script>
     const LEGENDS = [
       { slug: 'cynthia-cooper', name: 'Cynthia Cooper', facts: [
-        'Houston Comets guard who won the first WNBA MVP award in 1997 and repeated in 1998.',
-        'Led the Comets to the first four WNBA championships (1997–2000) and was Finals MVP all four times.',
-        'Inducted into the Naismith Basketball Hall of Fame in 2010.' ] },
+        '<strong>Houston Comets</strong> guard. Won the <strong>first WNBA MVP</strong> award in 1997 and again in 1998.',
+        'Led the Comets to the <strong>first four WNBA titles</strong> (1997–2000) and was <strong>Finals MVP all four times</strong>.',
+        '<strong>Hall of Fame</strong>, 2010.' ] },
       { slug: 'lisa-leslie', name: 'Lisa Leslie', facts: [
-        'Los Angeles Sparks center, three-time MVP (2001, 2004, 2006) and two-time champion (2001, 2002).',
-        'First player to dunk in a WNBA game, in 2002.',
-        'Eight-time All-Star; Hall of Fame in 2015.' ] },
+        '<strong>Los Angeles Sparks</strong> center. <strong>Three-time MVP</strong> (2001, 2004, 2006) and <strong>two-time champion</strong> (2001, 2002).',
+        '<strong>First player to dunk</strong> in a WNBA game, in 2002.',
+        'Eight-time All-Star. <strong>Hall of Fame</strong>, 2015.' ] },
       { slug: 'sheryl-swoopes', name: 'Sheryl Swoopes', facts: [
-        'Houston Comets star, three-time MVP (2000, 2002, 2005) and four-time champion.',
-        'Three-time Defensive Player of the Year; Nike’s "Air Swoopes" was the first signature shoe for a woman.',
-        'Hall of Fame in 2016.' ] },
+        '<strong>Houston Comets</strong> star. <strong>Three-time MVP</strong> (2000, 2002, 2005) and <strong>four-time champion</strong>.',
+        '<strong>Three-time Defensive Player of the Year</strong>. Nike’s “Air Swoopes” was the <strong>first signature shoe for a woman</strong>.',
+        '<strong>Hall of Fame</strong>, 2016.' ] },
       { slug: 'tina-thompson', name: 'Tina Thompson', facts: [
-        'The very first pick in WNBA history, drafted by the Houston Comets in 1997.',
-        'Four-time champion and nine-time All-Star; retired as the league’s all-time leading scorer.',
-        'Hall of Fame in 2018.' ] },
+        'The <strong>very first pick in WNBA history</strong>, taken by the <strong>Houston Comets</strong> in 1997.',
+        '<strong>Four-time champion</strong>, nine-time All-Star. Retired as the <strong>league’s all-time leading scorer</strong>.',
+        '<strong>Hall of Fame</strong>, 2018.' ] },
       { slug: 'sue-bird', name: 'Sue Bird', facts: [
-        'Seattle Storm point guard for 21 seasons, four-time champion (2004, 2010, 2018, 2020).',
-        'Thirteen-time All-Star and the league’s all-time assists leader.',
-        'No. 1 pick in 2002 out of UConn; retired in 2022.' ] },
+        '<strong>Seattle Storm</strong> point guard for 21 seasons. <strong>Four-time champion</strong> (2004, 2010, 2018, 2020).',
+        '<strong>13-time All-Star</strong> and the <strong>league’s all-time assists leader</strong>.',
+        '<strong>No. 1 pick</strong> in 2002 out of <strong>UConn</strong>; retired in 2022.' ] },
       { slug: 'diana-taurasi', name: 'Diana Taurasi', facts: [
-        'Phoenix Mercury guard and the all-time leading scorer in WNBA history.',
-        '2009 MVP, three-time champion, eleven-time All-Star.',
-        'No. 1 pick in 2004; retired in 2025.' ] },
+        '<strong>Phoenix Mercury</strong> guard and the <strong>all-time leading scorer in WNBA history</strong>.',
+        '<strong>2009 MVP</strong>, <strong>three-time champion</strong>, 11-time All-Star.',
+        '<strong>No. 1 pick</strong> in 2004; retired in 2025.' ] },
       { slug: 'maya-moore', name: 'Maya Moore', facts: [
-        'Minnesota Lynx forward, 2014 MVP and four-time champion (2011, 2013, 2015, 2017).',
-        '2013 Finals MVP and a six-time All-Star.',
-        'Stepped away from basketball in 2019 to work on criminal-justice reform.' ] },
+        '<strong>Minnesota Lynx</strong> forward. <strong>2014 MVP</strong> and <strong>four-time champion</strong> (2011, 2013, 2015, 2017).',
+        '<strong>2013 Finals MVP</strong>.',
+        '<strong>Stepped away from basketball in 2019</strong> to work on criminal-justice reform.' ] },
       { slug: 'tamika-catchings', name: 'Tamika Catchings', facts: [
-        'Indiana Fever forward, 2011 MVP, 2012 champion and Finals MVP.',
-        'Five-time Defensive Player of the Year and ten-time All-Star.',
-        'Hall of Fame in 2020.' ] },
+        '<strong>Indiana Fever</strong> forward. <strong>2011 MVP</strong>; <strong>2012 champion and Finals MVP</strong>.',
+        '<strong>Five-time Defensive Player of the Year</strong>, 10-time All-Star.',
+        '<strong>Hall of Fame</strong>, 2020.' ] },
       { slug: 'candace-parker', name: 'Candace Parker', facts: [
-        'Won MVP as a rookie in 2008 and again in 2013.',
-        'Three-time champion with three different teams — Los Angeles (2016), Chicago (2021), Las Vegas (2023).',
+        'Won <strong>MVP as a rookie</strong> in 2008, then <strong>MVP again</strong> in 2013.',
+        '<strong>Three-time champion with three different teams</strong> — <strong>Los Angeles</strong> (2016), <strong>Chicago</strong> (2021), <strong>Las Vegas</strong> (2023).',
         'Retired in 2024.' ] },
       { slug: 'lauren-jackson', name: 'Lauren Jackson', facts: [
-        'Australian center for the Seattle Storm, three-time MVP (2003, 2007, 2010).',
-        'Two-time champion (2004, 2010) and seven-time All-Star.',
-        'Hall of Fame in 2021.' ] },
+        '<strong>Australian</strong> center for the <strong>Seattle Storm</strong>. <strong>Three-time MVP</strong> (2003, 2007, 2010).',
+        '<strong>Two-time champion</strong> (2004, 2010), seven-time All-Star.',
+        '<strong>Hall of Fame</strong>, 2021.' ] },
       { slug: 'sylvia-fowles', name: 'Sylvia Fowles', facts: [
-        '2017 MVP; two-time champion and two-time Finals MVP with the Minnesota Lynx.',
-        'Four-time Defensive Player of the Year.',
-        'Retired in 2022 as the league’s all-time rebounding leader.' ] },
+        '<strong>2017 MVP</strong>. <strong>Two-time champion and two-time Finals MVP</strong> with the <strong>Minnesota Lynx</strong>.',
+        '<strong>Four-time Defensive Player of the Year</strong>.',
+        'Retired in 2022 as the <strong>league’s all-time rebounding leader</strong>.' ] },
       { slug: 'seimone-augustus', name: 'Seimone Augustus', facts: [
-        'No. 1 pick in 2006 and Rookie of the Year that same season.',
-        'Four-time champion with the Minnesota Lynx, 2011 Finals MVP, eight-time All-Star.',
-        'Honored with a statue outside the Lynx arena.' ] },
+        '<strong>No. 1 pick</strong> in 2006 and <strong>Rookie of the Year</strong> that season.',
+        '<strong>Four-time champion</strong> with the <strong>Minnesota Lynx</strong>, <strong>2011 Finals MVP</strong>, eight-time All-Star.',
+        'Honored with a <strong>statue outside the Lynx arena</strong>.' ] },
       { slug: 'lindsay-whalen', name: 'Lindsay Whalen', facts: [
-        'Minnesota native point guard; four-time champion with the hometown Lynx.',
-        'Five-time All-Star; later head coach at the University of Minnesota.',
-        'Hall of Fame in 2022.' ] },
+        '<strong>Minnesota native</strong> point guard; <strong>four-time champion</strong> with the hometown <strong>Lynx</strong>.',
+        'Five-time All-Star; later <strong>head coach at the University of Minnesota</strong>.',
+        '<strong>Hall of Fame</strong>, 2022.' ] },
       { slug: 'swin-cash', name: 'Swin Cash', facts: [
-        'Three-time champion (2003, 2006 with Detroit; 2010 with Seattle) and four-time All-Star.',
-        'Now a front-office executive with the NBA’s New Orleans Pelicans.',
-        'Hall of Fame in 2022.' ] },
+        '<strong>Three-time champion</strong> — <strong>Detroit</strong> (2003, 2006) and <strong>Seattle</strong> (2010).',
+        'Now a <strong>front-office executive with the NBA’s New Orleans Pelicans</strong>.',
+        '<strong>Hall of Fame</strong>, 2022.' ] },
       { slug: 'katie-smith', name: 'Katie Smith', facts: [
-        'One of the great scorers of the early era; retired as pro basketball’s all-time leading scorer across the ABL and WNBA.',
-        'Two-time champion with the Detroit Shock and seven-time All-Star.',
-        'Hall of Fame in 2018.' ] },
+        'One of the great scorers of the early era; retired as <strong>pro basketball’s all-time leading scorer</strong> across the ABL and WNBA.',
+        '<strong>Two-time champion</strong> with the <strong>Detroit Shock</strong>, seven-time All-Star.',
+        '<strong>Hall of Fame</strong>, 2018.' ] },
       { slug: 'yolanda-griffith', name: 'Yolanda Griffith', facts: [
-        'Sacramento Monarchs center, 1999 MVP and Defensive Player of the Year.',
-        '2005 champion and Finals MVP; seven-time All-Star.',
-        'Hall of Fame in 2021.' ] },
+        '<strong>Sacramento Monarchs</strong> center. <strong>1999 MVP and Defensive Player of the Year</strong>.',
+        '<strong>2005 champion and Finals MVP</strong>; seven-time All-Star.',
+        '<strong>Hall of Fame</strong>, 2021.' ] },
       { slug: 'becky-hammon', name: 'Becky Hammon', facts: [
-        'Six-time All-Star guard for the New York Liberty and San Antonio Silver Stars.',
-        'Became the first full-time female assistant coach in the NBA, then a title-winning head coach of the Las Vegas Aces.',
-        'Hall of Fame in 2022.' ] },
+        'Six-time All-Star guard for the <strong>New York Liberty</strong> and <strong>San Antonio</strong>.',
+        'Became the <strong>first full-time female assistant coach in the NBA</strong>, then a <strong>title-winning head coach of the Las Vegas Aces</strong>.',
+        '<strong>Hall of Fame</strong>, 2022.' ] },
       { slug: 'rebekkah-brunson', name: 'Rebekkah Brunson', facts: [
-        'Won five WNBA titles — one with Sacramento (2005) and four with Minnesota — the most of any player.',
+        'Won <strong>five WNBA titles</strong> — one with <strong>Sacramento</strong> (2005) and <strong>four with Minnesota</strong> — the <strong>most of any player</strong>.',
         'Five-time All-Star known for relentless rebounding.',
         'Later joined the Lynx coaching staff.' ] },
       { slug: 'penny-taylor', name: 'Penny Taylor', facts: [
-        'Australian forward, three-time champion with the Phoenix Mercury (2007, 2009, 2014).',
-        '2014 Finals MVP and a three-time All-Star.',
-        'Married to fellow Mercury legend Diana Taurasi.' ] },
+        '<strong>Australian</strong> forward. <strong>Three-time champion</strong> with the <strong>Phoenix Mercury</strong> (2007, 2009, 2014).',
+        '<strong>2014 Finals MVP</strong>, three-time All-Star.',
+        'Married to fellow Mercury legend <strong>Diana Taurasi</strong>.' ] },
       { slug: 'deanna-nolan', name: 'Deanna Nolan', facts: [
-        'Guard nicknamed "Tweety"; three-time champion with the Detroit Shock (2003, 2006, 2008).',
+        'Guard nicknamed <strong>“Tweety.”</strong> <strong>Three-time champion</strong> with the <strong>Detroit Shock</strong> (2003, 2006, 2008).',
         'Five-time All-Star.',
-        'Left the WNBA at her peak to play in Russia.' ] },
+        'Left the WNBA at her peak to play in <strong>Russia</strong>.' ] },
       { slug: 'elena-delle-donne', name: 'Elena Delle Donne', facts: [
-        'Two-time MVP (2015, 2019) and 2019 champion with the Washington Mystics.',
-        'In 2019 became the first player to join the 50–40–90 club for a season.',
-        '2013 Rookie of the Year.' ] },
+        '<strong>Two-time MVP</strong> (2015, 2019) and <strong>2019 champion</strong> with the <strong>Washington Mystics</strong>.',
+        'In 2019, the <strong>first player ever to join the 50–40–90 club</strong> for a season.',
+        '<strong>2013 Rookie of the Year</strong>.' ] },
     ];
 
     const shuffle = items => { const a = [...items]; for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
@@ -202,6 +209,7 @@
       return { legend, options: shuffle([legend, ...distractors]) };
     });
 
+    const legendCard = document.querySelector('.legend-card');
     const legendPhoto = document.getElementById('legendPhoto');
     const choicesBox = document.getElementById('choices');
     const roundNumber = document.getElementById('roundNumber');
@@ -230,6 +238,8 @@
       answered = false;
       roundNumber.textContent = roundIndex + 1;
       reveal.classList.add('hidden');
+      legendCard.classList.remove('answered');
+      choicesBox.classList.remove('hidden');
       feedback.textContent = 'Tap the name you think matches the photo.';
       legendPhoto.className = 'legend-photo';
       legendPhoto.alt = 'Mystery retired WNBA player';
@@ -240,12 +250,12 @@
         button.className = 'choice';
         button.type = 'button';
         button.textContent = option.name;
-        button.addEventListener('click', () => pickAnswer(option, button));
+        button.addEventListener('click', () => pickAnswer(option));
         return button;
       }));
     }
 
-    function pickAnswer(option, button) {
+    function pickAnswer(option) {
       if (answered) return;
       answered = true;
       const { legend } = rounds[roundIndex];
@@ -253,19 +263,16 @@
       if (isCorrect) score += 1;
       marks.push(isCorrect ? '🟩' : '🟥');
       scoreTotal.textContent = `${score} correct`;
-      [...choicesBox.children].forEach(child => {
-        child.disabled = true;
-        if (child.textContent === legend.name) child.classList.add('correct');
-      });
-      if (!isCorrect) button.classList.add('wrong');
+      feedback.textContent = '';
       legendPhoto.alt = legend.name;
-      revealName.textContent = legend.name;
-      revealVerdict.textContent = isCorrect ? 'You got it' : 'Not quite';
+      choicesBox.classList.add('hidden');
+      legendCard.classList.add('answered');
+      revealVerdict.textContent = isCorrect ? 'You got it' : `You guessed ${option.name}`;
       revealVerdict.className = isCorrect ? 'verdict hit' : 'verdict miss';
-      revealFacts.replaceChildren(...legend.facts.map(fact => { const li = document.createElement('li'); li.textContent = fact; return li; }));
+      revealName.textContent = legend.name;
+      revealFacts.replaceChildren(...legend.facts.map(fact => { const li = document.createElement('li'); li.innerHTML = fact; return li; }));
       nextButton.textContent = roundIndex === rounds.length - 1 ? 'See results' : 'Next legend';
       reveal.classList.remove('hidden');
-      feedback.textContent = isCorrect ? 'Nice — on to the next one.' : `It was ${legend.name}.`;
       updateResultPanel();
     }
 
