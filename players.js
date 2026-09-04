@@ -3258,7 +3258,7 @@ const allPlayers = [
     "college": "Oregon",
     "birthPlace": "Berlin, Germany",
     "experience": 4,
-    "status": "Out",
+    "status": "Active",
     "profile": "https://www.espn.com/wnba/player/_/id/4398768/nyara-sabally",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4398768.png"
