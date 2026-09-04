@@ -54,6 +54,19 @@
     .result-button { padding: 11px 18px; border: 1px solid var(--ink); background: var(--coral); color: #fff; font: 800 12px Manrope, sans-serif; text-transform: uppercase; cursor: pointer; }
     .result-button:hover { background: var(--coral-dark); border-color: var(--coral-dark); }
     .result-button.copy-button { background: var(--ink); }
+    .lb-form { margin-top: 20px; padding-top: 18px; border-top: 1px solid #e7e0d2; }
+    .lb-label { display: block; margin-bottom: 8px; font: 11px 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); }
+    .lb-row { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+    .lb-row input { flex: 1 1 180px; max-width: 240px; padding: 10px 12px; border: 1px solid var(--ink); background: var(--white); color: var(--ink); font: 14px Manrope, sans-serif; }
+    .lb-row input:focus-visible { outline: 3px solid var(--coral); outline-offset: 2px; }
+    .lb-wrap { margin-top: 20px; text-align: left; }
+    .lb-title { margin: 0 0 10px; font: 16px 'Archivo Black', sans-serif; text-transform: uppercase; text-align: center; }
+    .lb-list { display: grid; gap: 4px; margin: 0; padding: 0; list-style: none; }
+    .lb-item { display: grid; grid-template-columns: 26px 1fr auto; align-items: center; gap: 10px; padding: 9px 12px; border: 1px solid var(--ink); background: var(--white); font: 13px 'DM Mono', monospace; }
+    .lb-item.is-new { background: var(--mint); border-color: #5c9c7e; }
+    .lb-rank { font: 800 14px Manrope, sans-serif; color: var(--coral-dark); }
+    .lb-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .lb-score { font-weight: 700; }
     .hidden { display: none; }
     @media (max-width: 560px) {
       main { padding: 16px 0 48px; }
@@ -101,6 +114,17 @@
         <div class="share-actions">
           <button id="shareButton" class="result-button" type="button">Share with link</button>
           <button id="copyButton" class="result-button copy-button" type="button">Copy score</button>
+        </div>
+        <form id="lbForm" class="lb-form hidden">
+          <label class="lb-label" for="lbName">Add your score to the leaderboard</label>
+          <div class="lb-row">
+            <input id="lbName" type="text" maxlength="20" autocomplete="off" placeholder="Your name" data-1p-ignore="true" data-lpignore="true">
+            <button type="submit" class="result-button">Save</button>
+          </div>
+        </form>
+        <div id="lbWrap" class="lb-wrap hidden">
+          <h3 class="lb-title">Top 10</h3>
+          <ol id="lbList" class="lb-list"></ol>
         </div>
       </div>
     </section>
@@ -218,6 +242,10 @@
     const resultSummary = document.getElementById('resultSummary');
     const shareButton = document.getElementById('shareButton');
     const copyButton = document.getElementById('copyButton');
+    const lbForm = document.getElementById('lbForm');
+    const lbName = document.getElementById('lbName');
+    const lbWrap = document.getElementById('lbWrap');
+    const lbList = document.getElementById('lbList');
 
     roundTotal.textContent = rounds.length;
     let roundIndex = 0;
@@ -278,18 +306,123 @@
     }
 
     function nextRound() {
-      if (roundIndex === rounds.length - 1) {
-        resultHeading.textContent = 'Roll call complete';
-        updateResultPanel();
-        nextButton.disabled = true;
-        resultPanel.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        return;
-      }
+      if (roundIndex === rounds.length - 1) { finishGame(); return; }
       roundIndex += 1;
       renderRound();
     }
 
     nextButton.addEventListener('click', nextRound);
+
+    /* -------- Leaderboard --------
+       Paste the Google Apps Script Web App URL between the quotes below to turn on
+       the SHARED leaderboard (everyone sees the same Top 10). Leave it empty and
+       the leaderboard just saves on the current device. */
+    const LEADERBOARD_URL = 'https://script.google.com/macros/s/AKfycbxxFkRa3Jk0i4XxFYyduC58PG-bNg0D1WWHfUrwCRRuadnD2DYbU2n-LLnJwWfyigky/exec';
+
+    const LB_KEY = 'gtl-leaderboard-v1';
+    const lbShared = LEADERBOARD_URL.trim().length > 0;
+
+    function localBoard() { try { return JSON.parse(localStorage.getItem(LB_KEY)) || []; } catch { return []; } }
+    function saveLocal(board) { try { localStorage.setItem(LB_KEY, JSON.stringify(board)); } catch {} }
+    function sortBoard(board) { return [...board].sort((a, b) => b.score - a.score || a.t - b.t); }
+
+    function lbMessage(text) {
+      const li = document.createElement('li');
+      li.className = 'lb-item';
+      li.textContent = text;
+      lbList.replaceChildren(li);
+      lbWrap.classList.remove('hidden');
+    }
+    function renderRows(rows, highlightKey) {
+      const top = rows.slice(0, 10);
+      lbList.replaceChildren(...top.map((entry, i) => {
+        const li = document.createElement('li');
+        li.className = 'lb-item' + (highlightKey && entry.key === highlightKey ? ' is-new' : '');
+        const rank = document.createElement('span'); rank.className = 'lb-rank'; rank.textContent = i + 1;
+        const name = document.createElement('span'); name.className = 'lb-name'; name.textContent = entry.name;
+        const score = document.createElement('span'); score.className = 'lb-score'; score.textContent = `${entry.score}/${entry.total}`;
+        li.append(rank, name, score);
+        return li;
+      }));
+      lbWrap.classList.toggle('hidden', top.length === 0);
+    }
+
+    async function showBoard(highlightKey) {
+      if (!lbShared) { renderRows(sortBoard(localBoard()), highlightKey); return; }
+      lbMessage('Loading…');
+      try {
+        const res = await fetch(LEADERBOARD_URL, { method: 'GET' });
+        const data = await res.json();
+        if (!data || !data.ok) throw new Error('bad response');
+        renderRows(data.top || [], highlightKey);
+      } catch (err) {
+        lbMessage('Leaderboard unavailable right now.');
+      }
+    }
+
+    function replaceForm(message) {
+      const note = document.createElement('p');
+      note.className = 'lb-label';
+      note.style.margin = '0';
+      note.textContent = message;
+      lbForm.replaceChildren(note);
+    }
+    function formNote(message) {
+      let note = lbForm.querySelector('.lb-note');
+      if (!note) {
+        note = document.createElement('p');
+        note.className = 'lb-label lb-note';
+        note.style.margin = '10px 0 0';
+        lbForm.appendChild(note);
+      }
+      note.textContent = message;
+    }
+
+    function finishGame() {
+      resultHeading.textContent = 'Roll call complete';
+      updateResultPanel();
+      nextButton.disabled = true;
+      lbForm.classList.remove('hidden');
+      showBoard();
+      resultPanel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    lbForm.addEventListener('submit', async event => {
+      event.preventDefault();
+      const name = lbName.value.trim().replace(/\s+/g, ' ').slice(0, 20);
+      if (!name) { lbName.focus(); return; }
+      const total = rounds.length;
+      const key = `${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
+      const submitButton = lbForm.querySelector('button[type="submit"]');
+      submitButton.disabled = true;
+      lbName.disabled = true;
+
+      if (!lbShared) {
+        const board = localBoard();
+        board.push({ key, name, score, total, t: Date.now() });
+        saveLocal(board);
+        replaceForm('Saved to this device’s leaderboard.');
+        showBoard(key);
+        return;
+      }
+
+      formNote('Saving…');
+      try {
+        const res = await fetch(LEADERBOARD_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({ name, score, total })
+        });
+        const data = await res.json();
+        if (!data || !data.ok) throw new Error((data && data.error) || 'save failed');
+        replaceForm('Added to the leaderboard.');
+        renderRows(data.top || [], null);
+      } catch (err) {
+        submitButton.disabled = false;
+        lbName.disabled = false;
+        formNote('Could not save — check your connection and try again.');
+      }
+    });
 
     shareButton.addEventListener('click', async () => {
       const text = `WNBA Guess the Legend\n${summaryText()}\n${location.href}`;
