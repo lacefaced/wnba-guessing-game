@@ -27,7 +27,7 @@
     @media (min-width: 561px) {
       .legend-card.answered { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); }
       .legend-card.answered .legend-photo { height: 100%; max-height: 440px; border-bottom: none; border-right: 1px solid #e7e0d2; }
-      .legend-card.answered .reveal { align-self: center; }
+      .legend-card.answered .reveal { align-self: stretch; display: flex; flex-direction: column; justify-content: center; }
     }
     .legend-photo { display: block; width: 100%; height: auto; max-height: min(380px, 48vh); object-fit: contain; object-position: center; background: var(--white); border-bottom: 1px solid #e7e0d2; }
     .legend-photo.missing { height: 200px; display: flex; align-items: center; justify-content: center; font: 12px 'DM Mono', monospace; color: #fffdf8; background: #68c5b4; }
@@ -37,9 +37,13 @@
     .choice:disabled { cursor: default; }
     button:focus-visible { outline: 3px solid var(--coral); outline-offset: 3px; }
     .reveal { padding: 20px; }
-    .reveal .verdict { margin: 0 0 6px; font: 11px 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .12em; }
-    .reveal .verdict.hit { color: #2d7d58; } .reveal .verdict.miss { color: var(--coral-dark); }
+    .reveal.is-hit { background: #eef9f2; box-shadow: inset 5px 0 0 #5c9c7e; }
+    .reveal.is-miss { background: #ffefec; box-shadow: inset 5px 0 0 var(--coral); }
+    .reveal .verdict { display: inline-flex; align-items: center; gap: 6px; margin: 0 0 12px; padding: 6px 10px; border: 1px solid currentColor; font: 700 11px/1 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .1em; }
+    .reveal .verdict.hit { color: #1f6e4a; background: var(--mint); }
+    .reveal .verdict.miss { color: var(--coral-dark); background: #ffd2c9; }
     .reveal h2 { margin: 0 0 14px; font: 30px/1.05 'Archivo Black', sans-serif; text-transform: uppercase; letter-spacing: -.02em; }
+    .reveal.is-miss h2::before { content: "Correct answer"; display: block; margin-bottom: 5px; font: 700 10px/1 'DM Mono', monospace; letter-spacing: .12em; color: var(--coral-dark); }
     .fact-list { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; }
     .fact-list li { position: relative; padding-left: 18px; color: var(--ink); font-size: 15.5px; line-height: 1.6; }
     .fact-list li::before { content: ""; position: absolute; left: 0; top: 9px; width: 8px; height: 8px; background: var(--coral); }
@@ -258,6 +262,7 @@
       answered = false;
       roundNumber.textContent = roundIndex + 1;
       reveal.classList.add('hidden');
+      reveal.classList.remove('is-hit', 'is-miss');
       legendCard.classList.remove('answered');
       choicesBox.classList.remove('hidden');
       feedback.textContent = 'Tap the name you think matches the photo.';
@@ -287,7 +292,9 @@
       legendPhoto.alt = legend.name;
       choicesBox.classList.add('hidden');
       legendCard.classList.add('answered');
-      revealVerdict.textContent = isCorrect ? 'You got it' : `You guessed ${option.name}`;
+      reveal.classList.toggle('is-hit', isCorrect);
+      reveal.classList.toggle('is-miss', !isCorrect);
+      revealVerdict.textContent = isCorrect ? '✓ Correct' : `✗ Wrong — you picked ${option.name}`;
       revealVerdict.className = isCorrect ? 'verdict hit' : 'verdict miss';
       revealName.textContent = legend.name;
       revealFacts.replaceChildren(...legend.facts.map(fact => { const li = document.createElement('li'); li.innerHTML = fact; return li; }));
