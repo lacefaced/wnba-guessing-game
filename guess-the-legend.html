@@ -335,7 +335,11 @@
     const LEADERBOARD_URL = 'https://script.google.com/macros/s/AKfycbxxFkRa3Jk0i4XxFYyduC58PG-bNg0D1WWHfUrwCRRuadnD2DYbU2n-LLnJwWfyigky/exec';
 
     const LB_KEY = 'gtl-leaderboard-v1';
+    const NAME_KEY = 'gtl-player-name';
     const lbShared = LEADERBOARD_URL.trim().length > 0;
+
+    function loadName() { try { return localStorage.getItem(NAME_KEY) || ''; } catch { return ''; } }
+    function saveName(value) { try { localStorage.setItem(NAME_KEY, value); } catch {} }
 
     function localBoard() { try { return JSON.parse(localStorage.getItem(LB_KEY)) || []; } catch { return []; } }
     function saveLocal(board) { try { localStorage.setItem(LB_KEY, JSON.stringify(board)); } catch {} }
@@ -433,6 +437,7 @@
       event.preventDefault();
       const name = lbName.value.trim().replace(/\s+/g, ' ').slice(0, 20);
       if (!name) { lbName.focus(); return; }
+      saveName(name);
       const total = rounds.length;
       const key = `${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
       const submitButton = lbForm.querySelector('button[type="submit"]');
@@ -478,6 +483,7 @@
       setTimeout(() => { copyButton.textContent = 'Copy score'; }, 1500);
     });
 
+    lbName.value = loadName();
     renderRound();
     showBoard(null, true);
   </script>
