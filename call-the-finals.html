@@ -62,7 +62,7 @@
     <div id="site-menu"></div>
     <p class="kicker">WNBA / playoffs</p>
     <h1>Call the Finals.</h1>
-    <p class="intro">Pick the two teams you think will reach the WNBA Finals, then call the champion. Lock it in and see how your call stacks up against everyone else's.</p>
+    <p class="intro">Pick the two teams you think will reach the WNBA Finals, call the champion, and pick the team you'd <em>want</em> to win. Lock it in and see how your call stacks up against everyone else's.</p>
 
     <p id="closedNote" class="closed-note hidden">Calls are closed &mdash; the 2026 WNBA playoffs have started. Here's how everyone called it.</p>
 
@@ -74,6 +74,9 @@
       <p class="step-label">Step 2 &mdash; <b>your champion</b></p>
       <div id="champRow" class="champ-row"></div>
     </div>
+
+    <p class="step-label" id="wantLabel">Step 3 &mdash; <b>who you want to win</b> <span style="color:var(--muted)">(any team, heart not head)</span></p>
+    <div id="wantGrid" class="team-grid"></div>
 
     <div id="lockArea" class="hidden">
       <div class="lock-row">
@@ -92,6 +95,8 @@
       <div id="champTally" class="tally"></div>
       <h3>Reaching the Finals</h3>
       <div id="finalTally" class="tally"></div>
+      <h3>Want to win</h3>
+      <div id="wantTally" class="tally"></div>
     </section>
   </main>
 
@@ -128,9 +133,12 @@
     const boardCount = document.getElementById('boardCount');
     const champTally = document.getElementById('champTally');
     const finalTally = document.getElementById('finalTally');
+    const wantGrid = document.getElementById('wantGrid');
+    const wantTally = document.getElementById('wantTally');
 
     let selected = [];
     let champion = null;
+    let wantFor = null;
 
     function logoEl(name) {
       const team = TEAMS.find(t => t.name === name);
@@ -191,18 +199,35 @@
       updateLock();
     }
 
+    function renderWant() {
+      wantGrid.replaceChildren(...TEAMS.map(team => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'team-tile' + (wantFor === team.name ? ' selected' : '');
+        btn.append(logoEl(team.name), Object.assign(document.createElement('span'), { textContent: team.name }));
+        btn.addEventListener('click', () => {
+          if (callsClosed) return;
+          wantFor = team.name;
+          yourCall.classList.add('hidden');
+          renderWant();
+          updateLock();
+        });
+        return btn;
+      }));
+    }
+
     function updateLock() {
-      lockBtn.disabled = !(selected.length === 2 && champion && callName.value.trim());
+      lockBtn.disabled = !(selected.length === 2 && champion && wantFor && callName.value.trim());
     }
     callName.addEventListener('input', updateLock);
 
     async function submitCall() {
       if (callsClosed) return;
       const name = callName.value.trim().replace(/\s+/g, ' ').slice(0, 20);
-      if (!name || selected.length !== 2 || !champion) return;
+      if (!name || selected.length !== 2 || !champion || !wantFor) return;
       try {
         localStorage.setItem(NAME_KEY, name);
-        localStorage.setItem(PICK_KEY, JSON.stringify({ teamA: selected[0], teamB: selected[1], champion }));
+        localStorage.setItem(PICK_KEY, JSON.stringify({ teamA: selected[0], teamB: selected[1], champion, rootFor: wantFor }));
       } catch (e) {}
       lockBtn.disabled = true;
       lockNote.textContent = 'Locking in…';
@@ -210,7 +235,7 @@
         const res = await fetch(LEADERBOARD_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify({ game: 'finals', name, teamA: selected[0], teamB: selected[1], champion })
+          body: JSON.stringify({ game: 'finals', name, teamA: selected[0], teamB: selected[1], champion, rootFor: wantFor })
         });
         const data = await res.json();
         if (!data || !data.ok) throw new Error((data && data.error) || 'failed');
@@ -228,7 +253,7 @@
       lockArea.classList.add('hidden');
       yourCall.classList.remove('hidden');
       const line = document.createElement('div');
-      line.innerHTML = `Your call: <b>${selected[0]}</b> vs <b>${selected[1]}</b> &mdash; champion <b>${champion}</b>`;
+      line.innerHTML = `Your call: <b>${selected[0]}</b> vs <b>${selected[1]}</b> &mdash; champion <b>${champion}</b>.<br>Rooting for <b>${wantFor}</b>.`;
       yourCall.replaceChildren(line);
       if (callsClosed) return;
       const change = document.createElement('button');
@@ -272,9 +297,11 @@
       const mine = storedPick();
       const mineChamp = new Set(mine ? [mine.champion] : []);
       const mineFinal = new Set(mine ? [mine.teamA, mine.teamB] : []);
+      const mineWant = new Set(mine && mine.rootFor ? [mine.rootFor] : []);
       boardCount.textContent = `${pred.total} call${pred.total === 1 ? '' : 's'} in`;
       champTally.replaceChildren(...tallyRows(pred.champion || [], pred.total, mineChamp));
       finalTally.replaceChildren(...tallyRows(pred.finalist || [], pred.total, mineFinal));
+      wantTally.replaceChildren(...tallyRows(pred.want || [], pred.total, mineWant));
     }
 
     async function loadBoard() {
@@ -293,11 +320,13 @@
     if (mine && TEAMS.some(t => t.name === mine.teamA) && TEAMS.some(t => t.name === mine.teamB)) {
       selected = [mine.teamA, mine.teamB];
       champion = mine.champion;
+      wantFor = mine.rootFor || null;
     }
     if (callsClosed) {
       document.querySelector('.intro').classList.add('hidden');
       document.querySelectorAll('.step-label').forEach(el => el.classList.add('hidden'));
       teamGrid.classList.add('hidden');
+      wantGrid.classList.add('hidden');
       pickCount.classList.add('hidden');
       champStep.classList.add('hidden');
       lockArea.classList.add('hidden');
@@ -306,6 +335,7 @@
     } else {
       renderTeams();
       renderChampStep();
+      renderWant();
       if (mine) showYourCall();
     }
     loadBoard();

@@ -112,11 +112,14 @@ Save the file. That's the only change.
   full history even though each game only shows its Top 10. The `game` column
   says which game each row belongs to; older rows with a blank `game` count as
   `legends`.
-- **"Call the Finals" is different.** That game's picks go to a separate tab
-  called **Predictions** (`name | teamA | teamB | champion | timestamp`), which
-  the script creates on its own. There is **one row per name** - if the same
-  name submits again it overwrites their earlier pick, so the tally stays honest.
-  To reset the whole poll, delete every row under the header on that tab.
+- **"Call the Finals" is different.** That poll's picks go to a separate tab
+  called **Predictions**
+  (`name | teamA | teamB | champion | rootFor | timestamp`), which the script
+  creates on its own. `champion` is the team they think wins; `rootFor` is the
+  team they *want* to win (any playoff team). There is **one row per name** - if
+  the same name submits again it overwrites their earlier pick, so the tallies
+  stay honest. To reset the whole poll, delete every row under the header on that
+  tab.
 
 ---
 

@@ -65,13 +65,15 @@ function doPost(e) {
     var teamA = cleanTeam(body.teamA);
     var teamB = cleanTeam(body.teamB);
     var champion = cleanTeam(body.champion);
+    var rootFor = cleanTeam(body.rootFor);
     if (!teamA || !teamB || teamA === teamB) return jsonOutput({ ok: false, error: 'pick two different teams' });
     if (champion !== teamA && champion !== teamB) return jsonOutput({ ok: false, error: 'champion must be one of your two teams' });
+    if (!rootFor) return jsonOutput({ ok: false, error: 'pick a team to root for' });
 
     var predLock = LockService.getScriptLock();
     predLock.waitLock(5000);
     try {
-      upsertPrediction(name, teamA, teamB, champion);
+      upsertPrediction(name, teamA, teamB, champion, rootFor);
     } finally {
       predLock.releaseLock();
     }
@@ -176,12 +178,12 @@ function getPredSheet() {
     sheet = ss.insertSheet(PRED_TAB);
   }
   if (sheet.getLastRow() === 0) {
-    sheet.appendRow(['name', 'teamA', 'teamB', 'champion', 'timestamp']);
+    sheet.appendRow(['name', 'teamA', 'teamB', 'champion', 'rootFor', 'timestamp']);
   }
   return sheet;
 }
 
-function upsertPrediction(name, teamA, teamB, champion) {
+function upsertPrediction(name, teamA, teamB, champion, rootFor) {
   var sheet = getPredSheet();
   var last = sheet.getLastRow();
   var rowIndex = -1;
@@ -191,22 +193,23 @@ function upsertPrediction(name, teamA, teamB, champion) {
       if (String(names[i][0]).toLowerCase() === name.toLowerCase()) { rowIndex = i + 2; break; }
     }
   }
-  var row = [name, teamA, teamB, champion, Date.now()];
+  var row = [name, teamA, teamB, champion, rootFor, Date.now()];
   if (rowIndex === -1) {
     sheet.appendRow(row);
   } else {
-    sheet.getRange(rowIndex, 1, 1, 5).setValues([row]);
+    sheet.getRange(rowIndex, 1, 1, 6).setValues([row]);
   }
 }
 
 function readPredictions() {
   var sheet = getPredSheet();
   var last = sheet.getLastRow();
-  if (last < 2) return { total: 0, champion: [], finalist: [] };
+  if (last < 2) return { total: 0, champion: [], finalist: [], want: [] };
 
-  var values = sheet.getRange(2, 1, last - 1, 4).getValues();
+  var values = sheet.getRange(2, 1, last - 1, 5).getValues();
   var champ = {};
   var fin = {};
+  var want = {};
   var total = 0;
   values.forEach(function (r) {
     var a = cleanTeam(r[1]);
@@ -217,8 +220,10 @@ function readPredictions() {
     champ[c] = (champ[c] || 0) + 1;
     fin[a] = (fin[a] || 0) + 1;
     fin[b] = (fin[b] || 0) + 1;
+    var w = cleanTeam(r[4]);
+    if (w) want[w] = (want[w] || 0) + 1;
   });
-  return { total: total, champion: tallyToList(champ), finalist: tallyToList(fin) };
+  return { total: total, champion: tallyToList(champ), finalist: tallyToList(fin), want: tallyToList(want) };
 }
 
 function tallyToList(obj) {
