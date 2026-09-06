@@ -17,6 +17,7 @@
     .intro { max-width:520px; margin:14px 0 26px; color:var(--muted); font-size:14px; line-height:1.55; }
     .step-label { margin:28px 0 12px; font:12px 'DM Mono',monospace; letter-spacing:.1em; text-transform:uppercase; color:var(--coral-dark); }
     .step-label b { color:var(--ink); }
+    .closed-note { margin:6px 0 20px; padding:12px 14px; border-left:3px solid var(--coral); background:rgba(255,253,248,.7); font:12px/1.5 'DM Mono',monospace; color:var(--ink); }
     .team-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:10px; }
     .team-tile { display:flex; align-items:center; gap:10px; padding:10px 12px; border:1px solid var(--ink); background:var(--white); box-shadow:0 6px 0 rgba(23,34,44,.08); font:800 13px Manrope,sans-serif; text-align:left; cursor:pointer; }
     .team-tile:hover:not(:disabled) { border-color:var(--coral); }
@@ -63,6 +64,8 @@
     <h1>Call the Finals.</h1>
     <p class="intro">Pick the two teams you think will reach the WNBA Finals, then call the champion. Lock it in and see how your call stacks up against everyone else's.</p>
 
+    <p id="closedNote" class="closed-note hidden">Calls are closed &mdash; the 2026 WNBA playoffs have started. Here's how everyone called it.</p>
+
     <p class="step-label">Step 1 &mdash; <b>your two Finals teams</b></p>
     <div id="teamGrid" class="team-grid"></div>
     <p id="pickCount" class="pick-count">Pick 2 &mdash; 0 selected</p>
@@ -94,23 +97,20 @@
 
   <script>
     const LEADERBOARD_URL = 'https://script.google.com/macros/s/AKfycbxxFkRa3Jk0i4XxFYyduC58PG-bNg0D1WWHfUrwCRRuadnD2DYbU2n-LLnJwWfyigky/exec';
+    // The 2026 WNBA playoff field (all eight clinched). Edit here if it changes.
     const TEAMS = [
       { name: 'Atlanta Dream', abbr: 'atl' },
-      { name: 'Chicago Sky', abbr: 'chi' },
-      { name: 'Connecticut Sun', abbr: 'con' },
       { name: 'Dallas Wings', abbr: 'dal' },
       { name: 'Golden State Valkyries', abbr: 'gs' },
       { name: 'Indiana Fever', abbr: 'ind' },
       { name: 'Las Vegas Aces', abbr: 'lv' },
-      { name: 'Los Angeles Sparks', abbr: 'la' },
       { name: 'Minnesota Lynx', abbr: 'min' },
       { name: 'New York Liberty', abbr: 'ny' },
-      { name: 'Phoenix Mercury', abbr: 'phx' },
-      { name: 'Portland Fire', abbr: 'por' },
-      { name: 'Seattle Storm', abbr: 'sea' },
-      { name: 'Toronto Tempo', abbr: 'tor' },
       { name: 'Washington Mystics', abbr: 'wsh' }
     ];
+    // Picks close at midnight ET on the day the playoffs start.
+    const LOCK_AT = Date.parse('2026-09-27T00:00:00-04:00');
+    const callsClosed = Date.now() >= LOCK_AT;
     const LOGO = abbr => `https://a.espncdn.com/i/teamlogos/wnba/500/${abbr}.png`;
     const NAME_KEY = 'gtl-player-name';
     const PICK_KEY = 'ctf-pick';
@@ -160,6 +160,7 @@
     }
 
     function toggleTeam(name) {
+      if (callsClosed) return;
       if (selected.includes(name)) {
         selected = selected.filter(n => n !== name);
         if (champion === name) champion = null;
@@ -196,6 +197,7 @@
     callName.addEventListener('input', updateLock);
 
     async function submitCall() {
+      if (callsClosed) return;
       const name = callName.value.trim().replace(/\s+/g, ' ').slice(0, 20);
       if (!name || selected.length !== 2 || !champion) return;
       try {
@@ -227,6 +229,8 @@
       yourCall.classList.remove('hidden');
       const line = document.createElement('div');
       line.innerHTML = `Your call: <b>${selected[0]}</b> vs <b>${selected[1]}</b> &mdash; champion <b>${champion}</b>`;
+      yourCall.replaceChildren(line);
+      if (callsClosed) return;
       const change = document.createElement('button');
       change.type = 'button';
       change.textContent = 'Change my call';
@@ -236,7 +240,7 @@
         updateLock();
         callName.focus();
       });
-      yourCall.replaceChildren(line, change);
+      yourCall.appendChild(change);
     }
 
     function tallyRows(list, total, mine) {
@@ -290,9 +294,20 @@
       selected = [mine.teamA, mine.teamB];
       champion = mine.champion;
     }
-    renderTeams();
-    renderChampStep();
-    if (mine) showYourCall();
+    if (callsClosed) {
+      document.querySelector('.intro').classList.add('hidden');
+      document.querySelectorAll('.step-label').forEach(el => el.classList.add('hidden'));
+      teamGrid.classList.add('hidden');
+      pickCount.classList.add('hidden');
+      champStep.classList.add('hidden');
+      lockArea.classList.add('hidden');
+      document.getElementById('closedNote').classList.remove('hidden');
+      if (mine) showYourCall();
+    } else {
+      renderTeams();
+      renderChampStep();
+      if (mine) showYourCall();
+    }
     loadBoard();
   </script>
   <script src="menu.js"></script>

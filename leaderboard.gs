@@ -30,13 +30,14 @@ var MAX_POINTS = 500;
 var GAMES = ['legends', 'naming', 'finals'];
 var DEFAULT_GAME = 'legends';
 
-// Teams a "Call the Finals" pick may name.
+// Teams a "Call the Finals" pick may name - the 2026 WNBA playoff field.
 var TEAMS = [
-  'Atlanta Dream', 'Chicago Sky', 'Connecticut Sun', 'Dallas Wings',
-  'Golden State Valkyries', 'Indiana Fever', 'Las Vegas Aces', 'Los Angeles Sparks',
-  'Minnesota Lynx', 'New York Liberty', 'Phoenix Mercury', 'Portland Fire',
-  'Seattle Storm', 'Toronto Tempo', 'Washington Mystics'
+  'Atlanta Dream', 'Dallas Wings', 'Golden State Valkyries', 'Indiana Fever',
+  'Las Vegas Aces', 'Minnesota Lynx', 'New York Liberty', 'Washington Mystics'
 ];
+
+// "Call the Finals" picks stop being accepted at this moment (midnight ET, Sept 27 2026).
+var FINALS_LOCK = new Date('2026-09-27T00:00:00-04:00').getTime();
 
 
 function doGet(e) {
@@ -60,6 +61,7 @@ function doPost(e) {
   if (!name) return jsonOutput({ ok: false, error: 'name required' });
 
   if (game === 'finals') {
+    if (Date.now() >= FINALS_LOCK) return jsonOutput({ ok: false, error: 'calls are closed' });
     var teamA = cleanTeam(body.teamA);
     var teamB = cleanTeam(body.teamB);
     var champion = cleanTeam(body.champion);
