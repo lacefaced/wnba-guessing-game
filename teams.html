@@ -33,7 +33,8 @@
     .column-title span { color: var(--muted); font-size: 10px; }
     .cards { display: grid; gap: 10px; }
     .logo-stage { display: grid; place-items: center; min-height: 360px; padding: 24px; border: 1px solid var(--ink); background: var(--white); box-shadow: 0 10px 0 rgba(23,34,44,.08); }
-    .logo-stage .logo { flex-basis: 190px; width: 190px; height: 190px; margin: 0; padding: 16px; }
+    .logo-stage .logo { flex-basis: 190px; width: 190px; height: 190px; margin: 0; padding: 16px; filter: blur(9px); }
+    .logo-stage .logo.revealed { filter: none; transition: filter .2s ease; }
     .question-label { margin: 18px 0 0; color: var(--muted); font: 11px 'DM Mono', monospace; text-align: center; text-transform: uppercase; }
     button { font: inherit; }
     button:focus-visible { outline: 3px solid var(--coral); outline-offset: 3px; }
@@ -59,7 +60,7 @@
     .share-actions { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
     .copy-button { border-color: var(--ink); background: var(--ink); }
     @keyframes shake { 25% { transform: translateX(5px); } 75% { transform: translateX(-5px); } }
-    @media (max-width: 700px) { main { padding-top: 20px; } header { display: block; margin-bottom: 30px; } h1 { font-size: 34px; } .intro { max-width: none; margin-bottom: 20px; } .scoreboard { width: fit-content; } .board { grid-template-columns: 1fr; gap: 20px; } .logo-stage { min-height: 230px; } .logo-stage .logo { flex-basis: 140px; width: 140px; height: 140px; } }
+    @media (max-width: 700px) { main { padding-top: 20px; } header { display: block; margin-bottom: 30px; } h1 { font-size: 34px; } .intro { max-width: none; margin-bottom: 20px; } .scoreboard { width: fit-content; } .board { grid-template-columns: 1fr; gap: 20px; } .logo-stage { min-height: 230px; } .logo-stage .logo { flex-basis: 140px; width: 140px; height: 140px; filter: blur(6.5px); } }
   </style>
 </head>
 <body>
@@ -93,7 +94,7 @@
     function makeLogo(team) { const image = document.createElement('img'); image.className = 'logo'; image.src = `https://a.espncdn.com/i/teamlogos/wnba/500/${teamDetails[team][2]}.png`; image.alt = `${team} logo`; image.onerror = () => { const fallback = document.createElement('span'); fallback.className = 'logo logo-fallback'; fallback.textContent = team.split(' ').map(word => word[0]).join('').slice(0, 3); image.replaceWith(fallback); }; return image; }
     function makeAnswer(team) { const card = document.createElement('button'); card.className = 'match-card answer-card'; card.type = 'button'; card.textContent = currentType === 'name' ? teamDetails[team][1] : teamDetails[team][0]; card.addEventListener('click', () => answer(card, team)); return card; }
     let questionAttempted = false;
-    function answer(card, team) { if (card.disabled) return; if (!questionAttempted) { questionAttempted = true; if (team === currentTeam) { score += 1; scoreDisplay.textContent = score; } else { misses += 1; missesDisplay.textContent = misses; } } if (team === currentTeam) { answerCards.querySelectorAll('button').forEach(button => { button.disabled = true; }); card.classList.add('correct'); status.textContent = 'Correct. Next logo.'; status.className = 'status success'; updateResultPanel(); setTimeout(nextQuestion, 350); } else { card.classList.add('wrong'); status.textContent = 'Not quite. Try another answer.'; status.className = 'status error'; updateResultPanel(); setTimeout(() => card.classList.remove('wrong'), 350); } }
+    function answer(card, team) { if (card.disabled) return; if (!questionAttempted) { questionAttempted = true; if (team === currentTeam) { score += 1; scoreDisplay.textContent = score; } else { misses += 1; missesDisplay.textContent = misses; } } if (team === currentTeam) { answerCards.querySelectorAll('button').forEach(button => { button.disabled = true; }); card.classList.add('correct'); const shownLogo = logoStage.querySelector('.logo'); if (shownLogo) shownLogo.classList.add('revealed'); status.textContent = 'Correct. Next logo.'; status.className = 'status success'; updateResultPanel(); setTimeout(nextQuestion, 650); } else { card.classList.add('wrong'); status.textContent = 'Not quite. Try another answer.'; status.className = 'status error'; updateResultPanel(); setTimeout(() => card.classList.remove('wrong'), 350); } }
     function nextQuestion() { if (questionIndex === questionOrder.length) return finishGame(); const question = questionOrder[questionIndex]; currentTeam = question.team; currentType = question.type; questionAttempted = false; questionIndex += 1; questionType.textContent = currentType === 'name' ? 'team name' : 'location'; answerHeading.firstChild.textContent = currentType === 'name' ? 'Team name ' : 'Location '; logoStage.replaceChildren(makeLogo(currentTeam)); questionTeams = shuffle([currentTeam, ...shuffle(teams.filter(team => team !== currentTeam)).slice(0, 4)]); answerCards.replaceChildren(...shuffle(questionTeams).map(makeAnswer)); document.getElementById('roundLabel').textContent = `Question ${questionIndex} of ${questionOrder.length}`; status.textContent = 'Choose the correct answer.'; status.className = 'status'; }
     function updateResultPanel() { resultSummary.textContent = `${score} right  |  ${misses} wrong  |  ${questionIndex}/${questionOrder.length} answered`; resultPanel.hidden = false; }
     function scoreText(includeLink) { return `WNBA Logo Match\n${score} right  |  ${misses} wrong\n${questionIndex}/${questionOrder.length} answered${includeLink ? `\n${location.href}` : ''}`; }
