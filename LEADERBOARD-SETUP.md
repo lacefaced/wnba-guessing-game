@@ -112,6 +112,11 @@ Save the file. That's the only change.
   full history even though each game only shows its Top 10. The `game` column
   says which game each row belongs to; older rows with a blank `game` count as
   `legends`.
+- **"Call the Finals" is different.** That game's picks go to a separate tab
+  called **Predictions** (`name | teamA | teamB | champion | timestamp`), which
+  the script creates on its own. There is **one row per name** - if the same
+  name submits again it overwrites their earlier pick, so the tally stays honest.
+  To reset the whole poll, delete every row under the header on that tab.
 
 ---
 
@@ -133,7 +138,11 @@ existing Web App - the URL does **not** change:
 The list of games the script will accept lives near the top of `leaderboard.gs`:
 
 ```js
-var GAMES = ['legends', 'naming'];
+var GAMES = ['legends', 'naming', 'finals'];
 ```
 
 Add a new game's name there before pointing a new page at it.
+
+> **You need to do this re-deploy now** for the Naming Challenge board and the
+> new **Call the Finals** poll to work. Until you do, the Naming Challenge board
+> shows the Legends scores and Call the Finals can't save picks.

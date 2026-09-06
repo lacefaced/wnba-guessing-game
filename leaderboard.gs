@@ -1,30 +1,49 @@
 /**
- * WNBA Guessing Game - shared leaderboard backend.
+ * WNBA Guessing Game - shared leaderboard + predictions backend.
  *
- * This runs on Google's servers as a Web App attached to one Google Sheet.
- * One deployment serves every game; the `game` value keeps the boards separate.
- *   GET  ?game=legends   -> returns that game's current Top 10 as JSON
- *   POST {game,name,score,total}  -> validates and appends a new row
+ * Runs on Google's servers as a Web App attached to one Google Sheet.
+ * One deployment serves everything; the `game` value keeps things separate.
+ *
+ *   Score games (legends, naming):
+ *     GET  ?game=legends           -> that game's current Top 10 as JSON
+ *     POST {game,name,score,total} -> validates and appends a row (Scores tab)
+ *
+ *   Predictions (finals - "Call the Finals"):
+ *     GET  ?game=finals                       -> tally of everyone's picks
+ *     POST {game:'finals',name,teamA,teamB,champion} -> saves/updates one
+ *          person's pick in the Predictions tab (one row per name)
  *
  * Setup steps are in LEADERBOARD-SETUP.md.
  */
 
-// The tab (bottom-left of the spreadsheet) that holds the scores.
+// Tabs (bottom-left of the spreadsheet). Both are created automatically.
 var TAB_NAME = 'Scores';
+var PRED_TAB = 'Predictions';
 
-// Keep at most this many rows in the sheet; oldest are trimmed automatically.
+// Keep at most this many score rows; oldest are trimmed automatically.
 var MAX_ROWS = 2000;
 
-// Highest score/total any game could report. Submissions outside this are rejected.
+// Highest score/total any score game could report. Submissions outside this are rejected.
 var MAX_POINTS = 500;
 
-// Games that are allowed to write to the board. Unknown values fall back to the first.
-var GAMES = ['legends', 'naming'];
+// Games allowed to write. Unknown values fall back to the first.
+var GAMES = ['legends', 'naming', 'finals'];
 var DEFAULT_GAME = 'legends';
+
+// Teams a "Call the Finals" pick may name.
+var TEAMS = [
+  'Atlanta Dream', 'Chicago Sky', 'Connecticut Sun', 'Dallas Wings',
+  'Golden State Valkyries', 'Indiana Fever', 'Las Vegas Aces', 'Los Angeles Sparks',
+  'Minnesota Lynx', 'New York Liberty', 'Phoenix Mercury', 'Portland Fire',
+  'Seattle Storm', 'Toronto Tempo', 'Washington Mystics'
+];
 
 
 function doGet(e) {
   var game = cleanGame(e && e.parameter ? e.parameter.game : '');
+  if (game === 'finals') {
+    return jsonOutput({ ok: true, game: game, predictions: readPredictions() });
+  }
   return jsonOutput({ ok: true, game: game, top: readTop(10, game) });
 }
 
@@ -38,10 +57,27 @@ function doPost(e) {
 
   var game = cleanGame(body.game);
   var name = cleanName(body.name);
+  if (!name) return jsonOutput({ ok: false, error: 'name required' });
+
+  if (game === 'finals') {
+    var teamA = cleanTeam(body.teamA);
+    var teamB = cleanTeam(body.teamB);
+    var champion = cleanTeam(body.champion);
+    if (!teamA || !teamB || teamA === teamB) return jsonOutput({ ok: false, error: 'pick two different teams' });
+    if (champion !== teamA && champion !== teamB) return jsonOutput({ ok: false, error: 'champion must be one of your two teams' });
+
+    var predLock = LockService.getScriptLock();
+    predLock.waitLock(5000);
+    try {
+      upsertPrediction(name, teamA, teamB, champion);
+    } finally {
+      predLock.releaseLock();
+    }
+    return jsonOutput({ ok: true, game: game, predictions: readPredictions() });
+  }
+
   var score = Math.round(Number(body.score));
   var total = Math.round(Number(body.total));
-
-  if (!name) return jsonOutput({ ok: false, error: 'name required' });
   if (!(score >= 0 && score <= MAX_POINTS)) return jsonOutput({ ok: false, error: 'bad score' });
   if (!(total >= 1 && total <= MAX_POINTS)) return jsonOutput({ ok: false, error: 'bad total' });
   if (score > total) return jsonOutput({ ok: false, error: 'score above total' });
@@ -76,6 +112,14 @@ function cleanName(value) {
     out += ch;
   }
   return out.replace(/\s+/g, ' ').trim().slice(0, 20);
+}
+
+function cleanTeam(value) {
+  var v = String(value == null ? '' : value).trim().toLowerCase();
+  for (var i = 0; i < TEAMS.length; i++) {
+    if (TEAMS[i].toLowerCase() === v) return TEAMS[i];
+  }
+  return '';
 }
 
 function getSheet() {
@@ -119,6 +163,68 @@ function trimOldRows(sheet) {
     sheet.deleteRows(2, dataRows - MAX_ROWS);
   }
 }
+
+
+// ---- "Call the Finals" predictions ----
+
+function getPredSheet() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName(PRED_TAB);
+  if (!sheet) {
+    sheet = ss.insertSheet(PRED_TAB);
+  }
+  if (sheet.getLastRow() === 0) {
+    sheet.appendRow(['name', 'teamA', 'teamB', 'champion', 'timestamp']);
+  }
+  return sheet;
+}
+
+function upsertPrediction(name, teamA, teamB, champion) {
+  var sheet = getPredSheet();
+  var last = sheet.getLastRow();
+  var rowIndex = -1;
+  if (last >= 2) {
+    var names = sheet.getRange(2, 1, last - 1, 1).getValues();
+    for (var i = 0; i < names.length; i++) {
+      if (String(names[i][0]).toLowerCase() === name.toLowerCase()) { rowIndex = i + 2; break; }
+    }
+  }
+  var row = [name, teamA, teamB, champion, Date.now()];
+  if (rowIndex === -1) {
+    sheet.appendRow(row);
+  } else {
+    sheet.getRange(rowIndex, 1, 1, 5).setValues([row]);
+  }
+}
+
+function readPredictions() {
+  var sheet = getPredSheet();
+  var last = sheet.getLastRow();
+  if (last < 2) return { total: 0, champion: [], finalist: [] };
+
+  var values = sheet.getRange(2, 1, last - 1, 4).getValues();
+  var champ = {};
+  var fin = {};
+  var total = 0;
+  values.forEach(function (r) {
+    var a = cleanTeam(r[1]);
+    var b = cleanTeam(r[2]);
+    var c = cleanTeam(r[3]);
+    if (!a || !b || !c) return;
+    total++;
+    champ[c] = (champ[c] || 0) + 1;
+    fin[a] = (fin[a] || 0) + 1;
+    fin[b] = (fin[b] || 0) + 1;
+  });
+  return { total: total, champion: tallyToList(champ), finalist: tallyToList(fin) };
+}
+
+function tallyToList(obj) {
+  return Object.keys(obj)
+    .map(function (k) { return { team: k, count: obj[k] }; })
+    .sort(function (x, y) { return (y.count - x.count) || (x.team < y.team ? -1 : 1); });
+}
+
 
 function jsonOutput(obj) {
   return ContentService

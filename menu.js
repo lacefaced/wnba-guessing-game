@@ -7,6 +7,7 @@
     { f: 'rankings.html', l: '03 / Top Five' },
     { f: 'teams.html', l: '04 / Logo Match' },
     { f: 'guess-the-legend.html', l: '05 / Guess the Legend' },
+    { f: 'call-the-finals.html', l: '06 / Call the Finals' },
     { f: 'rosters.html', l: 'Roster Viewer' }
   ];
 

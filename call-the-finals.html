@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WNBA Call the Finals</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏀</text></svg>">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Mono:wght@400;500&family=Manrope:wght@500;600;700;800&display=swap');
+    :root { --ink:#17222c; --muted:#71808b; --paper:#f5f1e9; --white:#fffdf8; --coral:#f05a47; --coral-dark:#c63e35; --mint:#b8e6d1; }
+    * { box-sizing:border-box; }
+    body { margin:0; min-height:100vh; color:var(--ink); background:var(--paper); font-family:Manrope,sans-serif; }
+    body::before { content:""; position:fixed; inset:0; pointer-events:none; opacity:.3; background-image:radial-gradient(#c9c2b6 1px,transparent 1px); background-size:18px 18px; }
+    main { position:relative; width:min(760px,calc(100% - 28px)); margin:0 auto; padding:28px 0 60px; }
+    .kicker { margin:0 0 8px; color:var(--coral-dark); font:500 12px 'DM Mono',monospace; letter-spacing:.12em; text-transform:uppercase; }
+    h1 { margin:0; font:42px/1.02 'Archivo Black',sans-serif; text-transform:uppercase; }
+    .intro { max-width:520px; margin:14px 0 26px; color:var(--muted); font-size:14px; line-height:1.55; }
+    .step-label { margin:28px 0 12px; font:12px 'DM Mono',monospace; letter-spacing:.1em; text-transform:uppercase; color:var(--coral-dark); }
+    .step-label b { color:var(--ink); }
+    .team-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:10px; }
+    .team-tile { display:flex; align-items:center; gap:10px; padding:10px 12px; border:1px solid var(--ink); background:var(--white); box-shadow:0 6px 0 rgba(23,34,44,.08); font:800 13px Manrope,sans-serif; text-align:left; cursor:pointer; }
+    .team-tile:hover:not(:disabled) { border-color:var(--coral); }
+    .team-tile.selected { border:3px solid var(--coral); background:#fff0ec; padding:8px 10px; }
+    .team-tile:disabled { opacity:.4; cursor:default; }
+    .team-tile img, .team-tile .badge { width:34px; height:34px; flex:none; object-fit:contain; }
+    .team-tile .badge { display:grid; place-items:center; background:#68c5b4; color:var(--ink); font:800 11px 'DM Mono',monospace; }
+    .pick-count { margin-top:12px; font:11px 'DM Mono',monospace; color:var(--muted); text-transform:uppercase; letter-spacing:.08em; }
+    .champ-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .champ-btn { display:flex; flex-direction:column; align-items:center; gap:10px; padding:20px 12px; border:1px solid var(--ink); background:var(--white); box-shadow:0 8px 0 rgba(23,34,44,.08); font:900 15px 'Archivo Black',sans-serif; text-transform:uppercase; text-align:center; cursor:pointer; }
+    .champ-btn img, .champ-btn .badge { width:60px; height:60px; object-fit:contain; }
+    .champ-btn .badge { display:grid; place-items:center; background:#68c5b4; font:800 16px 'DM Mono',monospace; }
+    .champ-btn.selected { border:3px solid var(--coral); background:#fff0ec; }
+    .lock-row { display:flex; gap:8px; flex-wrap:wrap; margin-top:20px; }
+    .lock-row input { flex:1 1 200px; max-width:260px; padding:11px 13px; border:1px solid var(--ink); background:var(--white); color:var(--ink); font:14px Manrope,sans-serif; }
+    .lock-row input:focus-visible { outline:3px solid var(--coral); outline-offset:2px; }
+    .lock-btn { padding:11px 20px; border:1px solid var(--ink); background:var(--ink); color:#fff; font:800 12px Manrope,sans-serif; text-transform:uppercase; cursor:pointer; }
+    .lock-btn:hover:not(:disabled) { background:var(--coral); border-color:var(--coral); }
+    .lock-btn:disabled { opacity:.5; cursor:default; }
+    .your-call { margin-top:20px; padding:16px; border:1px solid var(--ink); background:var(--mint); font:13px/1.5 'DM Mono',monospace; }
+    .your-call b { font-family:Manrope,sans-serif; }
+    .your-call button { margin-top:12px; padding:7px 12px; border:1px solid var(--ink); background:var(--white); font:700 11px 'DM Mono',monospace; text-transform:uppercase; cursor:pointer; }
+    .board { margin-top:32px; padding:22px; border:1px solid var(--ink); background:var(--white); }
+    .board h2 { margin:0 0 4px; font:19px 'Archivo Black',sans-serif; text-transform:uppercase; text-align:center; }
+    .board .count { margin:0 0 18px; font:11px 'DM Mono',monospace; text-align:center; color:var(--muted); text-transform:uppercase; letter-spacing:.08em; }
+    .board h3 { margin:18px 0 8px; font:11px 'DM Mono',monospace; letter-spacing:.1em; text-transform:uppercase; color:var(--coral-dark); }
+    .tally { display:grid; gap:5px; }
+    .tally-row { position:relative; display:flex; justify-content:space-between; align-items:center; gap:10px; padding:9px 11px; border:1px solid #e0d9cc; background:var(--paper); font:12px 'DM Mono',monospace; overflow:hidden; }
+    .tally-row .bar { position:absolute; inset:0 auto 0 0; background:rgba(240,90,71,.16); }
+    .tally-row.mine { border-color:#5c9c7e; }
+    .tally-row.mine .bar { background:rgba(184,230,209,.7); }
+    .tally-row span { position:relative; }
+    .tally-row .team { font-family:Manrope,sans-serif; font-weight:800; }
+    button:focus-visible { outline:3px solid var(--coral); outline-offset:3px; }
+    .hidden { display:none; }
+    @media (max-width:560px) { h1 { font-size:32px; } main { padding-top:16px; } }
+    @media (max-width:400px) { .champ-row { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <main>
+    <div id="site-menu"></div>
+    <p class="kicker">WNBA / playoffs</p>
+    <h1>Call the Finals.</h1>
+    <p class="intro">Pick the two teams you think will reach the WNBA Finals, then call the champion. Lock it in and see how your call stacks up against everyone else's.</p>
+
+    <p class="step-label">Step 1 &mdash; <b>your two Finals teams</b></p>
+    <div id="teamGrid" class="team-grid"></div>
+    <p id="pickCount" class="pick-count">Pick 2 &mdash; 0 selected</p>
+
+    <div id="champStep" class="hidden">
+      <p class="step-label">Step 2 &mdash; <b>your champion</b></p>
+      <div id="champRow" class="champ-row"></div>
+    </div>
+
+    <div id="lockArea" class="hidden">
+      <div class="lock-row">
+        <input id="callName" type="text" maxlength="20" autocomplete="off" placeholder="Your name" data-1p-ignore="true" data-lpignore="true">
+        <button id="lockBtn" class="lock-btn" type="button" disabled>Lock in my call</button>
+      </div>
+      <p id="lockNote" class="pick-count"></p>
+    </div>
+
+    <div id="yourCall" class="your-call hidden"></div>
+
+    <section id="board" class="board hidden">
+      <h2>What everyone's calling</h2>
+      <p id="boardCount" class="count"></p>
+      <h3>Champion</h3>
+      <div id="champTally" class="tally"></div>
+      <h3>Reaching the Finals</h3>
+      <div id="finalTally" class="tally"></div>
+    </section>
+  </main>
+
+  <script>
+    const LEADERBOARD_URL = 'https://script.google.com/macros/s/AKfycbxxFkRa3Jk0i4XxFYyduC58PG-bNg0D1WWHfUrwCRRuadnD2DYbU2n-LLnJwWfyigky/exec';
+    const TEAMS = [
+      { name: 'Atlanta Dream', abbr: 'atl' },
+      { name: 'Chicago Sky', abbr: 'chi' },
+      { name: 'Connecticut Sun', abbr: 'con' },
+      { name: 'Dallas Wings', abbr: 'dal' },
+      { name: 'Golden State Valkyries', abbr: 'gs' },
+      { name: 'Indiana Fever', abbr: 'ind' },
+      { name: 'Las Vegas Aces', abbr: 'lv' },
+      { name: 'Los Angeles Sparks', abbr: 'la' },
+      { name: 'Minnesota Lynx', abbr: 'min' },
+      { name: 'New York Liberty', abbr: 'ny' },
+      { name: 'Phoenix Mercury', abbr: 'phx' },
+      { name: 'Portland Fire', abbr: 'por' },
+      { name: 'Seattle Storm', abbr: 'sea' },
+      { name: 'Toronto Tempo', abbr: 'tor' },
+      { name: 'Washington Mystics', abbr: 'wsh' }
+    ];
+    const LOGO = abbr => `https://a.espncdn.com/i/teamlogos/wnba/500/${abbr}.png`;
+    const NAME_KEY = 'gtl-player-name';
+    const PICK_KEY = 'ctf-pick';
+
+    const teamGrid = document.getElementById('teamGrid');
+    const pickCount = document.getElementById('pickCount');
+    const champStep = document.getElementById('champStep');
+    const champRow = document.getElementById('champRow');
+    const lockArea = document.getElementById('lockArea');
+    const callName = document.getElementById('callName');
+    const lockBtn = document.getElementById('lockBtn');
+    const lockNote = document.getElementById('lockNote');
+    const yourCall = document.getElementById('yourCall');
+    const board = document.getElementById('board');
+    const boardCount = document.getElementById('boardCount');
+    const champTally = document.getElementById('champTally');
+    const finalTally = document.getElementById('finalTally');
+
+    let selected = [];
+    let champion = null;
+
+    function logoEl(name) {
+      const team = TEAMS.find(t => t.name === name);
+      const img = document.createElement('img');
+      img.src = LOGO(team.abbr);
+      img.alt = '';
+      img.onerror = () => {
+        const badge = document.createElement('span');
+        badge.className = 'badge';
+        badge.textContent = name.split(' ').map(word => word[0]).join('').slice(0, 3);
+        img.replaceWith(badge);
+      };
+      return img;
+    }
+
+    function renderTeams() {
+      teamGrid.replaceChildren(...TEAMS.map(team => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'team-tile' + (selected.includes(team.name) ? ' selected' : '');
+        btn.disabled = selected.length >= 2 && !selected.includes(team.name);
+        btn.append(logoEl(team.name), Object.assign(document.createElement('span'), { textContent: team.name }));
+        btn.addEventListener('click', () => toggleTeam(team.name));
+        return btn;
+      }));
+      pickCount.textContent = `Pick 2 — ${selected.length} selected`;
+    }
+
+    function toggleTeam(name) {
+      if (selected.includes(name)) {
+        selected = selected.filter(n => n !== name);
+        if (champion === name) champion = null;
+      } else if (selected.length < 2) {
+        selected.push(name);
+      }
+      yourCall.classList.add('hidden');
+      renderTeams();
+      renderChampStep();
+    }
+
+    function renderChampStep() {
+      if (selected.length === 2) {
+        champStep.classList.remove('hidden');
+        lockArea.classList.remove('hidden');
+        champRow.replaceChildren(...selected.map(name => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'champ-btn' + (champion === name ? ' selected' : '');
+          btn.append(logoEl(name), Object.assign(document.createElement('span'), { textContent: name }));
+          btn.addEventListener('click', () => { champion = name; renderChampStep(); });
+          return btn;
+        }));
+      } else {
+        champStep.classList.add('hidden');
+        lockArea.classList.add('hidden');
+      }
+      updateLock();
+    }
+
+    function updateLock() {
+      lockBtn.disabled = !(selected.length === 2 && champion && callName.value.trim());
+    }
+    callName.addEventListener('input', updateLock);
+
+    async function submitCall() {
+      const name = callName.value.trim().replace(/\s+/g, ' ').slice(0, 20);
+      if (!name || selected.length !== 2 || !champion) return;
+      try {
+        localStorage.setItem(NAME_KEY, name);
+        localStorage.setItem(PICK_KEY, JSON.stringify({ teamA: selected[0], teamB: selected[1], champion }));
+      } catch (e) {}
+      lockBtn.disabled = true;
+      lockNote.textContent = 'Locking in…';
+      try {
+        const res = await fetch(LEADERBOARD_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({ game: 'finals', name, teamA: selected[0], teamB: selected[1], champion })
+        });
+        const data = await res.json();
+        if (!data || !data.ok) throw new Error((data && data.error) || 'failed');
+        lockNote.textContent = '';
+        showYourCall();
+        renderBoard(data.predictions);
+      } catch (err) {
+        lockBtn.disabled = false;
+        lockNote.textContent = 'Could not lock it in — check your connection and try again.';
+      }
+    }
+    lockBtn.addEventListener('click', submitCall);
+
+    function showYourCall() {
+      lockArea.classList.add('hidden');
+      yourCall.classList.remove('hidden');
+      const line = document.createElement('div');
+      line.innerHTML = `Your call: <b>${selected[0]}</b> vs <b>${selected[1]}</b> &mdash; champion <b>${champion}</b>`;
+      const change = document.createElement('button');
+      change.type = 'button';
+      change.textContent = 'Change my call';
+      change.addEventListener('click', () => {
+        yourCall.classList.add('hidden');
+        lockArea.classList.remove('hidden');
+        updateLock();
+        callName.focus();
+      });
+      yourCall.replaceChildren(line, change);
+    }
+
+    function tallyRows(list, total, mine) {
+      return list.map(item => {
+        const row = document.createElement('div');
+        row.className = 'tally-row' + (mine.has(item.team) ? ' mine' : '');
+        const bar = document.createElement('span');
+        bar.className = 'bar';
+        bar.style.width = total ? `${Math.round(item.count / total * 100)}%` : '0';
+        row.append(
+          bar,
+          Object.assign(document.createElement('span'), { className: 'team', textContent: item.team }),
+          Object.assign(document.createElement('span'), { textContent: `${item.count} (${total ? Math.round(item.count / total * 100) : 0}%)` })
+        );
+        return row;
+      });
+    }
+
+    function storedPick() { try { return JSON.parse(localStorage.getItem(PICK_KEY)); } catch (e) { return null; } }
+
+    function renderBoard(pred) {
+      board.classList.remove('hidden');
+      if (!pred) {
+        boardCount.textContent = 'Predictions unavailable right now.';
+        champTally.replaceChildren();
+        finalTally.replaceChildren();
+        return;
+      }
+      const mine = storedPick();
+      const mineChamp = new Set(mine ? [mine.champion] : []);
+      const mineFinal = new Set(mine ? [mine.teamA, mine.teamB] : []);
+      boardCount.textContent = `${pred.total} call${pred.total === 1 ? '' : 's'} in`;
+      champTally.replaceChildren(...tallyRows(pred.champion || [], pred.total, mineChamp));
+      finalTally.replaceChildren(...tallyRows(pred.finalist || [], pred.total, mineFinal));
+    }
+
+    async function loadBoard() {
+      try {
+        const res = await fetch(LEADERBOARD_URL + '?game=finals');
+        const data = await res.json();
+        if (!data || !data.ok) throw new Error('bad');
+        renderBoard(data.predictions);
+      } catch (err) {
+        renderBoard(null);
+      }
+    }
+
+    try { callName.value = localStorage.getItem(NAME_KEY) || ''; } catch (e) {}
+    const mine = storedPick();
+    if (mine && TEAMS.some(t => t.name === mine.teamA) && TEAMS.some(t => t.name === mine.teamB)) {
+      selected = [mine.teamA, mine.teamB];
+      champion = mine.champion;
+    }
+    renderTeams();
+    renderChampStep();
+    if (mine) showYourCall();
+    loadBoard();
+  </script>
+  <script src="menu.js"></script>
+</body>
+</html>
