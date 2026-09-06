@@ -1,12 +1,14 @@
-# Turning on the shared "Guess the Legend" leaderboard
+# Shared leaderboard setup
 
-Right now the leaderboard on the Legends game works, but it only saves scores on
-**your own device**. To make it a real shared leaderboard where every visitor sees
-the same Top 10, you need to connect it to a Google Sheet. This takes about 10
-minutes and only needs a Google account (the one you already use is fine).
+The shared leaderboard connects the games to a Google Sheet so every visitor sees
+the same Top 10. One Google Sheet + one script serves **every game** — each game's
+scores are kept separate by a `game` name (`legends`, `naming`, ...).
 
 There is **no server, no database, and nothing that costs money.** Google runs the
 small script for you and the Sheet is where the scores live.
+
+If the leaderboard is already running and you're here to add a new game, skip to
+**"Updating the script"** at the bottom.
 
 ---
 
@@ -105,9 +107,33 @@ Save the file. That's the only change.
 - **Keep the Sheet to just this.** The script runs as your Google account, so
   don't reuse this deployment for anything else, and turn on 2-step verification
   for the Google account if it isn't already.
-- **Editing the script later:** change the code, then Deploy -> **Manage
-  deployments** -> pencil icon -> **Version: New version** -> Deploy. The URL
-  stays the same.
 - **The Sheet is the backup.** Every score ever submitted is a row there (the
-  script keeps the most recent 500), so you can always see the full history even
-  though the game only shows the Top 10.
+  script keeps the most recent 2000 across all games), so you can always see the
+  full history even though each game only shows its Top 10. The `game` column
+  says which game each row belongs to; older rows with a blank `game` count as
+  `legends`.
+
+---
+
+## Updating the script (e.g. adding a new game)
+
+When `leaderboard.gs` in the project changes, push the new version to your
+existing Web App - the URL does **not** change:
+
+1. Open your **WNBA Leaderboard** spreadsheet -> **Extensions** -> **Apps Script**.
+2. Select all the code, delete it, and paste in the new contents of
+   `leaderboard.gs`. Save (disk icon).
+3. Click **Deploy** -> **Manage deployments**.
+4. Click the **pencil / edit** icon on the existing deployment.
+5. Set **Version** to **New version**, then click **Deploy**.
+6. Done. Same URL, new behavior. If anything looks wrong, come back to **Manage
+   deployments**, edit again, and pick an earlier version from the Version list
+   to roll back.
+
+The list of games the script will accept lives near the top of `leaderboard.gs`:
+
+```js
+var GAMES = ['legends', 'naming'];
+```
+
+Add a new game's name there before pointing a new page at it.

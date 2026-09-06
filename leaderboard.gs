@@ -2,26 +2,30 @@
  * WNBA Guessing Game - shared leaderboard backend.
  *
  * This runs on Google's servers as a Web App attached to one Google Sheet.
- * It does two things:
- *   GET  -> returns the current Top 10 as JSON
- *   POST -> validates a submitted score and appends it as a new row
+ * One deployment serves every game; the `game` value keeps the boards separate.
+ *   GET  ?game=legends   -> returns that game's current Top 10 as JSON
+ *   POST {game,name,score,total}  -> validates and appends a new row
  *
- * Setup steps are in LEADERBOARD-SETUP.md. You do not need to change anything
- * in this file unless you rename the tab (see TAB_NAME below).
+ * Setup steps are in LEADERBOARD-SETUP.md.
  */
 
-// The name of the tab (bottom-left of the spreadsheet) that holds the scores.
+// The tab (bottom-left of the spreadsheet) that holds the scores.
 var TAB_NAME = 'Scores';
 
 // Keep at most this many rows in the sheet; oldest are trimmed automatically.
-var MAX_ROWS = 500;
+var MAX_ROWS = 2000;
 
-// Highest score/total the game could ever report. Submissions outside this are rejected.
-var MAX_POINTS = 60;
+// Highest score/total any game could report. Submissions outside this are rejected.
+var MAX_POINTS = 500;
+
+// Games that are allowed to write to the board. Unknown values fall back to the first.
+var GAMES = ['legends', 'naming'];
+var DEFAULT_GAME = 'legends';
 
 
-function doGet() {
-  return jsonOutput({ ok: true, top: readTop(10) });
+function doGet(e) {
+  var game = cleanGame(e && e.parameter ? e.parameter.game : '');
+  return jsonOutput({ ok: true, game: game, top: readTop(10, game) });
 }
 
 function doPost(e) {
@@ -32,6 +36,7 @@ function doPost(e) {
     return jsonOutput({ ok: false, error: 'bad request' });
   }
 
+  var game = cleanGame(body.game);
   var name = cleanName(body.name);
   var score = Math.round(Number(body.score));
   var total = Math.round(Number(body.total));
@@ -45,15 +50,20 @@ function doPost(e) {
   lock.waitLock(5000);
   try {
     var sheet = getSheet();
-    sheet.appendRow([name, score, total, Date.now()]);
+    sheet.appendRow([name, score, total, Date.now(), game]);
     trimOldRows(sheet);
   } finally {
     lock.releaseLock();
   }
 
-  return jsonOutput({ ok: true, top: readTop(10) });
+  return jsonOutput({ ok: true, game: game, top: readTop(10, game) });
 }
 
+
+function cleanGame(value) {
+  var g = String(value == null ? '' : value).toLowerCase().replace(/[^a-z]/g, '');
+  return GAMES.indexOf(g) === -1 ? DEFAULT_GAME : g;
+}
 
 function cleanName(value) {
   var text = String(value == null ? '' : value);
@@ -75,19 +85,24 @@ function getSheet() {
     sheet = ss.insertSheet(TAB_NAME);
   }
   if (sheet.getLastRow() === 0) {
-    sheet.appendRow(['name', 'score', 'total', 'timestamp']);
+    sheet.appendRow(['name', 'score', 'total', 'timestamp', 'game']);
   }
   return sheet;
 }
 
-function readTop(count) {
+function readTop(count, game) {
   var sheet = getSheet();
   var lastRow = sheet.getLastRow();
   if (lastRow < 2) return [];
 
-  var values = sheet.getRange(2, 1, lastRow - 1, 4).getValues();
+  var values = sheet.getRange(2, 1, lastRow - 1, 5).getValues();
   var rows = values
-    .filter(function (r) { return r[0] !== '' && r[1] !== ''; })
+    .filter(function (r) {
+      if (r[0] === '' || r[1] === '') return false;
+      // rows saved before games existed have a blank column E -> treat as the default game
+      var rowGame = String(r[4] || DEFAULT_GAME).toLowerCase();
+      return rowGame === game;
+    })
     .map(function (r) {
       return { name: String(r[0]), score: Number(r[1]), total: Number(r[2]), t: Number(r[3]) || 0 };
     });
