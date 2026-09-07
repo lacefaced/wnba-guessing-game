@@ -581,7 +581,7 @@ const allPlayers = [
     "team": "Golden State Valkyries",
     "position": "F",
     "jersey": "13",
-    "age": 24,
+    "age": 25,
     "height": "6' 2\"",
     "college": "",
     "birthPlace": "",
