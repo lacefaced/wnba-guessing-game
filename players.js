@@ -192,6 +192,22 @@ const allPlayers = [
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2529205.png"
   },
   {
+    "id": "1068",
+    "name": "Nneka Ogwumike",
+    "team": "Los Angeles Sparks",
+    "position": "F",
+    "jersey": "30",
+    "age": 36,
+    "height": "6' 2\"",
+    "college": "Stanford",
+    "birthPlace": "Tomball, TX, USA",
+    "experience": 15,
+    "status": "Active",
+    "profile": "https://www.espn.com/wnba/player/_/id/1068/nneka-ogwumike",
+    "ppg": 17.2,
+    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/1068.png"
+  },
+  {
     "id": "5220150",
     "name": "Dominique Malonga",
     "team": "Seattle Storm",
@@ -368,6 +384,22 @@ const allPlayers = [
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4433405.png"
   },
   {
+    "id": "4398764",
+    "name": "Rae Burrell",
+    "team": "Los Angeles Sparks",
+    "position": "G",
+    "jersey": "12",
+    "age": 26,
+    "height": "6' 2\"",
+    "college": "Tennessee",
+    "birthPlace": "Las Vegas, NV, USA",
+    "experience": 5,
+    "status": "Active",
+    "profile": "https://www.espn.com/wnba/player/_/id/4398764/rae-burrell",
+    "ppg": 14.6,
+    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4398764.png"
+  },
+  {
     "id": "2999101",
     "name": "Jonquel Jones",
     "team": "New York Liberty",
@@ -398,6 +430,22 @@ const allPlayers = [
     "profile": "https://www.espn.com/wnba/player/_/id/3906949/jessica-shepard",
     "ppg": 14.4,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3906949.png"
+  },
+  {
+    "id": "2566106",
+    "name": "Dearica Hamby",
+    "team": "Los Angeles Sparks",
+    "position": "F",
+    "jersey": "5",
+    "age": 32,
+    "height": "6' 3\"",
+    "college": "Wake Forest",
+    "birthPlace": "Marietta, GA, USA",
+    "experience": 12,
+    "status": "Active",
+    "profile": "https://www.espn.com/wnba/player/_/id/2566106/dearica-hamby",
+    "ppg": 14.4,
+    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2566106.png"
   },
   {
     "id": "3142328",
@@ -752,6 +800,22 @@ const allPlayers = [
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4433635.png"
   },
   {
+    "id": "4433404",
+    "name": "Cameron Brink",
+    "team": "Los Angeles Sparks",
+    "position": "F",
+    "jersey": "22",
+    "age": 24,
+    "height": "6' 4\"",
+    "college": "Stanford",
+    "birthPlace": "Beaverton, OR, USA",
+    "experience": 3,
+    "status": "Active",
+    "profile": "https://www.espn.com/wnba/player/_/id/4433404/cameron-brink",
+    "ppg": 9.6,
+    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4433404.png"
+  },
+  {
     "id": "5017726",
     "name": "Jade Melbourne",
     "team": "Seattle Storm",
@@ -762,7 +826,7 @@ const allPlayers = [
     "college": "",
     "birthPlace": "Traralgon, VIC, Australia",
     "experience": 4,
-    "status": "Active",
+    "status": "Day-To-Day",
     "profile": "https://www.espn.com/wnba/player/_/id/5017726/jade-melbourne",
     "ppg": 9.5,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/5017726.png"
@@ -798,6 +862,22 @@ const allPlayers = [
     "profile": "https://www.espn.com/wnba/player/_/id/4398915/naz-hillmon",
     "ppg": 9.1,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4398915.png"
+  },
+  {
+    "id": "2491214",
+    "name": "Erica Wheeler",
+    "team": "Los Angeles Sparks",
+    "position": "G",
+    "jersey": "17",
+    "age": 35,
+    "height": "5' 7\"",
+    "college": "Rutgers",
+    "birthPlace": "Miami, FL, USA",
+    "experience": 11,
+    "status": "Active",
+    "profile": "https://www.espn.com/wnba/player/_/id/2491214/erica-wheeler",
+    "ppg": 9.0,
+    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2491214.png"
   },
   {
     "id": "1054",
@@ -878,6 +958,22 @@ const allPlayers = [
     "profile": "https://www.espn.com/wnba/player/_/id/4257500/cecilia-zandalasini",
     "ppg": 8.8,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4257500.png"
+  },
+  {
+    "id": "3146151",
+    "name": "Ariel Atkins",
+    "team": "Los Angeles Sparks",
+    "position": "G",
+    "jersey": "7",
+    "age": 30,
+    "height": "5' 10\"",
+    "college": "Texas",
+    "birthPlace": "Dallas, TX, USA",
+    "experience": 9,
+    "status": "Active",
+    "profile": "https://www.espn.com/wnba/player/_/id/3146151/ariel-atkins",
+    "ppg": 8.5,
+    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3146151.png"
   },
   {
     "id": "4038379",
@@ -1274,7 +1370,7 @@ const allPlayers = [
     "college": "Stanford",
     "birthPlace": "Hobart, TAS, Australia",
     "experience": 8,
-    "status": "Active",
+    "status": "Out",
     "profile": "https://www.espn.com/wnba/player/_/id/3913881/alanna-smith",
     "ppg": 6.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3913881.png"
@@ -1808,6 +1904,22 @@ const allPlayers = [
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4898898.png"
   },
   {
+    "id": "5105729",
+    "name": "Chance Gray",
+    "team": "Los Angeles Sparks",
+    "position": "G",
+    "jersey": "2",
+    "age": 22,
+    "height": "5' 9\"",
+    "college": "Ohio State",
+    "birthPlace": "Cincinnati, OH, USA",
+    "experience": 0,
+    "status": "Active",
+    "profile": "https://www.espn.com/wnba/player/_/id/5105729/chance-gray",
+    "ppg": 2.9,
+    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/5105729.png"
+  },
+  {
     "id": "4873358",
     "name": "Antonia Delaere",
     "team": "Minnesota Lynx",
@@ -1838,6 +1950,22 @@ const allPlayers = [
     "profile": "https://www.espn.com/wnba/player/_/id/4433411/angela-dugalic",
     "ppg": 2.9,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4433411.png"
+  },
+  {
+    "id": "4874375",
+    "name": "Jihyun Park",
+    "team": "Los Angeles Sparks",
+    "position": "F",
+    "jersey": "6",
+    "age": 26,
+    "height": "6' 1\"",
+    "college": "",
+    "birthPlace": "",
+    "experience": 0,
+    "status": "Active",
+    "profile": "https://www.espn.com/wnba/player/_/id/4874375/jihyun-park",
+    "ppg": 2.2,
+    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4874375.png"
   },
   {
     "id": "5122345",
@@ -2464,6 +2592,70 @@ const allPlayers = [
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/5220104.png"
   },
   {
+    "id": "5274110",
+    "name": "Monique Akoa Makani",
+    "team": "Los Angeles Sparks",
+    "position": "Player",
+    "jersey": "1",
+    "age": 25,
+    "height": "5' 11\"",
+    "college": "",
+    "birthPlace": "Bafang, Cameroon",
+    "experience": 2,
+    "status": "Active",
+    "profile": "https://www.espn.com/wnba/player/_/id/5274110/monique-akoa-makani",
+    "ppg": 0.0,
+    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/5274110.png"
+  },
+  {
+    "id": "2284331",
+    "name": "Emma Cannon",
+    "team": "Los Angeles Sparks",
+    "position": "Player",
+    "jersey": "32",
+    "age": 37,
+    "height": "6' 2\"",
+    "college": "UCF",
+    "birthPlace": "Rochester, NY, USA",
+    "experience": 8,
+    "status": "Active",
+    "profile": "https://www.espn.com/wnba/player/_/id/2284331/emma-cannon",
+    "ppg": 0.0,
+    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2284331.png"
+  },
+  {
+    "id": "4565515",
+    "name": "Tonie Morgan",
+    "team": "Los Angeles Sparks",
+    "position": "Player",
+    "jersey": "4",
+    "age": 22,
+    "height": "5' 9\"",
+    "college": "Kentucky",
+    "birthPlace": "Tallahassee, FL, USA",
+    "experience": 0,
+    "status": "Active",
+    "profile": "https://www.espn.com/wnba/player/_/id/4565515/tonie-morgan",
+    "ppg": 0.0,
+    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4565515.png"
+  },
+  {
+    "id": "4597509",
+    "name": "Aaliyah Nye",
+    "team": "Los Angeles Sparks",
+    "position": "Player",
+    "jersey": "32",
+    "age": 24,
+    "height": "6' 0\"",
+    "college": "Alabama",
+    "birthPlace": "East Lansing, MI, USA",
+    "experience": 2,
+    "status": "Out",
+    "profile": "https://www.espn.com/wnba/player/_/id/4597509/aaliyah-nye",
+    "ppg": 0.0,
+    "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4597509.png"
+  },
+  {
     "id": "4280877",
     "name": "Chloe Bibby",
     "team": "Minnesota Lynx",
@@ -2938,7 +3130,7 @@ const allPlayers = [
     "college": "",
     "birthPlace": "Wellington, New Zealand",
     "experience": 7,
-    "status": "Active",
+    "status": "Day-To-Day",
     "profile": "https://www.espn.com/wnba/player/_/id/4420318/ezi-magbegor",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4420318.png"
@@ -2997,7 +3189,7 @@ const allPlayers = [
     "team": "Toronto Tempo",
     "position": "Player",
     "jersey": "14",
-    "age": 33,
+    "age": 34,
     "height": "6' 5\"",
     "college": "USC",
     "birthPlace": "London, England",
