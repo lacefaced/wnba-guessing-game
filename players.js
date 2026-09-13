@@ -421,7 +421,7 @@ const allPlayers = [
     "team": "Dallas Wings",
     "position": "F",
     "jersey": "32",
-    "age": 29,
+    "age": 30,
     "height": "6' 4\"",
     "college": "Notre Dame",
     "birthPlace": "Fremont, NE, USA",
@@ -954,7 +954,7 @@ const allPlayers = [
     "college": "",
     "birthPlace": "Milan, Italy",
     "experience": 5,
-    "status": "Out",
+    "status": "Active",
     "profile": "https://www.espn.com/wnba/player/_/id/4257500/cecilia-zandalasini",
     "ppg": 8.8,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4257500.png"
