@@ -938,7 +938,7 @@ const allPlayers = [
     "college": "UCLA",
     "birthPlace": "Northridge, CA, USA",
     "experience": 7,
-    "status": "Active",
+    "status": "Out",
     "profile": "https://www.espn.com/wnba/player/_/id/3922628/kennedy-burke",
     "ppg": 8.8,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3922628.png"
