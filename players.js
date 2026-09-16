@@ -69,7 +69,7 @@ const allPlayers = [
     "team": "Toronto Tempo",
     "position": "G",
     "jersey": "3",
-    "age": 29,
+    "age": 30,
     "height": "6' 1\"",
     "college": "Notre Dame",
     "birthPlace": "Belmar, NJ, USA",
@@ -298,7 +298,7 @@ const allPlayers = [
     "college": "",
     "birthPlace": "",
     "experience": 2,
-    "status": "Out",
+    "status": "Active",
     "profile": "https://www.espn.com/wnba/player/_/id/5208982/carla-leite",
     "ppg": 15.9,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/5208982.png"
@@ -490,7 +490,7 @@ const allPlayers = [
     "college": "Iowa State",
     "birthPlace": "Chatham, ON, Canada",
     "experience": 8,
-    "status": "Active",
+    "status": "Day-To-Day",
     "profile": "https://www.espn.com/wnba/player/_/id/3906972/bridget-carleton",
     "ppg": 14.3,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3906972.png"
@@ -1242,7 +1242,7 @@ const allPlayers = [
     "college": "",
     "birthPlace": "Bordeaux, France",
     "experience": 2,
-    "status": "Out",
+    "status": "Active",
     "profile": "https://www.espn.com/wnba/player/_/id/3919496/valeriane-ayayi",
     "ppg": 6.3,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3919496.png"
@@ -1258,7 +1258,7 @@ const allPlayers = [
     "college": "Florida",
     "birthPlace": "Osnabruck, Germany",
     "experience": 0,
-    "status": "Out",
+    "status": "Active",
     "profile": "https://www.espn.com/wnba/player/_/id/5105406/frieda-buhner",
     "ppg": 6.3,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/5105406.png"
@@ -2218,7 +2218,7 @@ const allPlayers = [
     "college": "",
     "birthPlace": "Rodez, France",
     "experience": 2,
-    "status": "Out",
+    "status": "Active",
     "profile": "https://www.espn.com/wnba/player/_/id/5208981/leila-lacan",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/5208981.png"
@@ -2922,7 +2922,7 @@ const allPlayers = [
     "college": "",
     "birthPlace": "",
     "experience": 2,
-    "status": "Out",
+    "status": "Active",
     "profile": "https://www.espn.com/wnba/player/_/id/4873359/kyara-linskens",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4873359.png"
