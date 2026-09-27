@@ -118,7 +118,7 @@ Save the file. That's the only change.
   Both are set to `false` for the 2026 postseason - it's a casual bracket this
   round. To lock it down for a future postseason, set both to `true`, set the
   matching date/time, and re-deploy.
-- **"Call the Finals" is different.** That poll's picks go to a separate tab
+- **"Call the Finals" is different.** That bracket's picks go to a separate tab
   called **Predictions**
   (`name | m1 | m2 | m3 | m4 | s1 | s2 | champion | rootFor | timestamp`), which
   the script creates on its own. Every column is one round of the bracket -
@@ -129,7 +129,7 @@ Save the file. That's the only change.
   clear their browser, and it leaves the door open to score brackets or show
   round-by-round stats later. There is **one row per name** - resubmitting
   overwrites the earlier row, so the tallies stay honest. To reset the whole
-  poll, delete every row under the header on that tab.
+  bracket, delete every row under the header on that tab.
 
 ---
 
@@ -155,7 +155,3 @@ var GAMES = ['legends', 'naming', 'finals'];
 ```
 
 Add a new game's name there before pointing a new page at it.
-
-> **You need to do this re-deploy now** for the Naming Challenge board and the
-> new **Call the Finals** poll to work. Until you do, the Naming Challenge board
-> shows the Legends scores and Call the Finals can't save picks.
