@@ -120,12 +120,16 @@ Save the file. That's the only change.
   matching date/time, and re-deploy.
 - **"Call the Finals" is different.** That poll's picks go to a separate tab
   called **Predictions**
-  (`name | teamA | teamB | champion | rootFor | timestamp`), which the script
-  creates on its own. `champion` is the team they think wins; `rootFor` is the
-  team they *want* to win (any playoff team). There is **one row per name** - if
-  the same name submits again it overwrites their earlier pick, so the tallies
-  stay honest. To reset the whole poll, delete every row under the header on that
-  tab.
+  (`name | m1 | m2 | m3 | m4 | s1 | s2 | champion | rootFor | timestamp`), which
+  the script creates on its own. Every column is one round of the bracket -
+  `m1`-`m4` are the four Round 1 picks, `s1`/`s2` are the two Semifinal picks,
+  `champion` is the Finals pick, and `rootFor` is the team they *want* to win
+  (any playoff team, independent of the bracket). Storing the whole bracket
+  (not just the Finals result) means a person's full picks survive even if they
+  clear their browser, and it leaves the door open to score brackets or show
+  round-by-round stats later. There is **one row per name** - resubmitting
+  overwrites the earlier row, so the tallies stay honest. To reset the whole
+  poll, delete every row under the header on that tab.
 
 ---
 

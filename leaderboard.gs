@@ -9,9 +9,10 @@
  *     POST {game,name,score,total} -> validates and appends a row (Scores tab)
  *
  *   Predictions (finals - "Call the Finals"):
- *     GET  ?game=finals                       -> tally of everyone's picks
- *     POST {game:'finals',name,teamA,teamB,champion} -> saves/updates one
- *          person's pick in the Predictions tab (one row per name)
+ *     GET  ?game=finals -> tally of everyone's picks
+ *     POST {game:'finals',name,m1,m2,m3,m4,s1,s2,champion,rootFor} -> saves the
+ *          whole bracket (every round's pick, not just the Finals/champion) to
+ *          the Predictions tab - one row per name, overwritten on resubmit
  *
  * Setup steps are in LEADERBOARD-SETUP.md.
  */
@@ -35,6 +36,15 @@ var TEAMS = [
   'Atlanta Dream', 'Dallas Wings', 'Golden State Valkyries', 'Indiana Fever',
   'Las Vegas Aces', 'Minnesota Lynx', 'New York Liberty', 'Washington Mystics'
 ];
+
+// The real 2026 bracket (seeded; no reseeding after Round 1). Keep in sync with
+// the BRACKET constant in call-the-finals.html.
+var BRACKET = {
+  m1: ['Minnesota Lynx', 'New York Liberty'],
+  m2: ['Golden State Valkyries', 'Dallas Wings'],
+  m3: ['Las Vegas Aces', 'Indiana Fever'],
+  m4: ['Atlanta Dream', 'Washington Mystics']
+};
 
 // Set FINALS_LOCK_ENABLED to true (and pick a cutoff) to close brackets before a future
 // postseason. Left off for the 2026 playoffs since Round 1 was already underway when this
@@ -65,18 +75,25 @@ function doPost(e) {
 
   if (game === 'finals') {
     if (FINALS_LOCK_ENABLED && Date.now() >= FINALS_LOCK) return jsonOutput({ ok: false, error: 'calls are closed' });
-    var teamA = cleanTeam(body.teamA);
-    var teamB = cleanTeam(body.teamB);
+
+    var m1 = cleanTeam(body.m1), m2 = cleanTeam(body.m2), m3 = cleanTeam(body.m3), m4 = cleanTeam(body.m4);
+    var s1 = cleanTeam(body.s1), s2 = cleanTeam(body.s2);
     var champion = cleanTeam(body.champion);
     var rootFor = cleanTeam(body.rootFor);
-    if (!teamA || !teamB || teamA === teamB) return jsonOutput({ ok: false, error: 'pick two different teams' });
-    if (champion !== teamA && champion !== teamB) return jsonOutput({ ok: false, error: 'champion must be one of your two teams' });
+
+    if (BRACKET.m1.indexOf(m1) === -1) return jsonOutput({ ok: false, error: 'bad round 1 pick' });
+    if (BRACKET.m2.indexOf(m2) === -1) return jsonOutput({ ok: false, error: 'bad round 1 pick' });
+    if (BRACKET.m3.indexOf(m3) === -1) return jsonOutput({ ok: false, error: 'bad round 1 pick' });
+    if (BRACKET.m4.indexOf(m4) === -1) return jsonOutput({ ok: false, error: 'bad round 1 pick' });
+    if (s1 !== m1 && s1 !== m4) return jsonOutput({ ok: false, error: 'bad semifinal pick' });
+    if (s2 !== m2 && s2 !== m3) return jsonOutput({ ok: false, error: 'bad semifinal pick' });
+    if (champion !== s1 && champion !== s2) return jsonOutput({ ok: false, error: 'champion must be one of your finalists' });
     if (!rootFor) return jsonOutput({ ok: false, error: 'pick a team to root for' });
 
     var predLock = LockService.getScriptLock();
     predLock.waitLock(5000);
     try {
-      upsertPrediction(name, teamA, teamB, champion, rootFor);
+      upsertPrediction(name, [m1, m2, m3, m4, s1, s2, champion, rootFor]);
     } finally {
       predLock.releaseLock();
     }
@@ -181,12 +198,13 @@ function getPredSheet() {
     sheet = ss.insertSheet(PRED_TAB);
   }
   if (sheet.getLastRow() === 0) {
-    sheet.appendRow(['name', 'teamA', 'teamB', 'champion', 'rootFor', 'timestamp']);
+    sheet.appendRow(['name', 'm1', 'm2', 'm3', 'm4', 's1', 's2', 'champion', 'rootFor', 'timestamp']);
   }
   return sheet;
 }
 
-function upsertPrediction(name, teamA, teamB, champion, rootFor) {
+// picks = [m1, m2, m3, m4, s1, s2, champion, rootFor] - every round of the bracket.
+function upsertPrediction(name, picks) {
   var sheet = getPredSheet();
   var last = sheet.getLastRow();
   var rowIndex = -1;
@@ -196,11 +214,11 @@ function upsertPrediction(name, teamA, teamB, champion, rootFor) {
       if (String(names[i][0]).toLowerCase() === name.toLowerCase()) { rowIndex = i + 2; break; }
     }
   }
-  var row = [name, teamA, teamB, champion, rootFor, Date.now()];
+  var row = [name].concat(picks, [Date.now()]);
   if (rowIndex === -1) {
     sheet.appendRow(row);
   } else {
-    sheet.getRange(rowIndex, 1, 1, 6).setValues([row]);
+    sheet.getRange(rowIndex, 1, 1, row.length).setValues([row]);
   }
 }
 
@@ -209,21 +227,22 @@ function readPredictions() {
   var last = sheet.getLastRow();
   if (last < 2) return { total: 0, champion: [], finalist: [], want: [] };
 
-  var values = sheet.getRange(2, 1, last - 1, 5).getValues();
+  // columns: name, m1, m2, m3, m4, s1, s2, champion, rootFor
+  var values = sheet.getRange(2, 1, last - 1, 9).getValues();
   var champ = {};
   var fin = {};
   var want = {};
   var total = 0;
   values.forEach(function (r) {
-    var a = cleanTeam(r[1]);
-    var b = cleanTeam(r[2]);
-    var c = cleanTeam(r[3]);
-    if (!a || !b || !c) return;
+    var s1 = cleanTeam(r[5]);
+    var s2 = cleanTeam(r[6]);
+    var c = cleanTeam(r[7]);
+    if (!s1 || !s2 || !c) return;
     total++;
     champ[c] = (champ[c] || 0) + 1;
-    fin[a] = (fin[a] || 0) + 1;
-    fin[b] = (fin[b] || 0) + 1;
-    var w = cleanTeam(r[4]);
+    fin[s1] = (fin[s1] || 0) + 1;
+    fin[s2] = (fin[s2] || 0) + 1;
+    var w = cleanTeam(r[8]);
     if (w) want[w] = (want[w] || 0) + 1;
   });
   return { total: total, champion: tallyToList(champ), finalist: tallyToList(fin), want: tallyToList(want) };
