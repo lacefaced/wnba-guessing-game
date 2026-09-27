@@ -112,6 +112,12 @@ Save the file. That's the only change.
   full history even though each game only shows its Top 10. The `game` column
   says which game each row belongs to; older rows with a blank `game` count as
   `legends`.
+- **"Call the Finals" has an optional lock date.** `FINALS_LOCK_ENABLED` in
+  `leaderboard.gs` (and `LOCK_ENABLED` in `call-the-finals.html`) turn on a
+  cutoff, so nobody can submit or change a bracket once the real playoffs start.
+  Both are set to `false` for the 2026 postseason - it's a casual bracket this
+  round. To lock it down for a future postseason, set both to `true`, set the
+  matching date/time, and re-deploy.
 - **"Call the Finals" is different.** That poll's picks go to a separate tab
   called **Predictions**
   (`name | teamA | teamB | champion | rootFor | timestamp`), which the script

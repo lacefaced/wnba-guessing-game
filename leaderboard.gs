@@ -36,8 +36,11 @@ var TEAMS = [
   'Las Vegas Aces', 'Minnesota Lynx', 'New York Liberty', 'Washington Mystics'
 ];
 
-// "Call the Finals" picks stop being accepted at this moment (midnight ET, Sept 27 2026).
-var FINALS_LOCK = new Date('2026-09-27T00:00:00-04:00').getTime();
+// Set FINALS_LOCK_ENABLED to true (and pick a cutoff) to close brackets before a future
+// postseason. Left off for the 2026 playoffs since Round 1 was already underway when this
+// shipped - it's a casual/community bracket this round rather than a locked contest.
+var FINALS_LOCK_ENABLED = false;
+var FINALS_LOCK = new Date('2026-09-27T14:00:00-04:00').getTime(); // Game 1 tip-off, for reference
 
 
 function doGet(e) {
@@ -61,7 +64,7 @@ function doPost(e) {
   if (!name) return jsonOutput({ ok: false, error: 'name required' });
 
   if (game === 'finals') {
-    if (Date.now() >= FINALS_LOCK) return jsonOutput({ ok: false, error: 'calls are closed' });
+    if (FINALS_LOCK_ENABLED && Date.now() >= FINALS_LOCK) return jsonOutput({ ok: false, error: 'calls are closed' });
     var teamA = cleanTeam(body.teamA);
     var teamB = cleanTeam(body.teamB);
     var champion = cleanTeam(body.champion);
