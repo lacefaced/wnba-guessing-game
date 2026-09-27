@@ -42,7 +42,7 @@ const allPlayers = [
     "college": "Iowa",
     "birthPlace": "West Des Moines, IA, USA",
     "experience": 3,
-    "status": "Active",
+    "status": "Day-To-Day",
     "profile": "https://www.espn.com/wnba/player/_/id/4433403/caitlin-clark",
     "ppg": 22.3,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4433403.png"
@@ -90,7 +90,7 @@ const allPlayers = [
     "college": "UConn",
     "birthPlace": "North Syracuse, NY, USA",
     "experience": 10,
-    "status": "Out",
+    "status": "Active",
     "profile": "https://www.espn.com/wnba/player/_/id/2998928/breanna-stewart",
     "ppg": 20.8,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2998928.png"
@@ -122,7 +122,7 @@ const allPlayers = [
     "college": "TCU",
     "birthPlace": "Phillipsburg, NJ, USA",
     "experience": 0,
-    "status": "Out",
+    "status": "Active",
     "profile": "https://www.espn.com/wnba/player/_/id/4433791/olivia-miles",
     "ppg": 19.8,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4433791.png"
@@ -234,7 +234,7 @@ const allPlayers = [
     "college": "Ole Miss",
     "birthPlace": "Fredericksburg, VA, USA",
     "experience": 5,
-    "status": "Out",
+    "status": "Active",
     "profile": "https://www.espn.com/wnba/player/_/id/4398911/shakira-austin",
     "ppg": 17.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4398911.png"
@@ -266,7 +266,7 @@ const allPlayers = [
     "college": "LSU",
     "birthPlace": "Baltimore, MD, USA",
     "experience": 3,
-    "status": "Out",
+    "status": "Active",
     "profile": "https://www.espn.com/wnba/player/_/id/4433402/angel-reese",
     "ppg": 16.4,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4433402.png"
@@ -282,7 +282,7 @@ const allPlayers = [
     "college": "South Carolina",
     "birthPlace": "St. Thomas, Virgin Islands",
     "experience": 4,
-    "status": "Out",
+    "status": "Day-To-Day",
     "profile": "https://www.espn.com/wnba/player/_/id/4432831/aliyah-boston",
     "ppg": 16.1,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4432831.png"
@@ -490,7 +490,7 @@ const allPlayers = [
     "college": "George Washington",
     "birthPlace": "Freeport, GB, Bahamas",
     "experience": 10,
-    "status": "Out",
+    "status": "Day-To-Day",
     "profile": "https://www.espn.com/wnba/player/_/id/2999101/jonquel-jones",
     "ppg": 14.5,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2999101.png"
@@ -2282,7 +2282,7 @@ const allPlayers = [
     "college": "Middle Tennessee",
     "birthPlace": "Denver, CO, USA",
     "experience": 14,
-    "status": "Out",
+    "status": "Active",
     "profile": "https://www.espn.com/wnba/player/_/id/924/alysha-clark",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/924.png"
