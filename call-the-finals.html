@@ -68,6 +68,14 @@
     .tally-row.mine .bar { background:rgba(184,230,209,.7); }
     .tally-row span { position:relative; }
     .tally-row .team { font-family:Manrope,sans-serif; font-weight:800; }
+    .round1-tally { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px; margin-bottom:6px; }
+    .round1-tally .mini-label { margin:0 0 6px; font:11px 'DM Mono',monospace; color:var(--muted); }
+    .entries-list { display:grid; gap:6px; max-height:420px; overflow-y:auto; padding-right:2px; }
+    .entry-row { padding:9px 11px; border:1px solid #e0d9cc; background:var(--paper); }
+    .entry-row.mine { border-color:#5c9c7e; background:var(--mint); }
+    .entry-name { display:block; margin-bottom:3px; font:800 12px Manrope,sans-serif; color:var(--ink); }
+    .entry-pick { font:12px 'DM Mono',monospace; color:var(--muted); }
+    .entry-pick b { font-family:Manrope,sans-serif; color:var(--ink); }
     button:focus-visible { outline:3px solid var(--coral); outline-offset:3px; }
     .hidden { display:none; }
     @media (max-width:560px) { h1 { font-size:32px; } main { padding-top:16px; } }
@@ -113,12 +121,16 @@
     <section id="board" class="board hidden">
       <h2>What everyone's calling</h2>
       <p id="boardCount" class="count"></p>
-      <h3>Champion</h3>
-      <div id="champTally" class="tally"></div>
+      <h3>Round 1</h3>
+      <div id="round1Tally" class="round1-tally"></div>
       <h3>Reaching the Finals</h3>
       <div id="finalTally" class="tally"></div>
+      <h3>Champion</h3>
+      <div id="champTally" class="tally"></div>
       <h3>Want to win</h3>
       <div id="wantTally" class="tally"></div>
+      <h3>Everyone's brackets</h3>
+      <div id="entriesList" class="entries-list"></div>
     </section>
   </main>
 
@@ -178,6 +190,8 @@
     const champTally = document.getElementById('champTally');
     const finalTally = document.getElementById('finalTally');
     const wantTally = document.getElementById('wantTally');
+    const round1TallyEl = document.getElementById('round1Tally');
+    const entriesListEl = document.getElementById('entriesList');
 
     let picks = {};
     let wantFor = null;
@@ -361,13 +375,44 @@
 
     function storedPick() { try { return JSON.parse(localStorage.getItem(PICK_KEY)); } catch (e) { return null; } }
 
+    function round1Block(id, list, total, myPick) {
+      const m = BRACKET[id];
+      const wrap = document.createElement('div');
+      const label = document.createElement('p');
+      label.className = 'mini-label';
+      label.textContent = `${seedLabel(m.teamA)} vs ${seedLabel(m.teamB)}`;
+      const byTeam = {};
+      (list || []).forEach(item => { byTeam[item.team] = item.count; });
+      const rows = [m.teamA, m.teamB].map(team => ({ team, count: byTeam[team] || 0 }));
+      const tallyWrap = document.createElement('div');
+      tallyWrap.className = 'tally';
+      tallyWrap.append(...tallyRows(rows, total, new Set(myPick ? [myPick] : [])));
+      wrap.append(label, tallyWrap);
+      return wrap;
+    }
+
+    function entryRow(entry, myName) {
+      const row = document.createElement('div');
+      row.className = 'entry-row' + (entry.name.trim().toLowerCase() === myName ? ' mine' : '');
+      const name = document.createElement('span');
+      name.className = 'entry-name';
+      name.textContent = entry.name;
+      const pick = document.createElement('span');
+      pick.className = 'entry-pick';
+      pick.innerHTML = `${seedLabel(entry.s1)} vs ${seedLabel(entry.s2)} &rarr; champion <b>${entry.champion}</b> &middot; rooting for <b>${entry.rootFor}</b>`;
+      row.append(name, pick);
+      return row;
+    }
+
     function renderBoard(pred) {
       board.classList.remove('hidden');
       if (!pred) {
         boardCount.textContent = 'Predictions unavailable right now.';
+        round1TallyEl.replaceChildren();
         champTally.replaceChildren();
         finalTally.replaceChildren();
         wantTally.replaceChildren();
+        entriesListEl.replaceChildren();
         return;
       }
       const mine = storedPick();
@@ -376,9 +421,12 @@
       const mineFinal = new Set([minePicks.s1, minePicks.s2].filter(Boolean));
       const mineWant = new Set(mine && mine.rootFor ? [mine.rootFor] : []);
       boardCount.textContent = `${pred.total} bracket${pred.total === 1 ? '' : 's'} in`;
-      champTally.replaceChildren(...tallyRows(pred.champion || [], pred.total, mineChamp));
+      round1TallyEl.replaceChildren(...ROUND1_IDS.map(id => round1Block(id, pred.round1 && pred.round1[id], pred.total, minePicks[id])));
       finalTally.replaceChildren(...tallyRows(pred.finalist || [], pred.total, mineFinal));
+      champTally.replaceChildren(...tallyRows(pred.champion || [], pred.total, mineChamp));
       wantTally.replaceChildren(...tallyRows(pred.want || [], pred.total, mineWant));
+      const myName = (localStorage.getItem(NAME_KEY) || '').trim().toLowerCase();
+      entriesListEl.replaceChildren(...(pred.entries || []).map(entry => entryRow(entry, myName)));
     }
 
     async function loadBoard() {

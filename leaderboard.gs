@@ -225,27 +225,45 @@ function upsertPrediction(name, picks) {
 function readPredictions() {
   var sheet = getPredSheet();
   var last = sheet.getLastRow();
-  if (last < 2) return { total: 0, champion: [], finalist: [], want: [] };
+  var empty = { m1: [], m2: [], m3: [], m4: [] };
+  if (last < 2) return { total: 0, champion: [], finalist: [], want: [], round1: empty, entries: [] };
 
   // columns: name, m1, m2, m3, m4, s1, s2, champion, rootFor
   var values = sheet.getRange(2, 1, last - 1, 9).getValues();
   var champ = {};
   var fin = {};
   var want = {};
+  var r1 = { m1: {}, m2: {}, m3: {}, m4: {} };
+  var entries = [];
   var total = 0;
   values.forEach(function (r) {
+    var name = String(r[0]);
+    var m1v = cleanTeam(r[1]), m2v = cleanTeam(r[2]), m3v = cleanTeam(r[3]), m4v = cleanTeam(r[4]);
     var s1 = cleanTeam(r[5]);
     var s2 = cleanTeam(r[6]);
     var c = cleanTeam(r[7]);
-    if (!s1 || !s2 || !c) return;
+    if (!name || !s1 || !s2 || !c) return;
     total++;
     champ[c] = (champ[c] || 0) + 1;
     fin[s1] = (fin[s1] || 0) + 1;
     fin[s2] = (fin[s2] || 0) + 1;
+    if (m1v) r1.m1[m1v] = (r1.m1[m1v] || 0) + 1;
+    if (m2v) r1.m2[m2v] = (r1.m2[m2v] || 0) + 1;
+    if (m3v) r1.m3[m3v] = (r1.m3[m3v] || 0) + 1;
+    if (m4v) r1.m4[m4v] = (r1.m4[m4v] || 0) + 1;
     var w = cleanTeam(r[8]);
     if (w) want[w] = (want[w] || 0) + 1;
+    entries.push({ name: name, m1: m1v, m2: m2v, m3: m3v, m4: m4v, s1: s1, s2: s2, champion: c, rootFor: w });
   });
-  return { total: total, champion: tallyToList(champ), finalist: tallyToList(fin), want: tallyToList(want) };
+  entries.sort(function (a, b) { return a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1; });
+  return {
+    total: total,
+    champion: tallyToList(champ),
+    finalist: tallyToList(fin),
+    want: tallyToList(want),
+    round1: { m1: tallyToList(r1.m1), m2: tallyToList(r1.m2), m3: tallyToList(r1.m3), m4: tallyToList(r1.m4) },
+    entries: entries
+  };
 }
 
 function tallyToList(obj) {
