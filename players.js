@@ -42,7 +42,7 @@ const allPlayers = [
     "college": "Iowa",
     "birthPlace": "West Des Moines, IA, USA",
     "experience": 3,
-    "status": "Day-To-Day",
+    "status": "Active",
     "profile": "https://www.espn.com/wnba/player/_/id/4433403/caitlin-clark",
     "ppg": 22.3,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4433403.png"
@@ -282,7 +282,7 @@ const allPlayers = [
     "college": "South Carolina",
     "birthPlace": "St. Thomas, Virgin Islands",
     "experience": 4,
-    "status": "Day-To-Day",
+    "status": "Active",
     "profile": "https://www.espn.com/wnba/player/_/id/4432831/aliyah-boston",
     "ppg": 16.1,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4432831.png"
@@ -490,7 +490,7 @@ const allPlayers = [
     "college": "George Washington",
     "birthPlace": "Freeport, GB, Bahamas",
     "experience": 10,
-    "status": "Day-To-Day",
+    "status": "Active",
     "profile": "https://www.espn.com/wnba/player/_/id/2999101/jonquel-jones",
     "ppg": 14.5,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2999101.png"
@@ -581,7 +581,7 @@ const allPlayers = [
     "team": "Toronto Tempo",
     "position": "F",
     "jersey": "21",
-    "age": 32,
+    "age": 33,
     "height": "6' 5\"",
     "college": "Tennessee",
     "birthPlace": "Nashville, TN, USA",
