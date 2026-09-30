@@ -28,6 +28,11 @@
     .pick-tile:hover:not(:disabled) { border-color:var(--coral); }
     .pick-tile.selected { border:3px solid var(--coral); background:#fff0ec; padding:6px 8px; }
     .pick-tile.tbd { color:var(--muted); background:#efe9dd; cursor:default; font-style:italic; font-weight:600; justify-content:center; }
+    .pick-tile.advanced { border-color:#5c9c7e; background:var(--mint); cursor:default; }
+    .pick-tile.eliminated { color:var(--muted); background:#efe9dd; opacity:.65; text-decoration:line-through; cursor:default; }
+    .result-tag { margin-left:auto; padding:2px 6px; flex:none; font:700 9px 'DM Mono',monospace; text-transform:uppercase; letter-spacing:.06em; }
+    .pick-tile.advanced .result-tag { background:#2d7d58; color:#fff; }
+    .pick-tile.eliminated .result-tag { background:var(--muted); color:#fff; }
     .pick-tile img, .pick-tile .badge { width:26px; height:26px; flex:none; object-fit:contain; }
     .pick-tile .badge { display:grid; place-items:center; background:#68c5b4; color:var(--ink); font:800 9px 'DM Mono',monospace; }
     .pick-tile .name { overflow-wrap:break-word; line-height:1.2; }
@@ -164,6 +169,19 @@
     const ROUND2_IDS = ['s1', 's2'];
     const ALL_IDS = ['m1', 'm2', 'm3', 'm4', 's1', 's2', 'f'];
 
+    // Fill in the real winner (exact team name) as each series actually ends; leave a
+    // round null until it's decided. This only changes what the bracket PICKER shows -
+    // it doesn't touch anyone's already-submitted picks on the shared board.
+    const RESULTS = {
+      m1: null,
+      m2: null,
+      m3: null,
+      m4: null,
+      s1: null,
+      s2: null,
+      f: null
+    };
+
     // Set LOCK_ENABLED to true and pick a cutoff to close brackets before a future postseason.
     // Left off for the 2026 playoffs since Round 1 was already underway when this shipped.
     const LOCK_ENABLED = false;
@@ -227,18 +245,32 @@
         btn.textContent = 'TBD';
         return btn;
       }
-      btn.className = 'pick-tile' + (picks[id] === team ? ' selected' : '');
+      const result = RESULTS[id];
+      const isWinner = result && team === result;
+      const isLoser = result && !isWinner;
+      btn.className = 'pick-tile'
+        + (!result && picks[id] === team ? ' selected' : '')
+        + (isWinner ? ' advanced' : '')
+        + (isLoser ? ' eliminated' : '');
       const label = document.createElement('span');
       label.className = 'name';
       const seed = SEED_OF[team];
       label.textContent = (seed ? `(${seed}) ` : '') + team;
       btn.append(logoEl(team), label);
-      btn.addEventListener('click', () => {
-        if (callsClosed) return;
-        picks[id] = team;
-        cascade();
-        renderBracket();
-      });
+      if (result) {
+        btn.disabled = true;
+        const tag = document.createElement('span');
+        tag.className = 'result-tag';
+        tag.textContent = isWinner ? 'Advanced' : 'Eliminated';
+        btn.appendChild(tag);
+      } else {
+        btn.addEventListener('click', () => {
+          if (callsClosed) return;
+          picks[id] = team;
+          cascade();
+          renderBracket();
+        });
+      }
       return btn;
     }
 
@@ -253,8 +285,11 @@
       return wrap;
     }
 
-    // If an earlier-round pick changes, clear any later pick it invalidates.
+    // If an earlier-round pick changes, clear any later pick it invalidates. Also
+    // reconciles picks with any real results that have come in - a decided round is
+    // no longer a "pick," it's just what happened.
     function cascade() {
+      ALL_IDS.forEach(id => { if (RESULTS[id]) picks[id] = RESULTS[id]; });
       if (picks.s1 && picks.s1 !== picks.m1 && picks.s1 !== picks.m4) delete picks.s1;
       if (picks.s2 && picks.s2 !== picks.m2 && picks.s2 !== picks.m3) delete picks.s2;
       if (picks.f && picks.f !== picks.s1 && picks.f !== picks.s2) delete picks.f;
@@ -444,9 +479,9 @@
     const mine = storedPick();
     if (mine && mine.picks && ROUND1_IDS.every(id => mine.picks[id] && matchupTeams(id).includes(mine.picks[id]))) {
       picks = Object.assign({}, mine.picks);
-      cascade();
       wantFor = mine.rootFor || null;
     }
+    cascade(); // also applies any RESULTS entered above, even for a brand-new visitor
 
     if (callsClosed) {
       document.querySelector('.intro').classList.add('hidden');
