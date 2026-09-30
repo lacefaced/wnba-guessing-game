@@ -42,7 +42,7 @@ const allPlayers = [
     "college": "Iowa",
     "birthPlace": "West Des Moines, IA, USA",
     "experience": 3,
-    "status": "Day-To-Day",
+    "status": "Active",
     "profile": "https://www.espn.com/wnba/player/_/id/4433403/caitlin-clark",
     "ppg": 22.3,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4433403.png"
@@ -282,7 +282,7 @@ const allPlayers = [
     "college": "South Carolina",
     "birthPlace": "St. Thomas, Virgin Islands",
     "experience": 4,
-    "status": "Day-To-Day",
+    "status": "Active",
     "profile": "https://www.espn.com/wnba/player/_/id/4432831/aliyah-boston",
     "ppg": 16.1,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4432831.png"
