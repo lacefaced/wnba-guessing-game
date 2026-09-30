@@ -27,24 +27,28 @@
     h2 { margin: 0; font: 25px 'Archivo Black', sans-serif; text-transform: uppercase; }
     .hint { margin: 0; color: var(--muted); font: 11px 'DM Mono', monospace; text-align: right; }
     .ranking-list { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
-    .ranking-card { display: grid; grid-template-columns: 36px 58px 1fr auto; align-items: center; min-height: 76px; padding: 6px 10px 6px 8px; border: 1px solid var(--ink); background: var(--white); box-shadow: 0 8px 0 rgba(23,34,44,.08); }
+    .ranking-card { display: flex; align-items: center; padding: 0; border: 1px solid var(--ink); background: var(--white); box-shadow: 0 8px 0 rgba(23,34,44,.08); }
     .ranking-card.position-correct { background: var(--mint); border-color: #5c9c7e; }
     .ranking-card.position-wrong { background: #ffd8d1; border-color: var(--coral); }
-    .rank-number { font: 20px 'Archivo Black', sans-serif; text-align: center; cursor: grab; touch-action: none; user-select: none; }
-    .ranking-card.dragging { position: relative; z-index: 5; border-color: var(--coral); box-shadow: 0 14px 0 rgba(23,34,44,.18); }
-    .ranking-card.dragging .rank-number { cursor: grabbing; }
+    .ranking-card.selected { border-color: var(--coral); box-shadow: 0 8px 0 rgba(240,90,71,.3); }
+    .ranking-card-btn { display: grid; grid-template-columns: 36px 58px 1fr; align-items: center; flex: 1; min-width: 0; min-height: 76px; padding: 6px 0 6px 8px; border: none; background: transparent; font-family: inherit; color: inherit; text-align: left; cursor: pointer; }
+    .ranking-card-btn:hover:not(:disabled) { background: rgba(240,90,71,.06); }
+    .ranking-card-btn:disabled { cursor: default; }
+    .ranking-card.selected .ranking-card-btn { background: rgba(240,90,71,.1); }
+    .move-controls { display: flex; flex: none; gap: 5px; padding: 0 10px; }
+    .move-button { width: 30px; height: 30px; border: 1px solid var(--ink); background: var(--paper); color: var(--ink); font-weight: 800; cursor: pointer; }
+    .move-button:hover:not(:disabled) { background: var(--coral); color: white; }
+    .move-button:disabled { cursor: default; opacity: .3; }
+    .rank-number { font: 20px 'Archivo Black', sans-serif; text-align: center; }
     .ranking-card img, .image-placeholder { width: 48px; height: 62px; object-fit: cover; object-position: top center; background: #68c5b4; }
     .image-placeholder { display: block; }
     .player-name { padding: 0 10px; font-weight: 800; font-size: 15px; }
     .ppg { display: block; margin-top: 4px; color: #2d7d58; font: 11px 'DM Mono', monospace; }
-    .position-feedback { display: block; margin-top: 4px; font: 10px 'DM Mono', monospace; text-transform: uppercase; }
+    .position-feedback, .selected-feedback { display: block; margin-top: 4px; font: 10px 'DM Mono', monospace; text-transform: uppercase; }
     .position-correct .position-feedback { color: #2d7d58; }
     .position-wrong .position-feedback { color: var(--coral-dark); }
-    .move-controls { display: flex; gap: 5px; }
-    .move-button, .continue-button, .result-button { border: 1px solid var(--ink); cursor: pointer; }
-    .move-button { width: 30px; height: 30px; background: var(--paper); color: var(--ink); font-weight: 800; }
-    .move-button:hover:not(:disabled) { background: var(--coral); color: white; }
-    .move-button:disabled { cursor: default; opacity: .3; }
+    .selected-feedback { color: var(--coral-dark); }
+    .continue-button, .result-button { border: 1px solid var(--ink); cursor: pointer; }
     button:focus-visible { outline: 3px solid var(--coral); outline-offset: 3px; }
     .continue-button { display: block; width: 100%; margin-top: 18px; padding: 14px; background: var(--ink); color: white; font: 800 13px Manrope, sans-serif; text-transform: uppercase; }
     .continue-button:hover { background: var(--coral); border-color: var(--coral); }
@@ -58,7 +62,7 @@
     .share-actions { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
     .copy-button { border-color: var(--ink); background: var(--ink); }
     .hidden { display: none; }
-    @media (max-width: 520px) { main { padding-top: 20px; } h1 { font-size: 32px; } .team-heading { display: block; } .hint { margin-top: 8px; text-align: left; } .ranking-card { grid-template-columns: 30px 52px 1fr auto; padding-right: 7px; } .ranking-card img, .image-placeholder { width: 44px; height: 58px; } .player-name { padding: 0 6px; font-size: 14px; } .move-button { width: 28px; height: 28px; } }
+    @media (max-width: 520px) { main { padding-top: 20px; } h1 { font-size: 32px; } .team-heading { display: block; } .hint { margin-top: 8px; text-align: left; } .ranking-card-btn { grid-template-columns: 30px 52px 1fr; } .move-controls { padding: 0 7px; gap: 4px; } .ranking-card img, .image-placeholder { width: 44px; height: 58px; } .player-name { padding: 0 6px; font-size: 14px; } .move-button { width: 28px; height: 28px; } }
   </style>
   <script src="analytics.js"></script>
 </head>
@@ -75,7 +79,7 @@
       <div class="team-heading"><h2 id="teamTitle">Team</h2><p class="hint">1 is highest PPG</p></div>
       <ol id="rankingList" class="ranking-list"></ol>
       <button id="continueButton" class="continue-button" type="button">Check order</button>
-      <p id="feedback" class="feedback" role="status" aria-live="polite">Drag a card's number into place, or use the arrows.</p>
+      <p id="feedback" class="feedback" role="status" aria-live="polite">Tap a player, then tap another to swap their spots.</p>
       <div id="resultPanel" class="result-panel hidden"><h2>Share your progress</h2><p id="resultSummary" class="result-summary"></p><div class="share-actions"><button id="shareButton" class="result-button" type="button">Share with link</button><button id="copyButton" class="result-button copy-button" type="button">Copy score</button></div></div>
     </section>
   </main>
@@ -95,7 +99,7 @@
     function shuffle(items) { return [...items].sort(() => Math.random() - .5); }
     const teams = [...new Set(allPlayers.map(player => player.team))].filter(Boolean).sort();
     const topFiveByTeam = shuffle(teams).map(team => ({ team, players: allPlayers.filter(player => player.team === team).sort((a, b) => b.ppg - a.ppg).slice(0, 5) }));
-    let teamIndex = 0; let firstTryTeams = 0; let firstTryPlayers = 0; let checked = false; let teamSolved = false; let attempted = false; let orderResults = []; let currentPlayers = [];
+    let teamIndex = 0; let firstTryTeams = 0; let firstTryPlayers = 0; let checked = false; let teamSolved = false; let attempted = false; let orderResults = []; let currentPlayers = []; let selectedIndex = null;
 
     function makeImage(player) {
       const image = document.createElement('img'); image.src = player.headshot; image.alt = `${player.name} headshot`;
@@ -104,72 +108,41 @@
     }
     function renderRanking(loadTeam = false) {
       const round = topFiveByTeam[teamIndex];
-      if (loadTeam) { currentPlayers = shuffle([...round.players]); checked = false; teamSolved = false; attempted = false; }
+      if (loadTeam) { currentPlayers = shuffle([...round.players]); checked = false; teamSolved = false; attempted = false; selectedIndex = null; }
       teamTitle.textContent = round.team; teamNumber.textContent = teamIndex + 1; teamTotal.textContent = topFiveByTeam.length;
       rankingList.replaceChildren(...currentPlayers.map((player, index) => {
         const item = document.createElement('li'); item.className = 'ranking-card'; item.dataset.playerId = player.id;
         if (checked) item.classList.add(player.id === round.players[index].id ? 'position-correct' : 'position-wrong');
+        if (selectedIndex === index) item.classList.add('selected');
+        const btn = document.createElement('button'); btn.type = 'button'; btn.className = 'ranking-card-btn'; btn.disabled = teamSolved;
+        btn.setAttribute('aria-label', selectedIndex === index ? `${player.name}, selected. Tap another player to swap.` : `${player.name}. Tap to select, then tap another player to swap positions.`);
         const number = document.createElement('span'); number.className = 'rank-number'; number.textContent = index + 1;
-        attachDrag(number, item);
         const name = document.createElement('span'); name.className = 'player-name'; name.textContent = player.name;
-        if (checked) { const positionFeedback = document.createElement('small'); positionFeedback.className = 'position-feedback'; positionFeedback.textContent = player.id === round.players[index].id ? 'Correct spot' : 'Move this player'; name.appendChild(positionFeedback); }
+        if (checked) { const positionFeedback = document.createElement('small'); positionFeedback.className = 'position-feedback'; positionFeedback.textContent = player.id === round.players[index].id ? 'Correct spot' : 'Tap to move'; name.appendChild(positionFeedback); }
+        else if (selectedIndex === index) { const selectedFeedback = document.createElement('small'); selectedFeedback.className = 'selected-feedback'; selectedFeedback.textContent = 'Selected — tap another to swap'; name.appendChild(selectedFeedback); }
         if (teamSolved) { const ppg = document.createElement('small'); ppg.className = 'ppg'; ppg.textContent = `${player.ppg.toFixed(1)} PPG`; name.appendChild(ppg); }
+        btn.append(number, makeImage(player), name);
+        btn.addEventListener('click', () => handleCardTap(index));
         const controls = document.createElement('span'); controls.className = 'move-controls';
-        const up = document.createElement('button'); up.className = 'move-button'; up.type = 'button'; up.textContent = '^'; up.setAttribute('aria-label', `Move ${player.name} up`); up.disabled = index === 0;
-        const down = document.createElement('button'); down.className = 'move-button'; down.type = 'button'; down.textContent = 'v'; down.setAttribute('aria-label', `Move ${player.name} down`); down.disabled = index === round.players.length - 1;
+        const up = document.createElement('button'); up.className = 'move-button'; up.type = 'button'; up.textContent = '^'; up.setAttribute('aria-label', `Move ${player.name} up`); up.disabled = index === 0 || teamSolved;
+        const down = document.createElement('button'); down.className = 'move-button'; down.type = 'button'; down.textContent = 'v'; down.setAttribute('aria-label', `Move ${player.name} down`); down.disabled = index === round.players.length - 1 || teamSolved;
         up.addEventListener('click', () => movePlayer(index, -1)); down.addEventListener('click', () => movePlayer(index, 1)); controls.append(up, down);
-        item.append(number, makeImage(player), name, controls); return item;
+        item.append(btn, controls); return item;
       }));
-      if (loadTeam) { feedback.textContent = 'Use the arrows to arrange the players.'; feedback.className = 'feedback'; }
+      if (loadTeam) { feedback.textContent = 'Tap a player, then tap another to swap their spots — or use the arrows.'; feedback.className = 'feedback'; }
       continueButton.textContent = teamSolved ? (teamIndex === topFiveByTeam.length - 1 ? 'See results' : 'Continue') : 'Check order';
     }
     function movePlayer(index, direction) {
       if (teamSolved) return; const target = index + direction;
-      [currentPlayers[index], currentPlayers[target]] = [currentPlayers[target], currentPlayers[index]]; renderRanking();
+      [currentPlayers[index], currentPlayers[target]] = [currentPlayers[target], currentPlayers[index]]; selectedIndex = null; renderRanking();
     }
-
-    // Listens on document rather than relying on the handle's own pointer capture -
-    // some embedded/webview browsers release capture inconsistently once the dragged
-    // element gets reordered in the DOM mid-drag, which silently killed the drag there.
-    let dragState = null;
-    function attachDrag(handle, item) {
-      function onMove(event) {
-        if (!dragState || event.pointerId !== dragState.pointerId) return;
-        item.style.transform = `translateY(${event.clientY - dragState.startY}px)`;
-        for (const sibling of rankingList.children) {
-          if (sibling === item) continue;
-          const rect = sibling.getBoundingClientRect();
-          const midpoint = rect.top + rect.height / 2;
-          const itemIsAbove = !!(item.compareDocumentPosition(sibling) & Node.DOCUMENT_POSITION_FOLLOWING);
-          if (itemIsAbove && event.clientY > midpoint) { rankingList.insertBefore(item, sibling.nextSibling); }
-          else if (!itemIsAbove && event.clientY < midpoint) { rankingList.insertBefore(item, sibling); }
-          else continue;
-          dragState.startY = event.clientY;
-          item.style.transform = 'translateY(0px)';
-          break;
-        }
-      }
-      function onEnd(event) {
-        if (!dragState || event.pointerId !== dragState.pointerId) return;
-        item.classList.remove('dragging');
-        item.style.transform = '';
-        dragState = null;
-        document.removeEventListener('pointermove', onMove);
-        document.removeEventListener('pointerup', onEnd);
-        document.removeEventListener('pointercancel', onEnd);
-        const orderedIds = [...rankingList.children].map(el => el.dataset.playerId);
-        currentPlayers = orderedIds.map(id => currentPlayers.find(player => String(player.id) === id));
-        renderRanking();
-      }
-      handle.addEventListener('pointerdown', event => {
-        if (teamSolved) return;
-        event.preventDefault();
-        dragState = { pointerId: event.pointerId, startY: event.clientY };
-        item.classList.add('dragging');
-        document.addEventListener('pointermove', onMove);
-        document.addEventListener('pointerup', onEnd);
-        document.addEventListener('pointercancel', onEnd);
-      });
+    function handleCardTap(index) {
+      if (teamSolved) return;
+      if (selectedIndex === null) { selectedIndex = index; renderRanking(); return; }
+      if (selectedIndex === index) { selectedIndex = null; renderRanking(); return; }
+      [currentPlayers[selectedIndex], currentPlayers[index]] = [currentPlayers[index], currentPlayers[selectedIndex]];
+      selectedIndex = null;
+      renderRanking();
     }
     function checkOrder() {
       if (teamSolved) { if (teamIndex === topFiveByTeam.length - 1) finishGame(); else { teamIndex += 1; renderRanking(true); } return; }
