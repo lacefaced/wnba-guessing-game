@@ -30,7 +30,9 @@
     .ranking-card { display: grid; grid-template-columns: 36px 58px 1fr auto; align-items: center; min-height: 76px; padding: 6px 10px 6px 8px; border: 1px solid var(--ink); background: var(--white); box-shadow: 0 8px 0 rgba(23,34,44,.08); }
     .ranking-card.position-correct { background: var(--mint); border-color: #5c9c7e; }
     .ranking-card.position-wrong { background: #ffd8d1; border-color: var(--coral); }
-    .rank-number { font: 20px 'Archivo Black', sans-serif; text-align: center; }
+    .rank-number { font: 20px 'Archivo Black', sans-serif; text-align: center; cursor: grab; touch-action: none; user-select: none; }
+    .ranking-card.dragging { position: relative; z-index: 5; border-color: var(--coral); box-shadow: 0 14px 0 rgba(23,34,44,.18); }
+    .ranking-card.dragging .rank-number { cursor: grabbing; }
     .ranking-card img, .image-placeholder { width: 48px; height: 62px; object-fit: cover; object-position: top center; background: #68c5b4; }
     .image-placeholder { display: block; }
     .player-name { padding: 0 10px; font-weight: 800; font-size: 15px; }
@@ -73,7 +75,7 @@
       <div class="team-heading"><h2 id="teamTitle">Team</h2><p class="hint">1 is highest PPG</p></div>
       <ol id="rankingList" class="ranking-list"></ol>
       <button id="continueButton" class="continue-button" type="button">Check order</button>
-      <p id="feedback" class="feedback" role="status" aria-live="polite">Use the arrows to arrange the players.</p>
+      <p id="feedback" class="feedback" role="status" aria-live="polite">Drag a card's number into place, or use the arrows.</p>
       <div id="resultPanel" class="result-panel hidden"><h2>Share your progress</h2><p id="resultSummary" class="result-summary"></p><div class="share-actions"><button id="shareButton" class="result-button" type="button">Share with link</button><button id="copyButton" class="result-button copy-button" type="button">Copy score</button></div></div>
     </section>
   </main>
@@ -108,6 +110,7 @@
         const item = document.createElement('li'); item.className = 'ranking-card'; item.dataset.playerId = player.id;
         if (checked) item.classList.add(player.id === round.players[index].id ? 'position-correct' : 'position-wrong');
         const number = document.createElement('span'); number.className = 'rank-number'; number.textContent = index + 1;
+        attachDrag(number, item);
         const name = document.createElement('span'); name.className = 'player-name'; name.textContent = player.name;
         if (checked) { const positionFeedback = document.createElement('small'); positionFeedback.className = 'position-feedback'; positionFeedback.textContent = player.id === round.players[index].id ? 'Correct spot' : 'Move this player'; name.appendChild(positionFeedback); }
         if (teamSolved) { const ppg = document.createElement('small'); ppg.className = 'ppg'; ppg.textContent = `${player.ppg.toFixed(1)} PPG`; name.appendChild(ppg); }
@@ -123,6 +126,50 @@
     function movePlayer(index, direction) {
       if (teamSolved) return; const target = index + direction;
       [currentPlayers[index], currentPlayers[target]] = [currentPlayers[target], currentPlayers[index]]; renderRanking();
+    }
+
+    // Listens on document rather than relying on the handle's own pointer capture -
+    // some embedded/webview browsers release capture inconsistently once the dragged
+    // element gets reordered in the DOM mid-drag, which silently killed the drag there.
+    let dragState = null;
+    function attachDrag(handle, item) {
+      function onMove(event) {
+        if (!dragState || event.pointerId !== dragState.pointerId) return;
+        item.style.transform = `translateY(${event.clientY - dragState.startY}px)`;
+        for (const sibling of rankingList.children) {
+          if (sibling === item) continue;
+          const rect = sibling.getBoundingClientRect();
+          const midpoint = rect.top + rect.height / 2;
+          const itemIsAbove = !!(item.compareDocumentPosition(sibling) & Node.DOCUMENT_POSITION_FOLLOWING);
+          if (itemIsAbove && event.clientY > midpoint) { rankingList.insertBefore(item, sibling.nextSibling); }
+          else if (!itemIsAbove && event.clientY < midpoint) { rankingList.insertBefore(item, sibling); }
+          else continue;
+          dragState.startY = event.clientY;
+          item.style.transform = 'translateY(0px)';
+          break;
+        }
+      }
+      function onEnd(event) {
+        if (!dragState || event.pointerId !== dragState.pointerId) return;
+        item.classList.remove('dragging');
+        item.style.transform = '';
+        dragState = null;
+        document.removeEventListener('pointermove', onMove);
+        document.removeEventListener('pointerup', onEnd);
+        document.removeEventListener('pointercancel', onEnd);
+        const orderedIds = [...rankingList.children].map(el => el.dataset.playerId);
+        currentPlayers = orderedIds.map(id => currentPlayers.find(player => String(player.id) === id));
+        renderRanking();
+      }
+      handle.addEventListener('pointerdown', event => {
+        if (teamSolved) return;
+        event.preventDefault();
+        dragState = { pointerId: event.pointerId, startY: event.clientY };
+        item.classList.add('dragging');
+        document.addEventListener('pointermove', onMove);
+        document.addEventListener('pointerup', onEnd);
+        document.addEventListener('pointercancel', onEnd);
+      });
     }
     function checkOrder() {
       if (teamSolved) { if (teamIndex === topFiveByTeam.length - 1) finishGame(); else { teamIndex += 1; renderRanking(true); } return; }
