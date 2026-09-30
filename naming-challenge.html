@@ -97,6 +97,8 @@
     const hintBtn = document.getElementById('hintBtn'); const hintText = document.getElementById('hintText');
     let hintTarget = null; let hintLevel = 0;
     function topUnguessed() { return allPlayers.filter(player => !guessedPlayers.has(player.name)).sort((a, b) => b.ppg - a.ppg)[0]; }
+    const POSITION_NAMES = { G: 'Guard', F: 'Forward', C: 'Center' };
+    function positionName(position) { return position && position.split('-').every(part => POSITION_NAMES[part]) ? position.split('-').map(part => POSITION_NAMES[part]).join('-') : ''; }
     function resetHint() { hintTarget = null; hintLevel = 0; hintText.textContent = ''; hintBtn.disabled = false; hintBtn.textContent = 'Get a hint'; }
     hintBtn.addEventListener('click', () => {
       const target = topUnguessed();
@@ -104,7 +106,8 @@
       if (hintTarget !== target.name) { hintTarget = target.name; hintLevel = 0; }
       hintLevel = Math.min(hintLevel + 1, 3);
       const lines = [];
-      if (hintLevel >= 1) lines.push(`Plays <strong>${target.position}</strong> for the <strong>${target.team}</strong>.`);
+      const position = positionName(target.position);
+      if (hintLevel >= 1) lines.push(position ? `Plays <strong>${position}</strong> for the <strong>${target.team}</strong>.` : `Plays for the <strong>${target.team}</strong>.`);
       if (hintLevel >= 2) lines.push(`Averaging <strong>${target.ppg.toFixed(1)} PPG</strong> this season.`);
       if (hintLevel >= 3) lines.push(`Went to <strong>${target.college || 'college somewhere'}</strong>, wears <strong>#${target.jersey}</strong>, and their name starts with <strong>${target.name[0]}</strong>.`);
       hintText.innerHTML = lines.join(' ');
