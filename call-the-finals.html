@@ -78,8 +78,12 @@
     .entries-list { display:grid; gap:6px; max-height:420px; overflow-y:auto; padding-right:2px; }
     .entry-row { padding:9px 11px; border:1px solid #e0d9cc; background:var(--paper); }
     .entry-row.mine { border-color:#5c9c7e; background:var(--mint); }
-    .entry-name { display:block; margin-bottom:3px; font:800 12px Manrope,sans-serif; color:var(--ink); }
-    .entry-pick { font:12px 'DM Mono',monospace; color:var(--muted); }
+    .entry-top { display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:3px; }
+    .entry-name { font:800 12px Manrope,sans-serif; color:var(--ink); }
+    .entry-record { flex:none; padding:2px 7px; font:700 10px 'DM Mono',monospace; text-transform:uppercase; letter-spacing:.04em; background:#e9e2d3; color:var(--ink); }
+    .entry-record.perfect { background:#2d7d58; color:#fff; }
+    .entry-record.rough { background:var(--coral); color:#fff; }
+    .entry-pick { display:block; font:12px 'DM Mono',monospace; color:var(--muted); }
     .entry-pick b { font-family:Manrope,sans-serif; color:var(--ink); }
     button:focus-visible { outline:3px solid var(--coral); outline-offset:3px; }
     .hidden { display:none; }
@@ -173,7 +177,7 @@
     // round null until it's decided. This only changes what the bracket PICKER shows -
     // it doesn't touch anyone's already-submitted picks on the shared board.
     const RESULTS = {
-      m1: null,
+      m1: 'New York Liberty',
       m2: null,
       m3: null,
       m4: null,
@@ -426,16 +430,35 @@
       return wrap;
     }
 
+    // ids of matchups where a real result has been entered above.
+    function decidedIds() { return ALL_IDS.filter(id => RESULTS[id]); }
+    function entryValue(entry, id) { return id === 'f' ? entry.champion : entry[id]; }
+    function entryRecord(entry) {
+      const ids = decidedIds();
+      const correct = ids.filter(id => entryValue(entry, id) === RESULTS[id]).length;
+      return { correct, decided: ids.length };
+    }
+
     function entryRow(entry, myName) {
       const row = document.createElement('div');
       row.className = 'entry-row' + (entry.name.trim().toLowerCase() === myName ? ' mine' : '');
+      const top = document.createElement('div');
+      top.className = 'entry-top';
       const name = document.createElement('span');
       name.className = 'entry-name';
       name.textContent = entry.name;
+      top.appendChild(name);
+      const { correct, decided } = entryRecord(entry);
+      if (decided > 0) {
+        const record = document.createElement('span');
+        record.className = 'entry-record' + (correct === decided ? ' perfect' : correct === 0 ? ' rough' : '');
+        record.textContent = `${correct}/${decided} correct`;
+        top.appendChild(record);
+      }
       const pick = document.createElement('span');
       pick.className = 'entry-pick';
       pick.innerHTML = `${seedLabel(entry.s1)} vs ${seedLabel(entry.s2)} &rarr; champion <b>${entry.champion}</b> &middot; rooting for <b>${entry.rootFor}</b>`;
-      row.append(name, pick);
+      row.append(top, pick);
       return row;
     }
 
@@ -461,7 +484,14 @@
       champTally.replaceChildren(...tallyRows(pred.champion || [], pred.total, mineChamp));
       wantTally.replaceChildren(...tallyRows(pred.want || [], pred.total, mineWant));
       const myName = (localStorage.getItem(NAME_KEY) || '').trim().toLowerCase();
-      entriesListEl.replaceChildren(...(pred.entries || []).map(entry => entryRow(entry, myName)));
+      const entries = (pred.entries || []).slice();
+      if (decidedIds().length > 0) {
+        entries.sort((a, b) => {
+          const ra = entryRecord(a), rb = entryRecord(b);
+          return (rb.correct - ra.correct) || a.name.localeCompare(b.name);
+        });
+      }
+      entriesListEl.replaceChildren(...entries.map(entry => entryRow(entry, myName)));
     }
 
     async function loadBoard() {
