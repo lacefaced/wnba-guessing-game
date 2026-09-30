@@ -35,6 +35,12 @@
     .action-btn { width: 100%; padding: 14px; border: 1px solid var(--ink); background: var(--ink); color: white; font: 800 13px Manrope, sans-serif; cursor: pointer; }
     .finish-area .action-btn { background: transparent; color: var(--muted); border-color: #b9b1a5; }
     .finish-area .action-btn:hover { background: #fff0ec; color: var(--coral-dark); border-color: var(--coral); }
+    .hint-area { margin: 0 0 18px; }
+    .hint-btn { padding: 10px 16px; border: 1px solid var(--coral); background: transparent; color: var(--coral-dark); font: 800 12px Manrope, sans-serif; text-transform: uppercase; cursor: pointer; }
+    .hint-btn:hover:not(:disabled) { background: var(--coral); color: white; }
+    .hint-btn:disabled { opacity: .5; cursor: default; }
+    .hint-text { margin: 10px 0 0; padding: 12px 14px; border-left: 3px solid var(--coral); background: rgba(255,253,248,.7); color: var(--ink); font-size: 13px; line-height: 1.5; }
+    .hint-text:empty { display: none; }
     button:focus-visible { outline: 3px solid var(--coral); outline-offset: 3px; }
     ul { list-style: none; padding: 0; margin: 0 0 30px; }
     li { padding: 10px 0; border-bottom: 1px solid #ded9d0; font-size: 14px; }
@@ -59,6 +65,10 @@
     <p class="intro">Identify as many WNBA players as you can. Start typing a name and choose a match from the list.</p>
     <div class="score">Players Found: <span id="count">0</span> / <span id="total">0</span></div>
     <div class="input-wrapper"><input type="text" id="playerInput" placeholder="Start typing a player name..." autocomplete="off" data-bwignore="true" data-1p-ignore="true" data-lpignore="true"><div id="dropdown" class="dropdown"></div></div>
+    <div class="hint-area">
+      <button id="hintBtn" class="hint-btn" type="button">Get a hint</button>
+      <p id="hintText" class="hint-text"></p>
+    </div>
     <div class="finish-area"><button id="finishBtn" class="action-btn" type="button">Finish and show missed players</button></div>
     <div id="shareActions" class="share-actions hidden"><button id="shareBtn" class="action-btn" type="button">Share with link</button><button id="copyBtn" class="action-btn copy-button" type="button">Copy score</button></div>
     <div id="lb-mount"></div>
@@ -84,7 +94,24 @@
     });
     leaderboard.show(true);
     function normalizePlayerName(name) { return name.normalize('NFKC').replace(/[\u2018\u2019\u02BC\uFF07]/g, "'").replace(/\s+/g, ' ').trim().toLowerCase(); }
-    function addPlayer(player) { if (guessedPlayers.has(player.name)) return; guessedPlayers.add(player.name); const item = document.createElement('li'); item.innerHTML = `<div class="guessed-item"><img src="${player.headshot || ''}" alt="${player.name}" class="guessed-img" onerror="this.style.display='none'"><div><strong>${player.name}</strong><br><span class="guessed-text-team">${player.team}</span></div></div>`; guessedList.insertBefore(item, guessedList.firstChild); countDisplay.textContent = guessedPlayers.size; input.value = ''; dropdown.replaceChildren(); dropdown.style.display = 'none'; }
+    const hintBtn = document.getElementById('hintBtn'); const hintText = document.getElementById('hintText');
+    let hintTarget = null; let hintLevel = 0;
+    function topUnguessed() { return allPlayers.filter(player => !guessedPlayers.has(player.name)).sort((a, b) => b.ppg - a.ppg)[0]; }
+    function resetHint() { hintTarget = null; hintLevel = 0; hintText.textContent = ''; hintBtn.disabled = false; hintBtn.textContent = 'Get a hint'; }
+    hintBtn.addEventListener('click', () => {
+      const target = topUnguessed();
+      if (!target) { hintText.textContent = 'You found everyone!'; hintBtn.disabled = true; return; }
+      if (hintTarget !== target.name) { hintTarget = target.name; hintLevel = 0; }
+      hintLevel = Math.min(hintLevel + 1, 3);
+      const lines = [];
+      if (hintLevel >= 1) lines.push(`Plays <strong>${target.position}</strong> for the <strong>${target.team}</strong>.`);
+      if (hintLevel >= 2) lines.push(`Averaging <strong>${target.ppg.toFixed(1)} PPG</strong> this season.`);
+      if (hintLevel >= 3) lines.push(`Went to <strong>${target.college || 'college somewhere'}</strong>, wears <strong>#${target.jersey}</strong>, and their name starts with <strong>${target.name[0]}</strong>.`);
+      hintText.innerHTML = lines.join(' ');
+      hintBtn.textContent = hintLevel >= 3 ? 'No more hints' : 'Another hint';
+      hintBtn.disabled = hintLevel >= 3;
+    });
+    function addPlayer(player) { if (guessedPlayers.has(player.name)) return; guessedPlayers.add(player.name); if (player.name === hintTarget) resetHint(); const item = document.createElement('li'); item.innerHTML = `<div class="guessed-item"><img src="${player.headshot || ''}" alt="${player.name}" class="guessed-img" onerror="this.style.display='none'"><div><strong>${player.name}</strong><br><span class="guessed-text-team">${player.team}</span></div></div>`; guessedList.insertBefore(item, guessedList.firstChild); countDisplay.textContent = guessedPlayers.size; input.value = ''; dropdown.replaceChildren(); dropdown.style.display = 'none'; }
     input.addEventListener('input', () => {
       const value = normalizePlayerName(input.value);
       dropdown.replaceChildren();
@@ -112,6 +139,7 @@
       input.disabled = true;
       finishBtn.disabled = true;
       finishBtn.textContent = 'Game complete';
+      hintBtn.disabled = true;
       dropdown.style.display = 'none';
       shareActions.classList.remove('hidden');
       missingSection.classList.remove('hidden');
