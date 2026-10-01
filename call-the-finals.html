@@ -24,18 +24,18 @@
     .matchup { padding:16px; border:1px solid var(--ink); background:var(--white); box-shadow:0 6px 0 rgba(23,34,44,.08); }
     .matchup-row { display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:14px; }
     .vs { display:flex; align-items:center; justify-content:center; width:30px; height:30px; flex:none; border-radius:50%; border:2px solid var(--ink); background:var(--paper); font:800 10px 'DM Mono',monospace; color:var(--coral-dark); text-transform:uppercase; }
-    .pick-tile { display:flex; align-items:center; gap:8px; min-width:0; padding:8px 10px; border:1px solid var(--ink); background:var(--paper); font:800 12px Manrope,sans-serif; text-align:left; cursor:pointer; }
+    .pick-tile { display:flex; flex-wrap:wrap; align-items:center; gap:4px 8px; min-width:0; padding:8px 10px; border:1px solid var(--ink); background:var(--paper); font:800 12px Manrope,sans-serif; text-align:left; cursor:pointer; }
     .pick-tile:hover:not(:disabled) { border-color:var(--coral); }
     .pick-tile.selected { border:3px solid var(--coral); background:#fff0ec; padding:6px 8px; }
     .pick-tile.tbd { color:var(--muted); background:#efe9dd; cursor:default; font-style:italic; font-weight:600; justify-content:center; }
     .pick-tile.advanced { border-color:#5c9c7e; background:var(--mint); cursor:default; }
     .pick-tile.eliminated { color:var(--muted); background:#efe9dd; opacity:.65; text-decoration:line-through; cursor:default; }
-    .result-tag { margin-left:auto; padding:2px 6px; flex:none; font:700 9px 'DM Mono',monospace; text-transform:uppercase; letter-spacing:.06em; }
+    .result-tag { flex:0 0 100%; width: fit-content; margin-left:34px; padding:2px 6px; font:700 9px 'DM Mono',monospace; text-transform:uppercase; letter-spacing:.06em; }
     .pick-tile.advanced .result-tag { background:#2d7d58; color:#fff; }
     .pick-tile.eliminated .result-tag { background:var(--muted); color:#fff; }
     .pick-tile img, .pick-tile .badge { width:26px; height:26px; flex:none; object-fit:contain; }
     .pick-tile .badge { display:grid; place-items:center; background:#68c5b4; color:var(--ink); font:800 9px 'DM Mono',monospace; }
-    .pick-tile .name { overflow-wrap:break-word; line-height:1.2; }
+    .pick-tile .name { flex: 1 1 auto; min-width: 0; overflow-wrap:break-word; line-height:1.2; }
     #roundF .pick-tile { padding:16px 12px; font-size:14px; }
     #roundF .pick-tile img, #roundF .pick-tile .badge { width:40px; height:40px; }
     #roundF .pick-tile.selected { padding:14px 10px; }
