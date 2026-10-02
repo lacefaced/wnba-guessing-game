@@ -25,6 +25,19 @@
     .team-heading { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin: 0 0 12px; }
     .team-heading h2 { min-height: 2.1em; margin: 0; font: 23px/1.05 'Archivo Black', sans-serif; text-transform: uppercase; }
     .roster-count { color: var(--muted); font: 11px 'DM Mono', monospace; }
+    .scorebug { display: flex; align-items: stretch; justify-content: center; margin: 0 0 24px; border-radius: 10px; overflow: hidden; background: linear-gradient(180deg, #1c2733, #0e151c); box-shadow: 0 8px 0 rgba(0,0,0,.15), inset 0 1px 0 rgba(255,255,255,.08); }
+    .scorebug-team { display: flex; align-items: center; gap: 12px; flex: 1 1 0; padding: 14px 22px; min-width: 0; }
+    .scorebug-team.team-one { justify-content: flex-end; }
+    .scorebug-team.team-two { justify-content: flex-start; }
+    .scorebug-logo { width: 42px; height: 42px; object-fit: contain; flex: none; }
+    .scorebug-abbr { font: 800 15px 'DM Mono', monospace; letter-spacing: .06em; color: #fff; text-transform: uppercase; }
+    .scorebug-score { font: 800 34px 'Archivo Black', sans-serif; color: #fff; min-width: 46px; text-align: center; line-height: 1; }
+    .scorebug-center { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding: 10px 20px; flex: none; min-width: 120px; border-left: 1px solid rgba(255,255,255,.15); border-right: 1px solid rgba(255,255,255,.15); }
+    .scorebug-clock { font: 800 11px 'DM Mono', monospace; letter-spacing: .05em; color: #c3ccd4; text-transform: uppercase; text-align: center; }
+    .scorebug.is-live .scorebug-clock { color: #ff8a74; }
+    .scorebug-live-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--coral); animation: scorebugPulse 1.4s ease-in-out infinite; }
+    .scorebug.is-final .scorebug-score, .scorebug.is-final .scorebug-abbr { color: #9aa5af; }
+    @keyframes scorebugPulse { 0%, 100% { opacity: 1; } 50% { opacity: .25; } }
     .roster { display: grid; gap: 6px; }
     .player-card { display: grid; grid-template-columns: 50px 58px 1fr; align-items: center; min-height: 68px; padding: 4px 10px 4px 5px; border: 1px solid var(--ink); background: var(--white); box-shadow: 0 6px 0 rgba(23,34,44,.08); }
     .player-card img, .image-placeholder { width: 48px; height: 64px; object-fit: cover; object-position: top center; background: var(--mint); }
@@ -43,6 +56,7 @@
     .fouls-badge { display: block; margin-top: 2px; font: 800 10px 'DM Mono', monospace; text-transform: uppercase; color: var(--muted); }
     .fouls-badge.foul-trouble { color: #b35c00; }
     .fouls-badge.fouled-out { color: var(--coral-dark); }
+    .milestone-badge { display: block; margin-top: 2px; font: 800 10px 'DM Mono', monospace; text-transform: uppercase; color: var(--coral-dark); }
     .availability { display: block; margin-top: 3px; color: #2d7d58; font: 9px 'DM Mono', monospace; text-transform: uppercase; }
     .availability.unavailable { color: var(--coral-dark); font-weight: 800; }
     .empty { padding: 20px; border: 1px dashed #b9b1a5; color: var(--muted); font: 12px 'DM Mono', monospace; text-align: center; }
@@ -77,7 +91,7 @@
     .modal-link { display: inline-block; margin-top: 18px; color: var(--coral-dark); font: 12px 'DM Mono', monospace; }
     [hidden] { display: none !important; }
     @media (max-width: 520px) { .player-modal { padding: 18px; } .modal-profile { grid-template-columns: 96px 1fr; gap: 12px; } .modal-profile img, .modal-image-placeholder { width: 96px; height: 132px; } .modal-profile h2 { font-size: 21px; } .detail-grid { gap: 6px; } .detail { padding: 8px 4px; } .detail-value { font-size: 12px; overflow-wrap: anywhere; } }
-    @media (max-width: 700px) { main { padding-top: 24px; } h1 { font-size: 34px; } .selectors { gap: 12px; margin-bottom: 24px; } .comparison { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; } .team-heading { display: block; } .team-heading h2 { min-height: 2.2em; font-size: 16px; line-height: 1.1; overflow-wrap: anywhere; } .roster-count { display: block; margin-top: 5px; } .player-card { grid-template-columns: 22px 30px minmax(0, 1fr); gap: 3px; min-height: 52px; padding: 3px; } .player-card img, .image-placeholder, .player-card.no-ppg img, .player-card.no-ppg .image-placeholder { width: 30px; height: 42px; } .number { font-size: 15px; } .name { padding: 0; font-size: 10px; overflow-wrap: anywhere; } .player-meta { gap: 5px; margin-top: 2px; } .position, .ppg { font-size: 8px; } .live-pts { gap: 4px; margin-top: 2px; } .live-pts .pts-value { font-size: 14px; } .live-pts .pts-label { font-size: 7px; } .fouls-badge { font-size: 7px; margin-top: 1px; } .availability { font-size: 7px; } }
+    @media (max-width: 700px) { main { padding-top: 24px; } h1 { font-size: 34px; } .selectors { gap: 12px; margin-bottom: 24px; } .comparison { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; } .team-heading { display: block; } .team-heading h2 { min-height: 2.2em; font-size: 16px; line-height: 1.1; overflow-wrap: anywhere; } .roster-count { display: block; margin-top: 5px; } .player-card { grid-template-columns: 22px 30px minmax(0, 1fr); gap: 3px; min-height: 52px; padding: 3px; } .player-card img, .image-placeholder, .player-card.no-ppg img, .player-card.no-ppg .image-placeholder { width: 30px; height: 42px; } .number { font-size: 15px; } .name { padding: 0; font-size: 10px; overflow-wrap: anywhere; } .player-meta { gap: 5px; margin-top: 2px; } .position, .ppg { font-size: 8px; } .live-pts { gap: 4px; margin-top: 2px; } .live-pts .pts-value { font-size: 14px; } .live-pts .pts-label { font-size: 7px; } .fouls-badge { font-size: 7px; margin-top: 1px; } .milestone-badge { font-size: 7px; margin-top: 1px; } .availability { font-size: 7px; } .scorebug-team { gap: 7px; padding: 10px 10px; } .scorebug-logo { width: 28px; height: 28px; } .scorebug-abbr { font-size: 11px; } .scorebug-score { font-size: 24px; min-width: 32px; } .scorebug-center { min-width: 76px; padding: 8px 10px; } .scorebug-clock { font-size: 9px; } }
   </style>
   <script src="analytics.js"></script>
 </head>
@@ -89,6 +103,7 @@
     <p class="intro">Choose any two teams to see their current rosters, player images, jersey numbers, positions, and points per game.</p>
     <section class="quick-pick"><h3>Quick pick</h3><div id="quickPickSection" class="games-grid"></div></section>
     <div class="selectors"><div class="selector"><label for="teamOne">Team one</label><select id="teamOne"></select></div><div class="selector"><label for="teamTwo">Team two</label><select id="teamTwo"></select></div></div>
+    <div id="matchupStatus" class="scorebug" hidden></div>
     <div class="comparison"><section class="team-panel" aria-labelledby="teamOneTitle"><div class="team-heading"><h2 id="teamOneTitle"></h2><span id="teamOneCount" class="roster-count"></span></div><div id="teamOneRoster" class="roster"></div></section><section class="team-panel" aria-labelledby="teamTwoTitle"><div class="team-heading"><h2 id="teamTwoTitle"></h2><span id="teamTwoCount" class="roster-count"></span></div><div id="teamTwoRoster" class="roster"></div></section></div>
     <div class="share-row"><button id="shareLinkBtn" class="share-link-btn" type="button">Copy link to this matchup</button></div>
     <div id="playerModalBackdrop" class="player-modal-backdrop" hidden><section id="playerModal" class="player-modal" role="dialog" aria-modal="true" aria-labelledby="modalPlayerName"><button id="modalClose" class="modal-close" type="button" aria-label="Close player details">×</button><div class="modal-profile"><div id="modalImageContainer"></div><div><h2 id="modalPlayerName"></h2><p id="modalSubtitle" class="modal-subtitle"></p></div></div><div id="detailGrid" class="detail-grid"></div><a id="modalLink" class="modal-link" target="_blank" rel="noreferrer">View player profile</a></section></div>
@@ -105,7 +120,7 @@
     let liveStats = {};
     function extractEspnId(player) { const match = /\/wnba\/players\/full\/(\d+)\.png/.exec(player.headshot || ''); return match ? match[1] : null; }
 
-    function fetchAndDisplayGames() { fetch('https://site.api.espn.com/apis/site/v2/sports/basketball/wnba/scoreboard').then(r => r.json()).then(data => { const events = data.events || []; const localToday = new Date().toLocaleDateString('en-CA'); const todayGames = events .filter(game => { const gameDate = new Date(game.date); const gameLocalDate = gameDate.toLocaleDateString('en-CA'); return gameLocalDate === localToday; }) .sort((a, b) => new Date(a.date) - new Date(b.date)); gamesByTeam = {}; todayGames.forEach(game => { const comp = (game.competitions || [{}])[0]; const state = comp.status?.type?.state || 'pre'; (comp.competitors || []).forEach(competitor => { const name = competitor.team?.displayName; if (name) gamesByTeam[name] = { id: game.id, state }; }); }); if (todayGames.length === 0) { quickPickSection.className = 'empty-state'; quickPickSection.textContent = 'No games today'; } else { quickPickSection.className = 'games-grid'; quickPickSection.replaceChildren(...todayGames.map(game => { const comp = (game.competitions || [{}])[0]; const competitors = comp.competitors || []; const [away, home] = competitors.length >= 2 ? [competitors[0].team.displayName, competitors[1].team.displayName] : []; if (!away || !home) return document.createTextNode(''); const btn = document.createElement('button'); btn.className = 'game-btn'; btn.type = 'button'; const time = new Date(game.date); btn.innerHTML = `<span class="game-time">${time.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true })}</span>${away}<br>vs<br>${home}`; btn.addEventListener('click', () => { teamOneSelect.value = away; teamTwoSelect.value = home; render(); refreshLiveStats(); updateMatchupUrl(); }); return btn; })); } refreshLiveStats(); }).catch(() => { quickPickSection.className = 'empty-state'; quickPickSection.textContent = 'Unable to load games'; }); }
+    function fetchAndDisplayGames() { fetch('https://site.api.espn.com/apis/site/v2/sports/basketball/wnba/scoreboard').then(r => r.json()).then(data => { const events = data.events || []; const localToday = new Date().toLocaleDateString('en-CA'); const todayGames = events .filter(game => { const gameDate = new Date(game.date); const gameLocalDate = gameDate.toLocaleDateString('en-CA'); return gameLocalDate === localToday; }) .sort((a, b) => new Date(a.date) - new Date(b.date)); gamesByTeam = {}; todayGames.forEach(game => { const comp = (game.competitions || [{}])[0]; const status = comp.status || {}; const state = status.type?.state || 'pre'; const statusText = status.type?.shortDetail || status.type?.description || ''; const competitors = comp.competitors || []; const gameInfo = { id: game.id, state, statusText, teams: competitors.map(c => ({ name: c.team?.displayName, score: c.score })) }; competitors.forEach(competitor => { const name = competitor.team?.displayName; if (name) gamesByTeam[name] = gameInfo; }); }); if (todayGames.length === 0) { quickPickSection.className = 'empty-state'; quickPickSection.textContent = 'No games today'; } else { quickPickSection.className = 'games-grid'; quickPickSection.replaceChildren(...todayGames.map(game => { const comp = (game.competitions || [{}])[0]; const competitors = comp.competitors || []; const [away, home] = competitors.length >= 2 ? [competitors[0].team.displayName, competitors[1].team.displayName] : []; if (!away || !home) return document.createTextNode(''); const btn = document.createElement('button'); btn.className = 'game-btn'; btn.type = 'button'; const time = new Date(game.date); btn.innerHTML = `<span class="game-time">${time.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true })}</span>${away}<br>vs<br>${home}`; btn.addEventListener('click', () => { teamOneSelect.value = away; teamTwoSelect.value = home; render(); refreshLiveStats(); updateMatchupUrl(); }); return btn; })); } refreshLiveStats(); }).catch(() => { quickPickSection.className = 'empty-state'; quickPickSection.textContent = 'Unable to load games'; }); }
 
     // Deep-linking: ?team1=...&team2=... pre-selects a matchup so a shared link skips the pickers.
     function matchupUrl() { const url = new URL(location.href); url.search = ''; url.searchParams.set('team1', teamOneSelect.value); url.searchParams.set('team2', teamTwoSelect.value); return url.toString(); }
@@ -131,15 +146,23 @@
             const state = data.header?.competitions?.[0]?.status?.type?.state || 'in';
             (data.boxscore?.players || []).forEach(team => {
               (team.statistics || []).forEach(group => {
-                const ptsIndex = (group.names || []).indexOf('PTS');
-                const pfIndex = (group.names || []).indexOf('PF');
+                const names = group.names || [];
+                const ptsIndex = names.indexOf('PTS');
+                const pfIndex = names.indexOf('PF');
+                const rebIndex = names.indexOf('REB');
+                const astIndex = names.indexOf('AST');
+                const stlIndex = names.indexOf('STL');
+                const blkIndex = names.indexOf('BLK');
                 if (ptsIndex === -1) return;
+                const statAt = (stats, index) => { if (index === -1) return null; const value = Number(stats[index]); return Number.isNaN(value) ? null : value; };
                 (group.athletes || []).forEach(entry => {
                   const athleteId = entry.athlete?.id;
                   const stats = entry.stats || [];
-                  const pts = Number(stats[ptsIndex]);
-                  const fouls = pfIndex === -1 ? null : Number(stats[pfIndex]);
-                  if (athleteId && !Number.isNaN(pts)) nextStats[athleteId] = { pts, fouls: Number.isNaN(fouls) ? null : fouls, state };
+                  const pts = statAt(stats, ptsIndex);
+                  if (athleteId && pts != null) nextStats[athleteId] = {
+                    pts, fouls: statAt(stats, pfIndex), reb: statAt(stats, rebIndex),
+                    ast: statAt(stats, astIndex), stl: statAt(stats, stlIndex), blk: statAt(stats, blkIndex), state
+                  };
                 });
               });
             });
@@ -150,7 +173,7 @@
     }
     setInterval(refreshLiveStats, 45000);
     function makeImage(player) { const image = document.createElement('img'); image.src = player.headshot || ''; image.alt = `${player.name} headshot`; image.onerror = () => { const placeholder = document.createElement('span'); placeholder.className = 'image-placeholder'; image.replaceWith(placeholder); }; return image; }
-    function makePlayerCard(player) { const card = document.createElement('button'); const hasPpg = Number(player.ppg) > 0; const status = player.status || 'Unknown'; const unavailable = /out|inactive|injured|suspended/i.test(status); card.className = `player-card${hasPpg ? '' : ' no-ppg'}${unavailable ? ' unavailable' : ''}`; card.type = 'button'; const number = document.createElement('span'); number.className = 'number'; number.textContent = player.jersey || '—'; const name = document.createElement('span'); name.className = 'name'; name.textContent = player.name; const meta = document.createElement('span'); meta.className = 'player-meta'; const position = document.createElement('small'); position.className = 'position'; position.textContent = player.position || 'Player'; const ppg = document.createElement('small'); ppg.className = 'ppg'; ppg.textContent = hasPpg ? `${Number(player.ppg).toFixed(1)} PPG` : 'No PPG'; meta.append(position, ppg); const live = liveStats[extractEspnId(player)]; let liveBadge = null; let foulsBadge = null; if (live) { liveBadge = document.createElement('small'); liveBadge.className = `live-pts ${live.state === 'in' ? 'is-live' : 'is-final'}`; const ptsValue = document.createElement('span'); ptsValue.className = 'pts-value'; ptsValue.textContent = live.pts; const ptsLabel = document.createElement('span'); ptsLabel.className = 'pts-label'; ptsLabel.textContent = live.state === 'in' ? 'PTS · ● LIVE' : 'PTS · FINAL'; liveBadge.append(ptsValue, ptsLabel); if (live.fouls > 0) { foulsBadge = document.createElement('small'); const fouledOut = live.fouls >= 6; foulsBadge.className = `fouls-badge${fouledOut ? ' fouled-out' : live.fouls >= 5 ? ' foul-trouble' : ''}`; foulsBadge.textContent = fouledOut ? 'Fouled out' : `${live.fouls} ${live.fouls === 1 ? 'foul' : 'fouls'}`; } } const availability = document.createElement('small'); availability.className = `availability${unavailable ? ' unavailable' : ''}`; availability.textContent = status; name.append(meta); if (liveBadge) name.append(liveBadge); if (foulsBadge) name.append(foulsBadge); name.append(availability); card.append(number, makeImage(player), name); card.addEventListener('click', () => openPlayerModal(player)); return card; }
+    function makePlayerCard(player) { const card = document.createElement('button'); const hasPpg = Number(player.ppg) > 0; const status = player.status || 'Unknown'; const unavailable = /out|inactive|injured|suspended/i.test(status); card.className = `player-card${hasPpg ? '' : ' no-ppg'}${unavailable ? ' unavailable' : ''}`; card.type = 'button'; const number = document.createElement('span'); number.className = 'number'; number.textContent = player.jersey || '—'; const name = document.createElement('span'); name.className = 'name'; name.textContent = player.name; const meta = document.createElement('span'); meta.className = 'player-meta'; const position = document.createElement('small'); position.className = 'position'; position.textContent = player.position || 'Player'; const ppg = document.createElement('small'); ppg.className = 'ppg'; ppg.textContent = hasPpg ? `${Number(player.ppg).toFixed(1)} PPG` : 'No PPG'; meta.append(position, ppg); const live = liveStats[extractEspnId(player)]; let liveBadge = null; let foulsBadge = null; let milestoneBadge = null; if (live) { liveBadge = document.createElement('small'); liveBadge.className = `live-pts ${live.state === 'in' ? 'is-live' : 'is-final'}`; const ptsValue = document.createElement('span'); ptsValue.className = 'pts-value'; ptsValue.textContent = live.pts; const ptsLabel = document.createElement('span'); ptsLabel.className = 'pts-label'; ptsLabel.textContent = live.state === 'in' ? 'PTS · ● LIVE' : 'PTS · FINAL'; liveBadge.append(ptsValue, ptsLabel); if (live.fouls > 0) { foulsBadge = document.createElement('small'); const fouledOut = live.fouls >= 6; foulsBadge.className = `fouls-badge${fouledOut ? ' fouled-out' : live.fouls >= 5 ? ' foul-trouble' : ''}`; foulsBadge.textContent = fouledOut ? 'Fouled out' : `${live.fouls} ${live.fouls === 1 ? 'foul' : 'fouls'}`; } const doubleDigitCount = [live.pts, live.reb, live.ast, live.stl, live.blk].filter(v => Number(v) >= 10).length; if (doubleDigitCount >= 2) { milestoneBadge = document.createElement('small'); milestoneBadge.className = 'milestone-badge'; milestoneBadge.textContent = doubleDigitCount >= 3 ? '★ Triple-double' : '★ Double-double'; } } const availability = document.createElement('small'); availability.className = `availability${unavailable ? ' unavailable' : ''}`; availability.textContent = status; name.append(meta); if (liveBadge) name.append(liveBadge); if (milestoneBadge) name.append(milestoneBadge); if (foulsBadge) name.append(foulsBadge); name.append(availability); card.append(number, makeImage(player), name); card.addEventListener('click', () => openPlayerModal(player)); return card; }
     function displayValue(value) { if (value == null || value === '') return '—'; if (typeof value === 'object') return value.name || value.displayName || value.shortName || '—'; return String(value); }
     function openPlayerModal(player) { const image = makeImage(player); image.className = 'modal-image'; const imageContainer = document.getElementById('modalImageContainer'); imageContainer.replaceChildren(image); document.getElementById('modalPlayerName').textContent = player.name; document.getElementById('modalSubtitle').textContent = `${player.team}  |  #${player.jersey || '—'}  |  ${player.position || 'Player'}`; const details = [['PPG', Number(player.ppg) > 0 ? Number(player.ppg).toFixed(1) : 'No PPG'], ['Age', displayValue(player.age)], ['Height', displayValue(player.height)], ['College', displayValue(player.college)], ['Born', displayValue(player.birthPlace)], ['Experience', player.experience != null ? `${displayValue(player.experience)} seasons` : '—'], ['Status', displayValue(player.status)]]; document.getElementById('detailGrid').replaceChildren(...details.map(([label, value]) => { const detail = document.createElement('div'); detail.className = 'detail'; detail.innerHTML = `<span class="detail-label">${label}</span><span class="detail-value">${value}</span>`; return detail; })); const link = document.getElementById('modalLink'); link.hidden = !player.profile; link.href = player.profile || '#'; document.getElementById('playerModalBackdrop').hidden = false; document.body.style.overflow = 'hidden'; document.getElementById('modalClose').focus(); }
     function closePlayerModal() { document.getElementById('playerModalBackdrop').hidden = true; document.body.style.overflow = ''; }
@@ -158,8 +181,48 @@
     // hasn't checked in yet gets sunk to the bottom (-1) rather than borrowing their season
     // PPG, which could otherwise jump them above teammates who are actually in the game.
     function sortValue(player, hasLiveData) { const live = liveStats[extractEspnId(player)]; if (hasLiveData) return live ? live.pts : -1; return Number(player.ppg); }
+    const TEAM_ABBR = { 'Atlanta Dream': 'atl', 'Chicago Sky': 'chi', 'Connecticut Sun': 'con', 'Dallas Wings': 'dal', 'Golden State Valkyries': 'gs', 'Indiana Fever': 'ind', 'Las Vegas Aces': 'lv', 'Los Angeles Sparks': 'la', 'Minnesota Lynx': 'min', 'New York Liberty': 'ny', 'Phoenix Mercury': 'phx', 'Portland Fire': 'por', 'Seattle Storm': 'sea', 'Toronto Tempo': 'tor', 'Washington Mystics': 'wsh' };
+    function teamLogoUrl(team) { const abbr = TEAM_ABBR[team]; return abbr ? `https://a.espncdn.com/i/teamlogos/wnba/500/${abbr}.png` : ''; }
+    function scorebugTeam(team, score, side) {
+      const wrap = document.createElement('div');
+      wrap.className = `scorebug-team team-${side}`;
+      const logo = document.createElement('img');
+      logo.className = 'scorebug-logo';
+      logo.src = teamLogoUrl(team);
+      logo.alt = '';
+      logo.onerror = () => { logo.style.visibility = 'hidden'; };
+      const abbr = document.createElement('span');
+      abbr.className = 'scorebug-abbr';
+      abbr.textContent = (TEAM_ABBR[team] || '').toUpperCase();
+      const scoreEl = document.createElement('span');
+      scoreEl.className = 'scorebug-score';
+      scoreEl.textContent = score;
+      if (side === 'one') wrap.append(logo, abbr, scoreEl); else wrap.append(scoreEl, abbr, logo);
+      return wrap;
+    }
+    function renderMatchupStatus(teamOne, teamTwo) {
+      const statusEl = document.getElementById('matchupStatus');
+      const gameOne = gamesByTeam[teamOne];
+      const gameTwo = gamesByTeam[teamTwo];
+      const sameGame = gameOne && gameTwo && gameOne.id === gameTwo.id && (gameOne.state === 'in' || gameOne.state === 'post');
+      if (!sameGame) { statusEl.hidden = true; statusEl.replaceChildren(); return; }
+      const one = gameOne.teams.find(t => t.name === teamOne);
+      const two = gameOne.teams.find(t => t.name === teamTwo);
+      if (!one || !two) { statusEl.hidden = true; statusEl.replaceChildren(); return; }
+      const isLive = gameOne.state === 'in';
+      statusEl.className = `scorebug ${isLive ? 'is-live' : 'is-final'}`;
+      const center = document.createElement('div');
+      center.className = 'scorebug-center';
+      if (isLive) { const dot = document.createElement('span'); dot.className = 'scorebug-live-dot'; center.append(dot); }
+      const clock = document.createElement('span');
+      clock.className = 'scorebug-clock';
+      clock.textContent = isLive ? gameOne.statusText : 'Final';
+      center.append(clock);
+      statusEl.replaceChildren(scorebugTeam(teamOne, one.score, 'one'), center, scorebugTeam(teamTwo, two.score, 'two'));
+      statusEl.hidden = false;
+    }
     function renderTeam(team, title, count, roster) { const teamGame = gamesByTeam[team]; const hasLiveData = !!(teamGame && (teamGame.state === 'in' || teamGame.state === 'post')); const players = allPlayers.filter(player => player.team === team).sort((a, b) => sortValue(b, hasLiveData) - sortValue(a, hasLiveData) || a.name.localeCompare(b.name)); document.getElementById(title).textContent = team; document.getElementById(count).textContent = `${players.length} players`; const rosterElement = document.getElementById(roster); rosterElement.replaceChildren(...(players.length ? players.map(makePlayerCard) : [Object.assign(document.createElement('div'), { className: 'empty', textContent: 'No roster data available.' })])); }
-    function render() { renderTeam(teamOneSelect.value, 'teamOneTitle', 'teamOneCount', 'teamOneRoster'); renderTeam(teamTwoSelect.value, 'teamTwoTitle', 'teamTwoCount', 'teamTwoRoster'); }
+    function render() { renderTeam(teamOneSelect.value, 'teamOneTitle', 'teamOneCount', 'teamOneRoster'); renderTeam(teamTwoSelect.value, 'teamTwoTitle', 'teamTwoCount', 'teamTwoRoster'); renderMatchupStatus(teamOneSelect.value, teamTwoSelect.value); }
     teams.forEach((team, index) => { [teamOneSelect, teamTwoSelect].forEach(select => { const option = document.createElement('option'); option.value = team; option.textContent = team; select.append(option); }); if (index === 1) teamTwoSelect.value = team; });
     applyMatchupFromUrl();
     teamOneSelect.addEventListener('change', () => { render(); refreshLiveStats(); updateMatchupUrl(); }); teamTwoSelect.addEventListener('change', () => { render(); refreshLiveStats(); updateMatchupUrl(); }); render(); updateMatchupUrl();
