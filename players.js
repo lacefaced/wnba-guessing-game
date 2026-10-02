@@ -42,7 +42,7 @@ const allPlayers = [
     "college": "Iowa",
     "birthPlace": "West Des Moines, IA, USA",
     "experience": 3,
-    "status": "Day-To-Day",
+    "status": "Active",
     "profile": "https://www.espn.com/wnba/player/_/id/4433403/caitlin-clark",
     "ppg": 22.3,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4433403.png"
@@ -282,7 +282,7 @@ const allPlayers = [
     "college": "South Carolina",
     "birthPlace": "St. Thomas, Virgin Islands",
     "experience": 4,
-    "status": "Day-To-Day",
+    "status": "Active",
     "profile": "https://www.espn.com/wnba/player/_/id/4432831/aliyah-boston",
     "ppg": 16.1,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4432831.png"
@@ -1242,7 +1242,7 @@ const allPlayers = [
     "college": "",
     "birthPlace": "",
     "experience": 4,
-    "status": "Active",
+    "status": "Day-To-Day",
     "profile": "https://www.espn.com/wnba/player/_/id/4790266/awak-kuier",
     "ppg": 6.3,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4790266.png"
@@ -1722,7 +1722,7 @@ const allPlayers = [
     "college": "",
     "birthPlace": "Darwin, NT, Australia",
     "experience": 8,
-    "status": "Active",
+    "status": "Out",
     "profile": "https://www.espn.com/wnba/player/_/id/3099736/stephanie-talbot",
     "ppg": 4.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3099736.png"
@@ -2773,7 +2773,7 @@ const allPlayers = [
     "team": "Minnesota Lynx",
     "position": "Player",
     "jersey": "11",
-    "age": 24,
+    "age": 25,
     "height": "5' 11\"",
     "college": "",
     "birthPlace": "",
@@ -3237,7 +3237,7 @@ const allPlayers = [
     "team": "Portland Fire",
     "position": "Player",
     "jersey": "77",
-    "age": 25,
+    "age": 26,
     "height": "5' 11\"",
     "college": "Oregon",
     "birthPlace": "Northampton, England",
