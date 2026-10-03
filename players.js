@@ -1242,7 +1242,7 @@ const allPlayers = [
     "college": "",
     "birthPlace": "",
     "experience": 4,
-    "status": "Day-To-Day",
+    "status": "Active",
     "profile": "https://www.espn.com/wnba/player/_/id/4790266/awak-kuier",
     "ppg": 6.3,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4790266.png"
