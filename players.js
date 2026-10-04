@@ -1274,7 +1274,7 @@ const allPlayers = [
     "college": "",
     "birthPlace": "Hebei, China",
     "experience": 4,
-    "status": "Active",
+    "status": "Day-To-Day",
     "profile": "https://www.espn.com/wnba/player/_/id/4337216/han-xu",
     "ppg": 6.3,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4337216.png"
@@ -1722,7 +1722,7 @@ const allPlayers = [
     "college": "",
     "birthPlace": "Darwin, NT, Australia",
     "experience": 8,
-    "status": "Out",
+    "status": "Day-To-Day",
     "profile": "https://www.espn.com/wnba/player/_/id/3099736/stephanie-talbot",
     "ppg": 4.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3099736.png"
