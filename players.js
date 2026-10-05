@@ -138,7 +138,7 @@ const allPlayers = [
     "college": "South Carolina",
     "birthPlace": "Greenwood, SC, USA",
     "experience": 10,
-    "status": "Active",
+    "status": "Out",
     "profile": "https://www.espn.com/wnba/player/_/id/3058901/allisha-gray",
     "ppg": 19.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3058901.png"
@@ -1018,7 +1018,7 @@ const allPlayers = [
     "college": "Notre Dame",
     "birthPlace": "Lincolnwood, IL, USA",
     "experience": 12,
-    "status": "Active",
+    "status": "Out",
     "profile": "https://www.espn.com/wnba/player/_/id/2987869/jewell-loyd",
     "ppg": 8.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2987869.png"
@@ -1274,7 +1274,7 @@ const allPlayers = [
     "college": "",
     "birthPlace": "Hebei, China",
     "experience": 4,
-    "status": "Day-To-Day",
+    "status": "Active",
     "profile": "https://www.espn.com/wnba/player/_/id/4337216/han-xu",
     "ppg": 6.3,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4337216.png"
@@ -1722,7 +1722,7 @@ const allPlayers = [
     "college": "",
     "birthPlace": "Darwin, NT, Australia",
     "experience": 8,
-    "status": "Day-To-Day",
+    "status": "Out",
     "profile": "https://www.espn.com/wnba/player/_/id/3099736/stephanie-talbot",
     "ppg": 4.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3099736.png"
