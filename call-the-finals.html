@@ -75,16 +75,52 @@
     .tally-row .team { font-family:Manrope,sans-serif; font-weight:800; }
     .round1-tally { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px; margin-bottom:6px; }
     .round1-tally .mini-label { margin:0 0 6px; font:11px 'DM Mono',monospace; color:var(--muted); }
-    .entries-list { display:grid; gap:6px; max-height:420px; overflow-y:auto; padding-right:2px; }
-    .entry-row { padding:9px 11px; border:1px solid #e0d9cc; background:var(--paper); }
-    .entry-row.mine { border-color:#5c9c7e; background:var(--mint); }
-    .entry-top { display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:3px; }
-    .entry-name { font:800 12px Manrope,sans-serif; color:var(--ink); }
-    .entry-record { flex:none; padding:2px 7px; font:700 10px 'DM Mono',monospace; text-transform:uppercase; letter-spacing:.04em; background:#e9e2d3; color:var(--ink); }
-    .entry-record.perfect { background:#2d7d58; color:#fff; }
-    .entry-record.rough { background:var(--coral); color:#fff; }
-    .entry-pick { display:block; font:12px 'DM Mono',monospace; color:var(--muted); }
-    .entry-pick b { font-family:Manrope,sans-serif; color:var(--ink); }
+    .entries-list { display:grid; gap:6px; max-height:560px; overflow-y:auto; padding-right:2px; }
+    .grid-legend { display:flex; flex-wrap:wrap; gap:6px 14px; margin:0 0 12px; font:11px 'DM Mono',monospace; color:var(--muted); }
+    .grid-legend span { display:inline-flex; align-items:center; gap:10px; }
+    .grid-legend .cell { width:18px; height:18px; }
+    .grid-head, .entry-summary { display:flex; flex-wrap:wrap; align-items:center; gap:6px 12px; }
+    .grid-head { padding:0 12px; }
+    .entry-who { flex:1 1 150px; min-width:0; }
+    .entry-name { display:block; font:800 13px Manrope,sans-serif; color:var(--ink); overflow-wrap:anywhere; }
+    .entry-stats { display:block; margin-top:2px; font:11px 'DM Mono',monospace; color:var(--muted); }
+    .entry-stats .ok { color:#2d7d58; font-weight:700; }
+    .entry-stats .bad { color:var(--coral-dark); font-weight:700; }
+    .strip { display:flex; gap:10px; margin-left:auto; }
+    .strip-group { display:flex; gap:3px; }
+    .strip-label { font:700 9px 'DM Mono',monospace; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); text-align:center; }
+    .cell { position:relative; display:grid; place-items:center; width:30px; height:30px; flex:none; border:2px solid #cfc8bd; background:var(--white); }
+    .cell img, .cell .badge { width:20px; height:20px; object-fit:contain; }
+    .cell .badge { display:grid; place-items:center; background:#68c5b4; font:800 7px 'DM Mono',monospace; }
+    .cell .mark { position:absolute; right:-6px; bottom:-6px; display:grid; place-items:center; width:14px; height:14px; border-radius:50%; color:#fff; font:800 9px/1 Manrope,sans-serif; }
+    .cell.right { border-color:#2d7d58; background:var(--mint); }
+    .cell.right .mark { background:#2d7d58; }
+    .cell.wrong { border-color:var(--coral); background:#fde3dd; }
+    .cell.wrong .mark { background:var(--coral-dark); }
+    .cell.wrong img, .cell.busted img { filter:grayscale(1); opacity:.45; }
+    .cell.busted { border-style:dashed; border-color:#b2a99b; background:linear-gradient(to top right,transparent calc(50% - 1px),#b2a99b calc(50% - 1px),#b2a99b calc(50% + 1px),transparent calc(50% + 1px)),#efe9dd; }
+    .cell.heart .mark { right:-7px; bottom:-7px; background:none; font-size:12px; }
+    .cell.heart.won { border-color:#d9a400; background:#fff3c4; }
+    .strip-heart { padding-left:10px; border-left:1px dashed #cfc8bd; }
+    .grid-head .strip-heart { border-left-color:transparent; }
+    .cell.empty { color:var(--muted); font:11px 'DM Mono',monospace; }
+    .entry-row { border:1px solid #e0d9cc; background:var(--paper); }
+    .entry-row.mine { border-color:#5c9c7e; background:#e6f5ee; }
+    .entry-row summary { padding:10px 12px 12px; list-style:none; cursor:pointer; }
+    .entry-row summary::-webkit-details-marker { display:none; }
+    .entry-row summary:hover .entry-name { color:var(--coral-dark); }
+    .entry-row summary:focus-visible { outline:3px solid var(--coral); outline-offset:-3px; }
+    .entry-detail { display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:10px 16px; padding:10px 12px 12px; border-top:1px dashed #cfc8bd; }
+    .entry-detail h4 { margin:0 0 4px; font:700 10px 'DM Mono',monospace; text-transform:uppercase; letter-spacing:.08em; color:var(--coral-dark); }
+    .detail-line { display:flex; align-items:baseline; gap:6px; font:600 12px/1.6 Manrope,sans-serif; }
+    .detail-line .tag { flex:none; width:14px; font-weight:800; text-align:center; }
+    .detail-line.right .tag { color:#2d7d58; }
+    .detail-line.wrong .tag, .detail-line.wrong { color:var(--coral-dark); }
+    .detail-line.wrong .team, .detail-line.busted .team { text-decoration:line-through; }
+    .detail-line.busted { color:var(--muted); }
+    .detail-root { grid-column:1/-1; font:12px 'DM Mono',monospace; color:var(--muted); }
+    .detail-root b { font-family:Manrope,sans-serif; color:var(--ink); }
+    @media (max-width:560px) { .board { padding:16px 12px; } .grid-head .entry-who { display:none; } }
     button:focus-visible { outline:3px solid var(--coral); outline-offset:3px; }
     .hidden { display:none; }
     @media (max-width:560px) { h1 { font-size:32px; } main { padding-top:16px; } }
@@ -139,7 +175,16 @@
       <h3>Want to win</h3>
       <div id="wantTally" class="tally"></div>
       <h3>Everyone's brackets</h3>
+      <div class="grid-legend">
+        <span><span class="cell right"><span class="mark">&#10003;</span></span>Right</span>
+        <span><span class="cell wrong"><span class="mark">&#10007;</span></span>Wrong</span>
+        <span><span class="cell busted"></span>Can't happen (team is out)</span>
+        <span><span class="cell"></span>Not played yet</span>
+        <span><span class="cell heart"><span class="mark">&#10084;&#65039;</span></span>Team their heart wants (not scored)</span>
+      </div>
+      <div id="gridHead" class="grid-head"></div>
       <div id="entriesList" class="entries-list"></div>
+      <p class="pick-count">Tap a name to see their full bracket.</p>
     </section>
   </main>
 
@@ -214,6 +259,7 @@
     const wantTally = document.getElementById('wantTally');
     const round1TallyEl = document.getElementById('round1Tally');
     const entriesListEl = document.getElementById('entriesList');
+    const gridHead = document.getElementById('gridHead');
 
     let picks = {};
     let wantFor = null;
@@ -433,32 +479,169 @@
     // ids of matchups where a real result has been entered above.
     function decidedIds() { return ALL_IDS.filter(id => RESULTS[id]); }
     function entryValue(entry, id) { return id === 'f' ? entry.champion : entry[id]; }
-    function entryRecord(entry) {
-      const ids = decidedIds();
-      const correct = ids.filter(id => entryValue(entry, id) === RESULTS[id]).length;
-      return { correct, decided: ids.length };
+
+    // The two teams that actually played a series (only known once its feeder series are decided).
+    function actualTeams(id) {
+      if (BRACKET[id]) return [BRACKET[id].teamA, BRACKET[id].teamB];
+      const feeders = { s1: ['m1', 'm4'], s2: ['m2', 'm3'], f: ['s1', 's2'] }[id];
+      return feeders.map(f => RESULTS[f]).filter(Boolean);
+    }
+    // Teams knocked out by any real result so far.
+    function eliminatedTeams() {
+      const out = new Set();
+      decidedIds().forEach(id => actualTeams(id).forEach(team => { if (team !== RESULTS[id]) out.add(team); }));
+      return out;
+    }
+    // right / wrong for decided series; busted if the picked team is already out; otherwise alive.
+    function pickStatus(entry, id, out) {
+      const team = entryValue(entry, id);
+      if (!team) return 'empty';
+      if (RESULTS[id]) return team === RESULTS[id] ? 'right' : 'wrong';
+      return out.has(team) ? 'busted' : 'alive';
+    }
+    // Rooting-for team isn't a prediction, so it's never right/wrong - just won, out, or still alive.
+    function heartStatus(entry, out) {
+      const team = entry.rootFor;
+      if (!team) return 'empty';
+      if (RESULTS.f === team) return 'won';
+      return out.has(team) ? 'busted' : 'alive';
+    }
+    const HEART_WORD = { won: 'won it all!', busted: 'out', alive: 'still alive', empty: 'no pick' };
+    function heartCell(entry, out) {
+      const status = heartStatus(entry, out);
+      const cell = document.createElement('span');
+      cell.className = 'cell heart ' + status;
+      if (entry.rootFor) cell.appendChild(logoEl(entry.rootFor)); else cell.textContent = '–';
+      const mark = document.createElement('span');
+      mark.className = 'mark';
+      mark.textContent = status === 'busted' ? '💔' : '❤️';
+      cell.appendChild(mark);
+      const label = `Heart pick: ${entry.rootFor || 'none'} (${HEART_WORD[status]})`;
+      cell.title = label;
+      cell.setAttribute('aria-label', label);
+      cell.setAttribute('role', 'img');
+      return cell;
     }
 
-    function entryRow(entry, myName) {
-      const row = document.createElement('div');
+    function entryRecord(entry, out = eliminatedTeams()) {
+      const counts = { right: 0, wrong: 0, busted: 0, alive: 0, empty: 0 };
+      ALL_IDS.forEach(id => counts[pickStatus(entry, id, out)]++);
+      return counts;
+    }
+
+    const GROUPS = [
+      { label: 'Round 1', ids: ROUND1_IDS },
+      { label: 'Semis', ids: ROUND2_IDS },
+      { label: 'Champ', ids: ['f'] }
+    ];
+    const ROUND_NAME = { m1: 'Round 1', m2: 'Round 1', m3: 'Round 1', m4: 'Round 1', s1: 'Semifinal', s2: 'Semifinal', f: 'Champion' };
+    const STATUS_WORD = { right: 'right', wrong: 'wrong', busted: "can't happen, team is out", alive: 'not played yet', empty: 'no pick' };
+
+    function cellEl(team, status, id) {
+      const cell = document.createElement('span');
+      cell.className = 'cell ' + status;
+      if (!team) { cell.textContent = '–'; }
+      else cell.appendChild(logoEl(team));
+      if (status === 'right' || status === 'wrong') {
+        const mark = document.createElement('span');
+        mark.className = 'mark';
+        mark.textContent = status === 'right' ? '✓' : '✗';
+        cell.appendChild(mark);
+      }
+      const label = `${ROUND_NAME[id]}: ${team || 'no pick'} (${STATUS_WORD[status]})`;
+      cell.title = label;
+      cell.setAttribute('aria-label', label);
+      cell.setAttribute('role', 'img');
+      return cell;
+    }
+
+    function stripEl(entry, out) {
+      const strip = document.createElement('span');
+      strip.className = 'strip';
+      GROUPS.forEach(g => {
+        const group = document.createElement('span');
+        group.className = 'strip-group';
+        group.append(...g.ids.map(id => cellEl(entryValue(entry, id), pickStatus(entry, id, out), id)));
+        strip.appendChild(group);
+      });
+      const heart = document.createElement('span');
+      heart.className = 'strip-group strip-heart';
+      heart.appendChild(heartCell(entry, out));
+      strip.appendChild(heart);
+      return strip;
+    }
+
+    function renderGridHead() {
+      const who = document.createElement('span');
+      who.className = 'entry-who';
+      const strip = document.createElement('span');
+      strip.className = 'strip';
+      GROUPS.forEach(g => {
+        const label = document.createElement('span');
+        label.className = 'strip-label';
+        label.style.width = `${g.ids.length * 30 + (g.ids.length - 1) * 3}px`;
+        label.textContent = g.label;
+        strip.appendChild(label);
+      });
+      const heart = document.createElement('span');
+      heart.className = 'strip-label strip-heart';
+      heart.style.width = '40px';
+      heart.textContent = 'Heart';
+      strip.appendChild(heart);
+      gridHead.replaceChildren(who, strip);
+    }
+
+    function entryRow(entry, myName, out) {
+      const row = document.createElement('details');
       row.className = 'entry-row' + (entry.name.trim().toLowerCase() === myName ? ' mine' : '');
-      const top = document.createElement('div');
-      top.className = 'entry-top';
+      const summary = document.createElement('summary');
+      summary.className = 'entry-summary';
+      const who = document.createElement('span');
+      who.className = 'entry-who';
       const name = document.createElement('span');
       name.className = 'entry-name';
       name.textContent = entry.name;
-      top.appendChild(name);
-      const { correct, decided } = entryRecord(entry);
-      if (decided > 0) {
-        const record = document.createElement('span');
-        record.className = 'entry-record' + (correct === decided ? ' perfect' : correct === 0 ? ' rough' : '');
-        record.textContent = `${correct}/${decided} correct`;
-        top.appendChild(record);
+      const stats = document.createElement('span');
+      stats.className = 'entry-stats';
+      const rec = entryRecord(entry, out);
+      const champStatus = pickStatus(entry, 'f', out);
+      const champIcon = champStatus === 'right' ? '🏆 ' : (champStatus === 'wrong' || champStatus === 'busted') ? '💀 ' : '';
+      stats.innerHTML = `${champIcon}<span class="ok">${rec.right} right</span> · <span class="bad">${rec.wrong + rec.busted} wrong</span> · ${rec.alive} still alive`;
+      who.append(name, stats);
+      summary.append(who, stripEl(entry, out));
+
+      const detail = document.createElement('div');
+      detail.className = 'entry-detail';
+      GROUPS.forEach(g => {
+        const col = document.createElement('div');
+        const h = document.createElement('h4');
+        h.textContent = g.label === 'Champ' ? 'Champion' : g.label;
+        col.appendChild(h);
+        g.ids.forEach(id => {
+          const team = entryValue(entry, id);
+          const status = pickStatus(entry, id, out);
+          const line = document.createElement('div');
+          line.className = 'detail-line ' + status;
+          const tag = document.createElement('span');
+          tag.className = 'tag';
+          tag.textContent = { right: '✓', wrong: '✗', busted: '✗', alive: '•', empty: '–' }[status];
+          const teamEl = document.createElement('span');
+          teamEl.className = 'team';
+          teamEl.textContent = team ? seedLabel(team) : 'no pick';
+          line.append(tag, teamEl);
+          line.title = STATUS_WORD[status];
+          col.appendChild(line);
+        });
+        detail.appendChild(col);
+      });
+      if (entry.rootFor) {
+        const root = document.createElement('div');
+        root.className = 'detail-root';
+        const hs = heartStatus(entry, out);
+        root.append(hs === 'busted' ? '💔 Rooting for ' : '❤️ Rooting for ', Object.assign(document.createElement('b'), { textContent: entry.rootFor }), ` (${HEART_WORD[hs]})`);
+        detail.appendChild(root);
       }
-      const pick = document.createElement('span');
-      pick.className = 'entry-pick';
-      pick.innerHTML = `${seedLabel(entry.s1)} vs ${seedLabel(entry.s2)} &rarr; champion <b>${entry.champion}</b> &middot; rooting for <b>${entry.rootFor}</b>`;
-      row.append(top, pick);
+      row.append(summary, detail);
       return row;
     }
 
@@ -484,14 +667,12 @@
       champTally.replaceChildren(...tallyRows(pred.champion || [], pred.total, mineChamp));
       wantTally.replaceChildren(...tallyRows(pred.want || [], pred.total, mineWant));
       const myName = (localStorage.getItem(NAME_KEY) || '').trim().toLowerCase();
-      const entries = (pred.entries || []).slice();
-      if (decidedIds().length > 0) {
-        entries.sort((a, b) => {
-          const ra = entryRecord(a), rb = entryRecord(b);
-          return (rb.correct - ra.correct) || a.name.localeCompare(b.name);
-        });
-      }
-      entriesListEl.replaceChildren(...entries.map(entry => entryRow(entry, myName)));
+      const out = eliminatedTeams();
+      const entries = (pred.entries || []).map(entry => ({ entry, rec: entryRecord(entry, out) }));
+      // Most right first, then most picks still alive, then name.
+      entries.sort((a, b) => (b.rec.right - a.rec.right) || (b.rec.alive - a.rec.alive) || a.entry.name.localeCompare(b.entry.name));
+      renderGridHead();
+      entriesListEl.replaceChildren(...entries.map(({ entry }) => entryRow(entry, myName, out)));
     }
 
     async function loadBoard() {
