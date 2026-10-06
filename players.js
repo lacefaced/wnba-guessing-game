@@ -1013,7 +1013,7 @@ const allPlayers = [
     "team": "Las Vegas Aces",
     "position": "G",
     "jersey": "24",
-    "age": 32,
+    "age": 33,
     "height": "5' 11\"",
     "college": "Notre Dame",
     "birthPlace": "Lincolnwood, IL, USA",
