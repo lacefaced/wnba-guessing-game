@@ -1018,7 +1018,7 @@ const allPlayers = [
     "college": "Notre Dame",
     "birthPlace": "Lincolnwood, IL, USA",
     "experience": 12,
-    "status": "Day-To-Day",
+    "status": "Out",
     "profile": "https://www.espn.com/wnba/player/_/id/2987869/jewell-loyd",
     "ppg": 8.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/2987869.png"
@@ -2570,7 +2570,7 @@ const allPlayers = [
     "college": "Louisville",
     "birthPlace": "Gary, IN, USA",
     "experience": 6,
-    "status": "Out",
+    "status": "Active",
     "profile": "https://www.espn.com/wnba/player/_/id/4281190/dana-evans",
     "ppg": 0.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4281190.png"
