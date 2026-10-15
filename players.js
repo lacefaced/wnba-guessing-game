@@ -1221,7 +1221,7 @@ const allPlayers = [
     "team": "Washington Mystics",
     "position": "C",
     "jersey": "51",
-    "age": 22,
+    "age": 23,
     "height": "6' 7\"",
     "college": "UCLA",
     "birthPlace": "Centennial, CO, USA",
