@@ -282,7 +282,7 @@ const allPlayers = [
     "college": "South Carolina",
     "birthPlace": "St. Thomas, Virgin Islands",
     "experience": 4,
-    "status": "Active",
+    "status": "Out",
     "profile": "https://www.espn.com/wnba/player/_/id/4432831/aliyah-boston",
     "ppg": 16.1,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4432831.png"
