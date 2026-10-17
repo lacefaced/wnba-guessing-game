@@ -120,7 +120,7 @@
     let liveStats = {};
     function extractEspnId(player) { const match = /\/wnba\/players\/full\/(\d+)\.png/.exec(player.headshot || ''); return match ? match[1] : null; }
 
-    function fetchAndDisplayGames() { fetch('https://site.api.espn.com/apis/site/v2/sports/basketball/wnba/scoreboard').then(r => r.json()).then(data => { const events = data.events || []; const localToday = new Date().toLocaleDateString('en-CA'); const todayGames = events .filter(game => { const gameDate = new Date(game.date); const gameLocalDate = gameDate.toLocaleDateString('en-CA'); return gameLocalDate === localToday; }) .sort((a, b) => new Date(a.date) - new Date(b.date)); gamesByTeam = {}; todayGames.forEach(game => { const comp = (game.competitions || [{}])[0]; const status = comp.status || {}; const state = status.type?.state || 'pre'; const statusText = status.type?.shortDetail || status.type?.description || ''; const competitors = comp.competitors || []; const gameInfo = { id: game.id, state, statusText, teams: competitors.map(c => ({ name: c.team?.displayName, score: c.score })) }; competitors.forEach(competitor => { const name = competitor.team?.displayName; if (name) gamesByTeam[name] = gameInfo; }); }); if (todayGames.length === 0) { quickPickSection.className = 'empty-state'; quickPickSection.textContent = 'No games today'; } else { quickPickSection.className = 'games-grid'; quickPickSection.replaceChildren(...todayGames.map(game => { const comp = (game.competitions || [{}])[0]; const competitors = comp.competitors || []; const [away, home] = competitors.length >= 2 ? [competitors[0].team.displayName, competitors[1].team.displayName] : []; if (!away || !home) return document.createTextNode(''); const btn = document.createElement('button'); btn.className = 'game-btn'; btn.type = 'button'; const time = new Date(game.date); btn.innerHTML = `<span class="game-time">${time.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true })}</span>${away}<br>vs<br>${home}`; btn.addEventListener('click', () => { teamOneSelect.value = away; teamTwoSelect.value = home; render(); refreshLiveStats(); updateMatchupUrl(); }); return btn; })); } refreshLiveStats(); }).catch(() => { quickPickSection.className = 'empty-state'; quickPickSection.textContent = 'Unable to load games'; }); }
+    function fetchAndDisplayGames() { fetch('https://site.api.espn.com/apis/site/v2/sports/basketball/wnba/scoreboard').then(r => r.json()).then(data => { const events = data.events || []; const localToday = new Date().toLocaleDateString('en-CA'); const todayGames = events .filter(game => { const gameDate = new Date(game.date); const gameLocalDate = gameDate.toLocaleDateString('en-CA'); return gameLocalDate === localToday; }) .sort((a, b) => new Date(a.date) - new Date(b.date)); gamesByTeam = {}; todayGames.forEach(game => { const comp = (game.competitions || [{}])[0]; const status = comp.status || {}; const state = status.type?.state || 'pre'; const statusText = status.type?.shortDetail || status.type?.description || ''; const competitors = comp.competitors || []; const gameInfo = { id: game.id, state, statusText, teams: competitors.map(c => ({ name: c.team?.displayName, score: c.score })) }; competitors.forEach(competitor => { const name = competitor.team?.displayName; if (name) gamesByTeam[name] = gameInfo; }); }); if (todayGames.length === 0) { quickPickSection.className = 'empty-state'; quickPickSection.textContent = 'No games today'; } else { quickPickSection.className = 'games-grid'; quickPickSection.replaceChildren(...todayGames.map(game => { const comp = (game.competitions || [{}])[0]; const competitors = comp.competitors || []; const [away, home] = competitors.length >= 2 ? [competitors[0].team.displayName, competitors[1].team.displayName] : []; if (!away || !home) return document.createTextNode(''); const btn = document.createElement('button'); btn.className = 'game-btn'; btn.type = 'button'; const time = new Date(game.date); btn.innerHTML = `<span class="game-time">${time.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true })}</span>${away}<br>vs<br>${home}`; btn.addEventListener('click', () => { userPickedTeams = true; teamOneSelect.value = away; teamTwoSelect.value = home; render(); refreshLiveStats(); updateMatchupUrl(); }); return btn; })); } refreshLiveStats(); }).catch(() => { quickPickSection.className = 'empty-state'; quickPickSection.textContent = 'Unable to load games'; }); }
 
     // Deep-linking: ?team1=...&team2=... pre-selects a matchup so a shared link skips the pickers.
     function matchupUrl() { const url = new URL(location.href); url.search = ''; url.searchParams.set('team1', teamOneSelect.value); url.searchParams.set('team2', teamTwoSelect.value); return url.toString(); }
@@ -130,6 +130,36 @@
       const paramTeam1 = params.get('team1'); const paramTeam2 = params.get('team2');
       if (paramTeam1 && teams.includes(paramTeam1)) teamOneSelect.value = paramTeam1;
       if (paramTeam2 && teams.includes(paramTeam2)) teamTwoSelect.value = paramTeam2;
+    }
+
+    // With no matchup in the URL, open on the live game (the first one if several are live),
+    // or else the next upcoming game. ESPN's scoreboard only takes one date per request, so if
+    // today has nothing left, look ahead day by day. Off-season, the alphabetical default stays.
+    let userPickedTeams = false;
+    function scoreboardGames(dateParam) {
+      const url = 'https://site.api.espn.com/apis/site/v2/sports/basketball/wnba/scoreboard' + (dateParam ? `?dates=${dateParam}` : '');
+      return fetch(url).then(r => r.json()).then(data => (data.events || []).map(game => {
+        const comp = (game.competitions || [{}])[0];
+        return { date: new Date(game.date), state: comp.status?.type?.state, teams: (comp.competitors || []).map(c => c.team?.displayName) };
+      })).catch(() => []);
+    }
+    function isPickable(game) { return game.teams.length >= 2 && game.teams.every(team => teams.includes(team)); }
+    async function findFeaturedGame() {
+      const today = (await scoreboardGames()).filter(isPickable);
+      const live = today.find(game => game.state === 'in');
+      if (live) return live;
+      const upcoming = games => games.filter(game => game.state === 'pre').sort((a, b) => a.date - b.date)[0];
+      if (upcoming(today)) return upcoming(today);
+      const days = Array.from({ length: 14 }, (_, i) => { const d = new Date(); d.setDate(d.getDate() + i + 1); return d.toLocaleDateString('en-CA').replaceAll('-', ''); });
+      return upcoming((await Promise.all(days.map(scoreboardGames))).flat().filter(isPickable));
+    }
+    async function selectFeaturedGame() {
+      const params = new URLSearchParams(location.search);
+      if (params.get('team1') || params.get('team2')) return;
+      const game = await findFeaturedGame();
+      if (!game || userPickedTeams) return;
+      [teamOneSelect.value, teamTwoSelect.value] = game.teams;
+      render(); refreshLiveStats();
     }
     fetchAndDisplayGames();
 
@@ -225,7 +255,7 @@
     function render() { renderTeam(teamOneSelect.value, 'teamOneTitle', 'teamOneCount', 'teamOneRoster'); renderTeam(teamTwoSelect.value, 'teamTwoTitle', 'teamTwoCount', 'teamTwoRoster'); renderMatchupStatus(teamOneSelect.value, teamTwoSelect.value); }
     teams.forEach((team, index) => { [teamOneSelect, teamTwoSelect].forEach(select => { const option = document.createElement('option'); option.value = team; option.textContent = team; select.append(option); }); if (index === 1) teamTwoSelect.value = team; });
     applyMatchupFromUrl();
-    teamOneSelect.addEventListener('change', () => { render(); refreshLiveStats(); updateMatchupUrl(); }); teamTwoSelect.addEventListener('change', () => { render(); refreshLiveStats(); updateMatchupUrl(); }); render(); updateMatchupUrl();
+    teamOneSelect.addEventListener('change', () => { userPickedTeams = true; render(); refreshLiveStats(); updateMatchupUrl(); }); teamTwoSelect.addEventListener('change', () => { userPickedTeams = true; render(); refreshLiveStats(); updateMatchupUrl(); }); render(); selectFeaturedGame();
     document.getElementById('shareLinkBtn').addEventListener('click', async () => {
       const btn = document.getElementById('shareLinkBtn');
       try { await navigator.clipboard.writeText(matchupUrl()); btn.textContent = 'Link copied!'; }
