@@ -138,7 +138,7 @@ const allPlayers = [
     "college": "South Carolina",
     "birthPlace": "Greenwood, SC, USA",
     "experience": 10,
-    "status": "Out",
+    "status": "Active",
     "profile": "https://www.espn.com/wnba/player/_/id/3058901/allisha-gray",
     "ppg": 19.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3058901.png"
