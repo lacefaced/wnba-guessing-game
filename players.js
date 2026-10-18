@@ -874,7 +874,7 @@ const allPlayers = [
     "college": "UConn",
     "birthPlace": "Lakeland, FL, USA",
     "experience": 14,
-    "status": "Active",
+    "status": "Day-To-Day",
     "profile": "https://www.espn.com/wnba/player/_/id/1054/tiffany-hayes",
     "ppg": 9.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/1054.png"
