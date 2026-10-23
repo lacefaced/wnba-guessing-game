@@ -2613,7 +2613,7 @@ const allPlayers = [
     "team": "Las Vegas Aces",
     "position": "Player",
     "jersey": "18",
-    "age": 26,
+    "age": 27,
     "height": "5' 5\"",
     "college": "",
     "birthPlace": "Hiroshima, Japan",
