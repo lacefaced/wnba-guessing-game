@@ -138,7 +138,7 @@ const allPlayers = [
     "college": "South Carolina",
     "birthPlace": "Greenwood, SC, USA",
     "experience": 10,
-    "status": "Active",
+    "status": "Day-To-Day",
     "profile": "https://www.espn.com/wnba/player/_/id/3058901/allisha-gray",
     "ppg": 19.0,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/3058901.png"
@@ -1301,7 +1301,7 @@ const allPlayers = [
     "team": "Phoenix Mercury",
     "position": "F",
     "jersey": "1",
-    "age": 26,
+    "age": 27,
     "height": "5' 11\"",
     "college": "",
     "birthPlace": "",
