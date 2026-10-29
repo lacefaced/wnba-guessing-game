@@ -1770,7 +1770,7 @@ const allPlayers = [
     "college": "South Carolina",
     "birthPlace": "Oceanside, CA, USA",
     "experience": 2,
-    "status": "Active",
+    "status": "Day-To-Day",
     "profile": "https://www.espn.com/wnba/player/_/id/4433431/te-hina-paopao",
     "ppg": 3.7,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4433431.png"
