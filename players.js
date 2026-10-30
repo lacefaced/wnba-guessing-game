@@ -1770,7 +1770,7 @@ const allPlayers = [
     "college": "South Carolina",
     "birthPlace": "Oceanside, CA, USA",
     "experience": 2,
-    "status": "Day-To-Day",
+    "status": "Out",
     "profile": "https://www.espn.com/wnba/player/_/id/4433431/te-hina-paopao",
     "ppg": 3.7,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4433431.png"
@@ -3493,7 +3493,7 @@ const allPlayers = [
     "team": "Washington Mystics",
     "position": "Player",
     "jersey": "4",
-    "age": 32,
+    "age": 33,
     "height": "6' 0\"",
     "college": "Rutgers",
     "birthPlace": "Clayton, DE, USA",
