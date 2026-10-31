@@ -1269,7 +1269,7 @@ const allPlayers = [
     "team": "New York Liberty",
     "position": "C",
     "jersey": "21",
-    "age": 26,
+    "age": 27,
     "height": "6' 11\"",
     "college": "",
     "birthPlace": "Hebei, China",
@@ -1770,7 +1770,7 @@ const allPlayers = [
     "college": "South Carolina",
     "birthPlace": "Oceanside, CA, USA",
     "experience": 2,
-    "status": "Out",
+    "status": "Day-To-Day",
     "profile": "https://www.espn.com/wnba/player/_/id/4433431/te-hina-paopao",
     "ppg": 3.7,
     "headshot": "https://a.espncdn.com/i/headshots/wnba/players/full/4433431.png"
