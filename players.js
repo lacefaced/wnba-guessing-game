@@ -3253,7 +3253,7 @@ const allPlayers = [
     "team": "Seattle Storm",
     "position": "Player",
     "jersey": "54",
-    "age": 25,
+    "age": 26,
     "height": "6' 3\"",
     "college": "Indiana",
     "birthPlace": "Gorham, ME, USA",
