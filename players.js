@@ -341,7 +341,7 @@ const allPlayers = [
     "team": "Seattle Storm",
     "position": "G",
     "jersey": "4",
-    "age": 22,
+    "age": 23,
     "height": "5' 10\"",
     "college": "LSU",
     "birthPlace": "Savannah, GA, USA",
