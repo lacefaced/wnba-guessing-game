@@ -917,7 +917,7 @@ const allPlayers = [
     "team": "Phoenix Mercury",
     "position": "F",
     "jersey": "4",
-    "age": 28,
+    "age": 29,
     "height": "6' 4\"",
     "college": "Oklahoma State",
     "birthPlace": "Lufkin, TX, USA",
