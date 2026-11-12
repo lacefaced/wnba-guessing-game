@@ -21,7 +21,7 @@ const allPlayers = [
     "team": "Indiana Fever",
     "position": "G",
     "jersey": "0",
-    "age": 30,
+    "age": 31,
     "height": "5' 8\"",
     "college": "Ohio State",
     "birthPlace": "Cincinnati, OH, USA",
