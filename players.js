@@ -2789,7 +2789,7 @@ const allPlayers = [
     "team": "Phoenix Mercury",
     "position": "Player",
     "jersey": "31",
-    "age": 29,
+    "age": 30,
     "height": "6' 4\"",
     "college": "",
     "birthPlace": "",
