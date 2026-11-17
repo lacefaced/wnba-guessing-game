@@ -213,7 +213,7 @@ const allPlayers = [
     "team": "Seattle Storm",
     "position": "C",
     "jersey": "14",
-    "age": 20,
+    "age": 21,
     "height": "6' 6\"",
     "college": "",
     "birthPlace": "",
