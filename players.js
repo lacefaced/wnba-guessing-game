@@ -2453,7 +2453,7 @@ const allPlayers = [
     "team": "Los Angeles Sparks",
     "position": "Player",
     "jersey": "15",
-    "age": 22,
+    "age": 23,
     "height": "6' 2\"",
     "college": "Vanderbilt",
     "birthPlace": "Sioux Falls, SD, USA",
