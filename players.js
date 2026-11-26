@@ -2757,7 +2757,7 @@ const allPlayers = [
     "team": "Phoenix Mercury",
     "position": "Player",
     "jersey": "5",
-    "age": 22,
+    "age": 23,
     "height": "5' 7\"",
     "college": "Indiana",
     "birthPlace": "Buffalo, NY, USA",
